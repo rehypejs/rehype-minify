@@ -27,9 +27,9 @@ rehype src -o dist
 
 ## API
 
-> Caveat: Plugins cannot configure how HTML is formatted on the API.
-> You must do that yourself.  An object of suggested settings is at
-> `minify.config`;
+> Caveat: Plugins cannot configure how HTML is [formatted][format]
+> on the API.  You must do that yourself.  An object of suggested
+> settings is at `minify.config`;
 
 Use:
 
@@ -83,5 +83,7 @@ Yields:
 [rehype]: https://github.com/wooorm/rehype
 
 [cli]: https://github.com/wooorm/rehype/tree/master/packages/rehype-cli
+
+[format]: https://github.com/wooorm/hast-util-to-html#tohtmlnode-options
 
 [license]: ../../LICENSE
