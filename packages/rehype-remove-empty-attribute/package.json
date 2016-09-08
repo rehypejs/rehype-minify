@@ -1,0 +1,29 @@
+{
+  "name": "rehype-remove-empty-attribute",
+  "version": "0.0.0",
+  "description": "Remove empty attributes",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "remove",
+    "attributes"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-remove-empty-attribute",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js",
+    "schema.json"
+  ],
+  "dependencies": {
+    "has": "^1.0.1",
+    "hast-util-is-element": "^1.0.0",
+    "hast-util-is-event-handler": "^0.0.0",
+    "unist-util-visit": "^1.0.0",
+    "x-is-array": "^0.1.0"
+  }
+}

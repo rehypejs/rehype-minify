@@ -1,0 +1,25 @@
+{
+  "name": "rehype-remove-comments",
+  "version": "0.0.0",
+  "description": "Remove comments (except conditional comments)",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "javascript",
+    "src"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-remove-comments",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "unist-util-filter": "^0.2.0",
+    "hast-util-is-conditional-comment": "^0.0.0"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "rehype-remove-script-type-javascript",
+  "version": "0.0.0",
+  "description": "Remove `type` and `language` on JavaScript scripts",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "remove",
+    "script",
+    "javascript"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-remove-script-type-javascript",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "hast-util-is-javascript": "^0.0.0",
+    "unist-util-visit": "^1.0.0"
+  }
+}

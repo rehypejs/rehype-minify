@@ -1,0 +1,28 @@
+{
+  "name": "rehype-minify-css-style",
+  "version": "0.0.0",
+  "description": "Minify `style` elements",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "css",
+    "style"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-minify-css-style",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "clean-css": "^3.4.18",
+    "hast-util-from-string": "^0.0.0",
+    "hast-util-is-css-style": "^0.0.0",
+    "hast-util-to-string": "^0.0.0",
+    "unist-util-visit": "^1.0.0"
+  }
+}

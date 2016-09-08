@@ -1,0 +1,30 @@
+{
+  "name": "rehype-minify-javascript-url",
+  "version": "0.0.0",
+  "description": "Minify JavaScript URLs",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "url",
+    "javascript"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-minify-javascript-url",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "has": "^1.0.1",
+    "hast-util-has-property": "^1.0.0",
+    "hast-util-is-element": "^1.0.0",
+    "html-url-attributes": "^0.0.0",
+    "uglify-js": "^2.6.4",
+    "unist-util-visit": "^1.0.0",
+    "trim": "0.0.1"
+  }
+}

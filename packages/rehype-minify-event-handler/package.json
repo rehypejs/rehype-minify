@@ -1,0 +1,28 @@
+{
+  "name": "rehype-minify-event-handler",
+  "version": "0.0.0",
+  "description": "Minify event handler attributes",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "event",
+    "handler"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-minify-event-handler",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "hast-util-is-event-handler": "^0.0.0",
+    "hast-util-has-property": "^1.0.0",
+    "uglify-js": "^2.6.4",
+    "unist-util-visit": "^1.0.0",
+    "trim": "0.0.1"
+  }
+}

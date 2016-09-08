@@ -1,0 +1,26 @@
+{
+  "name": "rehype-css-to-top",
+  "version": "0.0.0",
+  "description": "Move CSS `<link>` to `<head>`",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "css",
+    "head"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-css-to-top",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "unist-util-visit": "^1.0.0",
+    "hast-util-is-css-link": "^0.0.0"
+  },
+  "excludeFromPreset": true
+}

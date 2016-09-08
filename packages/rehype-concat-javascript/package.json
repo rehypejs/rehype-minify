@@ -1,0 +1,30 @@
+{
+  "name": "rehype-concat-javascript",
+  "version": "0.0.0",
+  "description": "Concatenate JS `<script>` elements together",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "script",
+    "javascript",
+    "concat"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-concat-javascript",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "hast-util-from-string": "^0.0.0",
+    "hast-util-has-property": "^1.0.0",
+    "hast-util-is-javascript": "^0.0.0",
+    "hast-util-to-string": "^0.0.0",
+    "unist-util-visit": "^1.0.0"
+  },
+  "excludeFromPreset": true
+}

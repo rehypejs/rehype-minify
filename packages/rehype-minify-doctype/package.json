@@ -1,0 +1,24 @@
+{
+  "name": "rehype-minify-doctype",
+  "version": "0.0.0",
+  "description": "Minify the HTML doctype",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "doctype"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-minify-doctype",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "unist-util-visit": "^1.0.0"
+  },
+  "excludeFromPreset": true
+}

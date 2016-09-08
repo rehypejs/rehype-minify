@@ -1,0 +1,26 @@
+{
+  "name": "rehype-minify-style-attribute",
+  "version": "0.0.0",
+  "description": "Minify style attributes",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "style",
+    "attribute"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-minify-style-attribute",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "clean-css": "^3.4.18",
+    "hast-util-has-property": "^1.0.0",
+    "unist-util-visit": "^1.0.0"
+  }
+}

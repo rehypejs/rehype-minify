@@ -1,0 +1,26 @@
+{
+  "name": "rehype-javascript-to-bottom",
+  "version": "0.0.0",
+  "description": "Move JavaScript `<script>` to `<body>`",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "js",
+    "head"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-javascript-to-bottom",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "unist-util-visit": "^1.0.0",
+    "hast-util-is-javascript": "^0.0.0"
+  },
+  "excludeFromPreset": true
+}

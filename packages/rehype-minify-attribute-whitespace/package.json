@@ -1,0 +1,31 @@
+{
+  "name": "rehype-minify-attribute-whitespace",
+  "version": "0.0.0",
+  "description": "Minify white-space in attributes",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "attributes",
+    "whitespace"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-minify-attribute-whitespace",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js",
+    "schema.json"
+  ],
+  "dependencies": {
+    "has": "^1.0.1",
+    "hast-util-has-property": "^1.0.0",
+    "hast-util-is-element": "^1.0.0",
+    "hast-util-is-event-handler": "^0.0.0",
+    "trim": "^0.0.1",
+    "unist-util-visit": "^1.0.0",
+    "x-is-array": "^0.1.0"
+  }
+}

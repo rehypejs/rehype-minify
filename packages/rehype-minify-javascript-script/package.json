@@ -1,0 +1,29 @@
+{
+  "name": "rehype-minify-javascript-script",
+  "version": "0.0.0",
+  "description": "Minify `script` elements with a JS body",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "script",
+    "javascript"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-minify-javascript-script",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "uglify-js": "^2.6.4",
+    "unist-util-visit": "^1.0.0",
+    "hast-util-from-string": "^0.0.0",
+    "hast-util-has-property": "^1.0.0",
+    "hast-util-is-javascript": "^0.0.0",
+    "hast-util-to-string": "^0.0.0"
+  }
+}

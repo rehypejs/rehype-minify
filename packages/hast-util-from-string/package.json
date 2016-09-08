@@ -1,0 +1,20 @@
+{
+  "name": "hast-util-from-string",
+  "version": "0.0.0",
+  "description": "Set the plain-text value of a node",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "string"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/hast-util-from-string",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ]
+}

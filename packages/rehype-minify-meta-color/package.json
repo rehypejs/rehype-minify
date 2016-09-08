@@ -1,0 +1,27 @@
+{
+  "name": "rehype-minify-meta-color",
+  "version": "0.0.0",
+  "description": "Minify `theme-color` and `msapplication-TileColor` meta elements",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "meta",
+    "color"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-minify-meta-color",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "clean-css": "^3.4.18",
+    "hast-util-is-element": "^1.0.0",
+    "hast-util-has-property": "^1.0.0",
+    "unist-util-visit": "^1.0.0"
+  }
+}

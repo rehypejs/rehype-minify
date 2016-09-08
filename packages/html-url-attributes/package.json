@@ -1,0 +1,24 @@
+{
+  "name": "html-url-attributes",
+  "version": "0.0.0",
+  "description": "Map of URL attributes in HTML",
+  "license": "MIT",
+  "keywords": [
+    "whitespace",
+    "white",
+    "space",
+    "sensitive",
+    "tagname",
+    "tag",
+    "name"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/html-url-attributes",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.json"
+  ]
+}

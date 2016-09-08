@@ -1,0 +1,27 @@
+{
+  "name": "rehype-remove-style-type-css",
+  "version": "0.0.0",
+  "description": "Remove `type` on CSS `style` and `link`s",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "remove",
+    "style",
+    "type"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-remove-style-type-css",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "hast-util-is-css-link": "^0.0.0",
+    "hast-util-is-css-style": "^0.0.0",
+    "unist-util-visit": "^1.0.0"
+  }
+}

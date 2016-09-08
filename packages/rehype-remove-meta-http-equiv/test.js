@@ -1,0 +1,93 @@
+'use strict';
+
+/* eslint-disable import/no-extraneous-dependencies */
+
+var test = require('tape');
+var rehype = require('rehype');
+var u = require('unist-builder');
+var h = require('hastscript');
+var min = require('./');
+
+test('rehype-remove-meta-http-equiv', function (t) {
+  t.deepEqual(
+    rehype().use(min).run(h('head', [
+      h('meta', {charSet: 'utf8'}),
+      h('meta', {httpEquiv: ['content-type'], content: 'text/html; charset=chinese'})
+    ])),
+    h('head', [
+      h('meta', {charSet: 'chinese'})
+    ])
+  );
+
+  t.deepEqual(
+    rehype().use(min).run(h('head', [
+      h('meta', {httpEquiv: ['content-type'], content: 'text/html; charset=chinese'})
+    ])),
+    h('head', [
+      h('meta', {charSet: 'chinese'})
+    ])
+  );
+
+  t.deepEqual(
+    rehype().use(min).run(h('html', [
+      h('meta', {httpEquiv: ['content-type'], content: 'text/html; charset=chinese'})
+    ])),
+    h('html', [
+      h('meta', {httpEquiv: ['content-type'], content: 'text/html; charset=chinese'})
+    ])
+  );
+
+  t.deepEqual(
+    rehype().use(min).run(h('head', [
+      h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
+    ])),
+    h('head', [
+      h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
+    ])
+  );
+
+  t.deepEqual(
+    rehype().use(min).run(h('html', [
+      h('head', [h('meta', {httpEquiv: ['content-language'], content: 'en-US'})])
+    ])),
+    h('html', {lang: 'en-US'}, [h('head', [])])
+  );
+
+  t.deepEqual(
+    rehype().use(min).run(h('html', {lang: 'en-GB'}, [
+      h('head', [h('meta', {httpEquiv: ['content-language'], content: 'en-US'})])
+    ])),
+    h('html', {lang: 'en-US'}, [h('head', [])])
+  );
+
+  t.deepEqual(
+    rehype().use(min).run(u('root', [
+      u('doctype', {name: 'html'}),
+      h('html', {lang: 'en-GB'}, [
+        h('head', [
+          h('meta', {charSet: 'utf8'}),
+          h('noscript', h('link', {rel: ['stylesheet'], href: 'index.css'})),
+          h('meta', {name: 'viewport', content: 'width=device-width, initial-scale=1.0'}),
+          h('meta', {httpEquiv: ['X-UA-Compatible'], content: 'IE=edge, chrome=1'}),
+          h('meta', {httpEquiv: ['content-type'], content: 'text/html; charset=chinese'}),
+          h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
+        ]),
+        h('body', h('p', 'Hello, world!'))
+      ])
+    ])),
+    u('root', [
+      u('doctype', {name: 'html'}),
+      h('html', {lang: 'en-US'}, [
+        h('head', [
+          h('meta', {charSet: 'chinese'}),
+          h('noscript', h('link', {rel: ['stylesheet'], href: 'index.css'})),
+          h('meta', {name: 'viewport', content: 'width=device-width, initial-scale=1.0'}),
+          h('meta', {httpEquiv: ['X-UA-Compatible'], content: 'IE=edge, chrome=1'})
+        ]),
+        h('body', h('p', 'Hello, world!'))
+      ])
+    ])
+  );
+
+  t.end();
+});

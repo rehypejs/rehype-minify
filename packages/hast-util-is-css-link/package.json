@@ -1,0 +1,24 @@
+{
+  "name": "hast-util-is-css-link",
+  "version": "0.0.0",
+  "description": "Check if an element is a css link",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "css",
+    "link"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/hast-util-is-css-link",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "trim": "^0.0.1"
+  }
+}

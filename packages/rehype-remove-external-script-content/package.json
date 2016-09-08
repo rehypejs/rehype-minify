@@ -1,0 +1,26 @@
+{
+  "name": "rehype-remove-external-script-content",
+  "version": "0.0.0",
+  "description": "Remove content of external JavaScript `script` elements",
+  "license": "MIT",
+  "keywords": [
+    "rehype",
+    "hast",
+    "javascript",
+    "src"
+  ],
+  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-remove-external-script-content",
+  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com>"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "unist-util-visit": "^1.0.0",
+    "hast-util-has-property": "^1.0.0",
+    "hast-util-is-javascript": "^0.0.0"
+  }
+}
