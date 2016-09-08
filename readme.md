@@ -50,7 +50,7 @@ npm install rehype-preset-minify
 ## Plugins
 
 The following plugins are included in the preset.  They are mostly
-harmless (disclaimer: **rehype-minify** isn’t stable yet).
+harmless (disclaimer: **rehype-minify** is quite young).
 
 <!--plugins-core start-->
 
