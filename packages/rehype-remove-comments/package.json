@@ -1,6 +1,6 @@
 {
   "name": "rehype-remove-comments",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Remove comments (except conditional comments)",
   "license": "MIT",
   "keywords": [
@@ -20,6 +20,6 @@
   ],
   "dependencies": {
     "unist-util-filter": "^0.2.0",
-    "hast-util-is-conditional-comment": "^0.0.0"
+    "hast-util-is-conditional-comment": "^1.0.0"
   }
 }

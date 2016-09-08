@@ -1,6 +1,6 @@
 {
   "name": "hast-util-is-css-style",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Check if an element is a css style",
   "license": "MIT",
   "keywords": [

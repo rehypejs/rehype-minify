@@ -1,6 +1,6 @@
 {
   "name": "rehype-css-to-top",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Move CSS `<link>` to `<head>`",
   "license": "MIT",
   "keywords": [
@@ -20,7 +20,7 @@
   ],
   "dependencies": {
     "unist-util-visit": "^1.0.0",
-    "hast-util-is-css-link": "^0.0.0"
+    "hast-util-is-css-link": "^1.0.0"
   },
   "excludeFromPreset": true
 }

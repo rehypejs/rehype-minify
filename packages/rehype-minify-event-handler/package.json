@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-event-handler",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Minify event handler attributes",
   "license": "MIT",
   "keywords": [
@@ -19,7 +19,7 @@
     "index.js"
   ],
   "dependencies": {
-    "hast-util-is-event-handler": "^0.0.0",
+    "hast-util-is-event-handler": "^1.0.0",
     "hast-util-has-property": "^1.0.0",
     "uglify-js": "^2.6.4",
     "unist-util-visit": "^1.0.0",

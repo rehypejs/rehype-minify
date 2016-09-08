@@ -1,6 +1,6 @@
 {
   "name": "rehype-remove-style-type-css",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Remove `type` on CSS `style` and `link`s",
   "license": "MIT",
   "keywords": [
@@ -20,8 +20,8 @@
     "index.js"
   ],
   "dependencies": {
-    "hast-util-is-css-link": "^0.0.0",
-    "hast-util-is-css-style": "^0.0.0",
+    "hast-util-is-css-link": "^1.0.0",
+    "hast-util-is-css-style": "^1.0.0",
     "unist-util-visit": "^1.0.0"
   }
 }

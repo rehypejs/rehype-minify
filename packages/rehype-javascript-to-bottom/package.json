@@ -1,6 +1,6 @@
 {
   "name": "rehype-javascript-to-bottom",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Move JavaScript `<script>` to `<body>`",
   "license": "MIT",
   "keywords": [
@@ -20,7 +20,7 @@
   ],
   "dependencies": {
     "unist-util-visit": "^1.0.0",
-    "hast-util-is-javascript": "^0.0.0"
+    "hast-util-is-javascript": "^1.0.0"
   },
   "excludeFromPreset": true
 }
