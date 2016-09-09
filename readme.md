@@ -120,7 +120,7 @@ The following plugins are not included because they are potentially
 
 [rehype]: https://github.com/wooorm/rehype
 
-[logo]: https://cdn.rawgit.com/wooorm/rehype-minify/master/logo.svg
+[logo]: https://cdn.rawgit.com/wooorm/rehype-minify/03b2790/logo.svg
 
 [cli]: ./packages/rehype-preset-minify/readme.md#cli
 
