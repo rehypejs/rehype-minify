@@ -63,5 +63,41 @@ test('rehype-minify-whitespace', function (t) {
     ])
   );
 
+  t.deepEqual(
+    rehype().use(min, {newlines: true}).run(h('main', [
+      '  ',
+      h('p', [
+        '\n ',
+        h('strong', 'foo'),
+        '  ',
+        h('em', 'bar'),
+        ' \n',
+        h('meta', {itemProp: true}),
+        ' \n'
+      ]),
+      ' \n',
+      h('p', [
+        h('a', {href: 'example.com'}, ' baz'),
+        '  ',
+        h('em', ' qux')
+      ]),
+      '  '
+    ])),
+    h('main', [
+      h('p', [
+        h('strong', 'foo'),
+        ' ',
+        h('em', 'bar'),
+        '\n',
+        h('meta', {itemProp: true})
+      ]),
+      h('p', [
+        h('a', {href: 'example.com'}, 'baz'),
+        ' ',
+        h('em', 'qux')
+      ])
+    ])
+  );
+
   t.end();
 });

@@ -4,6 +4,10 @@
 
 Collapse whitespace.
 
+Normally, collapses to a single space.  If `newlines: true`,
+collapses white-space containing newlines to `'\n'` instead
+of `' '`.
+
 ## Install
 
 ```sh

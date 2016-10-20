@@ -1,6 +1,10 @@
 /**
  * @fileoverview
  *   Collapse whitespace.
+ *
+ *   Normally, collapses to a single space.  If `newlines: true`,
+ *   collapses white-space containing newlines to `'\n'` instead
+ *   of `' '`.
  * @example
  *   <h1>Heading</h1>
  *   <p><strong>This</strong> and <em>that</em></p>
@@ -22,11 +26,15 @@ var list = require('./list');
 /* Expose. */
 module.exports = collapse;
 
-function collapse() {
+function collapse(proc, options) {
   return transform;
+  function transform(tree) {
+    return minify(tree, options || {});
+  }
 }
 
-function transform(tree) {
+function minify(tree, options) {
+  var whitespace = options.newlines ? collapseToNewLines : collapseWhiteSpace;
   var modifier = modify(visitor);
   var inside = false;
   var seen = false;
@@ -47,15 +55,15 @@ function transform(tree) {
       prev = parent.children[index - 1];
       next = parent.children[index + 1];
 
-      value = collapseWhiteSpace(node.value);
+      value = whitespace(node.value);
       end = value.length;
       start = 0;
 
-      if (value.charAt(0) === ' ' && viable(prev)) {
+      if (empty(value.charAt(0)) && viable(prev)) {
         start++;
       }
 
-      if (value.charAt(end - 1) === ' ' && viable(next)) {
+      if (empty(value.charAt(end - 1)) && viable(next)) {
         end--;
       }
 
@@ -96,4 +104,17 @@ function collapsable(node) {
     embedded(node) ||
     bodyOK(node) ||
     (element(node, 'meta') && has(node, 'itemProp'));
+}
+
+/* Collapse to spaces, or newlines if they’re in a run. */
+function collapseToNewLines(value) {
+  var result = String(value).replace(/\s+/g, function ($0) {
+    return $0.indexOf('\n') === -1 ? ' ' : '\n';
+  });
+
+  return result;
+}
+
+function empty(character) {
+  return character === ' ' || character === '\n';
 }
