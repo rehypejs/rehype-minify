@@ -24,7 +24,7 @@ module.exports = trough()
         return line.slice(1, -1);
       }).filter(Boolean);
 
-      if (!ctx.contributors.length) {
+      if (ctx.contributors.length === 0) {
         ctx.contributors = null;
       }
 

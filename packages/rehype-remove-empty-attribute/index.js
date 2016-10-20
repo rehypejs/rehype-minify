@@ -33,7 +33,7 @@ function visitor(node) {
     value = props[prop];
 
     if (
-      (value === '' || (array(value) && !value.length)) &&
+      (value === '' || (array(value) && value.length === 0)) &&
       (handler(prop) || (has(attributes, prop) && is(node, attributes[prop])))
     ) {
       props[prop] = null;

@@ -33,7 +33,7 @@ function ok(node) {
   length = rel.length;
   index = -1;
 
-  if (!rel.length) {
+  if (rel.length === 0) {
     return false;
   }
 

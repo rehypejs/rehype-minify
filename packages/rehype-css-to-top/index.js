@@ -26,7 +26,7 @@ function transform(tree) {
 
   visit(tree, 'element', visitor);
 
-  if (head && matches.length) {
+  if (head && matches.length !== 0) {
     move();
   }
 
