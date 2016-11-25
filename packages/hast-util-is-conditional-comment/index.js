@@ -7,7 +7,7 @@
 
 module.exports = conditional;
 
-var re = /^\[if[ \t\f\n\r]+[^\]]+\]|<!\[endif\]$/;
+var re = /^\[if[ \t\f\n\r]+[^\]]+]|<!\[endif]$/;
 
 function conditional(node) {
   return node && node.type === 'comment' && re.test(node.value);

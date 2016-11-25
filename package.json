@@ -18,7 +18,7 @@
     "lerna": "2.0.0-beta.28",
     "mdast-zone": "^3.0.0",
     "negate": "^1.0.0",
-    "nyc": "^8.0.0",
+    "nyc": "^10.0.0",
     "parse-author": "^1.0.0",
     "rehype": "^3.0.0",
     "rehype-cli": "^1.0.0",
