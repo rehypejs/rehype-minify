@@ -1,5 +1,5 @@
 {
-  "presets": [
+  "plugins": [
     "../packages/rehype-preset-minify"
   ]
 }

@@ -96,8 +96,9 @@ module.exports = trough()
       );
 
       tree.push(u('code', {lang: 'html'}, trim(rehype()
+        .data('settings', opts.processor || {fragment: true})
         .use(require(ctx.script.path), opts.plugin || undefined)
-        .process(example, opts.processor || {fragment: true})
+        .processSync(example)
         .toString())
       ));
     }

@@ -16,7 +16,7 @@ var conditional = require('hast-util-is-conditional-comment');
 
 module.exports = comments;
 
-function comments(processor, options) {
+function comments(options) {
   var force = (options || {}).removeConditional;
 
   return transform;

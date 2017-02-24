@@ -1,15 +1,41 @@
 'use strict';
 
-/* Dependencies. */
-var api = require('./lib/api');
-var preset = require('./lib/preset');
+exports.settings = {
+  entities: {
+    omitOptionalSemicolons: true,
+    useShortestReferences: true
+  },
+  quoteSmart: true,
+  preferUnquoted: true,
+  omitOptionalTags: true,
+  collapseEmptyAttributes: true,
+  tightCommaSeparatedLists: true,
+  tightAttributes: true,
+  allowParseErrors: true,
+  allowDangerousCharacters: true
+};
 
-/* Expose. */
-module.exports = minify;
-
-minify.config = require('./lib/config');
-
-/* Check if we’re loaded as a plugin or a preset */
-function minify(a, b) {
-  return (a.use && a.process && a.readable && a.writable ? api : preset)(a, b);
-}
+exports.plugins = [
+  require('rehype-minify-attribute-whitespace'),
+  require('rehype-minify-css-style'),
+  require('rehype-minify-enumerated-attribute'),
+  require('rehype-minify-event-handler'),
+  require('rehype-minify-javascript-script'),
+  require('rehype-minify-javascript-url'),
+  require('rehype-minify-json-script'),
+  require('rehype-minify-media-attribute'),
+  require('rehype-minify-meta-color'),
+  require('rehype-minify-meta-content'),
+  require('rehype-minify-style-attribute'),
+  require('rehype-minify-whitespace'),
+  require('rehype-normalize-attribute-value-case'),
+  require('rehype-remove-comments'),
+  require('rehype-remove-duplicate-attribute-values'),
+  require('rehype-remove-empty-attribute'),
+  require('rehype-remove-external-script-content'),
+  require('rehype-remove-meta-http-equiv'),
+  require('rehype-remove-script-type-javascript'),
+  require('rehype-remove-style-type-css'),
+  require('rehype-sort-attribute-values'),
+  require('rehype-sort-attributes')
+];

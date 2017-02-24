@@ -4,11 +4,10 @@
 var path = require('path');
 var vfile = require('to-vfile');
 var trough = require('trough');
-var xtend = require('xtend');
 
 var filePipeline = trough()
   .use(function (ctx, next) {
-    vfile.read(path.join(ctx.root, 'lib', ctx.basename), function (err, file) {
+    vfile.read(path.join(ctx.root, 'index.js'), function (err, file) {
       ctx.file = file;
       next(err);
     });
@@ -22,25 +21,17 @@ var filePipeline = trough()
 
       if (re.test(doc)) {
         if (pack.excludeFromPreset) {
-          throw new Error('Did not expect `' + name + '` in `' + ctx.basename + '`');
+          throw new Error('Did not expect `' + name + '` in `' + ctx.root + '`');
         }
       } else if (!pack.excludeFromPreset) {
-        throw new Error('Expected `' + name + '` in `' + ctx.basename + '`');
+        throw new Error('Expected `' + name + '` in `' + ctx.root + '`');
       }
     });
   });
 
 module.exports = trough()
   .use(function (ctx, next) {
-    var count = 0;
-
-    ['api.js', 'preset.js'].forEach(function (basename, index, all) {
-      filePipeline.run(xtend(ctx, {basename: basename}), function (err) {
-        count++;
-
-        if (err || count === all.length) {
-          next(err);
-        }
-      });
+    filePipeline.run(ctx, function (err) {
+      next(err);
     });
   });

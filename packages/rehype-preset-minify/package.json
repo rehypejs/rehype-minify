@@ -17,12 +17,8 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com>"
   ],
-  "browser": "lib/api.js",
   "files": [
-    "index.js",
-    "lib/api.js",
-    "lib/config.js",
-    "lib/preset.js"
+    "index.js"
   ],
   "dependencies": {
     "rehype-minify-attribute-whitespace": "^1.0.0",

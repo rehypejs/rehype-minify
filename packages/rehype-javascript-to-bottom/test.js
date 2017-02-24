@@ -10,7 +10,7 @@ var min = require('./');
 
 test('rehype-javascript-to-bottom', function (t) {
   t.deepEqual(
-    rehype().use(min).run(u('root', [
+    rehype().use(min).runSync(u('root', [
       h('head', [
         h('script', {src: 'index.js'}),
         h('script', 'alert(1);'),
@@ -30,7 +30,7 @@ test('rehype-javascript-to-bottom', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(u('root', [
+    rehype().use(min).runSync(u('root', [
       h('head'),
       h('body', h('link', {rel: ['stylesheet'], type: 'text/foostyle', href: 'index.css'}))
     ])),
@@ -41,7 +41,7 @@ test('rehype-javascript-to-bottom', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(
+    rehype().use(min).runSync(
       h('body', h('link', {rel: ['stylesheet'], href: 'index.css'}))
     ),
     h('body', h('link', {rel: ['stylesheet'], href: 'index.css'}))

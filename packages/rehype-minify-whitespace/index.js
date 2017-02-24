@@ -26,7 +26,7 @@ var list = require('./list');
 /* Expose. */
 module.exports = collapse;
 
-function collapse(proc, options) {
+function collapse(options) {
   return transform;
   function transform(tree) {
     return minify(tree, options || {});

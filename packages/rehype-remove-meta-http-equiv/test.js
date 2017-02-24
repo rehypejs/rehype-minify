@@ -10,7 +10,7 @@ var min = require('./');
 
 test('rehype-remove-meta-http-equiv', function (t) {
   t.deepEqual(
-    rehype().use(min).run(h('head', [
+    rehype().use(min).runSync(h('head', [
       h('meta', {charSet: 'utf8'}),
       h('meta', {httpEquiv: ['content-type'], content: 'text/html; charset=chinese'})
     ])),
@@ -20,7 +20,7 @@ test('rehype-remove-meta-http-equiv', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('head', [
+    rehype().use(min).runSync(h('head', [
       h('meta', {httpEquiv: ['content-type'], content: 'text/html; charset=chinese'})
     ])),
     h('head', [
@@ -29,7 +29,7 @@ test('rehype-remove-meta-http-equiv', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('html', [
+    rehype().use(min).runSync(h('html', [
       h('meta', {httpEquiv: ['content-type'], content: 'text/html; charset=chinese'})
     ])),
     h('html', [
@@ -38,7 +38,7 @@ test('rehype-remove-meta-http-equiv', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('head', [
+    rehype().use(min).runSync(h('head', [
       h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
     ])),
     h('head', [
@@ -47,21 +47,21 @@ test('rehype-remove-meta-http-equiv', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('html', [
+    rehype().use(min).runSync(h('html', [
       h('head', [h('meta', {httpEquiv: ['content-language'], content: 'en-US'})])
     ])),
     h('html', {lang: 'en-US'}, [h('head', [])])
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('html', {lang: 'en-GB'}, [
+    rehype().use(min).runSync(h('html', {lang: 'en-GB'}, [
       h('head', [h('meta', {httpEquiv: ['content-language'], content: 'en-US'})])
     ])),
     h('html', {lang: 'en-US'}, [h('head', [])])
   );
 
   t.deepEqual(
-    rehype().use(min).run(u('root', [
+    rehype().use(min).runSync(u('root', [
       u('doctype', {name: 'html'}),
       h('html', {lang: 'en-GB'}, [
         h('head', [

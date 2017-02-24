@@ -27,7 +27,7 @@ test('plugin', function (t) {
       config = JSON.parse(fs.readFileSync(path.join(fp, 'config.json'), 'utf8'));
     } catch (err) {}
 
-    rehype().use(minify, config).process(input, minify.config, function (err, doc) {
+    rehype().use(minify, config).process(input, function (err, doc) {
       t.ifErr(err, 'shouldn’t fail');
       t.equal(String(doc), trim(output), name);
     });

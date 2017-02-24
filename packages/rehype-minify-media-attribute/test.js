@@ -9,21 +9,21 @@ var min = require('./');
 
 test('rehype-minify-media-attribute', function (t) {
   t.deepEqual(
-    rehype().use(min).run(
+    rehype().use(min).runSync(
       h('link', {media: '(min-width: 320px)', href: 'index.css'})
     ),
     h('link', {media: '(min-width:320px)', href: 'index.css'})
   );
 
   t.deepEqual(
-    rehype().use(min).run(
+    rehype().use(min).runSync(
       h('source', {media: '(min-width: 721px)', src: 'pear.jpg'})
     ),
     h('source', {media: '(min-width:721px)', src: 'pear.jpg'})
   );
 
   t.deepEqual(
-    rehype().use(min).run(
+    rehype().use(min).runSync(
       h('style', {media: 'all'}, '* {color: red}')
     ),
     {
@@ -35,19 +35,19 @@ test('rehype-minify-media-attribute', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(
+    rehype().use(min).runSync(
       h('source', {media: '!important', src: 'pear.jpg'})
     ),
     h('source', {media: '!important', src: 'pear.jpg'})
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('div')),
+    rehype().use(min).runSync(h('div')),
     h('div')
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('source', {media: true})),
+    rehype().use(min).runSync(h('source', {media: true})),
     h('source', {media: true})
   );
 

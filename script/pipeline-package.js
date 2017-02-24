@@ -65,7 +65,8 @@ module.exports = trough()
       browser: prev.browser || undefined,
       files: ctx.files || prev.files,
       dependencies: prev.dependencies,
-      excludeFromPreset: prev.excludeFromPreset
+      excludeFromPreset: prev.excludeFromPreset,
+      xo: false
     };
 
     ctx.package.contents = JSON.stringify(curr, 0, 2) + '\n';

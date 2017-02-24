@@ -10,7 +10,7 @@ var min = require('./');
 
 test('rehype-prevent-favicon-request', function (t) {
   t.deepEqual(
-    rehype().use(min).run(u('root', [
+    rehype().use(min).runSync(u('root', [
       u('doctype', {name: 'html'}),
       h('html', [h('head'), h('body')])
     ])),
@@ -28,7 +28,7 @@ test('rehype-prevent-favicon-request', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(u('root', [
+    rehype().use(min).runSync(u('root', [
       u('doctype', {name: 'html'}),
       h('html', [
         h('head', [h('link', {
@@ -49,7 +49,7 @@ test('rehype-prevent-favicon-request', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(u('root', [
+    rehype().use(min).runSync(u('root', [
       u('doctype', {name: 'html'}),
       h('html', [
         h('head', [h('link', {
@@ -77,7 +77,7 @@ test('rehype-prevent-favicon-request', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(u('root', [])),
+    rehype().use(min).runSync(u('root', [])),
     u('root', [])
   );
 

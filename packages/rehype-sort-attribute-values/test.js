@@ -9,7 +9,7 @@ var min = require('./');
 
 test('rehype-sort-attribute-values', function (t) {
   t.deepEqual(
-    rehype().use(min).run(h('i', {className: ['qux', 'quux', 'bar', 'foo', 'baz'], itemProp: true, id: 'foo'})),
+    rehype().use(min).runSync(h('i', {className: ['qux', 'quux', 'bar', 'foo', 'baz'], itemProp: true, id: 'foo'})),
     h('i', {className: ['bar', 'baz', 'foo', 'quux', 'qux'], itemProp: true, id: 'foo'})
   );
 

@@ -25,14 +25,19 @@ module.exports = trough()
     });
 
     remark()
-      .use(attacher, 'plugins-core', core)
-      .use(attacher, 'plugins-other', others)
-      .process(ctx.readme, {bullet: '*'}, function (err) {
+      .data('settings', {bullet: '*'})
+      .use(plugin('plugins-core', core))
+      .use(plugin('plugins-other', others))
+      .process(ctx.readme, function (err) {
         next(err);
       });
 
-    function attacher(proc, name, list) {
-      return transform;
+    function plugin(name, list) {
+      return attacher;
+
+      function attacher() {
+        return transform;
+      }
 
       function transform(tree) {
         zone(tree, name, visit);

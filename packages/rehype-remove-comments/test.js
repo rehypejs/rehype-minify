@@ -9,17 +9,17 @@ var min = require('./');
 
 test('rehype-remove-comments', function (t) {
   t.deepEqual(
-    rehype().use(min).run(h('div', [{type: 'comment', value: 'foo'}])),
+    rehype().use(min).runSync(h('div', [{type: 'comment', value: 'foo'}])),
     h('div')
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('div', [{type: 'comment', value: '[if IE]>...<![endif]'}])),
+    rehype().use(min).runSync(h('div', [{type: 'comment', value: '[if IE]>...<![endif]'}])),
     h('div', [{type: 'comment', value: '[if IE]>...<![endif]'}])
   );
 
   t.deepEqual(
-    rehype().use(min, {removeConditional: true}).run(h('div', [{type: 'comment', value: '[if IE]>...<![endif]'}])),
+    rehype().use(min, {removeConditional: true}).runSync(h('div', [{type: 'comment', value: '[if IE]>...<![endif]'}])),
     h('div')
   );
 

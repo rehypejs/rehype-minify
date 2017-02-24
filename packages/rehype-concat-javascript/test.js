@@ -10,7 +10,7 @@ var min = require('./');
 
 test('rehype-concat-javascript', function (t) {
   t.deepEqual(
-    rehype().use(min).run(u('root', [
+    rehype().use(min).runSync(u('root', [
       h('script', 'alert(1)'),
       h('script', 'alert(2)')
     ])),
@@ -20,7 +20,7 @@ test('rehype-concat-javascript', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(u('root', [
+    rehype().use(min).runSync(u('root', [
       h('script', 'alert(1);'),
       h('script', 'alert(2);')
     ])),
@@ -30,7 +30,7 @@ test('rehype-concat-javascript', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(u('root', [
+    rehype().use(min).runSync(u('root', [
       h('script', 'alert(1)'),
       h('script', {type: 'text/fooscript'}, 'alert(2)')
     ])),
@@ -41,7 +41,7 @@ test('rehype-concat-javascript', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(u('root', [
+    rehype().use(min).runSync(u('root', [
       h('script', 'alert(1)'),
       h('script', {src: 'foo'}),
       h('script', 'alert(2)')
@@ -53,7 +53,7 @@ test('rehype-concat-javascript', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(u('root', [
+    rehype().use(min).runSync(u('root', [
       h('script', 'alert(1)')
     ])),
     u('root', [

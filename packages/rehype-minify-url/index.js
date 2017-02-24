@@ -22,7 +22,7 @@ var attributes = require('html-url-attributes');
 
 module.exports = url;
 
-function url(processor, options) {
+function url(options) {
   var settings = options || {};
   var relate = new Relate(settings.from, settings);
 

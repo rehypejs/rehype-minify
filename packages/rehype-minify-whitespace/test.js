@@ -9,7 +9,7 @@ var min = require('./');
 
 test('rehype-minify-whitespace', function (t) {
   t.deepEqual(
-    rehype().use(min).run(h('main', [
+    rehype().use(min).runSync(h('main', [
       '  ',
       h('p', [
         '  ',
@@ -45,7 +45,7 @@ test('rehype-minify-whitespace', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('head', [
+    rehype().use(min).runSync(h('head', [
       '  ',
       h('meta', {itemProp: true}),
       '  ',
@@ -64,7 +64,7 @@ test('rehype-minify-whitespace', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min, {newlines: true}).run(h('main', [
+    rehype().use(min, {newlines: true}).runSync(h('main', [
       '  ',
       h('p', [
         '\n ',

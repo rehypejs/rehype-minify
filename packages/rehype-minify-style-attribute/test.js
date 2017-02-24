@@ -9,14 +9,14 @@ var min = require('./');
 
 test('rehype-minify-style-attribute', function (t) {
   t.deepEqual(
-    rehype().use(min).run(
+    rehype().use(min).runSync(
       h('i', {style: 'color: #ff0000;'})
     ),
     h('i', {style: 'color:red'})
   );
 
   t.deepEqual(
-    rehype().use(min).run({
+    rehype().use(min).runSync({
       type: 'element',
       tagName: 'i',
       properties: {style: true},
@@ -31,7 +31,7 @@ test('rehype-minify-style-attribute', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run({
+    rehype().use(min).runSync({
       type: 'element',
       tagName: 'i',
       properties: {style: 2},
@@ -46,7 +46,7 @@ test('rehype-minify-style-attribute', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('i', {style: ''})),
+    rehype().use(min).runSync(h('i', {style: ''})),
     {
       type: 'element',
       tagName: 'i',
@@ -56,12 +56,12 @@ test('rehype-minify-style-attribute', function (t) {
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('i', {style: '!important'})),
+    rehype().use(min).runSync(h('i', {style: '!important'})),
     h('i', {style: '!important'})
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('i')),
+    rehype().use(min).runSync(h('i')),
     h('i')
   );
 

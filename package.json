@@ -20,11 +20,11 @@
     "negate": "^1.0.0",
     "nyc": "^10.0.0",
     "parse-author": "^1.0.0",
-    "rehype": "^3.0.0",
-    "rehype-cli": "^1.0.0",
-    "remark": "^6.0.0",
-    "remark-cli": "^2.0.0",
-    "remark-preset-wooorm": "^1.0.0",
+    "rehype": "^4.0.0",
+    "rehype-cli": "^2.0.0",
+    "remark": "^7.0.0",
+    "remark-cli": "^3.0.0",
+    "remark-preset-wooorm": "^2.0.0",
     "strip-indent": "^1.0.0",
     "tape": "^4.6.0",
     "to-vfile": "^2.0.0",
@@ -67,6 +67,8 @@
     }
   },
   "remarkConfig": {
-    "presets": "wooorm"
+    "plugins": [
+      "preset-wooorm"
+    ]
   }
 }

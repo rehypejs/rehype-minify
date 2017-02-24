@@ -9,22 +9,22 @@ var min = require('./');
 
 test('rehype-remove-script-type-javascript', function (t) {
   t.deepEqual(
-    rehype().use(min).run(h('script', {type: 'text/javascript'})),
+    rehype().use(min).runSync(h('script', {type: 'text/javascript'})),
     {type: 'element', tagName: 'script', properties: {type: null}, children: []}
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('script', {language: 'javascript'})),
+    rehype().use(min).runSync(h('script', {language: 'javascript'})),
     {type: 'element', tagName: 'script', properties: {language: null}, children: []}
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('script', {type: 'fooscript'})),
+    rehype().use(min).runSync(h('script', {type: 'fooscript'})),
     h('script', {type: 'fooscript'})
   );
 
   t.deepEqual(
-    rehype().use(min).run(h('script', {language: 'fooscript'})),
+    rehype().use(min).runSync(h('script', {language: 'fooscript'})),
     h('script', {language: 'fooscript'})
   );
 

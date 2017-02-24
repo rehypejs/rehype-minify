@@ -9,7 +9,7 @@ var min = require('./');
 
 test('rehype-remove-duplicate-attribute-values', function (t) {
   t.deepEqual(
-    rehype().use(min).run(h('i', {className: ['foo', 'foo'], autoComplete: ['on', 'on']})),
+    rehype().use(min).runSync(h('i', {className: ['foo', 'foo'], autoComplete: ['on', 'on']})),
     h('i', {className: ['foo'], autoComplete: ['on', 'on']})
   );
 

@@ -9,7 +9,7 @@ var min = require('./');
 
 test('rehype-sort-attributes', function (t) {
   t.equal(
-    rehype().stringify(rehype().use(min).run(
+    rehype().stringify(rehype().use(min).runSync(
       h('p', {id: 'foo', className: ['bar']}, [
         h('strong', {id: 'baz', className: ['qux']}),
         h('em', {hidden: false, className: ['quux']})
