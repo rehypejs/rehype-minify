@@ -21,5 +21,6 @@
   "dependencies": {
     "unist-util-filter": "^0.2.0",
     "hast-util-is-conditional-comment": "^1.0.0"
-  }
+  },
+  "xo": false
 }

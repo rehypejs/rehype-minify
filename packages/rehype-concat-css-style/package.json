@@ -24,5 +24,6 @@
     "hast-util-from-string": "^1.0.0",
     "hast-util-to-string": "^1.0.0"
   },
-  "excludeFromPreset": true
+  "excludeFromPreset": true,
+  "xo": false
 }

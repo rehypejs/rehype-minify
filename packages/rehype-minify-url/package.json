@@ -26,5 +26,6 @@
     "unist-util-visit": "^1.0.0",
     "x-is-array": "^0.1.0"
   },
-  "excludeFromPreset": true
+  "excludeFromPreset": true,
+  "xo": false
 }

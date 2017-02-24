@@ -25,5 +25,6 @@
     "hast-util-has-property": "^1.0.0",
     "hast-util-is-javascript": "^1.0.0",
     "hast-util-to-string": "^1.0.0"
-  }
+  },
+  "xo": false
 }

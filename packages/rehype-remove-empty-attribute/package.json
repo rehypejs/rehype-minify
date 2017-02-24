@@ -25,5 +25,6 @@
     "hast-util-is-event-handler": "^1.0.0",
     "unist-util-visit": "^1.0.0",
     "x-is-array": "^0.1.0"
-  }
+  },
+  "xo": false
 }

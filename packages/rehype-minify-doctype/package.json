@@ -20,5 +20,6 @@
   "dependencies": {
     "unist-util-visit": "^1.0.0"
   },
-  "excludeFromPreset": true
+  "excludeFromPreset": true,
+  "xo": false
 }

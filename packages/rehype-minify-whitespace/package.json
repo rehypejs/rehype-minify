@@ -27,5 +27,6 @@
     "html-whitespace-sensitive-tag-names": "^1.0.0",
     "unist-util-is": "^2.0.0",
     "unist-util-modify-children": "^1.0.0"
-  }
+  },
+  "xo": false
 }

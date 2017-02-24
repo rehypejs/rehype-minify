@@ -27,5 +27,6 @@
     "trim": "^0.0.1",
     "unist-util-visit": "^1.0.0",
     "x-is-array": "^0.1.0"
-  }
+  },
+  "xo": false
 }

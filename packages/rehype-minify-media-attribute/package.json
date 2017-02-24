@@ -22,5 +22,6 @@
     "clean-css": "^3.4.18",
     "hast-util-is-element": "^1.0.0",
     "unist-util-visit": "^1.0.0"
-  }
+  },
+  "xo": false
 }

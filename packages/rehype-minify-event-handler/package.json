@@ -24,5 +24,6 @@
     "uglify-js": "^2.6.4",
     "unist-util-visit": "^1.0.0",
     "trim": "0.0.1"
-  }
+  },
+  "xo": false
 }

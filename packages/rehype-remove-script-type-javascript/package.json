@@ -22,5 +22,6 @@
   "dependencies": {
     "hast-util-is-javascript": "^1.0.0",
     "unist-util-visit": "^1.0.0"
-  }
+  },
+  "xo": false
 }

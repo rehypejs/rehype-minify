@@ -20,5 +20,6 @@
   ],
   "dependencies": {
     "trim": "^0.0.1"
-  }
+  },
+  "xo": false
 }
