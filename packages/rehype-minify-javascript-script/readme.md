@@ -24,7 +24,7 @@ npm install rehype-minify-javascript-script
 ##### Out
 
 ```html
-<script>var name="World";console.log("Hello, "+name+"!");</script>
+<script>console.log("Hello, World!");</script>
 ```
 
 ## License

@@ -21,8 +21,8 @@ module.exports = url;
 var protocol = 'javascript:';
 /* eslint-enable no-script-url */
 
-var prefix = '!function(){return ';
-var suffix = '}();';
+var prefix = 'function a(){';
+var suffix = '}a();';
 
 function url() {
   return transform;

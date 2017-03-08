@@ -15,8 +15,8 @@ var handler = require('hast-util-is-event-handler');
 
 module.exports = eventHandler;
 
-var prefix = '!function(){';
-var suffix = '}();';
+var prefix = 'function a(){';
+var suffix = '}a();';
 
 function eventHandler() {
   return transform;

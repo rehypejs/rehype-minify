@@ -12,14 +12,14 @@ test('rehype-minify-javascript-script', function (t) {
     rehype().use(min).runSync(
       h('script', 'var name = "World";\nconsole.log("Hello, " + name + "!");')
     ),
-    h('script', 'var name="World";console.log("Hello, "+name+"!");')
+    h('script', 'console.log("Hello, World!");')
   );
 
   t.deepEqual(
     rehype().use(min).runSync(
       h('script', '(function () {var name = "World";\nconsole.log("Hello, " + name + "!");})()')
     ),
-    h('script', '!function(){var o="World";console.log("Hello, "+o+"!")}();')
+    h('script', '!function(){console.log("Hello, World!")}();')
   );
 
   t.deepEqual(
