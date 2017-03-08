@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-event-handler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Minify event handler attributes",
   "license": "MIT",
   "keywords": [
