@@ -12,7 +12,7 @@ test('rehype-minify-javascript-script', function (t) {
     rehype().use(min).runSync(
       h('script', 'var name = "World";\nconsole.log("Hello, " + name + "!");')
     ),
-    h('script', 'console.log("Hello, World!");')
+    h('script', 'var name="World";console.log("Hello, "+name+"!");')
   );
 
   t.deepEqual(
