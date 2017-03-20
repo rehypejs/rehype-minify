@@ -80,7 +80,9 @@ function minify(tree, options) {
     }
 
     if (!seen && !inside) {
-      inside = seen = head = element(node, 'head');
+      head = element(node, 'head');
+      inside = head;
+      seen = head;
     }
 
     if (node.children && !element(node, whitespaceSensitive)) {

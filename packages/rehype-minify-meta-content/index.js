@@ -22,8 +22,10 @@ module.exports = content;
 var handlers = {};
 
 handlers.viewport = viewport;
-handlers.keywords = handlers.robots = collapse;
-handlers['apple-itunes-app'] = handlers['apple-media-service-subscription'] = collapse;
+handlers.keywords = collapse;
+handlers.robots = collapse;
+handlers['apple-itunes-app'] = collapse;
+handlers['apple-media-service-subscription'] = collapse;
 
 function content() {
   return transform;

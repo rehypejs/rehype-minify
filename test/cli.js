@@ -15,7 +15,7 @@ test('preset', function (t) {
 
   t.plan(1);
 
-  /* preset is loaded from `.rehyperc` */
+  /* Preset is loaded from `.rehyperc` */
   execa(bin, [input]).then(function (result) {
     t.equal(
       result.stdout,
