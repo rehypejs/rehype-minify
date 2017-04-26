@@ -17,7 +17,7 @@ module.exports = mediaAttribute;
 var clean = new CleanCSS();
 
 var prefix = '@media ';
-var suffix = '{*{x:y}}';
+var suffix = '{i{color:red}}';
 
 function mediaAttribute() {
   return transform;

@@ -19,7 +19,7 @@
     "index.js"
   ],
   "dependencies": {
-    "clean-css": "^3.4.18",
+    "clean-css": "^4.0.12",
     "hast-util-from-string": "^1.0.0",
     "hast-util-is-css-style": "^1.0.0",
     "hast-util-to-string": "^1.0.0",
