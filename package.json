@@ -15,7 +15,7 @@
     "execa": "^0.6.0",
     "hastscript": "^3.0.0",
     "is-hidden": "^1.0.1",
-    "lerna": "2.0.0-beta.28",
+    "lerna": "2.0.0-rc.3",
     "mdast-zone": "^3.0.0",
     "negate": "^1.0.0",
     "nyc": "^10.0.0",
