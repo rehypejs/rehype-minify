@@ -96,6 +96,11 @@ The following plugins are not included because they are potentially
 
 <!--plugins-other end-->
 
+## Related
+
+*   [`rehype-format`](https://github.com/wooorm/rehype-format)
+    — Format HTML
+
 ## License
 
 [MIT][license] © [Titus Wormer][author]
