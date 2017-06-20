@@ -11,13 +11,14 @@
 
 'use strict';
 
-var own = require('has');
 var comma = require('comma-separated-tokens');
 var visit = require('unist-util-visit');
 var is = require('hast-util-is-element');
 var has = require('hast-util-has-property');
 
 module.exports = content;
+
+var own = {}.hasOwnProperty;
 
 var handlers = {};
 
@@ -39,7 +40,7 @@ function visitor(node) {
   var props = node.properties;
   var name = props.name;
 
-  if (is(node, 'meta') && has(node, 'content') && own(handlers, name)) {
+  if (is(node, 'meta') && has(node, 'content') && own.call(handlers, name)) {
     if (typeof props.content === 'string') {
       props.content = handlers[name](props.content);
     }

@@ -20,7 +20,6 @@
   ],
   "dependencies": {
     "comma-separated-tokens": "^1.0.2",
-    "has": "^1.0.1",
     "hast-util-has-property": "^1.0.0",
     "hast-util-is-element": "^1.0.0",
     "unist-util-visit": "^1.0.0"

@@ -9,11 +9,12 @@
 
 'use strict';
 
-var own = require('has');
 var visit = require('unist-util-visit');
 var has = require('hast-util-has-property');
 
 module.exports = sort;
+
+var own = {}.hasOwnProperty;
 
 function sort() {
   return transform;
@@ -38,7 +39,7 @@ function transform(tree) {
 
     for (name in props) {
       if (has(node, name)) {
-        if (own(counts, name)) {
+        if (own.call(counts, name)) {
           counts[name]++;
         } else {
           all.push(name);

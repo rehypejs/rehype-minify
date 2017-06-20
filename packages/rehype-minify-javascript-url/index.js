@@ -9,13 +9,14 @@
 
 var Uglify = require('uglify-js');
 var trim = require('trim');
-var own = require('has');
 var visit = require('unist-util-visit');
 var has = require('hast-util-has-property');
 var is = require('hast-util-is-element');
 var attributes = require('html-url-attributes');
 
 module.exports = url;
+
+var own = {}.hasOwnProperty;
 
 /* eslint-disable no-script-url */
 var protocol = 'javascript:';
@@ -37,7 +38,7 @@ function visitor(node) {
   var prop;
 
   for (prop in props) {
-    if (has(node, prop) && own(attributes, prop) && is(node, attributes[prop])) {
+    if (has(node, prop) && own.call(attributes, prop) && is(node, attributes[prop])) {
       props[prop] = minify(props[prop]);
     }
   }

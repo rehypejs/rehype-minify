@@ -13,7 +13,6 @@
 
 'use strict';
 
-var own = require('has');
 var string = require('x-is-string');
 var visit = require('unist-util-visit');
 var has = require('hast-util-has-property');
@@ -21,6 +20,8 @@ var is = require('hast-util-is-element');
 var schema = require('./schema');
 
 module.exports = enums;
+
+var own = {}.hasOwnProperty;
 
 function enums() {
   return transform;
@@ -38,7 +39,7 @@ function visitor(node) {
   var prop;
 
   for (prop in props) {
-    if (has(node, prop) && own(schema, prop) && string(props[prop])) {
+    if (has(node, prop) && own.call(schema, prop) && typeof props[prop] === 'string') {
       definitions = schema[prop];
       definitions = definitions.length ? definitions : [definitions];
       length = definitions.length;

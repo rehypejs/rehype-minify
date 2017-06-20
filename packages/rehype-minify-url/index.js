@@ -12,7 +12,6 @@
 
 'use strict';
 
-var own = require('has');
 var Relate = require('relateurl');
 var array = require('x-is-array');
 var visit = require('unist-util-visit');
@@ -21,6 +20,8 @@ var is = require('hast-util-is-element');
 var attributes = require('html-url-attributes');
 
 module.exports = url;
+
+var own = {}.hasOwnProperty;
 
 function url(options) {
   var settings = options || {};
@@ -42,7 +43,7 @@ function url(options) {
       var prop;
 
       for (prop in props) {
-        if (has(node, prop) && own(attributes, prop) && is(node, attributes[prop])) {
+        if (has(node, prop) && own.call(attributes, prop) && is(node, attributes[prop])) {
           props[prop] = minify(props[prop], relate);
         }
       }

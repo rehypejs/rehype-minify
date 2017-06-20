@@ -10,7 +10,6 @@
 
 'use strict';
 
-var own = require('has');
 var trim = require('trim');
 var array = require('x-is-array');
 var visit = require('unist-util-visit');
@@ -20,6 +19,8 @@ var handler = require('hast-util-is-event-handler');
 var attributes = require('./schema');
 
 module.exports = whitespace;
+
+var own = {}.hasOwnProperty;
 
 function whitespace() {
   return transform;
@@ -36,7 +37,7 @@ function visitor(node) {
   for (prop in props) {
     if (
       has(node, prop) &&
-      (handler(prop) || (own(attributes, prop) && is(node, attributes[prop])))
+      (handler(prop) || (own.call(attributes, prop) && is(node, attributes[prop])))
     ) {
       props[prop] = minify(props[prop]);
     }
