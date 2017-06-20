@@ -1,6 +1,6 @@
 {
   "name": "rehype-remove-empty-attribute",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Remove empty attributes",
   "license": "MIT",
   "keywords": [
