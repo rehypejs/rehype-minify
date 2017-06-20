@@ -13,7 +13,6 @@
 
 'use strict';
 
-var string = require('x-is-string');
 var visit = require('unist-util-visit');
 var has = require('hast-util-has-property');
 var is = require('hast-util-is-element');
@@ -66,7 +65,7 @@ function minify(value, info) {
   while (++index < length) {
     state = states[index];
 
-    if (string(state)) {
+    if (typeof state === 'string') {
       state = [state];
     }
 
@@ -80,9 +79,9 @@ function minify(value, info) {
    * Lets’s optimize it. */
   if (known && state) {
     result = state[0];
-  } else if (string(info.invalid)) {
+  } else if (typeof info.invalid === 'string') {
     result = info.invalid;
-  } else if (string(info.missing)) {
+  } else if (typeof info.missing === 'string') {
     result = info.missing;
   } else {
     return value;
