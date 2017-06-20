@@ -30,10 +30,7 @@ function transform(tree) {
 function visitor(node) {
   if (js(node) && !has(node, 'src')) {
     try {
-      fromString(node, Uglify.minify(toString(node), {
-        fromString: true,
-        output: {inline_script: true}
-      }).code);
+      fromString(node, Uglify.minify(toString(node)).code);
     } catch (err) {}
   }
 }

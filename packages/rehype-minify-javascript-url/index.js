@@ -55,11 +55,7 @@ function minify(value) {
     val = val.slice(protocol.length);
 
     try {
-      output = Uglify.minify(prefix + val + suffix, {
-        fromString: true,
-        output: {inline_script: true}
-      });
-
+      output = Uglify.minify(prefix + val + suffix);
       val = output.code.slice(prefix.length, -suffix.length);
     } catch (err) {}
 

@@ -19,7 +19,7 @@ test('rehype-minify-javascript-script', function (t) {
     rehype().use(min).runSync(
       h('script', '(function () {var name = "World";\nconsole.log("Hello, " + name + "!");})()')
     ),
-    h('script', '!function(){console.log("Hello, World!")}();')
+    h('script', 'console.log("Hello, World!");')
   );
 
   t.deepEqual(
