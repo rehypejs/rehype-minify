@@ -12,7 +12,6 @@
 
 'use strict';
 
-/* Dependencies. */
 var collapseWhiteSpace = require('collapse-white-space');
 var whitespaceSensitive = require('html-whitespace-sensitive-tag-names');
 var is = require('unist-util-is');
@@ -23,7 +22,6 @@ var embedded = require('hast-util-embedded');
 var bodyOK = require('hast-util-is-body-ok-link');
 var list = require('./list');
 
-/* Expose. */
 module.exports = collapse;
 
 function collapse(options) {

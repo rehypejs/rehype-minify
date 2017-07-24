@@ -1,6 +1,5 @@
 'use strict';
 
-/* Dependencies. */
 var path = require('path');
 var vfile = require('to-vfile');
 var trough = require('trough');

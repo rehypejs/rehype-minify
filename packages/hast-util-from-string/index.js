@@ -7,7 +7,6 @@
 
 'use strict';
 
-/* Expose. */
 module.exports = fromString;
 
 function fromString(node, value) {

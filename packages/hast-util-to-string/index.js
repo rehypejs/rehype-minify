@@ -5,7 +5,6 @@
 
 'use strict';
 
-/* Expose. */
 module.exports = toString;
 
 function toString(node) {
