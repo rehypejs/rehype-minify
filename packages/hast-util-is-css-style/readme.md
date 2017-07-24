@@ -10,6 +10,24 @@ Check if an element is a CSS `<style>` element.
 npm install hast-util-is-css-style
 ```
 
+## Usage
+
+```javascript
+var h = require('hastscript');
+var ok = require('hast-util-is-css-style');
+
+ok(h('style')); //=> true
+ok(h('style', {type: ' TEXT/CSS '})); //=> true
+ok(h('style', {type: 'text/foo'})); //=> false
+```
+
+## API
+
+### `isCSSStyle(node)`
+
+Return `true` if `node` is a `<style>` element that has no
+`type`, an empty `type`, or `'text/css'` as its `type`.
+
 ## License
 
 [MIT](https://github.com/wooorm/rehype-minify/blob/master/LICENSE) © [Titus Wormer](http://wooorm.com)

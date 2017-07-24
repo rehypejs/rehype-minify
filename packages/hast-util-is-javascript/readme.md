@@ -10,6 +10,27 @@ Check if an element is a JavaScript script.
 npm install hast-util-is-javascript
 ```
 
+## Usage
+
+```javascript
+var h = require('hastscript');
+var ok = require('hast-util-is-javascript');
+
+ok(h('script')); //=> true
+ok(h('script', {type: 'text/ecmascript'})); //=> true
+ok(h('script', {language: 'ecmascript'})); //=> true
+ok(h('script', {type: 'text/fooscript'})); //=> false
+ok(h('script', {language: 'fooscript'})); //=> false
+```
+
+## API
+
+### `isJavaScript(node)`
+
+Return `true` if `node` is a `<script>` element that has a valid
+JavaScript `type`, has no `type` and a valid JavaScript `language`,
+or has neither.
+
 ## License
 
 [MIT](https://github.com/wooorm/rehype-minify/blob/master/LICENSE) © [Titus Wormer](http://wooorm.com)

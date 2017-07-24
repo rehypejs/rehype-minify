@@ -10,6 +10,24 @@ Check if a property is an event handler.
 npm install hast-util-is-event-handler
 ```
 
+## Usage
+
+```javascript
+var ok = require('hast-util-is-event-handler');
+
+ok('oncut'); //=> true
+ok('onpushsubscriptionchange'); //=> true
+ok('ones'); //=> false
+ok('class'); //=> false
+```
+
+## API
+
+### `isEventHandler(prop)`
+
+Check if `prop` is a `string` starting with `'on'` and its `length`
+is 5 or more.
+
 ## License
 
 [MIT](https://github.com/wooorm/rehype-minify/blob/master/LICENSE) © [Titus Wormer](http://wooorm.com)

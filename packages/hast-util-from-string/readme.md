@@ -12,6 +12,34 @@ The given node is returned.
 npm install hast-util-from-string
 ```
 
+## Usage
+
+```javascript
+var h = require('hastscript');
+var fromString = require('hast-util-from-string');
+
+fromString(h('p'), 'Alpha');
+// { type: 'element',
+//   tagName: 'p',
+//   properties: {},
+//   children: [ { type: 'text', value: 'Alpha' } ] }
+fromString(h('div', [h('b', 'Bold'), ' and ', h('i', 'italic'), '.']), 'Charlie');
+// { type: 'element',
+//   tagName: 'div',
+//   properties: {},
+//   children: [ { type: 'text', value: 'Charlie' } ] }
+```
+
+## API
+
+### `fromString(node[, value])`
+
+If `node` is a text node (has a `value` property), set that to
+the given `value` or an empty string.
+If `node` is a parent node (has `children`), replace them with
+a text node whose data is set to given `value`, or if `value` is
+not given, remove all its.
+
 ## License
 
 [MIT](https://github.com/wooorm/rehype-minify/blob/master/LICENSE) © [Titus Wormer](http://wooorm.com)
