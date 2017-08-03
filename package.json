@@ -27,6 +27,7 @@
     "remark-preset-wooorm": "^3.0.0",
     "strip-indent": "^2.0.0",
     "tape": "^4.6.0",
+    "tape-watch": "^2.3.0",
     "to-vfile": "^2.0.0",
     "trim": "0.0.1",
     "trim-trailing-lines": "^1.0.0",
@@ -44,6 +45,7 @@
     "build": "npm run build-packages && npm run build-md",
     "lint": "xo",
     "test-api": "tape test/index.js packages/*/test.js",
+    "test-api-watch": "tape-watch test/index.js packages/*/test.js",
     "test-coverage": "nyc --reporter lcov tape test/index.js packages/*/test.js",
     "test": "npm run build && npm run lint && npm run test-coverage"
   },
