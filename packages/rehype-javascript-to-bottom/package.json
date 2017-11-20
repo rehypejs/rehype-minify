@@ -13,6 +13,7 @@
   "bugs": "https://github.com/wooorm/rehype-minify/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
+    "Andrew Joslin <andrewtjoslin@gmail.com>",
     "Titus Wormer <tituswormer@gmail.com>"
   ],
   "files": [
