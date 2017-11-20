@@ -47,5 +47,27 @@ test('rehype-javascript-to-bottom', function (t) {
     h('body', h('link', {rel: ['stylesheet'], href: 'index.css'}))
   );
 
+  function ignoreFoo(node) {
+    return !/foo.js/.test(node.properties.src);
+  }
+
+  t.deepEqual(
+    rehype().use(min, {filter: ignoreFoo}).runSync(u('root', [
+      h('head', [
+        h('script', {src: 'index.js'}),
+        h('script', {src: 'foo.js'})
+      ]),
+      h('body', [])
+    ])),
+    u('root', [
+      h('head', [
+        h('script', {src: 'foo.js'})
+      ]),
+      h('body', [
+        h('script', {src: 'index.js'})
+      ])
+    ])
+  );
+
   t.end();
 });
