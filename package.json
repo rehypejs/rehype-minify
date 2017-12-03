@@ -21,7 +21,7 @@
     "nyc": "^11.0.0",
     "parse-author": "^2.0.0",
     "rehype": "^5.0.0",
-    "rehype-cli": "^4.0.0",
+    "rehype-cli": "^5.0.0",
     "remark": "^8.0.0",
     "remark-cli": "^4.0.0",
     "remark-preset-wooorm": "^3.0.0",
