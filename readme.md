@@ -101,6 +101,13 @@ The following plugins are not included because they are potentially
 *   [`rehype-format`](https://github.com/wooorm/rehype-format)
     — Format HTML
 
+## Contribute
+
+See [`contribute.md` in `rehypejs/rehype`][contribute] for ways to get started.
+
+This organisation has a [Code of Conduct][coc].  By interacting with this
+repository, organisation, or community you agree to abide by its terms.
+
 ## License
 
 [MIT][license] © [Titus Wormer][author]
@@ -130,3 +137,7 @@ The following plugins are not included because they are potentially
 [cli]: ./packages/rehype-preset-minify/readme.md#cli
 
 [api]: ./packages/rehype-preset-minify/readme.md#api
+
+[contribute]: https://github.com/rehypejs/rehype/blob/master/contributing.md
+
+[coc]: https://github.com/rehypejs/rehype/blob/master/code-of-conduct.md
