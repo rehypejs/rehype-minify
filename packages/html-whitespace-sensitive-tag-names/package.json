@@ -12,8 +12,8 @@
     "tag",
     "name"
   ],
-  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/html-whitespace-sensitive-tag-names",
-  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/html-whitespace-sensitive-tag-names",
+  "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com>"

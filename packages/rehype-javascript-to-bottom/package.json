@@ -9,11 +9,10 @@
     "js",
     "head"
   ],
-  "repository": "https://github.com/wooorm/rehype-minify/tree/master/packages/rehype-javascript-to-bottom",
-  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-javascript-to-bottom",
+  "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
-    "Andrew Joslin <andrewtjoslin@gmail.com>",
     "Titus Wormer <tituswormer@gmail.com>"
   ],
   "files": [

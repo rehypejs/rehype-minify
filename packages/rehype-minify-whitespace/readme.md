@@ -31,4 +31,4 @@ npm install rehype-minify-whitespace
 
 ## License
 
-[MIT](https://github.com/wooorm/rehype-minify/blob/master/LICENSE) © [Titus Wormer](http://wooorm.com)
+[MIT](https://github.com/rehypejs/rehype-minify/blob/master/LICENSE) © [Titus Wormer](http://wooorm.com)

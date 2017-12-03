@@ -114,25 +114,25 @@ repository, organisation, or community you agree to abide by its terms.
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/wooorm/rehype-minify.svg
+[build-badge]: https://img.shields.io/travis/rehypejs/rehype-minify.svg
 
-[build-status]: https://travis-ci.org/wooorm/rehype-minify
+[build-status]: https://travis-ci.org/rehypejs/rehype-minify
 
-[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/rehype-minify.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/rehypejs/rehype-minify.svg
 
-[coverage-status]: https://codecov.io/github/wooorm/rehype-minify
+[coverage-status]: https://codecov.io/github/rehypejs/rehype-minify
 
-[chat-badge]: https://img.shields.io/gitter/room/wooorm/rehype.svg
+[chat-badge]: https://img.shields.io/gitter/room/rehypejs/Lobby.svg
 
-[chat]: https://gitter.im/wooorm/rehype
+[chat]: https://gitter.im/rehypejs/Lobby
 
 [license]: LICENSE
 
 [author]: http://wooorm.com
 
-[rehype]: https://github.com/wooorm/rehype
+[rehype]: https://github.com/rehypejs/rehype
 
-[logo]: https://cdn.rawgit.com/wooorm/rehype-minify/03b2790/logo.svg
+[logo]: https://cdn.rawgit.com/rehypejs/rehype-minify/03b2790/logo.svg
 
 [cli]: ./packages/rehype-preset-minify/readme.md#cli
 

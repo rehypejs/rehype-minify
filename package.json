@@ -2,8 +2,8 @@
   "private": true,
   "name": "monorepo",
   "license": "MIT",
-  "repository": "https://github.com/wooorm/rehype-minify",
-  "bugs": "https://github.com/wooorm/rehype-minify/issues",
+  "repository": "https://github.com/rehypejs/rehype-minify",
+  "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
