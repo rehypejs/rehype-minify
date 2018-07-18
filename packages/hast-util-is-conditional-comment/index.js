@@ -21,12 +21,12 @@
  *   one of the know IE conditional comments.
  */
 
-'use strict';
+'use strict'
 
-module.exports = conditional;
+module.exports = conditional
 
-var re = /^\[if[ \t\f\n\r]+[^\]]+]|<!\[endif]$/;
+var re = /^\[if[ \t\f\n\r]+[^\]]+]|<!\[endif]$/
 
 function conditional(node) {
-  return node && node.type === 'comment' && re.test(node.value);
+  return node && node.type === 'comment' && re.test(node.value)
 }

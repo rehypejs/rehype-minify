@@ -19,87 +19,87 @@
  *   </html>
  */
 
-'use strict';
+'use strict'
 
-var visit = require('unist-util-visit');
-var spaces = require('space-separated-tokens').stringify;
-var has = require('hast-util-has-property');
-var is = require('hast-util-is-element');
+var visit = require('unist-util-visit')
+var spaces = require('space-separated-tokens').stringify
+var has = require('hast-util-has-property')
+var is = require('hast-util-is-element')
 
-module.exports = removeHTTPEquiv;
+module.exports = removeHTTPEquiv
 
 function removeHTTPEquiv() {
-  return transform;
+  return transform
 }
 
 function transform(tree) {
-  var html;
-  var head;
-  var charSet;
-  var contentType;
-  var contentLanguage;
-  var contentTypeParent;
-  var contentLanguageParent;
-  var value;
+  var html
+  var head
+  var charSet
+  var contentType
+  var contentLanguage
+  var contentTypeParent
+  var contentLanguageParent
+  var value
 
-  visit(tree, 'element', visitor);
+  visit(tree, 'element', visitor)
 
   /* `meta` has precedence over `html[lang]`:
    * https://html.spec.whatwg.org/#the-lang-and-xml:lang-
    * attributes:pragma-set-default-language */
   if (html && contentLanguage) {
-    html.properties.lang = contentLanguage.properties.content;
-    remove(contentLanguageParent, contentLanguage);
+    html.properties.lang = contentLanguage.properties.content
+    remove(contentLanguageParent, contentLanguage)
   }
 
   /* `meta` has precedence over `meta[charset]`. */
   if (contentType) {
-    value = contentType.properties.content.replace(/^.+charset=/i, '');
+    value = contentType.properties.content.replace(/^.+charset=/i, '')
 
     if (charSet) {
-      charSet.properties.charSet = value;
-      remove(contentTypeParent, contentType);
+      charSet.properties.charSet = value
+      remove(contentTypeParent, contentType)
     } else if (head) {
       head.children.unshift({
         type: 'element',
         tagName: 'meta',
         properties: {charSet: value},
         children: []
-      });
+      })
 
-      remove(contentTypeParent, contentType);
+      remove(contentTypeParent, contentType)
     }
   }
 
   function visitor(node, index, parent) {
     /* Stop walking.  We only need the `head`. */
     if (is(node, 'body')) {
-      return false;
+      return false
     }
 
     if (is(node, 'html')) {
-      html = node;
+      html = node
     } else if (is(node, 'head')) {
-      head = node;
+      head = node
     } else if (is(node, 'meta')) {
       if (has(node, 'charSet')) {
-        charSet = node;
+        charSet = node
       } else if (has(node, 'httpEquiv')) {
-        value = spaces(node.properties.httpEquiv).toLowerCase();
+        value = spaces(node.properties.httpEquiv).toLowerCase()
 
         if (value === 'content-language') {
-          contentLanguage = node;
-          contentLanguageParent = parent;
+          contentLanguage = node
+          contentLanguageParent = parent
         } else if (value === 'content-type') {
-          contentType = node;
-          contentTypeParent = parent;
+          contentType = node
+          contentTypeParent = parent
         }
       }
     }
   }
 
   function remove(parent, child) {
-    var siblings = parent.children;
-    siblings.splice(siblings.indexOf(child), 1);
+    var siblings = parent.children
+    siblings.splice(siblings.indexOf(child), 1)
   }
 }

@@ -21,10 +21,15 @@
  *   is 5 or more.
  */
 
-'use strict';
+'use strict'
 
-module.exports = ev;
+module.exports = ev
 
 function ev(name) {
-  return name && name.slice && name.slice(0, 2).toLowerCase() === 'on' && name.length >= 5;
+  return (
+    name &&
+    name.slice &&
+    name.slice(0, 2).toLowerCase() === 'on' &&
+    name.length >= 5
+  )
 }

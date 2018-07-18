@@ -24,37 +24,37 @@
  *   or has neither.
  */
 
-'use strict';
+'use strict'
 
-var has = require('hast-util-has-property');
-var is = require('hast-util-is-element');
-var trim = require('trim');
-var mime = require('./index.json');
+var has = require('hast-util-has-property')
+var is = require('hast-util-is-element')
+var trim = require('trim')
+var mime = require('./index.json')
 
-module.exports = javascript;
+module.exports = javascript
 
 /* Check node. */
 function javascript(node) {
   if (!is(node, 'script')) {
-    return false;
+    return false
   }
 
   if (has(node, 'type')) {
-    return check(node.properties.type);
+    return check(node.properties.type)
   }
 
-  return !has(node, 'language') || check(node.properties.language, 'text/');
+  return !has(node, 'language') || check(node.properties.language, 'text/')
 }
 
 /* Check one value. */
 function check(value, prefix) {
-  var val;
+  var val
 
   if (typeof value !== 'string') {
-    return false;
+    return false
   }
 
-  val = trim(value.split(';', 1)[0]).toLowerCase();
+  val = trim(value.split(';', 1)[0]).toLowerCase()
 
-  return val === '' || mime.indexOf((prefix || '') + val) !== -1;
+  return val === '' || mime.indexOf((prefix || '') + val) !== -1
 }

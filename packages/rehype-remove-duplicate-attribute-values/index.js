@@ -5,36 +5,40 @@
  *   <div class="foo foo"></label>
  */
 
-'use strict';
+'use strict'
 
-var uniq = require('uniq');
-var array = require('x-is-array');
-var visit = require('unist-util-visit');
-var is = require('hast-util-is-element');
-var attributes = require('./schema');
+var uniq = require('uniq')
+var array = require('x-is-array')
+var visit = require('unist-util-visit')
+var is = require('hast-util-is-element')
+var attributes = require('./schema')
 
-module.exports = empty;
+module.exports = empty
 
-var own = {}.hasOwnProperty;
+var own = {}.hasOwnProperty
 
 function empty() {
-  return transform;
+  return transform
 }
 
 function transform(tree) {
-  visit(tree, 'element', visitor);
+  visit(tree, 'element', visitor)
 }
 
 function visitor(node) {
-  var props = node.properties;
-  var prop;
-  var val;
+  var props = node.properties
+  var prop
+  var val
 
   for (prop in props) {
-    val = props[prop];
+    val = props[prop]
 
-    if (own.call(attributes, prop) && is(node, attributes[prop]) && array(val)) {
-      uniq(val);
+    if (
+      own.call(attributes, prop) &&
+      is(node, attributes[prop]) &&
+      array(val)
+    ) {
+      uniq(val)
     }
   }
 }

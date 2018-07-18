@@ -10,41 +10,45 @@
  *   <a href="/foo/../bar.html"></a>
  */
 
-'use strict';
+'use strict'
 
-var Relate = require('relateurl');
-var array = require('x-is-array');
-var visit = require('unist-util-visit');
-var has = require('hast-util-has-property');
-var is = require('hast-util-is-element');
-var attributes = require('html-url-attributes');
+var Relate = require('relateurl')
+var array = require('x-is-array')
+var visit = require('unist-util-visit')
+var has = require('hast-util-has-property')
+var is = require('hast-util-is-element')
+var attributes = require('html-url-attributes')
 
-module.exports = url;
+module.exports = url
 
-var own = {}.hasOwnProperty;
+var own = {}.hasOwnProperty
 
 function url(options) {
-  var settings = options || {};
-  var relate = new Relate(settings.from, settings);
+  var settings = options || {}
+  var relate = new Relate(settings.from, settings)
 
   try {
-    relate.relate('/');
+    relate.relate('/')
   } catch (err) {
-    throw new Error('Missing absolute `from` in options');
+    throw new Error('Missing absolute `from` in options')
   }
 
-  return transform;
+  return transform
 
   function transform(tree) {
-    visit(tree, 'element', visitor);
+    visit(tree, 'element', visitor)
 
     function visitor(node) {
-      var props = node.properties;
-      var prop;
+      var props = node.properties
+      var prop
 
       for (prop in props) {
-        if (has(node, prop) && own.call(attributes, prop) && is(node, attributes[prop])) {
-          props[prop] = minify(props[prop], relate);
+        if (
+          has(node, prop) &&
+          own.call(attributes, prop) &&
+          is(node, attributes[prop])
+        ) {
+          props[prop] = minify(props[prop], relate)
         }
       }
     }
@@ -52,25 +56,25 @@ function url(options) {
 }
 
 function minify(value, relate) {
-  return (array(value) ? all : one)(value, relate);
+  return (array(value) ? all : one)(value, relate)
 }
 
 function all(value, relate) {
-  var length = value.length;
-  var index = -1;
-  var result = [];
+  var length = value.length
+  var index = -1
+  var result = []
 
   while (++index < length) {
-    result[index] = one(value[index], relate);
+    result[index] = one(value[index], relate)
   }
 
-  return result;
+  return result
 }
 
 function one(value, relate) {
   try {
-    return relate.relate(value);
+    return relate.relate(value)
   } catch (err) {}
 
-  return value;
+  return value
 }

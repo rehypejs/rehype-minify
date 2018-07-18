@@ -6,24 +6,24 @@
  *   <script src="index.js">Hello!</script>
  */
 
-'use strict';
+'use strict'
 
-var visit = require('unist-util-visit');
-var js = require('hast-util-is-javascript');
-var has = require('hast-util-has-property');
+var visit = require('unist-util-visit')
+var js = require('hast-util-is-javascript')
+var has = require('hast-util-has-property')
 
-module.exports = scriptJS;
+module.exports = scriptJS
 
 function scriptJS() {
-  return transform;
+  return transform
 }
 
 function transform(tree) {
-  visit(tree, 'element', visitor);
+  visit(tree, 'element', visitor)
 }
 
 function visitor(node) {
   if (js(node) && has(node, 'src')) {
-    node.children = [];
+    node.children = []
   }
 }

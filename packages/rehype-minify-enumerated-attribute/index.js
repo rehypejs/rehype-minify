@@ -11,42 +11,46 @@
  *   </video>
  */
 
-'use strict';
+'use strict'
 
-var visit = require('unist-util-visit');
-var has = require('hast-util-has-property');
-var is = require('hast-util-is-element');
-var schema = require('./schema');
+var visit = require('unist-util-visit')
+var has = require('hast-util-has-property')
+var is = require('hast-util-is-element')
+var schema = require('./schema')
 
-module.exports = enums;
+module.exports = enums
 
-var own = {}.hasOwnProperty;
+var own = {}.hasOwnProperty
 
 function enums() {
-  return transform;
+  return transform
 }
 
 function transform(tree) {
-  visit(tree, 'element', visitor);
+  visit(tree, 'element', visitor)
 }
 
 function visitor(node) {
-  var props = node.properties;
-  var definitions;
-  var length;
-  var index;
-  var prop;
+  var props = node.properties
+  var definitions
+  var length
+  var index
+  var prop
 
   for (prop in props) {
-    if (has(node, prop) && own.call(schema, prop) && typeof props[prop] === 'string') {
-      definitions = schema[prop];
-      definitions = definitions.length ? definitions : [definitions];
-      length = definitions.length;
-      index = -1;
+    if (
+      has(node, prop) &&
+      own.call(schema, prop) &&
+      typeof props[prop] === 'string'
+    ) {
+      definitions = schema[prop]
+      definitions = definitions.length ? definitions : [definitions]
+      length = definitions.length
+      index = -1
 
       while (++index < length) {
         if (is(node, definitions[index].tagNames)) {
-          props[prop] = minify(props[prop], definitions[index]);
+          props[prop] = minify(props[prop], definitions[index])
         }
       }
     }
@@ -54,48 +58,48 @@ function visitor(node) {
 }
 
 function minify(value, info) {
-  var insensitive = value.toLowerCase();
-  var states = info.states;
-  var length = states.length;
-  var index = -1;
-  var known = false;
-  var state;
-  var result;
+  var insensitive = value.toLowerCase()
+  var states = info.states
+  var length = states.length
+  var index = -1
+  var known = false
+  var state
+  var result
 
   while (++index < length) {
-    state = states[index];
+    state = states[index]
 
     if (typeof state === 'string') {
-      state = [state];
+      state = [state]
     }
 
     if (state.indexOf(insensitive) !== -1) {
-      known = true;
-      break;
+      known = true
+      break
     }
   }
 
   /* So, this is a valid enumerated attribute.
    * Lets’s optimize it. */
   if (known && state) {
-    result = state[0];
+    result = state[0]
   } else if (typeof info.invalid === 'string') {
-    result = info.invalid;
+    result = info.invalid
   } else if (typeof info.missing === 'string') {
-    result = info.missing;
+    result = info.missing
   } else {
-    return value;
+    return value
   }
 
   /* Should be a setting.
    * There’s a missing value defined, so we can just as well
    * remove the property all-together if they’re the same. */
   if (result === info.missing) {
-    result = null;
+    result = null
   } else if (result === info.invalid) {
     /* “a” is never used as a keyword. */
-    result = 'a';
+    result = 'a'
   }
 
-  return result;
+  return result
 }

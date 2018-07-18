@@ -1,55 +1,61 @@
-'use strict';
+'use strict'
 
-var fs = require('fs');
-var path = require('path');
-var vfile = require('to-vfile');
-var execa = require('execa');
-var findDown = require('vfile-find-down');
-var trough = require('trough');
-var uniq = require('uniq');
+var fs = require('fs')
+var path = require('path')
+var vfile = require('to-vfile')
+var execa = require('execa')
+var findDown = require('vfile-find-down')
+var trough = require('trough')
+var uniq = require('uniq')
 
 module.exports = trough()
-  .use(function (ctx, next) {
-    vfile.read(path.join(ctx.root, 'package.json'), function (err, file) {
-      ctx.package = file;
-      next(err);
-    });
+  .use(function(ctx, next) {
+    vfile.read(path.join(ctx.root, 'package.json'), function(err, file) {
+      ctx.package = file
+      next(err)
+    })
   })
-  .use(function (ctx, next) {
-    var fp = path.relative(ctx.ancestor, ctx.root);
+  .use(function(ctx, next) {
+    var fp = path.relative(ctx.ancestor, ctx.root)
 
-    execa('git', ['log', '--all', '--format="%cN <%cE>"', fp]).then(function (result) {
-      ctx.contributors = uniq(result.stdout.split('\n')).sort().map(function (line) {
-        return line.slice(1, -1);
-      }).filter(Boolean);
+    execa('git', ['log', '--all', '--format="%cN <%cE>"', fp]).then(function(
+      result
+    ) {
+      ctx.contributors = uniq(result.stdout.split('\n'))
+        .sort()
+        .map(function(line) {
+          return line.slice(1, -1)
+        })
+        .filter(Boolean)
 
       if (ctx.contributors.length === 0) {
-        ctx.contributors = null;
+        ctx.contributors = null
       }
 
-      next();
-    }, next);
+      next()
+    },
+    next)
   })
-  .use(function (ctx, next) {
-    findDown.all(['.js', '.json'], ctx.root, function (err, files) {
+  .use(function(ctx, next) {
+    findDown.all(['.js', '.json'], ctx.root, function(err, files) {
       if (files) {
         ctx.files = files
-          .map(function (file) {
-            return path.relative(ctx.root, file.path);
+          .map(function(file) {
+            return path.relative(ctx.root, file.path)
           })
-          .filter(function (name) {
-            return name !== 'package.json' && !/(example|test)/.test(name);
+          .filter(function(name) {
+            return name !== 'package.json' && !/(example|test)/.test(name)
           })
-          .sort();
+          .sort()
       }
 
-      next(err);
-    });
+      next(err)
+    })
   })
-  .use(function (ctx) {
-    var prev = JSON.parse(ctx.package);
-    var pkg = require(path.join(ctx.ancestor, 'package.json'));
-    var relative = path.relative(ctx.ancestor, ctx.root);
+  .use(function(ctx) {
+    var prev = JSON.parse(ctx.package)
+    var pkg = require(path.join(ctx.ancestor, 'package.json'))
+    var relative = path.relative(ctx.ancestor, ctx.root)
 
     var curr = {
       name: path.basename(ctx.root),
@@ -66,13 +72,13 @@ module.exports = trough()
       dependencies: prev.dependencies,
       excludeFromPreset: prev.excludeFromPreset,
       xo: false
-    };
+    }
 
-    ctx.package.contents = JSON.stringify(curr, 0, 2) + '\n';
+    ctx.package.contents = JSON.stringify(curr, 0, 2) + '\n'
   })
-  .use(function (ctx, next) {
-    fs.writeFile(ctx.package.path, ctx.package.contents, next);
+  .use(function(ctx, next) {
+    fs.writeFile(ctx.package.path, ctx.package.contents, next)
   })
-  .use(function (ctx) {
-    ctx.package.stored = true;
-  });
+  .use(function(ctx) {
+    ctx.package.stored = true
+  })

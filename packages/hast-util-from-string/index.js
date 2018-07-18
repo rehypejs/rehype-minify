@@ -34,22 +34,22 @@
  *   not given, remove all its.
  */
 
-'use strict';
+'use strict'
 
-module.exports = fromString;
+module.exports = fromString
 
 function fromString(node, value) {
-  var val = value == null ? '' : String(value);
+  var val = value == null ? '' : String(value)
 
   if ('children' in node) {
-    node.children = [];
+    node.children = []
 
     if (val) {
-      node.children.push({type: 'text', value: val});
+      node.children.push({type: 'text', value: val})
     }
   } else {
-    node.value = val;
+    node.value = val
   }
 
-  return node;
+  return node
 }

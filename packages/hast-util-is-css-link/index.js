@@ -22,29 +22,29 @@
  *   `type`, or `'text/css'` as its `type`.
  */
 
-'use strict';
+'use strict'
 
-var trim = require('trim');
+var trim = require('trim')
 
-module.exports = cssLink;
+module.exports = cssLink
 
 function cssLink(node) {
-  var props;
-  var rel;
-  var type;
+  var props
+  var rel
+  var type
 
   if (!node || node.tagName !== 'link') {
-    return false;
+    return false
   }
 
-  props = node.properties || {};
-  rel = props.rel;
+  props = node.properties || {}
+  rel = props.rel
 
   if (!rel || !rel.indexOf || rel.indexOf('stylesheet') === -1) {
-    return false;
+    return false
   }
 
-  type = trim(props.type || '').toLowerCase();
+  type = trim(props.type || '').toLowerCase()
 
-  return !type || type === 'text/css';
+  return !type || type === 'text/css'
 }

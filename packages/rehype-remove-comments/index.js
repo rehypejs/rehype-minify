@@ -9,27 +9,27 @@
  *   <!--[if IE 6]>OK<![endif]-->
  */
 
-'use strict';
+'use strict'
 
-var filter = require('unist-util-filter');
-var conditional = require('hast-util-is-conditional-comment');
+var filter = require('unist-util-filter')
+var conditional = require('hast-util-is-conditional-comment')
 
-module.exports = comments;
+module.exports = comments
 
 function comments(options) {
-  var force = (options || {}).removeConditional;
+  var force = (options || {}).removeConditional
 
-  return transform;
+  return transform
 
   function transform(tree) {
-    return filter(tree, {cascade: false}, force ? hard : soft);
+    return filter(tree, {cascade: false}, force ? hard : soft)
   }
 }
 
 function soft(node) {
-  return hard(node) || conditional(node);
+  return hard(node) || conditional(node)
 }
 
 function hard(node) {
-  return node.type !== 'comment';
+  return node.type !== 'comment'
 }

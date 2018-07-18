@@ -9,40 +9,40 @@
  *   <meta name="keywords" content="foo, bar baz, qux">
  */
 
-'use strict';
+'use strict'
 
-var comma = require('comma-separated-tokens');
-var visit = require('unist-util-visit');
-var is = require('hast-util-is-element');
-var has = require('hast-util-has-property');
+var comma = require('comma-separated-tokens')
+var visit = require('unist-util-visit')
+var is = require('hast-util-is-element')
+var has = require('hast-util-has-property')
 
-module.exports = content;
+module.exports = content
 
-var own = {}.hasOwnProperty;
+var own = {}.hasOwnProperty
 
-var handlers = {};
+var handlers = {}
 
-handlers.viewport = viewport;
-handlers.keywords = collapse;
-handlers.robots = collapse;
-handlers['apple-itunes-app'] = collapse;
-handlers['apple-media-service-subscription'] = collapse;
+handlers.viewport = viewport
+handlers.keywords = collapse
+handlers.robots = collapse
+handlers['apple-itunes-app'] = collapse
+handlers['apple-media-service-subscription'] = collapse
 
 function content() {
-  return transform;
+  return transform
 }
 
 function transform(tree) {
-  visit(tree, 'element', visitor);
+  visit(tree, 'element', visitor)
 }
 
 function visitor(node) {
-  var props = node.properties;
-  var name = props.name;
+  var props = node.properties
+  var name = props.name
 
   if (is(node, 'meta') && has(node, 'content') && own.call(handlers, name)) {
     if (typeof props.content === 'string') {
-      props.content = handlers[name](props.content);
+      props.content = handlers[name](props.content)
     }
   }
 }
@@ -50,13 +50,13 @@ function visitor(node) {
 function viewport(value) {
   return collapse(
     value.replace(/(\d+\.\d+)/, toNumber).replace(/user-scalable=\s*yes/, '')
-  );
+  )
 }
 
 function collapse(value) {
-  return comma.stringify(comma.parse(value), {padLeft: false});
+  return comma.stringify(comma.parse(value), {padLeft: false})
 }
 
 function toNumber(val) {
-  return Number(val);
+  return Number(val)
 }

@@ -1,61 +1,63 @@
-'use strict';
+'use strict'
 
 /* eslint-disable import/no-extraneous-dependencies */
 
-var test = require('tape');
-var rehype = require('rehype');
-var h = require('hastscript');
-var min = require('.');
+var test = require('tape')
+var rehype = require('rehype')
+var h = require('hastscript')
+var min = require('.')
 
-test('rehype-minify-meta-color', function (t) {
+test('rehype-minify-meta-color', function(t) {
   t.deepEqual(
-    rehype().use(min).runSync(
-      h('meta', {name: 'theme-color', content: '#ff0000'})
-    ),
+    rehype()
+      .use(min)
+      .runSync(h('meta', {name: 'theme-color', content: '#ff0000'})),
     h('meta', {name: 'theme-color', content: 'red'})
-  );
+  )
 
   t.deepEqual(
-    rehype().use(min).runSync(
-      h('meta', {name: 'msapplication-TileColor', content: '#00ff00'})
-    ),
+    rehype()
+      .use(min)
+      .runSync(
+        h('meta', {name: 'msapplication-TileColor', content: '#00ff00'})
+      ),
     h('meta', {name: 'msapplication-TileColor', content: '#0f0'})
-  );
+  )
 
   t.deepEqual(
-    rehype().use(min).runSync(
-      h('meta', {name: 'theme-color', content: true})
-    ),
+    rehype()
+      .use(min)
+      .runSync(h('meta', {name: 'theme-color', content: true})),
     h('meta', {name: 'theme-color', content: true})
-  );
+  )
 
   t.deepEqual(
-    rehype().use(min).runSync(
-      h('meta', {name: 'theme-color'})
-    ),
+    rehype()
+      .use(min)
+      .runSync(h('meta', {name: 'theme-color'})),
     h('meta', {name: 'theme-color'})
-  );
+  )
 
   t.deepEqual(
-    rehype().use(min).runSync(
-      h('meta', {name: 'theme-color', content: ''})
-    ),
+    rehype()
+      .use(min)
+      .runSync(h('meta', {name: 'theme-color', content: ''})),
     h('meta', {name: 'theme-color', content: ''})
-  );
+  )
 
   t.deepEqual(
-    rehype().use(min).runSync(
-      h('meta', {name: 'theme-color', content: '#f'})
-    ),
+    rehype()
+      .use(min)
+      .runSync(h('meta', {name: 'theme-color', content: '#f'})),
     h('meta', {name: 'theme-color', content: '#f'})
-  );
+  )
 
   t.deepEqual(
-    rehype().use(min).runSync(
-      h('meta', {name: 'theme-color', content: 'unknown'})
-    ),
+    rehype()
+      .use(min)
+      .runSync(h('meta', {name: 'theme-color', content: 'unknown'})),
     h('meta', {name: 'theme-color', content: 'unknown'})
-  );
+  )
 
-  t.end();
-});
+  t.end()
+})

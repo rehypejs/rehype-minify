@@ -6,26 +6,26 @@
  *   <style type="text/css"></style>
  */
 
-'use strict';
+'use strict'
 
-var visit = require('unist-util-visit');
-var link = require('hast-util-is-css-link');
-var style = require('hast-util-is-css-style');
+var visit = require('unist-util-visit')
+var link = require('hast-util-is-css-link')
+var style = require('hast-util-is-css-style')
 
-module.exports = removeStyleType;
+module.exports = removeStyleType
 
 function removeStyleType() {
-  return transform;
+  return transform
 }
 
 function transform(tree) {
-  visit(tree, 'element', visitor);
+  visit(tree, 'element', visitor)
 }
 
 function visitor(node) {
-  var props = node.properties;
+  var props = node.properties
 
   if ('type' in props && (link(node) || style(node))) {
-    props.type = null;
+    props.type = null
   }
 }

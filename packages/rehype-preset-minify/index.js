@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 exports.settings = {
   entities: {
@@ -13,7 +13,7 @@ exports.settings = {
   tightAttributes: true,
   allowParseErrors: true,
   allowDangerousCharacters: true
-};
+}
 
 exports.plugins = [
   require('rehype-minify-attribute-whitespace'),
@@ -38,4 +38,4 @@ exports.plugins = [
   require('rehype-remove-style-type-css'),
   require('rehype-sort-attribute-values'),
   require('rehype-sort-attributes')
-];
+]

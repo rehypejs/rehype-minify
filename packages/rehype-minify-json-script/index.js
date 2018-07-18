@@ -15,27 +15,27 @@
  *   </script>
  */
 
-'use strict';
+'use strict'
 
-var visit = require('unist-util-visit');
-var fromString = require('hast-util-from-string');
-var toString = require('hast-util-to-string');
-var is = require('hast-util-is-element');
+var visit = require('unist-util-visit')
+var fromString = require('hast-util-from-string')
+var toString = require('hast-util-to-string')
+var is = require('hast-util-is-element')
 
-module.exports = scriptJSON;
+module.exports = scriptJSON
 
 function scriptJSON() {
-  return transform;
+  return transform
 }
 
 function transform(tree) {
-  visit(tree, 'element', visitor);
+  visit(tree, 'element', visitor)
 }
 
 function visitor(node) {
   if (is(node, 'script') && node.properties.type === 'application/ld+json') {
     try {
-      fromString(node, JSON.stringify(JSON.parse(toString(node))));
+      fromString(node, JSON.stringify(JSON.parse(toString(node))))
     } catch (err) {}
   }
 }

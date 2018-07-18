@@ -32,24 +32,26 @@ rehype src -o dist
 Use:
 
 ```js
-var rehype = require('rehype');
-var minify = require('rehype-preset-minify');
+var rehype = require('rehype')
+var minify = require('rehype-preset-minify')
+
+var doc = `<!doctype html>
+<html>
+  <head>
+    <title>Hello</title>
+  </head>
+  <body>
+    <h1>World!</h1>
+  </body>
+</html>
+`
 
 rehype()
   .use(minify)
-  .process(`<!doctype html>
-  <html>
-    <head>
-      <title>Hello</title>
-    </head>
-    <body>
-      <h1>World!</h1>
-    </body>
-  </html>
-`, function (err, file) {
-    if (err) throw err;
-    console.log(String(file));
-  });
+  .process(doc, function(err, file) {
+    if (err) throw err
+    console.log(String(file))
+  })
 ```
 
 Yields:

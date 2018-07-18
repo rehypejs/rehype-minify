@@ -23,45 +23,41 @@
  *     or `stylesheet`.
  */
 
-'use strict';
+'use strict'
 
-var is = require('hast-util-is-element');
-var has = require('hast-util-has-property');
+var is = require('hast-util-is-element')
+var has = require('hast-util-has-property')
 
-module.exports = ok;
+module.exports = ok
 
-var list = [
-  'pingback',
-  'prefetch',
-  'stylesheet'
-];
+var list = ['pingback', 'prefetch', 'stylesheet']
 
 function ok(node) {
-  var length;
-  var index;
-  var rel;
+  var length
+  var index
+  var rel
 
   if (!is(node, 'link')) {
-    return false;
+    return false
   }
 
   if (has(node, 'itemProp')) {
-    return true;
+    return true
   }
 
-  rel = (node.properties || {}).rel || [];
-  length = rel.length;
-  index = -1;
+  rel = (node.properties || {}).rel || []
+  length = rel.length
+  index = -1
 
   if (rel.length === 0) {
-    return false;
+    return false
   }
 
   while (++index < length) {
     if (list.indexOf(rel[index]) === -1) {
-      return false;
+      return false
     }
   }
 
-  return true;
+  return true
 }

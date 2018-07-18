@@ -9,48 +9,48 @@
  *   <!doctype html><html><head></head><body><link rel="stylesheet" href="index.css"></body></html>
  */
 
-'use strict';
+'use strict'
 
-var visit = require('unist-util-visit');
-var css = require('hast-util-is-css-link');
+var visit = require('unist-util-visit')
+var css = require('hast-util-is-css-link')
 
-module.exports = cssToTop;
+module.exports = cssToTop
 
 function cssToTop() {
-  return transform;
+  return transform
 }
 
 function transform(tree) {
-  var head;
-  var matches = [];
+  var head
+  var matches = []
 
-  visit(tree, 'element', visitor);
+  visit(tree, 'element', visitor)
 
   if (head && matches.length !== 0) {
-    move();
+    move()
   }
 
   function visitor(node, index, parent) {
     if (node.tagName === 'head') {
-      head = node;
+      head = node
     }
 
     if (css(node) && parent.tagName !== 'head') {
-      matches.push([parent, node]);
+      matches.push([parent, node])
     }
   }
 
   function move() {
-    var length = matches.length;
-    var index = -1;
-    var match;
-    var siblings;
+    var length = matches.length
+    var index = -1
+    var match
+    var siblings
 
     while (++index < length) {
-      match = matches[index];
-      siblings = match[0].children;
-      siblings.splice(siblings.indexOf(match[1]), 1);
-      head.children.push(match[1]);
+      match = matches[index]
+      siblings = match[0].children
+      siblings.splice(siblings.indexOf(match[1]), 1)
+      head.children.push(match[1])
     }
   }
 }

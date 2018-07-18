@@ -6,48 +6,48 @@
  *   <meta name="msapplication-TileColor" content="#ff0000">
  */
 
-'use strict';
+'use strict'
 
-var CleanCSS = require('clean-css');
-var visit = require('unist-util-visit');
-var is = require('hast-util-is-element');
-var has = require('hast-util-has-property');
+var CleanCSS = require('clean-css')
+var visit = require('unist-util-visit')
+var is = require('hast-util-is-element')
+var has = require('hast-util-has-property')
 
-module.exports = styleAttribute;
+module.exports = styleAttribute
 
-var clean = new CleanCSS();
+var clean = new CleanCSS()
 
-var prefix = '*{color:';
-var suffix = '}';
+var prefix = '*{color:'
+var suffix = '}'
 
 function styleAttribute() {
-  return transform;
+  return transform
 }
 
 function transform(tree) {
-  visit(tree, 'element', visitor);
+  visit(tree, 'element', visitor)
 }
 
 function visitor(node) {
-  var props = node.properties;
-  var name = props.name;
-  var val;
-  var output;
+  var props = node.properties
+  var name = props.name
+  var val
+  var output
 
   if (
     is(node, 'meta') &&
     (name === 'msapplication-TileColor' || name === 'theme-color') &&
     has(node, 'content')
   ) {
-    val = props.content;
+    val = props.content
 
     if (typeof val === 'string') {
       try {
-        output = clean.minify(prefix + val + suffix);
-        val = output.styles.slice(prefix.length, -suffix.length);
+        output = clean.minify(prefix + val + suffix)
+        val = output.styles.slice(prefix.length, -suffix.length)
       } catch (err) {}
 
-      props.content = val;
+      props.content = val
     }
   }
 }

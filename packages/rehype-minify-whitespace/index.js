@@ -10,111 +10,113 @@
  *   <p><strong>This</strong> and <em>that</em></p>
  */
 
-'use strict';
+'use strict'
 
-var collapseWhiteSpace = require('collapse-white-space');
-var whitespaceSensitive = require('html-whitespace-sensitive-tag-names');
-var is = require('unist-util-is');
-var modify = require('unist-util-modify-children');
-var element = require('hast-util-is-element');
-var has = require('hast-util-has-property');
-var embedded = require('hast-util-embedded');
-var bodyOK = require('hast-util-is-body-ok-link');
-var list = require('./list');
+var collapseWhiteSpace = require('collapse-white-space')
+var whitespaceSensitive = require('html-whitespace-sensitive-tag-names')
+var is = require('unist-util-is')
+var modify = require('unist-util-modify-children')
+var element = require('hast-util-is-element')
+var has = require('hast-util-has-property')
+var embedded = require('hast-util-embedded')
+var bodyOK = require('hast-util-is-body-ok-link')
+var list = require('./list')
 
-module.exports = collapse;
+module.exports = collapse
 
 function collapse(options) {
-  return transform;
+  return transform
   function transform(tree) {
-    return minify(tree, options || {});
+    return minify(tree, options || {})
   }
 }
 
 function minify(tree, options) {
-  var whitespace = options.newlines ? collapseToNewLines : collapseWhiteSpace;
-  var modifier = modify(visitor);
-  var inside = false;
-  var seen = false;
+  var whitespace = options.newlines ? collapseToNewLines : collapseWhiteSpace
+  var modifier = modify(visitor)
+  var inside = false
+  var seen = false
 
-  visitor(tree);
+  visitor(tree)
 
-  return tree;
+  return tree
 
   function visitor(node, index, parent) {
-    var head;
-    var prev;
-    var next;
-    var value;
-    var start;
-    var end;
+    var head
+    var prev
+    var next
+    var value
+    var start
+    var end
 
     if (is('text', node)) {
-      prev = parent.children[index - 1];
-      next = parent.children[index + 1];
+      prev = parent.children[index - 1]
+      next = parent.children[index + 1]
 
-      value = whitespace(node.value);
-      end = value.length;
-      start = 0;
+      value = whitespace(node.value)
+      end = value.length
+      start = 0
 
       if (empty(value.charAt(0)) && viable(prev)) {
-        start++;
+        start++
       }
 
       if (empty(value.charAt(end - 1)) && viable(next)) {
-        end--;
+        end--
       }
 
-      value = value.slice(start, end);
+      value = value.slice(start, end)
 
       /* Remove the node if it’s collapsed entirely. */
       if (!value) {
-        parent.children.splice(index, 1);
+        parent.children.splice(index, 1)
 
-        return index;
+        return index
       }
 
-      node.value = value;
+      node.value = value
     }
 
     if (!seen && !inside) {
-      head = element(node, 'head');
-      inside = head;
-      seen = head;
+      head = element(node, 'head')
+      inside = head
+      seen = head
     }
 
     if (node.children && !element(node, whitespaceSensitive)) {
-      modifier(node);
+      modifier(node)
     }
 
     if (head) {
-      inside = false;
+      inside = false
     }
   }
 
   function viable(node) {
-    return !node || inside || !collapsable(node);
+    return !node || inside || !collapsable(node)
   }
 }
 
 /* Check if `node` is collapsable. */
 function collapsable(node) {
-  return is('text', node) ||
+  return (
+    is('text', node) ||
     element(node, list) ||
     embedded(node) ||
     bodyOK(node) ||
-    (element(node, 'meta') && has(node, 'itemProp'));
+    (element(node, 'meta') && has(node, 'itemProp'))
+  )
 }
 
 /* Collapse to spaces, or newlines if they’re in a run. */
 function collapseToNewLines(value) {
-  var result = String(value).replace(/\s+/g, function ($0) {
-    return $0.indexOf('\n') === -1 ? ' ' : '\n';
-  });
+  var result = String(value).replace(/\s+/g, function($0) {
+    return $0.indexOf('\n') === -1 ? ' ' : '\n'
+  })
 
-  return result;
+  return result
 }
 
 function empty(character) {
-  return character === ' ' || character === '\n';
+  return character === ' ' || character === '\n'
 }

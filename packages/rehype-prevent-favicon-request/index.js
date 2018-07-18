@@ -13,22 +13,22 @@
  *   <!doctype html><html><head></head><body></body></html>
  */
 
-'use strict';
+'use strict'
 
-var array = require('x-is-array');
-var visit = require('unist-util-visit');
+var array = require('x-is-array')
+var visit = require('unist-util-visit')
 
-module.exports = doctype;
+module.exports = doctype
 
 function doctype() {
-  return transform;
+  return transform
 }
 
 function transform(tree) {
-  var head;
-  var ico;
+  var head
+  var ico
 
-  visit(tree, 'element', visitor);
+  visit(tree, 'element', visitor)
 
   if (head && !ico) {
     head.children.push({
@@ -40,28 +40,32 @@ function transform(tree) {
         href: 'data:image/x-icon;,'
       },
       children: []
-    });
+    })
   }
 
   function visitor(node) {
-    var rel;
+    var rel
 
     if (node.tagName === 'head') {
-      head = node;
+      head = node
     }
 
     if (node.tagName === 'link') {
-      rel = node.properties.rel;
+      rel = node.properties.rel
 
-      if (array(rel) && rel.indexOf('shortcut') !== -1 && rel.indexOf('icon') !== -1) {
-        ico = node;
-        return false;
+      if (
+        array(rel) &&
+        rel.indexOf('shortcut') !== -1 &&
+        rel.indexOf('icon') !== -1
+      ) {
+        ico = node
+        return false
       }
     }
 
     /* Stop visiting in body. */
     if (node.tagName === 'body') {
-      return false;
+      return false
     }
   }
 }

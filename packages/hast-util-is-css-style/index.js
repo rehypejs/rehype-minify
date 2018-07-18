@@ -21,20 +21,20 @@
  *   `type`, an empty `type`, or `'text/css'` as its `type`.
  */
 
-'use strict';
+'use strict'
 
-var trim = require('trim');
+var trim = require('trim')
 
-module.exports = cssStyle;
+module.exports = cssStyle
 
 function cssStyle(node) {
-  var val;
+  var val
 
   if (!node || node.tagName !== 'style') {
-    return false;
+    return false
   }
 
-  val = (node.properties || {}).type;
+  val = (node.properties || {}).type
 
-  return val == null || trim(val).toLowerCase() === 'text/css';
+  return val == null || trim(val).toLowerCase() === 'text/css'
 }

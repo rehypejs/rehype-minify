@@ -6,31 +6,31 @@
  *   <script language="javascript1.5"></script>
  */
 
-'use strict';
+'use strict'
 
-var visit = require('unist-util-visit');
-var js = require('hast-util-is-javascript');
+var visit = require('unist-util-visit')
+var js = require('hast-util-is-javascript')
 
-module.exports = removeScriptType;
+module.exports = removeScriptType
 
 function removeScriptType() {
-  return transform;
+  return transform
 }
 
 function transform(tree) {
-  visit(tree, 'element', visitor);
+  visit(tree, 'element', visitor)
 }
 
 function visitor(node) {
-  var props = node.properties;
+  var props = node.properties
 
   if (js(node)) {
     if ('type' in props) {
-      props.type = null;
+      props.type = null
     }
 
     if ('language' in props) {
-      props.language = null;
+      props.language = null
     }
   }
 }
