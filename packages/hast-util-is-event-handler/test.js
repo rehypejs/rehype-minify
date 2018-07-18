@@ -3,7 +3,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 var test = require('tape');
-var ok = require('./');
+var ok = require('.');
 
 test('hast-util-is-event-handler', function (t) {
   t.ok(ok('oncut'), 'oncut');

@@ -21,7 +21,7 @@ npm install rehype-minify-doctype
 ##### Out
 
 ```html
-<!DOCTYPE html><html><head></head><body></body></html>
+<!doctype html><html><head></head><body></body></html>
 ```
 
 ## License

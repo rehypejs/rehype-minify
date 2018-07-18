@@ -22,13 +22,13 @@ npm install rehype-prevent-favicon-request
 ##### In
 
 ```html
-<!DOCTYPE html><html><head></head><body></body></html>
+<!doctype html><html><head></head><body></body></html>
 ```
 
 ##### Out
 
 ```html
-<!DOCTYPE html><html><head><link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;,"></head><body></body></html>
+<!doctype html><html><head><link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;,"></head><body></body></html>
 ```
 
 ## License

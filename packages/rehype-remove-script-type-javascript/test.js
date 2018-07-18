@@ -5,7 +5,7 @@
 var test = require('tape');
 var rehype = require('rehype');
 var h = require('hastscript');
-var min = require('./');
+var min = require('.');
 
 test('rehype-remove-script-type-javascript', function (t) {
   t.deepEqual(

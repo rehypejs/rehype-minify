@@ -18,13 +18,13 @@ npm install rehype-css-to-top
 ##### In
 
 ```html
-<!DOCTYPE html><html><head></head><body><link rel="stylesheet" href="index.css"></body></html>
+<!doctype html><html><head></head><body><link rel="stylesheet" href="index.css"></body></html>
 ```
 
 ##### Out
 
 ```html
-<!DOCTYPE html><html><head><link rel="stylesheet" href="index.css"></head><body></body></html>
+<!doctype html><html><head><link rel="stylesheet" href="index.css"></head><body></body></html>
 ```
 
 ## License

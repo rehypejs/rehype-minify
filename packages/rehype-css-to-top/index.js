@@ -6,7 +6,7 @@
  *   render](https://developer.yahoo.com/performance/rules.html#css_top)
  * @example {"processor": {"fragment": false}}
  *
- *   <!DOCTYPE html><html><head></head><body><link rel="stylesheet" href="index.css"></body></html>
+ *   <!doctype html><html><head></head><body><link rel="stylesheet" href="index.css"></body></html>
  */
 
 'use strict';

@@ -37,7 +37,7 @@ var minify = require('rehype-preset-minify');
 
 rehype()
   .use(minify)
-  .process(`<!DOCTYPE html>
+  .process(`<!doctype html>
   <html>
     <head>
       <title>Hello</title>
@@ -55,7 +55,7 @@ rehype()
 Yields:
 
 ```html
-<!DOCTYPE html><title>Hello</title><h1>World!</h1>
+<!doctype html><title>Hello</title><h1>World!</h1>
 ```
 
 ## License

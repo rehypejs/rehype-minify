@@ -34,7 +34,7 @@ npm install rehype-remove-meta-http-equiv
 ##### Out
 
 ```html
-<!DOCTYPE html><html lang="en-US"><head>
+<!doctype html><html lang="en-US"><head>
     <meta charset="chinese">
     
     

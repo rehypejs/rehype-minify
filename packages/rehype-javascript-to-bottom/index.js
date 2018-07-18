@@ -9,7 +9,7 @@
  *   returning `true` if the script should be moved, and `false` if not.
  * @example {"processor": {"fragment": false}}
  *
- *   <!DOCTYPE html><html><head><script src="index.js"></script></head><body></body></html>
+ *   <!doctype html><html><head><script src="index.js"></script></head><body></body></html>
  */
 
 'use strict';

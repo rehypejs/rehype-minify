@@ -10,7 +10,7 @@
  *   a round trip to the server by inserting an empty favicon.
  * @example
  *   {"processor": {"fragment": false}}
- *   <!DOCTYPE html><html><head></head><body></body></html>
+ *   <!doctype html><html><head></head><body></body></html>
  */
 
 'use strict';

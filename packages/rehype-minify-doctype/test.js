@@ -5,7 +5,7 @@
 var test = require('tape');
 var rehype = require('rehype');
 var u = require('unist-builder');
-var min = require('./');
+var min = require('.');
 
 test('rehype-minify-doctype', function (t) {
   t.deepEqual(

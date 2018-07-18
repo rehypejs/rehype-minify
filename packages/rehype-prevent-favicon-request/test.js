@@ -6,7 +6,7 @@ var test = require('tape');
 var rehype = require('rehype');
 var u = require('unist-builder');
 var h = require('hastscript');
-var min = require('./');
+var min = require('.');
 
 test('rehype-prevent-favicon-request', function (t) {
   t.deepEqual(

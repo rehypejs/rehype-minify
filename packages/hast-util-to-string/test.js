@@ -4,7 +4,7 @@
 
 var test = require('tape');
 var u = require('unist-builder');
-var toString = require('./');
+var toString = require('.');
 
 test('hast-util-to-string', function (t) {
   t.deepEqual(

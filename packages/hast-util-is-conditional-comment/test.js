@@ -5,7 +5,7 @@
 var test = require('tape');
 var u = require('unist-builder');
 var h = require('hastscript');
-var ok = require('./');
+var ok = require('.');
 
 test('hast-util-is-conditional-comment', function (t) {
   [

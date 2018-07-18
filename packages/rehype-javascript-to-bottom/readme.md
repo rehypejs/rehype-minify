@@ -21,13 +21,13 @@ npm install rehype-javascript-to-bottom
 ##### In
 
 ```html
-<!DOCTYPE html><html><head><script src="index.js"></script></head><body></body></html>
+<!doctype html><html><head><script src="index.js"></script></head><body></body></html>
 ```
 
 ##### Out
 
 ```html
-<!DOCTYPE html><html><head></head><body><script src="index.js"></script></body></html>
+<!doctype html><html><head></head><body><script src="index.js"></script></body></html>
 ```
 
 ## License
