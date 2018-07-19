@@ -9,6 +9,8 @@ exports.settings = {
   preferUnquoted: true,
   omitOptionalTags: true,
   collapseEmptyAttributes: true,
+  closeEmptyElements: true,
+  tightSelfClosing: true,
   tightCommaSeparatedLists: true,
   tightAttributes: true,
   allowParseErrors: true,
