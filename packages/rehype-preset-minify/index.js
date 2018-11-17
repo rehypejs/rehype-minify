@@ -13,6 +13,7 @@ exports.settings = {
   tightSelfClosing: true,
   tightCommaSeparatedLists: true,
   tightAttributes: true,
+  tightDoctype: true,
   allowParseErrors: true,
   allowDangerousCharacters: true
 }
