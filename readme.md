@@ -124,9 +124,9 @@ repository, organisation, or community you agree to abide by its terms.
 
 [coverage]: https://codecov.io/github/rehypejs/rehype-minify
 
-[downloads-badge]: https://img.shields.io/npm/dm/rehype-minify.svg
+[downloads-badge]: https://img.shields.io/npm/dm/rehype-preset-minify.svg
 
-[downloads]: https://www.npmjs.com/package/rehype-minify
+[downloads]: https://www.npmjs.com/package/rehype-preset-minify
 
 [chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
 
