@@ -1,7 +1,8 @@
 # ![rehype-minify][logo]
 
-[![Build Status][build-badge]][build-status]
-[![Coverage Status][coverage-badge]][coverage-status]
+[![Build][build-badge]][build]
+[![Coverage][coverage-badge]][coverage]
+[![Downloads][downloads-badge]][downloads]
 [![Chat][chat-badge]][chat]
 
 **rehype-preset-minify** is an HTML minifier based on [**rehype**][rehype].
@@ -117,15 +118,19 @@ repository, organisation, or community you agree to abide by its terms.
 
 [build-badge]: https://img.shields.io/travis/rehypejs/rehype-minify.svg
 
-[build-status]: https://travis-ci.org/rehypejs/rehype-minify
+[build]: https://travis-ci.org/rehypejs/rehype-minify
 
 [coverage-badge]: https://img.shields.io/codecov/c/github/rehypejs/rehype-minify.svg
 
-[coverage-status]: https://codecov.io/github/rehypejs/rehype-minify
+[coverage]: https://codecov.io/github/rehypejs/rehype-minify
 
-[chat-badge]: https://img.shields.io/gitter/room/rehypejs/Lobby.svg
+[downloads-badge]: https://img.shields.io/npm/dm/rehype-minify.svg
 
-[chat]: https://gitter.im/rehypejs/Lobby
+[downloads]: https://www.npmjs.com/package/rehype-minify
+
+[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+
+[chat]: https://spectrum.chat/unified/rehype
 
 [license]: license
 
