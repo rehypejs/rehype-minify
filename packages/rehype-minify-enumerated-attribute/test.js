@@ -124,5 +124,12 @@ test('rehype-minify-enumerated-attribute', function(t) {
     h('div', {spellCheck: 'invalid'})
   )
 
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(h('link', {crossOrigin: 'anonymous'})),
+    h('link', {crossOrigin: ''})
+  )
+
   t.end()
 })

@@ -97,8 +97,10 @@ function minify(value, info) {
   if (result === info.missing) {
     result = null
   } else if (result === info.invalid) {
-    // “a” is never used as a keyword.
-    result = 'a'
+    // If the invalid state is longer that one character, we explicitly set a
+    // short keyword, namely “a” (never used as a keyword so always invalid).
+    // Otherwise, we keep the result (it’s often an empty string)
+    result = result.length > 1 ? 'a' : result
   }
 
   return result
