@@ -133,7 +133,7 @@ repository, organisation, or community you agree to abide by its terms.
 
 [rehype]: https://github.com/rehypejs/rehype
 
-[logo]: https://cdn.rawgit.com/rehypejs/rehype-minify/03b2790/logo.svg
+[logo]: https://raw.githubusercontent.com/rehypejs/rehype-minify/942349c/logo.svg?sanitize=true
 
 [cli]: ./packages/rehype-preset-minify/readme.md#cli
 
