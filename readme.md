@@ -32,12 +32,12 @@
 ##### Out
 
 ```html
-<!doctype html><html lang=en-US><meta charset=utf8><script src=index.js></script><link rel=stylesheet href=index.css><title>Foo &amp bar</title><h1 class=foo>bar bar</h1><p id=alfred><strong>foo</strong> <em>bar</em></p><button type=button onclick=return!1>Alpha</button>
+<!doctypehtml><html lang=en-US><meta charset=utf8><script src=index.js></script><link rel=stylesheet href=index.css><title>Foo &amp bar</title><h1 class=foo>bar bar</h1><p id=alfred><strong>foo</strong> <em>bar</em></p><button type=button onclick=return!1>Alpha</button>
 ```
 
 ## Install
 
-Install:
+[npm][]:
 
 ```sh
 npm install rehype-preset-minify
@@ -131,6 +131,8 @@ repository, organisation, or community you agree to abide by its terms.
 [chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
 
 [chat]: https://spectrum.chat/unified/rehype
+
+[npm]: https://docs.npmjs.com/cli/install
 
 [license]: license
 
