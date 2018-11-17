@@ -28,9 +28,15 @@ function transform(tree) {
 }
 
 function visitor(node) {
+  var val
   if (js(node) && !has(node, 'src')) {
     try {
-      fromString(node, Uglify.minify(toString(node)).code)
+      val = Uglify.minify(toString(node)).code
+      /* istanbul ignore else - not used, but just to be sure there’s an if */
+      if (val.charAt(val.length - 1) === ';') {
+        val = val.slice(0, -1)
+      }
+      fromString(node, val)
     } catch (error) {}
   }
 }

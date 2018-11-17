@@ -14,7 +14,7 @@ test('rehype-minify-javascript-script', function(t) {
       .runSync(
         h('script', 'var name = "World";\nconsole.log("Hello, " + name + "!");')
       ),
-    h('script', 'var name="World";console.log("Hello, "+name+"!");')
+    h('script', 'var name="World";console.log("Hello, "+name+"!")')
   )
 
   t.deepEqual(
@@ -26,7 +26,7 @@ test('rehype-minify-javascript-script', function(t) {
           '(function () {var name = "World";\nconsole.log("Hello, " + name + "!");})()'
         )
       ),
-    h('script', 'console.log("Hello, World!");')
+    h('script', 'console.log("Hello, World!")')
   )
 
   t.deepEqual(
