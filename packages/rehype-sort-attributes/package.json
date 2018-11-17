@@ -1,6 +1,6 @@
 {
   "name": "rehype-sort-attributes",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Reorder attributes based on how often they occur",
   "license": "MIT",
   "keywords": [
