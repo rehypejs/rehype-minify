@@ -84,4 +84,4 @@ Yields:
 
 [cli]: https://github.com/rehypejs/rehype/tree/master/packages/rehype-cli
 
-[license]: ../../LICENSE
+[license]: ../../license
