@@ -78,7 +78,7 @@ Yields:
 
 [chat]: https://gitter.im/rehypejs/Lobby
 
-[author]: http://wooorm.com
+[author]: https://wooorm.com
 
 [rehype]: https://github.com/rehypejs/rehype
 

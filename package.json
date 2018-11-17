@@ -4,9 +4,9 @@
   "license": "MIT",
   "repository": "https://github.com/rehypejs/rehype-minify",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
-  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
   "contributors": [
-    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
   ],
   "devDependencies": {
     "bail": "^1.0.1",

@@ -14,7 +14,7 @@
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/html-url-attributes",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
-  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com>"
   ],

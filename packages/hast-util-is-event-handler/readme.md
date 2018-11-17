@@ -30,4 +30,4 @@ is 5 or more.
 
 ## License
 
-[MIT](https://github.com/rehypejs/rehype-minify/blob/master/license) © [Titus Wormer](http://wooorm.com)
+[MIT](https://github.com/rehypejs/rehype-minify/blob/master/license) © [Titus Wormer](https://wooorm.com)
