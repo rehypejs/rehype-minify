@@ -122,7 +122,7 @@ module.exports = trough()
     tree.push(
       u('heading', {depth: 2}, [u('text', 'License')]),
       u('paragraph', [
-        u('link', {url: pkg.repository + '/blob/master/LICENSE'}, [
+        u('link', {url: pkg.repository + '/blob/master/license'}, [
           u('text', config.license)
         ]),
         u('text', ' © '),

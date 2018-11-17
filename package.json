@@ -39,7 +39,7 @@
     "xtend": "^4.0.1"
   },
   "scripts": {
-    "prepublish": "lerna bootstrap",
+    "postinstall": "lerna bootstrap --no-ci",
     "format": "remark . -qfo && prettier --write '**/*.js' && xo --fix",
     "build-packages": "node script/build-packages",
     "build": "npm run build-packages",
