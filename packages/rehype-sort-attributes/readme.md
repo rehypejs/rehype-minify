@@ -23,7 +23,7 @@ npm install rehype-sort-attributes
 ##### Out
 
 ```html
-<div id="foo"><strong id="baz" class="bar">qux</strong></div>
+<div id="foo"><strong class="bar" id="baz">qux</strong></div>
 ```
 
 ## License

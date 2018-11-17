@@ -10,11 +10,8 @@
 'use strict'
 
 var visit = require('unist-util-visit')
-var has = require('hast-util-has-property')
 
 module.exports = sort
-
-var own = {}.hasOwnProperty
 
 function sort() {
   return transform
@@ -22,48 +19,87 @@ function sort() {
 
 function transform(tree) {
   var counts = {}
-  var all = []
 
   visit(tree, 'element', count)
 
-  // Most-used first.
-  all.sort(function(left, right) {
-    return counts[right] - counts[left]
-  })
+  var caches = optimize()
 
   visit(tree, 'element', reorder)
 
   function count(node) {
+    var name = node.tagName
+    var cache = counts[name] || (counts[name] = {known: []})
     var props = node.properties
-    var name
+    var prop
+    var value
 
-    for (name in props) {
-      if (has(node, name)) {
-        if (own.call(counts, name)) {
-          counts[name]++
-        } else {
-          all.push(name)
-          counts[name] = 1
-        }
+    for (prop in props) {
+      value = safe(prop)
+
+      if (value in cache) {
+        cache[value]++
+      } else {
+        cache[value] = 1
+        cache.known.push(prop)
       }
+    }
+  }
+
+  function optimize() {
+    var caches = {}
+    var name
+    var values
+
+    for (name in counts) {
+      values = counts[name]
+      caches[name] = values.known.sort(sort)
+    }
+
+    return caches
+
+    function sort(a, b) {
+      return values[safe(b)] - values[safe(a)] || compare(a, b, 0)
     }
   }
 
   function reorder(node) {
+    var cache = caches[node.tagName]
     var props = node.properties
-    var length = all.length
-    var index = -1
+    var keys = []
     var result = {}
+    var index = -1
+    var length
     var prop
 
-    while (++index < length) {
-      prop = all[index]
+    for (prop in props) {
+      keys.push(prop)
+    }
 
-      if (has(node, prop)) {
-        result[prop] = props[prop]
-      }
+    keys.sort(sorter)
+    length = keys.length
+
+    while (++index < length) {
+      prop = keys[index]
+      result[prop] = props[prop]
     }
 
     node.properties = result
+
+    function sorter(a, b) {
+      return cache.indexOf(a) - cache.indexOf(b)
+    }
   }
+}
+
+function safe(value) {
+  return '$' + value
+}
+
+// This would create an infinite loop if `a` and `b` could be equal,
+// but the list we operate on only has unique values.
+function compare(a, b, index) {
+  return (
+    (a.charCodeAt(index) || 0) - (b.charCodeAt(index) || 0) ||
+    compare(a, b, index + 1)
+  )
 }
