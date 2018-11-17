@@ -69,7 +69,9 @@ function minify(value, info) {
   while (++index < length) {
     state = states[index]
 
-    if (typeof state === 'string') {
+    if (state === null) {
+      continue
+    } else if (typeof state === 'string') {
       state = [state]
     }
 

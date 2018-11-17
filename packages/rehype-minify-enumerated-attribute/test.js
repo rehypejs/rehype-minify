@@ -103,5 +103,26 @@ test('rehype-minify-enumerated-attribute', function(t) {
     h('div', {translate: 'invalid'})
   )
 
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(h('div', {spellCheck: 'true'})),
+    h('div', {spellCheck: ''})
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(h('div', {spellCheck: 'false'})),
+    h('div', {spellCheck: 'false'})
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(h('div', {spellCheck: 'invalid'})),
+    h('div', {spellCheck: 'invalid'})
+  )
+
   t.end()
 })
