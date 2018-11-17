@@ -26,7 +26,7 @@ function transform(tree) {
 
   visit(tree, 'element', count)
 
-  /* Most-used first. */
+  // Most-used first.
   all.sort(function(left, right) {
     return counts[right] - counts[left]
   })

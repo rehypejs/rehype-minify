@@ -63,7 +63,7 @@ function transform(tree) {
       }
     }
 
-    /* Stop visiting in body. */
+    // Stop visiting in body.
     if (node.tagName === 'body') {
       return false
     }

@@ -11,8 +11,7 @@
 module.exports = {
   charSet: {
     tagNames: ['meta', 'script'],
-    /* In HTML5, utf8 is implied. But we let it be
-     * here for older versions. */
+    // In HTML5, utf8 is implied. But we let it be here for older versions.
     states: [
       ['utf8', 'utf-8', 'unicode-1-1-utf-8'],
       ['866', 'cp866', 'ibm866', 'csibm866'],
@@ -230,7 +229,7 @@ module.exports = {
     invalid: '',
     states: [['', 'anonymous'], 'use-credentials']
   },
-  /* Should also apply to `content` on `meta[name=referrer]`. */
+  // Should also apply to `content` on `meta[name=referrer]`.
   referrerpolicy: {
     tagNames: ['link', 'a', 'area', 'img', 'iframe'],
     missing: '',
@@ -286,14 +285,14 @@ module.exports = {
   },
   preload: {
     tagNames: ['audio', 'video'],
-    /* Note: https://html.spec.whatwg.org/#attr-media-preload */
+    // Note: https://html.spec.whatwg.org/#attr-media-preload
     states: ['none', 'metadata', ['', 'auto']]
   },
   shape: {
     tagNames: 'area',
     missing: 'rect',
     states: [
-      /* The latter are non-conforming. */
+      // The latter are non-conforming.
       ['rect', 'rectangle'],
       ['poly', 'polygon'],
       ['circle', 'circ'],
@@ -360,14 +359,14 @@ module.exports = {
     missing: 'rsa',
     states: ['', 'rsa']
   },
-  /* Also for `formMethod` on submit buttons. */
+  // Also for `formMethod` on submit buttons.
   method: {
     tagNames: 'form',
     invalid: 'get',
     missing: 'get',
     states: ['get', 'post', 'dialog']
   },
-  /* Also for `formEncType` on submit buttons. */
+  // Also for `formEncType` on submit buttons.
   encType: {
     tagNames: 'form',
     invalid: 'application/x-www-form-urlencoded',
@@ -379,7 +378,7 @@ module.exports = {
     ]
   },
   inputMode: {
-    /* In fact only applies to `text`, `search`, and `password`. */
+    // In fact only applies to `text`, `search`, and `password`.
     tagNames: 'input',
     invalid: '',
     missing: '',

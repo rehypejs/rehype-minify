@@ -33,7 +33,7 @@ var mime = require('./index.json')
 
 module.exports = javascript
 
-/* Check node. */
+// Check node.
 function javascript(node) {
   if (!is(node, 'script')) {
     return false
@@ -46,7 +46,7 @@ function javascript(node) {
   return !has(node, 'language') || check(node.properties.language, 'text/')
 }
 
-/* Check one value. */
+// Check one value.
 function check(value, prefix) {
   var val
 

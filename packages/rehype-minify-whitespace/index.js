@@ -67,7 +67,7 @@ function minify(tree, options) {
 
       value = value.slice(start, end)
 
-      /* Remove the node if it’s collapsed entirely. */
+      // Remove the node if it’s collapsed entirely.
       if (!value) {
         parent.children.splice(index, 1)
 
@@ -97,7 +97,7 @@ function minify(tree, options) {
   }
 }
 
-/* Check if `node` is collapsable. */
+// Check if `node` is collapsable.
 function collapsable(node) {
   return (
     is('text', node) ||
@@ -108,7 +108,7 @@ function collapsable(node) {
   )
 }
 
-/* Collapse to spaces, or newlines if they’re in a run. */
+// Collapse to spaces, or newlines if they’re in a run.
 function collapseToNewLines(value) {
   var result = String(value).replace(/\s+/g, function($0) {
     return $0.indexOf('\n') === -1 ? ' ' : '\n'

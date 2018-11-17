@@ -5,8 +5,8 @@
  *   <a href="  http://example.com "></a>
  */
 
-/* Note: Don’t include non-strings (such as `boolean`s) here,
- * they’re already handled in the generator. */
+// Note: Don’t include non-strings (such as `boolean`s) here, they’re already
+// handled in the generator.
 
 'use strict'
 

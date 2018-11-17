@@ -44,15 +44,14 @@ function transform(tree) {
 
   visit(tree, 'element', visitor)
 
-  /* `meta` has precedence over `html[lang]`:
-   * https://html.spec.whatwg.org/#the-lang-and-xml:lang-
-   * attributes:pragma-set-default-language */
+  // `meta` has precedence over `html[lang]`:
+  // <https://html.spec.whatwg.org/#the-lang-and-xml:lang-attributes:pragma-set-default-language>
   if (html && contentLanguage) {
     html.properties.lang = contentLanguage.properties.content
     remove(contentLanguageParent, contentLanguage)
   }
 
-  /* `meta` has precedence over `meta[charset]`. */
+  // `meta` has precedence over `meta[charset]`.
   if (contentType) {
     value = contentType.properties.content.replace(/^.+charset=/i, '')
 
@@ -72,7 +71,7 @@ function transform(tree) {
   }
 
   function visitor(node, index, parent) {
-    /* Stop walking.  We only need the `head`. */
+    // Stop walking.  We only need the `head`.
     if (is(node, 'body')) {
       return false
     }

@@ -23,7 +23,7 @@ fs.readdir(packages, function(err, basenames) {
   basenames = basenames.filter(negate(hidden))
   plugins = basenames.filter(plugin)
 
-  /* Generate all packages. */
+  // Generate all packages.
   basenames.forEach(function(basename) {
     trough()
       .use(function(ctx, next) {
@@ -42,7 +42,7 @@ fs.readdir(packages, function(err, basenames) {
       )
   })
 
-  /* Generate root `readme.md`. */
+  // Generate root `readme.md`.
   root.run({root: rootPath, plugins: plugins}, wrap(path.basename(rootPath)))
 
   function wrap(basename) {

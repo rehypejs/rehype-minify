@@ -26,13 +26,13 @@
 module.exports = toString
 
 function toString(node) {
-  /* “The concatenation of data of all the Text node descendants
-   * of the context object, in tree order.” */
+  // “The concatenation of data of all the Text node descendants of the context
+  // object, in tree order.”
   if ('children' in node) {
     return all(node)
   }
 
-  /* “Context object’s data.” */
+  // “Context object’s data.”
   return 'value' in node ? node.value : ''
 }
 
