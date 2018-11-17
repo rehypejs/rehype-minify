@@ -1,6 +1,7 @@
 .DS_Store
 *.log
-coverage/
 .nyc_output/
+benchmark-cache/
+coverage/
 node_modules/
 yarn.lock
