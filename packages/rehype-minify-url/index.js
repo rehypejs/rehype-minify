@@ -29,7 +29,7 @@ function url(options) {
 
   try {
     relate.relate('/')
-  } catch (err) {
+  } catch (error) {
     throw new Error('Missing absolute `from` in options')
   }
 
@@ -74,7 +74,7 @@ function all(value, relate) {
 function one(value, relate) {
   try {
     return relate.relate(value)
-  } catch (err) {}
+  } catch (error) {}
 
   return value
 }

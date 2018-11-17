@@ -61,7 +61,7 @@ function minify(value) {
     try {
       output = Uglify.minify(prefix + val + suffix)
       val = output.code.slice(prefix.length, -suffix.length)
-    } catch (err) {}
+    } catch (error) {}
 
     val = protocol + trim(val)
   }

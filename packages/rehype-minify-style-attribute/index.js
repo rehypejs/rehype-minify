@@ -39,7 +39,7 @@ function visitor(node) {
       try {
         output = clean.minify(prefix + val + suffix).styles
         val = output ? output.slice(prefix.length, -suffix.length) : val
-      } catch (err) {}
+      } catch (error) {}
 
       props.style = val || null
     }

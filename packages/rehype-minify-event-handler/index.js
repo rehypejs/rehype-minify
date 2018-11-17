@@ -48,7 +48,7 @@ function minify(value) {
   try {
     output = Uglify.minify(prefix + val + suffix)
     val = output.code.slice(prefix.length, -suffix.length)
-  } catch (err) {}
+  } catch (error) {}
 
   return trim(val)
 }

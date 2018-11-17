@@ -31,6 +31,6 @@ function visitor(node) {
   if (js(node) && !has(node, 'src')) {
     try {
       fromString(node, Uglify.minify(toString(node)).code)
-    } catch (err) {}
+    } catch (error) {}
   }
 }

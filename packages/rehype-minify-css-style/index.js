@@ -34,6 +34,6 @@ function visitor(node) {
     try {
       val = toString(node)
       fromString(node, clean.minify(val).styles || val)
-    } catch (err) {}
+    } catch (error) {}
   }
 }

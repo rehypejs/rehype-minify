@@ -39,7 +39,7 @@ function visitor(node) {
       try {
         output = clean.minify(prefix + val + suffix)
         val = output.styles.slice(prefix.length, -suffix.length)
-      } catch (err) {}
+      } catch (error) {}
 
       props.media = val === 'all' || !val ? null : val
     }

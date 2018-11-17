@@ -36,6 +36,6 @@ function visitor(node) {
   if (is(node, 'script') && node.properties.type === 'application/ld+json') {
     try {
       fromString(node, JSON.stringify(JSON.parse(toString(node))))
-    } catch (err) {}
+    } catch (error) {}
   }
 }

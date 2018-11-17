@@ -79,7 +79,7 @@ module.exports = trough()
         try {
           opts = JSON.parse(opts)
           example = example.slice(example.indexOf('\n') + 1)
-        } catch (err) {
+        } catch (error) {
           opts = {}
         }
       }

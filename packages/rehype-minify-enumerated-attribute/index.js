@@ -44,7 +44,7 @@ function visitor(node) {
       typeof props[prop] === 'string'
     ) {
       definitions = schema[prop]
-      definitions = definitions.length ? definitions : [definitions]
+      definitions = 'length' in definitions ? definitions : [definitions]
       length = definitions.length
       index = -1
 
