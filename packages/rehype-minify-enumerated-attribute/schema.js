@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 /**
  * @fileoverview
  *   This schema exposes a map of property names to (one or

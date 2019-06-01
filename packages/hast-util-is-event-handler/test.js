@@ -1,8 +1,9 @@
 'use strict'
 
 /* eslint-disable import/no-extraneous-dependencies */
-
 var test = require('tape')
+/* eslint-enable import/no-extraneous-dependencies */
+
 var ok = require('.')
 
 test('hast-util-is-event-handler', function(t) {

@@ -1,13 +1,15 @@
 'use strict'
 
-/* eslint-disable import/no-extraneous-dependencies, no-script-url */
-
+/* eslint-disable import/no-extraneous-dependencies */
 var test = require('tape')
 var rehype = require('rehype')
 var h = require('hastscript')
+/* eslint-enable import/no-extraneous-dependencies */
+
 var min = require('.')
 
 test('rehype-minify-javascript-url', function(t) {
+  /* eslint-disable no-script-url */
   t.deepEqual(
     rehype()
       .use(min)
@@ -28,6 +30,7 @@ test('rehype-minify-javascript-url', function(t) {
       .runSync(h('img', {src: 'http://example.com/fav.ico'})),
     h('img', {src: 'http://example.com/fav.ico'})
   )
+  /* eslint-enable no-script-url */
 
   t.end()
 })

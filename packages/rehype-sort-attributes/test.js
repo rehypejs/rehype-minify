@@ -1,9 +1,10 @@
 'use strict'
 
 /* eslint-disable import/no-extraneous-dependencies */
-
 var test = require('tape')
 var rehype = require('rehype')
+/* eslint-enable import/no-extraneous-dependencies */
+
 var min = require('.')
 
 test('rehype-sort-attributes', function(t) {

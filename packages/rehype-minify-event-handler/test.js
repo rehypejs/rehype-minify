@@ -1,19 +1,22 @@
 'use strict'
 
-/* eslint-disable import/no-extraneous-dependencies, no-script-url */
-
+/* eslint-disable import/no-extraneous-dependencies */
 var test = require('tape')
 var rehype = require('rehype')
 var h = require('hastscript')
+/* eslint-enable import/no-extraneous-dependencies */
+
 var min = require('.')
 
 test('rehype-minify-event-handler', function(t) {
+  /* eslint-disable no-script-url */
   t.deepEqual(
     rehype()
       .use(min)
       .runSync(h('h1', {onClick: 'javascript:alert(false)'}, 'Hello')),
     h('h1', {onClick: 'alert(!1)'}, 'Hello')
   )
+  /* eslint-enable no-script-url */
 
   t.deepEqual(
     rehype()

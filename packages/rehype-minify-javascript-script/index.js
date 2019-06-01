@@ -36,6 +36,7 @@ function visitor(node) {
       if (val.charAt(val.length - 1) === ';') {
         val = val.slice(0, -1)
       }
+
       fromString(node, val)
     } catch (error) {}
   }

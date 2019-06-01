@@ -4,7 +4,7 @@
 
 Move JS `<script>` elements to the end of `<body>`.
 
-This can _decrease_ the time to [first
+This can *decrease* the time to [first
 render](https://developer.yahoo.com/performance/rules.html#js_bottom).
 
 You can pass `filter`, a function called with each checked node,
