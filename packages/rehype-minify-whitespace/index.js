@@ -14,13 +14,15 @@
 
 var collapseWhiteSpace = require('collapse-white-space')
 var whitespaceSensitive = require('html-whitespace-sensitive-tag-names')
-var is = require('unist-util-is')
+var convert = require('unist-util-is/convert')
 var modify = require('unist-util-modify-children')
 var element = require('hast-util-is-element')
 var has = require('hast-util-has-property')
 var embedded = require('hast-util-embedded')
 var bodyOK = require('hast-util-is-body-ok-link')
 var list = require('./list')
+
+var text = convert('text')
 
 module.exports = collapse
 
@@ -49,7 +51,7 @@ function minify(tree, options) {
     var start
     var end
 
-    if (is('text', node)) {
+    if (text(node)) {
       prev = parent.children[index - 1]
       next = parent.children[index + 1]
 
@@ -100,7 +102,7 @@ function minify(tree, options) {
 // Check if `node` is collapsable.
 function collapsable(node) {
   return (
-    is('text', node) ||
+    text(node) ||
     element(node, list) ||
     embedded(node) ||
     bodyOK(node) ||
