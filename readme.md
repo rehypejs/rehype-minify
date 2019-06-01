@@ -2,10 +2,11 @@
 
 [![Build][build-badge]][build]
 [![Coverage][coverage-badge]][coverage]
-[![Downloads][downloads-badge]][downloads]
+[![Sponsors][sponsors-badge]][collective]
+[![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-**rehype-preset-minify** is an HTML minifier based on [**rehype**][rehype].
+[**rehype**][rehype] preset to minify HTML.
 
 ##### In
 
@@ -50,8 +51,8 @@ npm install rehype-preset-minify
 
 ## Plugins
 
-The following plugins are included in the preset.  They are mostly
-harmless (disclaimer: **rehype-minify** is quite young).
+The following plugins are included in the preset.
+They are mostly harmless (disclaimer: **rehype-minify** is quite young).
 
 <!--plugins-core start-->
 
@@ -83,7 +84,8 @@ harmless (disclaimer: **rehype-minify** is quite young).
 ## Other Plugins
 
 The following plugins are not included because they are potentially
-**dangerous**.  Read their READMEs carefully before using!
+**dangerous**.
+Read their readmes carefully before using!
 
 <!--plugins-other start-->
 
@@ -104,11 +106,13 @@ The following plugins are not included because they are potentially
 
 ## Contribute
 
-See [`contributing.md` in `rehypejs/rehype`][contribute] for ways to get
-started.
+See [`contributing.md`][contributing] in [`rehypejs/.github`][health] for ways
+to get started.
+See [`support.md`][support] for ways to get help.
 
-This organisation has a [Code of Conduct][coc].  By interacting with this
-repository, organisation, or community you agree to abide by its terms.
+This project has a [Code of Conduct][coc].
+By interacting with this repository, organisation, or community you agree to
+abide by its terms.
 
 ## License
 
@@ -124,9 +128,11 @@ repository, organisation, or community you agree to abide by its terms.
 
 [coverage]: https://codecov.io/github/rehypejs/rehype-minify
 
-[downloads-badge]: https://img.shields.io/npm/dm/rehype-preset-minify.svg
+[sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
 
-[downloads]: https://www.npmjs.com/package/rehype-preset-minify
+[backers-badge]: https://opencollective.com/unified/backers/badge.svg
+
+[collective]: https://opencollective.com/unified
 
 [chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
 
@@ -134,11 +140,17 @@ repository, organisation, or community you agree to abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
+[health]: https://github.com/rehypejs/.github
+
+[contributing]: https://github.com/rehypejs/.github/blob/master/contributing.md
+
+[support]: https://github.com/rehypejs/.github/blob/master/support.md
+
+[coc]: https://github.com/rehypejs/.github/blob/master/code-of-conduct.md
+
 [license]: license
 
 [author]: https://wooorm.com
-
-[rehype]: https://github.com/rehypejs/rehype
 
 [logo]: https://raw.githubusercontent.com/rehypejs/rehype-minify/942349c/logo.svg?sanitize=true
 
@@ -146,6 +158,4 @@ repository, organisation, or community you agree to abide by its terms.
 
 [api]: ./packages/rehype-preset-minify/readme.md#api
 
-[contribute]: https://github.com/rehypejs/rehype/blob/master/contributing.md
-
-[coc]: https://github.com/rehypejs/rehype/blob/master/code-of-conduct.md
+[rehype]: https://github.com/rehypejs/rehype
