@@ -1,9 +1,10 @@
 {
   "name": "rehype-concat-css-style",
   "version": "1.0.0",
-  "description": "Concatenate CSS `<style>` elements together",
+  "description": "rehype plugin to concatenate CSS `<style>` elements together",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "css",

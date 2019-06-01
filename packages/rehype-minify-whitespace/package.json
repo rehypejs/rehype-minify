@@ -1,9 +1,10 @@
 {
   "name": "rehype-minify-whitespace",
   "version": "2.0.3",
-  "description": "Collapse whitespace with rehype",
+  "description": "rehype plugin to collapse whitespace",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "collapse",
     "whitespace"

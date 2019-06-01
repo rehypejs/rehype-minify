@@ -1,9 +1,10 @@
 {
   "name": "rehype-minify-javascript-script",
   "version": "2.0.0",
-  "description": "Minify `script` elements with a JS body",
+  "description": "rehype plugin to minify `script` elements with a JS body",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "script",

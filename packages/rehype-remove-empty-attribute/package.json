@@ -1,9 +1,10 @@
 {
   "name": "rehype-remove-empty-attribute",
   "version": "1.0.1",
-  "description": "Remove empty attributes",
+  "description": "rehype plugin to remove empty attributes",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "remove",

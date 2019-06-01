@@ -1,9 +1,10 @@
 {
   "name": "rehype-remove-duplicate-attribute-values",
   "version": "1.0.1",
-  "description": "Remove duplicates in attribute values with unique tokens",
+  "description": "rehype plugin to remove duplicates in attribute values with unique tokens",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "remove",

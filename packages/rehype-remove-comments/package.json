@@ -1,9 +1,10 @@
 {
   "name": "rehype-remove-comments",
   "version": "2.0.1",
-  "description": "Remove comments (except conditional comments)",
+  "description": "rehype plugin to remove comments (except conditional comments)",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "javascript",

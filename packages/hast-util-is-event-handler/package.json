@@ -1,9 +1,10 @@
 {
   "name": "hast-util-is-event-handler",
   "version": "1.0.1",
-  "description": "Check if a property is an event handler",
+  "description": "hast utility to check if a property is an event handler",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "property",

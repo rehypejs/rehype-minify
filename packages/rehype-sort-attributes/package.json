@@ -1,9 +1,10 @@
 {
   "name": "rehype-sort-attributes",
   "version": "2.0.0",
-  "description": "Reorder attributes based on how often they occur",
+  "description": "rehype plugin to reorder attributes based on how often they occur",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "attribute",

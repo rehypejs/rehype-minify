@@ -1,9 +1,10 @@
 {
   "name": "rehype-preset-minify",
   "version": "3.0.0",
-  "description": "Preset to minify and mangle HTML with rehype",
+  "description": "rehype preset to minify and mangle HTML",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "plugin",
     "min",

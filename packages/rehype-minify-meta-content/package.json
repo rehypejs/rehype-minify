@@ -1,9 +1,10 @@
 {
   "name": "rehype-minify-meta-content",
   "version": "1.0.1",
-  "description": "Minify `content` on `meta` elements",
+  "description": "rehype plugin to minify `content` on `meta` elements",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "meta",

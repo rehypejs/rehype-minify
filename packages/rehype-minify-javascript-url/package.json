@@ -1,9 +1,10 @@
 {
   "name": "rehype-minify-javascript-url",
   "version": "2.0.0",
-  "description": "Minify JavaScript URLs",
+  "description": "rehype plugin to minify JavaScript URLs",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "url",

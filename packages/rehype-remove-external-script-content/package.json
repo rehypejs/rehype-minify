@@ -1,9 +1,10 @@
 {
   "name": "rehype-remove-external-script-content",
   "version": "1.0.0",
-  "description": "Remove content of external JavaScript `script` elements",
+  "description": "rehype plugin to remove content of external JavaScript `script` elements",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "javascript",

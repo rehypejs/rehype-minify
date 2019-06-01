@@ -1,9 +1,10 @@
 {
   "name": "rehype-sort-attribute-values",
   "version": "2.0.0",
-  "description": "Sort attribute values",
+  "description": "rehype plugin to sort attribute values",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "sort",

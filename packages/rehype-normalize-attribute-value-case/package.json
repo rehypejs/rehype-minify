@@ -1,9 +1,10 @@
 {
   "name": "rehype-normalize-attribute-value-case",
   "version": "1.0.1",
-  "description": "Normalize casing of attribute values",
+  "description": "rehype plugin to normalize casing of attribute values",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "attribute",

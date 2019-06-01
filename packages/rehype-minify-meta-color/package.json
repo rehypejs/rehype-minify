@@ -1,9 +1,10 @@
 {
   "name": "rehype-minify-meta-color",
   "version": "1.1.0",
-  "description": "Minify `theme-color` and `msapplication-TileColor` meta elements",
+  "description": "rehype plugin to minify `theme-color` and `msapplication-TileColor` meta elements",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "meta",

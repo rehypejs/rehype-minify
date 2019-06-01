@@ -1,9 +1,10 @@
 {
   "name": "rehype-remove-style-type-css",
   "version": "1.0.0",
-  "description": "Remove `type` on CSS `style` and `link`s",
+  "description": "rehype plugin to remove `type` on CSS `style` and `link`s",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "remove",

@@ -1,9 +1,10 @@
 {
   "name": "rehype-remove-script-type-javascript",
   "version": "1.0.0",
-  "description": "Remove `type` and `language` on JavaScript scripts",
+  "description": "rehype plugin to remove `type` and `language` on JavaScript scripts",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "remove",

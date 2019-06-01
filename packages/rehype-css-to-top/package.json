@@ -1,9 +1,10 @@
 {
   "name": "rehype-css-to-top",
   "version": "1.0.0",
-  "description": "Move CSS `<link>` to `<head>`",
+  "description": "rehype plugin to move CSS `<link>` to `<head>`",
   "license": "MIT",
   "keywords": [
+    "unified",
     "rehype",
     "hast",
     "css",
