@@ -7,7 +7,7 @@
  * @longdescription
  *   ## Use
  *
- *   ```javascript
+ *   ```js
  *   var h = require('hastscript')
  *   var fromString = require('hast-util-from-string')
  *
