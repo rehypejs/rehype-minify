@@ -1,7 +1,6 @@
 /**
  * @fileoverview
- *   Remove content of external JavaScript
- *   `script` elements.
+ *   Remove content of external JavaScript `script` elements.
  * @example
  *   <script src="index.js">Hello!</script>
  */

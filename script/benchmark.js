@@ -261,11 +261,11 @@ function size(ctx) {
 
 function htmlMinifier(buf, ctx) {
   // Based on:
-  // https://github.com/kangax/html-minifier/blob/gh-pages/sample-cli-config-file.conf
+  // <https://github.com/kangax/html-minifier/blob/gh-pages/sample-cli-config-file.conf>
   // but passed through the CLI normalization:
-  // https://github.com/kangax/html-minifier/blob/346f73d/cli.js#L100
+  // <https://github.com/kangax/html-minifier/blob/346f73d/cli.js#L100>
   // and defaults removed for brevity:
-  // https://github.com/kangax/html-minifier
+  // <https://github.com/kangax/html-minifier>
   var options = {
     collapseBooleanAttributes: true,
     collapseWhitespace: true,

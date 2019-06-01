@@ -2,8 +2,8 @@
  * @fileoverview
  *   Remove comments (except conditional comments).
  *
- *   When configured with `force: true` (default: `false`), conditional
- *   comments are also removed.
+ *   When configured with `force: true` (default: `false`), conditional comments
+ *   are also removed.
  * @example
  *   <!--Hello-->
  *   <!--[if IE 6]>OK<![endif]-->

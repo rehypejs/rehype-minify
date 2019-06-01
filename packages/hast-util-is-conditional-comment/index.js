@@ -2,23 +2,23 @@
  * @fileoverview
  *   Check if a node is a conditional comment.
  * @longdescription
- *   ## Usage
+ *   ## Use
  *
- *   ```javascript
- *   var u = require('unist-builder');
- *   var ok = require('hast-util-is-conditional-comment');
+ *   ```js
+ *   var u = require('unist-builder')
+ *   var ok = require('hast-util-is-conditional-comment')
  *
- *   ok(u('comment', '[if IE]>...<![endif]')); //=> true
- *   ok(u('comment', '<![endif]')); //=> true
- *   ok(u('comment', 'foo')); //=> false
+ *   ok(u('comment', '[if IE]>...<![endif]')) //=> true
+ *   ok(u('comment', '<![endif]')) //=> true
+ *   ok(u('comment', 'foo')) //=> false
  *   ```
  *
  *   ## API
  *
  *   ### `isConditionalComment(node)`
  *
- *   Return `true` if `node` is a comment node matching
- *   one of the know IE conditional comments.
+ *   Return `true` if `node` is a comment node matching one of the know IE
+ *   conditional comments.
  */
 
 'use strict'

@@ -2,7 +2,7 @@
 
 # hast-util-to-string
 
-Get the plain-text value of a HAST node.
+Get the plain-text value of a hast node.
 
 ## Install
 
@@ -10,15 +10,15 @@ Get the plain-text value of a HAST node.
 npm install hast-util-to-string
 ```
 
-## Usage
+## Use
 
-```javascript
-var h = require('hastscript');
-var toString = require('hast-util-to-string');
+```js
+var h = require('hastscript')
+var toString = require('hast-util-to-string')
 
-toString(h('p', 'Alpha'));
+toString(h('p', 'Alpha'))
 //=> 'Alpha'
-toString(h('div', [h('b', 'Bold'), ' and ', h('i', 'italic'), '.']));
+toString(h('div', [h('b', 'Bold'), ' and ', h('i', 'italic'), '.']))
 //=> 'Bold and italic.'
 ```
 
@@ -26,7 +26,7 @@ toString(h('div', [h('b', 'Bold'), ' and ', h('i', 'italic'), '.']));
 
 ### `toString(node)`
 
-Transform a node to string.
+Transform a node to a string.
 
 ## License
 

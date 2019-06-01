@@ -4,9 +4,8 @@
 
 Concatenate JS `<script>` elements together.
 
-This plugin can be dangerous if a) JS is invalid,
-or b) values are expected to be undefined in one script
-and defined in another.
+This plugin can be dangerous if a) JS is invalid, or b) values are expected
+to be undefined in one script and defined in another.
 
 ## Install
 

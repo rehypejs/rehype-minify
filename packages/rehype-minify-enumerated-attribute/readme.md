@@ -4,8 +4,8 @@
 
 Minify enumerated attributes.
 
-Sometimes attributes or their values can be dropped
-entirely, or a shorter value can be used.
+Sometimes attributes or their values can be dropped entirely, or a shorter
+value can be used.
 
 ## Install
 

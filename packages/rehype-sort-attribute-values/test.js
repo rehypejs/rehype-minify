@@ -16,7 +16,7 @@ test('rehype-sort-attribute-values', function(t) {
     h('#foo.bar.baz.foo.quux.qux', {itemProp: true})
   )
 
-  // 3 x foo, 2 x bar, 1 x baz, 1 x qux, 1 x quux
+  // 3 x foo, 2 x bar, 1 x baz, 1 x qux, 1 x quux.
   t.deepEqual(
     rehype()
       .use(min)

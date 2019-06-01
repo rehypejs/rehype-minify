@@ -2,12 +2,11 @@
  * @fileoverview
  *   Prevent a `favicon.ico` request.
  *
- *   Use this plugin if there’s no `favicon.ico` at the root
- *   of your server, and there may or may not be a `shortcut icon`
- *   referenced in your HTML.
+ *   Use this plugin if there’s no `favicon.ico` at the root of your server, and
+ *   there may or may not be a `shortcut icon` referenced in your HTML.
  *
- *   This plugin increases the size of the HTML, but prevents
- *   a round trip to the server by inserting an empty favicon.
+ *   This plugin increases the size of the HTML, but prevents a round trip to
+ *   the server by inserting an empty favicon.
  * @example
  *   {"processor": {"fragment": false}}
  *   <!doctype html><html><head></head><body></body></html>

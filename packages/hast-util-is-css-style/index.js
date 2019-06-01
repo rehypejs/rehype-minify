@@ -2,23 +2,23 @@
  * @fileoverview
  *   Check if an element is a CSS `<style>` element.
  * @longdescription
- *   ## Usage
+ *   ## Use
  *
- *   ```javascript
- *   var h = require('hastscript');
- *   var ok = require('hast-util-is-css-style');
+ *   ```js
+ *   var h = require('hastscript')
+ *   var ok = require('hast-util-is-css-style')
  *
- *   ok(h('style')); //=> true
- *   ok(h('style', {type: ' TEXT/CSS '})); //=> true
- *   ok(h('style', {type: 'text/foo'})); //=> false
+ *   ok(h('style')) //=> true
+ *   ok(h('style', {type: ' TEXT/CSS '})) //=> true
+ *   ok(h('style', {type: 'text/foo'})) //=> false
  *   ```
  *
  *   ## API
  *
  *   ### `isCSSStyle(node)`
  *
- *   Return `true` if `node` is a `<style>` element that has no
- *   `type`, an empty `type`, or `'text/css'` as its `type`.
+ *   Return `true` if `node` is a `<style>` element that has no `type`, an empty
+ *   `type`, or `'text/css'` as its `type`.
  */
 
 'use strict'

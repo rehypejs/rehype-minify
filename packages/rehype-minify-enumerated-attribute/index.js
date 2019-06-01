@@ -2,8 +2,8 @@
  * @fileoverview
  *   Minify enumerated attributes.
  *
- *   Sometimes attributes or their values can be dropped
- *   entirely, or a shorter value can be used.
+ *   Sometimes attributes or their values can be dropped entirely, or a shorter
+ *   value can be used.
  * @example
  *   <meta charset="utf-8">
  *   <video preload="auto">
@@ -81,7 +81,8 @@ function minify(value, info) {
     }
   }
 
-  // So, this is a valid enumerated attribute.  Lets’s optimize it.
+  // So, this is a valid enumerated attribute.
+  // Lets’s optimize it.
   if (known && state) {
     result = state[0]
   } else if (typeof info.invalid === 'string') {
@@ -92,8 +93,9 @@ function minify(value, info) {
     return value
   }
 
-  // Should be a setting.  There’s a missing value defined, so we can just as
-  // well remove the property all-together if they’re the same.
+  // Should be a setting.
+  // There’s a missing value defined, so we can just as well remove the property
+  // all-together if they’re the same.
   if (result === info.missing) {
     result = null
   } else if (result === info.invalid) {

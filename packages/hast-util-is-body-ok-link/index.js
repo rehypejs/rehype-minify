@@ -2,15 +2,15 @@
  * @fileoverview
  *   Check if a `link` element is “Body OK”.
  * @longdescription
- *   ## Usage
+ *   ## Use
  *
- *   ```javascript
- *   var h = require('hastscript');
- *   var ok = require('hast-util-is-body-ok-link');
+ *   ```js
+ *   var h = require('hastscript')
+ *   var ok = require('hast-util-is-body-ok-link')
  *
- *   ok(h('link', {itemProp: 'foo'})); //=> true
- *   ok(h('link', {rel: ['stylesheet'], href: 'index.css'})); //=> true
- *   ok(h('link', {rel: ['author'], href: 'index.css'})); //=> false
+ *   ok(h('link', {itemProp: 'foo'})) //=> true
+ *   ok(h('link', {rel: ['stylesheet'], href: 'index.css'})) //=> true
+ *   ok(h('link', {rel: ['author'], href: 'index.css'})) //=> false
  *   ```
  *
  *   ## API
@@ -18,9 +18,8 @@
  *   ### `isBodyOkLink(node)`
  *
  *   * Return `true` for `link` elements with an `itemProp`
- *   * Return `true` for `link` elements with a `rel` list
- *     where one or more entries are `pingback`, `prefetch`,
- *     or `stylesheet`.
+ *   * Return `true` for `link` elements with a `rel` list where one or more
+ *     entries are `pingback`, `prefetch`, or `stylesheet`.
  */
 
 'use strict'

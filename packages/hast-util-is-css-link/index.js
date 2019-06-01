@@ -2,24 +2,24 @@
  * @fileoverview
  *   Check if an element is a CSS link.
  * @longdescription
- *   ## Usage
+ *   ## Use
  *
- *   ```javascript
- *   var h = require('hastscript');
- *   var ok = require('hast-util-is-css-link');
+ *   ```js
+ *   var h = require('hastscript')
+ *   var ok = require('hast-util-is-css-link')
  *
- *   ok(h('link', {rel: ['stylesheet', 'author']})); //=> true
- *   ok(h('link', {rel: ['stylesheet'], type: 'text/css'})); //=> true
- *   ok(h('link', {rel: ['stylesheet'], type: 'text/foo'})); //=> false
+ *   ok(h('link', {rel: ['stylesheet', 'author']})) //=> true
+ *   ok(h('link', {rel: ['stylesheet'], type: 'text/css'})) //=> true
+ *   ok(h('link', {rel: ['stylesheet'], type: 'text/foo'})) //=> false
  *   ```
  *
  *   ## API
  *
  *   ### `isCSSLink(node)`
  *
- *   Return `true` if `node` is a `<link>` element with a `rel`
- *   list that contains `'stylesheet'` and has no `type`, an empty
- *   `type`, or `'text/css'` as its `type`.
+ *   Return `true` if `node` is a `<link>` element with a `rel` list that
+ *   contains `'stylesheet'` and has no `type`, an empty `type`, or `'text/css'`
+ *   as its `type`.
  */
 
 'use strict'

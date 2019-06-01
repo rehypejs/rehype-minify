@@ -4,11 +4,11 @@
 
 Move JS `<script>` elements to the end of `<body>`.
 
-This can *decrease* the time to [first
-render](https://developer.yahoo.com/performance/rules.html#js_bottom).
+This can *decrease* the time to
+[first render](https://developer.yahoo.com/performance/rules.html#js_bottom).
 
-You can pass `filter`, a function called with each checked node,
-returning `true` if the script should be moved, and `false` if not.
+You can pass `filter`, a function called with each checked node, returning
+`true` if the script should be moved, and `false` if not.
 
 ## Install
 

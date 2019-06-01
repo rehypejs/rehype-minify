@@ -2,8 +2,7 @@
 
 # rehype-remove-external-script-content
 
-Remove content of external JavaScript
-`script` elements.
+Remove content of external JavaScript `script` elements.
 
 ## Install
 

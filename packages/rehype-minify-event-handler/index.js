@@ -1,6 +1,6 @@
 /**
  * @fileoverview
- *   Minify event handler attributes
+ *   Minify event handler attributes.
  * @example
  *   <h1 onclick="javascript:alert(false)">Hello</h1>
  */

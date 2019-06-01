@@ -10,23 +10,23 @@ Check if a property is an event handler.
 npm install hast-util-is-event-handler
 ```
 
-## Usage
+## Use
 
-```javascript
-var ok = require('hast-util-is-event-handler');
+```js
+var ok = require('hast-util-is-event-handler')
 
-ok('oncut'); //=> true
-ok('onpushsubscriptionchange'); //=> true
-ok('ones'); //=> false
-ok('class'); //=> false
+ok('oncut') //=> true
+ok('onpushsubscriptionchange') //=> true
+ok('ones') //=> false
+ok('class') //=> false
 ```
 
 ## API
 
 ### `isEventHandler(prop)`
 
-Check if `prop` is a `string` starting with `'on'` and its `length`
-is 5 or more.
+Check if `prop` is a `string` starting with `'on'` and its `length` is 5 or
+more.
 
 ## License
 

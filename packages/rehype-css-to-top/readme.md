@@ -4,8 +4,8 @@
 
 Move CSS `<link>` elements to the `<head>`.
 
-This can *decrease* the time to [first
-render](https://developer.yahoo.com/performance/rules.html#css_top).
+This can *decrease* the time to
+[first render](https://developer.yahoo.com/performance/rules.html#css_top).
 
 ## Install
 

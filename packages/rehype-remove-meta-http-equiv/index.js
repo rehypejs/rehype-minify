@@ -1,8 +1,7 @@
 /**
  * @fileoverview
  *   Remove `meta[http-equiv=content-language]` and
- *   `meta[http-equiv=content-type]` elements for shorter
- *   output.
+ *   `meta[http-equiv=content-type]` elements for shorter output.
  *
  *   Note: The missing white-space in the output is due to
  *   [inikulin/parse5#150](https://github.com/inikulin/parse5/issues/150).
@@ -71,7 +70,7 @@ function transform(tree) {
   }
 
   function visitor(node, index, parent) {
-    // Stop walking.  We only need the `head`.
+    // Stop walking as we only need the `head`.
     if (is(node, 'body')) {
       return false
     }

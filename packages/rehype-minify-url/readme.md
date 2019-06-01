@@ -2,10 +2,12 @@
 
 # rehype-minify-url
 
-Minify URLs.  Uses [`relateurl`](https://www.npmjs.com/package/relateurl).
-`from` in options is required (which must be an absolute url to
-where the file is hosted.  All other [options](https://www.npmjs.com/package/relateurl#options)
-are passed through.
+Minify URLs.
+Uses [`relateurl`](https://www.npmjs.com/package/relateurl).
+`from` in options is required (which must be an absolute url to where the
+file is hosted.
+All other [options](https://www.npmjs.com/package/relateurl#options) are
+passed through.
 
 ## Install
 

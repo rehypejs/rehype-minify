@@ -1,16 +1,12 @@
-/**
- * @fileoverview
- *   This schema exposes a map of property names to (one or
- *   more) definitions.  Each definition defined how that
- *   attribute is enumerated.
- */
-
 'use strict'
 
+// This schema exposes a map of property names to (one or more) definitions.
+// Each definition defined how that attribute is enumerated.
 module.exports = {
   charSet: {
     tagNames: ['meta', 'script'],
-    // In HTML5, utf8 is implied. But we let it be here for older versions.
+    // In HTML5, utf8 is implied.
+    // But we let it be here for older versions.
     states: [
       ['utf8', 'utf-8', 'unicode-1-1-utf-8'],
       ['866', 'cp866', 'ibm866', 'csibm866'],

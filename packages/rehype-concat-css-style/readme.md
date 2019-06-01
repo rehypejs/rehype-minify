@@ -5,9 +5,8 @@
 Concatenate CSS `<style>` elements together.
 
 This plugin can be dangerous if CSS is invalid.
-Additionally, this plugin does not handle `scoped`
-styles.  Those are [deprecated](https://github.com/whatwg/html/issues/552)
-anyway.
+Additionally, this plugin does not handle `scoped` styles.
+Those are [deprecated](https://github.com/whatwg/html/issues/552) anyway.
 
 ## Install
 

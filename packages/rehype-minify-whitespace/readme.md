@@ -2,11 +2,11 @@
 
 # rehype-minify-whitespace
 
-Collapse whitespace.
+Collapse white-space.
 
-Normally, collapses to a single space.  If `newlines: true`,
-collapses white-space containing newlines to `'\n'` instead
-of `' '`.
+Normally, collapses to a single space.
+If `newlines: true`, collapses white-space containing newlines to `'\n'`
+instead of `' '`.
 
 ## Install
 

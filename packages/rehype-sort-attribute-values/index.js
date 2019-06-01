@@ -107,8 +107,8 @@ function safe(value) {
   return '$' + value
 }
 
-// This would create an infinite loop if `a` and `b` could be equal,
-// but the list we operate on only has unique values.
+// This would create an infinite loop if `a` and `b` could be equal, but the
+// list we operate on only has unique values.
 function compare(a, b, index) {
   return (
     (a.charCodeAt(index) || 0) - (b.charCodeAt(index) || 0) ||
