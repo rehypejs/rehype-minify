@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-doctype",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "rehype plugin to minify the HTML doctype",
   "license": "MIT",
   "keywords": [

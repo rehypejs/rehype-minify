@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-url",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "rehype plugin to minify URLs",
   "license": "MIT",
   "keywords": [
