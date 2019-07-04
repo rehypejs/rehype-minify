@@ -40,6 +40,10 @@ function one(node) {
   if (node.type === 'text') {
     return node.value
   }
+  
+  if (node.properties && node.properties.className && node.properties.className.includes('footnote-ref')) {
+    return '';
+  }
 
   return node.children ? all(node) : ''
 }
