@@ -14,8 +14,7 @@ exports.settings = {
   tightCommaSeparatedLists: true,
   tightAttributes: true,
   tightDoctype: true,
-  allowParseErrors: true,
-  allowDangerousCharacters: true
+  allowParseErrors: true
 }
 
 exports.plugins = [
