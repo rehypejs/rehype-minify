@@ -84,7 +84,7 @@ They are mostly harmless (disclaimer: **rehype-minify** is quite young).
 ## Other Plugins
 
 The following plugins are not included because they are potentially
-**dangerous**.
+**dangerous**, can make sites slower in some cases, or need extra configuration.
 Read their readmes carefully before using!
 
 <!--plugins-other start-->
@@ -98,6 +98,15 @@ Read their readmes carefully before using!
 *   [`rehype-prevent-favicon-request`](./packages/rehype-prevent-favicon-request)
 
 <!--plugins-other end-->
+
+## Security
+
+Use of `rehype-preset-minify` is *safe* by default, if the tree is already safe.
+Other plugins can open you up to a [cross-site scripting (XSS)][xss] attack.
+Use [`rehype-sanitize`][sanitize] to make the tree safe.
+
+To further optimise the result disregarding security, use the extra plugins
+above and pass [`allowDangerousCharacters` to `rehype-stringify`][stringify].
 
 ## Related
 
@@ -159,3 +168,9 @@ abide by its terms.
 [api]: ./packages/rehype-preset-minify/readme.md#api
 
 [rehype]: https://github.com/rehypejs/rehype
+
+[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
+
+[sanitize]: https://github.com/rehypejs/rehype-sanitize
+
+[stringify]: https://github.com/rehypejs/rehype/tree/master/packages/rehype-stringify#api
