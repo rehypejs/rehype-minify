@@ -7,6 +7,7 @@ var trough = require('trough')
 var remark = require('remark')
 var zone = require('mdast-zone')
 var vfile = require('to-vfile')
+var remarkSettings = require('remark-preset-wooorm').settings
 
 module.exports = trough()
   .use(function(ctx, next) {
@@ -25,7 +26,7 @@ module.exports = trough()
     })
 
     remark()
-      .data('settings', {bullet: '*'})
+      .data('settings', remarkSettings)
       .use(plugin('plugins-core', core))
       .use(plugin('plugins-other', others))
       .process(ctx.readme, function(err) {
