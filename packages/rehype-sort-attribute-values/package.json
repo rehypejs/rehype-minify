@@ -23,7 +23,7 @@
   ],
   "dependencies": {
     "hast-util-is-element": "^1.0.0",
-    "unist-util-visit": "^1.1.0",
+    "unist-util-visit": "^2.0.0",
     "x-is-array": "^0.1.0"
   },
   "xo": false

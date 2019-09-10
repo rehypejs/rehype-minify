@@ -22,7 +22,7 @@
   "dependencies": {
     "clean-css": "^4.0.12",
     "hast-util-has-property": "^1.0.0",
-    "unist-util-visit": "^1.0.0"
+    "unist-util-visit": "^2.0.0"
   },
   "xo": false
 }

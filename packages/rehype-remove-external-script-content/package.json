@@ -20,7 +20,7 @@
     "index.js"
   ],
   "dependencies": {
-    "unist-util-visit": "^1.0.0",
+    "unist-util-visit": "^2.0.0",
     "hast-util-has-property": "^1.0.0",
     "hast-util-is-javascript": "^1.0.0"
   },

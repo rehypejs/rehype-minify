@@ -23,7 +23,7 @@
   "dependencies": {
     "hast-util-is-css-link": "^1.0.0",
     "hast-util-is-css-style": "^1.0.0",
-    "unist-util-visit": "^1.0.0"
+    "unist-util-visit": "^2.0.0"
   },
   "xo": false
 }
