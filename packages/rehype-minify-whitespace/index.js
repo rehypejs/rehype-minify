@@ -20,7 +20,7 @@ var element = require('hast-util-is-element')
 var has = require('hast-util-has-property')
 var embedded = require('hast-util-embedded')
 var bodyOK = require('hast-util-is-body-ok-link')
-var list = require('./list')
+var list = require('./list.json')
 
 var text = convert('text')
 
