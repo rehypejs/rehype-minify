@@ -18,7 +18,6 @@
     "chalk": "^3.0.0",
     "concat-stream": "^2.0.0",
     "dox": "^0.9.0",
-    "execa": "^4.0.0",
     "hastscript": "^5.0.0",
     "html-minifier": "^4.0.0",
     "is-hidden": "^1.0.0",

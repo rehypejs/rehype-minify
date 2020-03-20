@@ -2,8 +2,8 @@
 
 var fs = require('fs')
 var path = require('path')
+var exec = require('child_process').exec
 var test = require('tape')
-var execa = require('execa')
 var trim = require('trim-trailing-lines')
 
 test('preset', function(t) {
@@ -11,14 +11,15 @@ test('preset', function(t) {
   var output = path.join('test', 'fixtures', 'small', 'output.html')
   var bin = require.resolve('rehype-cli/cli')
 
-  t.plan(1)
+  t.plan(2)
 
   // Preset is loaded from `.rehyperc`
-  execa(bin, [input]).then(function(result) {
+  exec(bin + ' "' + input + '"', function(error, stdout) {
+    t.ifErr(error)
     t.equal(
-      result.stdout,
+      stdout,
       trim(String(fs.readFileSync(output))),
       'should minify from the preset'
     )
-  }, t.ifErr)
+  })
 })

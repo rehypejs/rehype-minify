@@ -2,8 +2,8 @@
 
 var fs = require('fs')
 var path = require('path')
+var exec = require('child_process').exec
 var vfile = require('to-vfile')
-var execa = require('execa')
 var findDown = require('vfile-find-down')
 var trough = require('trough')
 var uniq = require('uniq')
@@ -17,15 +17,13 @@ module.exports = trough()
   })
   .use(function(ctx, next) {
     var fp = path.relative(ctx.ancestor, ctx.root)
+    var cmd = 'git log --all --format="%cN <%cE>" "' + fp + '"'
 
-    execa('git', ['log', '--all', '--format="%cN <%cE>"', fp]).then(function(
-      result
-    ) {
-      ctx.contributors = uniq(result.stdout.split('\n'))
+    exec(cmd, function(err, stdout) {
+      if (err) return next(err)
+
+      ctx.contributors = uniq(stdout.split('\n'))
         .sort()
-        .map(function(line) {
-          return line.slice(1, -1)
-        })
         .filter(Boolean)
 
       if (ctx.contributors.length === 0) {
@@ -33,8 +31,7 @@ module.exports = trough()
       }
 
       next()
-    },
-    next)
+    })
   })
   .use(function(ctx, next) {
     findDown.all(['.js', '.json'], ctx.root, function(err, files) {
