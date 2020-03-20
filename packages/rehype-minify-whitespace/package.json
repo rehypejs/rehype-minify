@@ -6,8 +6,15 @@
   "keywords": [
     "unified",
     "rehype",
+    "rehype-plugin",
+    "plugin",
+    "html",
+    "minify",
+    "mangle",
     "collapse",
-    "whitespace"
+    "whitespace",
+    "white",
+    "space"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-minify-whitespace",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",

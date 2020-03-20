@@ -6,7 +6,11 @@
   "keywords": [
     "unified",
     "rehype",
-    "hast",
+    "rehype-plugin",
+    "plugin",
+    "html",
+    "minify",
+    "mangle",
     "script",
     "json"
   ],

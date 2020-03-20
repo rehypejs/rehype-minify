@@ -4,9 +4,12 @@
   "description": "hast utility to check if a link element is “Body OK”",
   "license": "MIT",
   "keywords": [
-    "unified",
-    "rehype",
+    "unist",
     "hast",
+    "hast-util",
+    "util",
+    "utility",
+    "html",
     "link",
     "body",
     "ok"

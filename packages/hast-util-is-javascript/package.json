@@ -4,9 +4,12 @@
   "description": "hast utility to check if an element is a JavaScript script",
   "license": "MIT",
   "keywords": [
-    "unified",
-    "rehype",
+    "unist",
     "hast",
+    "hast-util",
+    "util",
+    "utility",
+    "html",
     "javascript",
     "script"
   ],

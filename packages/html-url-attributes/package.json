@@ -4,13 +4,11 @@
   "description": "Map of URL attributes in HTML",
   "license": "MIT",
   "keywords": [
-    "whitespace",
-    "white",
-    "space",
-    "sensitive",
-    "tagname",
-    "tag",
-    "name"
+    "html",
+    "attribute",
+    "property",
+    "url",
+    "attribute"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/html-url-attributes",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",

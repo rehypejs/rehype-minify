@@ -4,9 +4,12 @@
   "description": "hast utility to check if an element is a css style",
   "license": "MIT",
   "keywords": [
-    "unified",
-    "rehype",
+    "unist",
     "hast",
+    "hast-util",
+    "util",
+    "utility",
+    "html",
     "css",
     "style"
   ],

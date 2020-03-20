@@ -4,9 +4,12 @@
   "description": "hast utility to check if a property is an event handler",
   "license": "MIT",
   "keywords": [
-    "unified",
-    "rehype",
+    "unist",
     "hast",
+    "hast-util",
+    "util",
+    "utility",
+    "html",
     "property",
     "event",
     "handler"

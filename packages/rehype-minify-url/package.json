@@ -6,7 +6,11 @@
   "keywords": [
     "unified",
     "rehype",
-    "hast",
+    "rehype-plugin",
+    "plugin",
+    "html",
+    "minify",
+    "mangle",
     "url"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-minify-url",

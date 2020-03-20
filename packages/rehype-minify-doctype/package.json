@@ -6,8 +6,13 @@
   "keywords": [
     "unified",
     "rehype",
-    "hast",
-    "doctype"
+    "rehype-plugin",
+    "plugin",
+    "html",
+    "minify",
+    "mangle",
+    "doctype",
+    "document"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-minify-doctype",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",

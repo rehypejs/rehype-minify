@@ -4,6 +4,7 @@
   "description": "List of whitespace sensitive HTML tag names",
   "license": "MIT",
   "keywords": [
+    "html",
     "whitespace",
     "white",
     "space",

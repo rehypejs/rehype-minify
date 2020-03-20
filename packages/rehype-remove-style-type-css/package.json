@@ -6,10 +6,15 @@
   "keywords": [
     "unified",
     "rehype",
-    "hast",
+    "rehype-plugin",
+    "plugin",
+    "html",
+    "minify",
+    "mangle",
     "remove",
     "style",
-    "type"
+    "type",
+    "css"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-remove-style-type-css",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",

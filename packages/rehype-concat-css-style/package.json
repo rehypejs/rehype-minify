@@ -6,9 +6,15 @@
   "keywords": [
     "unified",
     "rehype",
-    "hast",
+    "rehype-plugin",
+    "plugin",
+    "html",
+    "minify",
+    "mangle",
     "css",
-    "style"
+    "style",
+    "concat",
+    "combine"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-concat-css-style",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",

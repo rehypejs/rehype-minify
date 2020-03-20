@@ -4,9 +4,12 @@
   "description": "hast utility to check if an element is a css link",
   "license": "MIT",
   "keywords": [
-    "unified",
-    "rehype",
+    "unist",
     "hast",
+    "hast-util",
+    "util",
+    "utility",
+    "html",
     "css",
     "link"
   ],

@@ -4,9 +4,12 @@
   "description": "hast utility to check if a node is a conditional comment",
   "license": "MIT",
   "keywords": [
-    "unified",
-    "rehype",
+    "unist",
     "hast",
+    "hast-util",
+    "util",
+    "utility",
+    "html",
     "conditional",
     "comment"
   ],

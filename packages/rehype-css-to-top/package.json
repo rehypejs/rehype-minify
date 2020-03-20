@@ -6,9 +6,14 @@
   "keywords": [
     "unified",
     "rehype",
-    "hast",
+    "rehype-plugin",
+    "plugin",
+    "html",
+    "minify",
+    "mangle",
     "css",
-    "head"
+    "head",
+    "move"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-css-to-top",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",

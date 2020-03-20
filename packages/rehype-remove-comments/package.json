@@ -6,9 +6,12 @@
   "keywords": [
     "unified",
     "rehype",
-    "hast",
-    "javascript",
-    "src"
+    "rehype-plugin",
+    "plugin",
+    "html",
+    "minify",
+    "mangle",
+    "comment"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-remove-comments",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",

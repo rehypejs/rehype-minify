@@ -6,11 +6,13 @@
   "keywords": [
     "unified",
     "rehype",
+    "rehype-plugin",
     "plugin",
+    "html",
     "min",
     "minify",
     "mangle",
-    "html"
+    "preset"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-preset-minify",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
