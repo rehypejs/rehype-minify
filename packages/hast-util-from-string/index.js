@@ -38,17 +38,17 @@
 
 module.exports = fromString
 
-function fromString(node, value) {
-  var val = value == null ? '' : String(value)
+function fromString(node, d) {
+  var value = d == null ? '' : String(d)
 
   if ('children' in node) {
     node.children = []
 
-    if (val) {
-      node.children.push({type: 'text', value: val})
+    if (value) {
+      node.children.push({type: 'text', value: value})
     }
   } else {
-    node.value = val
+    node.value = value
   }
 
   return node

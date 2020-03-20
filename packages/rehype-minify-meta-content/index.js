@@ -57,6 +57,6 @@ function collapse(value) {
   return comma.stringify(comma.parse(value), {padLeft: false})
 }
 
-function toNumber(val) {
-  return Number(val)
+function toNumber(value) {
+  return Number(value)
 }

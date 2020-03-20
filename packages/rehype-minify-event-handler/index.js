@@ -38,17 +38,17 @@ function visitor(node) {
 }
 
 function minify(value) {
-  var val = value
+  var result = value
   var output
 
-  if (typeof val !== 'string') {
-    return val
+  if (typeof result !== 'string') {
+    return result
   }
 
   try {
-    output = Uglify.minify(prefix + val + suffix)
-    val = output.code.slice(prefix.length, -suffix.length)
-  } catch (error) {}
+    output = Uglify.minify(prefix + result + suffix)
+    result = output.code.slice(prefix.length, -suffix.length)
+  } catch (_) {}
 
-  return trim(val)
+  return trim(result)
 }

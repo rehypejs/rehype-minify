@@ -28,13 +28,13 @@ var trim = require('trim')
 module.exports = cssStyle
 
 function cssStyle(node) {
-  var val
+  var value
 
   if (!node || node.tagName !== 'style') {
     return false
   }
 
-  val = (node.properties || {}).type
+  value = (node.properties || {}).type
 
-  return val == null || trim(val).toLowerCase() === 'text/css'
+  return value == null || trim(value).toLowerCase() === 'text/css'
 }

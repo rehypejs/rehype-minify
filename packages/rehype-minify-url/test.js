@@ -1,10 +1,8 @@
 'use strict'
 
-/* eslint-disable import/no-extraneous-dependencies */
 var test = require('tape')
 var rehype = require('rehype')
 var h = require('hastscript')
-/* eslint-enable import/no-extraneous-dependencies */
 
 var min = require('.')
 
@@ -27,60 +25,60 @@ test('rehype-minify-url', function(t) {
       .freeze()
   }, /^Error: Missing absolute `from` in options$/)
 
-  var opts = {from: 'http://example.com/one/alpha/'}
+  var options = {from: 'http://example.com/one/alpha/'}
 
   t.deepEqual(
     rehype()
-      .use(min, opts)
+      .use(min, options)
       .runSync(h('a', {href: 'http://example.com/one/bravo/index.html'})),
     h('a', {href: '../bravo/'})
   )
 
   t.deepEqual(
     rehype()
-      .use(min, opts)
+      .use(min, options)
       .runSync(h('a', {href: 'http://example.com/two/charlie/index.html'})),
     h('a', {href: '/two/charlie/'})
   )
 
   t.deepEqual(
     rehype()
-      .use(min, opts)
-      .runSync(h('a', {href: opts.from})),
+      .use(min, options)
+      .runSync(h('a', {href: options.from})),
     h('a', {href: ''})
   )
 
   t.deepEqual(
     rehype()
-      .use(min, opts)
-      .runSync(h('a', {href: opts.from.replace(/http/, 'https')})),
-    h('a', {href: opts.from.replace(/http/, 'https')})
+      .use(min, options)
+      .runSync(h('a', {href: options.from.replace(/http/, 'https')})),
+    h('a', {href: options.from.replace(/http/, 'https')})
   )
 
   t.deepEqual(
     rehype()
-      .use(min, opts)
+      .use(min, options)
       .runSync(h('a', {href: 'http://google.com:80/alpha'})),
     h('a', {href: '//google.com/alpha'})
   )
 
   t.deepEqual(
     rehype()
-      .use(min, opts)
+      .use(min, options)
       .runSync(h('a', {href: '../../../../../../../../#anchor'})),
     h('a', {href: '/#anchor'})
   )
 
   t.deepEqual(
     rehype()
-      .use(min, opts)
+      .use(min, options)
       .runSync(h('a', {href: false, ping: ['../../foo', '../../bar']})),
     h('a', {href: false, ping: ['/foo', '/bar']})
   )
 
   t.deepEqual(
     rehype()
-      .use(min, opts)
+      .use(min, options)
       .runSync(h('a', {href: true})),
     h('a', {href: true})
   )

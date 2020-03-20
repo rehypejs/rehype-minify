@@ -46,14 +46,14 @@ function javascript(node) {
 }
 
 // Check one value.
-function check(value, prefix) {
-  var val
+function check(d, prefix) {
+  var value
 
-  if (typeof value !== 'string') {
+  if (typeof d !== 'string') {
     return false
   }
 
-  val = trim(value.split(';', 1)[0]).toLowerCase()
+  value = trim(d.split(';', 1)[0]).toLowerCase()
 
-  return val === '' || mime.indexOf((prefix || '') + val) !== -1
+  return value === '' || mime.indexOf((prefix || '') + value) !== -1
 }

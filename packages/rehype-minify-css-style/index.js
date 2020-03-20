@@ -28,12 +28,12 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var val
+  var value
 
   if (css(node)) {
     try {
-      val = toString(node)
-      fromString(node, clean.minify(val).styles || val)
-    } catch (error) {}
+      value = toString(node)
+      fromString(node, clean.minify(value).styles || value)
+    } catch (_) {}
   }
 }

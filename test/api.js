@@ -23,7 +23,7 @@ test('plugin', function(t) {
 
     try {
       config = JSON.parse(fs.readFileSync(path.join(fp, 'config.json'), 'utf8'))
-    } catch (error) {}
+    } catch (_) {}
 
     rehype()
       .use(minify, config)

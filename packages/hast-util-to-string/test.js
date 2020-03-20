@@ -1,9 +1,7 @@
 'use strict'
 
-/* eslint-disable import/no-extraneous-dependencies */
 var test = require('tape')
 var u = require('unist-builder')
-/* eslint-enable import/no-extraneous-dependencies */
 
 var toString = require('.')
 

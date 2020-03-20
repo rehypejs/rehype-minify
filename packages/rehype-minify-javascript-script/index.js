@@ -28,16 +28,16 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var val
+  var value
   if (js(node) && !has(node, 'src')) {
     try {
-      val = Uglify.minify(toString(node)).code
+      value = Uglify.minify(toString(node)).code
       /* istanbul ignore else - not used, but just to be sure there’s an if */
-      if (val.charAt(val.length - 1) === ';') {
-        val = val.slice(0, -1)
+      if (value.charAt(value.length - 1) === ';') {
+        value = value.slice(0, -1)
       }
 
-      fromString(node, val)
-    } catch (error) {}
+      fromString(node, value)
+    } catch (_) {}
   }
 }

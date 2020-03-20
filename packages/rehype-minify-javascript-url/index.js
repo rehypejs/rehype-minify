@@ -49,22 +49,22 @@ function visitor(node) {
 }
 
 function minify(value) {
-  var val = value
+  var result = value
   var output
 
   if (
-    typeof val === 'string' &&
-    val.slice(0, protocol.length).toLowerCase() === protocol
+    typeof result === 'string' &&
+    result.slice(0, protocol.length).toLowerCase() === protocol
   ) {
-    val = val.slice(protocol.length)
+    result = result.slice(protocol.length)
 
     try {
-      output = Uglify.minify(prefix + val + suffix)
-      val = output.code.slice(prefix.length, -suffix.length)
-    } catch (error) {}
+      output = Uglify.minify(prefix + result + suffix)
+      result = output.code.slice(prefix.length, -suffix.length)
+    } catch (_) {}
 
-    val = protocol + trim(val)
+    result = protocol + trim(result)
   }
 
-  return val
+  return result
 }

@@ -31,7 +31,7 @@ function transform(tree) {
 function visitor(node) {
   var props = node.properties
   var name = props.name
-  var val
+  var value
   var output
 
   if (
@@ -39,15 +39,15 @@ function visitor(node) {
     (name === 'msapplication-TileColor' || name === 'theme-color') &&
     has(node, 'content')
   ) {
-    val = props.content
+    value = props.content
 
-    if (typeof val === 'string') {
+    if (typeof value === 'string') {
       try {
-        output = clean.minify(prefix + val + suffix)
-        val = output.styles.slice(prefix.length, -suffix.length)
-      } catch (error) {}
+        output = clean.minify(prefix + value + suffix)
+        value = output.styles.slice(prefix.length, -suffix.length)
+      } catch (_) {}
 
-      props.content = val
+      props.content = value
     }
   }
 }

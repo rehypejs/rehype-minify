@@ -1,10 +1,8 @@
 'use strict'
 
-/* eslint-disable import/no-extraneous-dependencies */
 var test = require('tape')
 var u = require('unist-builder')
 var h = require('hastscript')
-/* eslint-enable import/no-extraneous-dependencies */
 
 var ok = require('.')
 

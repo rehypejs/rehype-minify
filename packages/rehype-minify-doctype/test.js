@@ -1,10 +1,8 @@
 'use strict'
 
-/* eslint-disable import/no-extraneous-dependencies */
 var test = require('tape')
 var rehype = require('rehype')
 var u = require('unist-builder')
-/* eslint-enable import/no-extraneous-dependencies */
 
 var min = require('.')
 

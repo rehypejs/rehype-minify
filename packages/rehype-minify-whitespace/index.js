@@ -45,21 +45,21 @@ function minify(tree, options) {
 
   function visitor(node, index, parent) {
     var head
-    var prev
+    var previous
     var next
     var value
     var start
     var end
 
     if (text(node)) {
-      prev = parent.children[index - 1]
+      previous = parent.children[index - 1]
       next = parent.children[index + 1]
 
       value = whitespace(node.value)
       end = value.length
       start = 0
 
-      if (empty(value.charAt(0)) && viable(prev)) {
+      if (empty(value.charAt(0)) && viable(previous)) {
         start++
       }
 

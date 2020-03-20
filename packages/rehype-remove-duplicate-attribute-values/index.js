@@ -28,17 +28,17 @@ function transform(tree) {
 function visitor(node) {
   var props = node.properties
   var prop
-  var val
+  var value
 
   for (prop in props) {
-    val = props[prop]
+    value = props[prop]
 
     if (
       own.call(attributes, prop) &&
       is(node, attributes[prop]) &&
-      array(val)
+      array(value)
     ) {
-      uniq(val)
+      uniq(value)
     }
   }
 }

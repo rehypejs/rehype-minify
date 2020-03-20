@@ -28,20 +28,20 @@ function transform(tree) {
 
 function visitor(node) {
   var props
-  var val
+  var value
   var output
 
   if (has(node, 'style')) {
     props = node.properties
-    val = props.style
+    value = props.style
 
-    if (typeof val === 'string') {
+    if (typeof value === 'string') {
       try {
-        output = clean.minify(prefix + val + suffix).styles
-        val = output ? output.slice(prefix.length, -suffix.length) : val
-      } catch (error) {}
+        output = clean.minify(prefix + value + suffix).styles
+        value = output ? output.slice(prefix.length, -suffix.length) : value
+      } catch (_) {}
 
-      props.style = val || null
+      props.style = value || null
     }
   }
 }

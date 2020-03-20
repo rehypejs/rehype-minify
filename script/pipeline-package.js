@@ -53,24 +53,24 @@ module.exports = trough()
     })
   })
   .use(function(ctx) {
-    var prev = JSON.parse(ctx.package)
+    var previous = JSON.parse(ctx.package)
     var pkg = require(path.join(ctx.ancestor, 'package.json'))
     var relative = path.relative(ctx.ancestor, ctx.root)
 
     var curr = {
       name: path.basename(ctx.root),
-      version: prev.version,
-      description: prev.description,
+      version: previous.version,
+      description: previous.description,
       license: pkg.license,
-      keywords: prev.keywords,
+      keywords: previous.keywords,
       repository: pkg.repository + '/tree/master/' + relative,
       bugs: pkg.bugs,
       author: pkg.author,
       contributors: ctx.contributors || [pkg.author],
-      browser: prev.browser || undefined,
-      files: ctx.files || prev.files,
-      dependencies: prev.dependencies,
-      excludeFromPreset: prev.excludeFromPreset,
+      browser: previous.browser || undefined,
+      files: ctx.files || previous.files,
+      dependencies: previous.dependencies,
+      excludeFromPreset: previous.excludeFromPreset,
       xo: false
     }
 

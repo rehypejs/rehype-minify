@@ -21,7 +21,7 @@ var cache = 'benchmark-cache'
 
 try {
   fs.mkdirSync(cache)
-} catch (error) {}
+} catch (_) {}
 
 var benchmarks = trough()
   .use(all)
@@ -134,9 +134,9 @@ function request(ctx, next) {
     https.get(url, onrequest)
   }
 
-  function onrequest(res) {
-    res.on('error', onerror)
-    res.pipe(concat(onconcat))
+  function onrequest(response) {
+    response.on('error', onerror)
+    response.pipe(concat(onconcat))
   }
 
   function onerror(err) {
@@ -206,14 +206,14 @@ function clean(ctx) {
   )
 
   function map(result) {
-    var res = {type: result.type, raw: result.rawWin, gzip: result.gzipWin}
+    var info = {type: result.type, raw: result.rawWin, gzip: result.gzipWin}
     best = !best || result.gzipSize < best.gzipSize ? result : best
-    return res
+    return info
   }
 
   function stringify(result) {
-    var res = result.type === best.type ? chalk.bold(result.type) : result.type
-    return res + ' (' + result.raw + ', ' + result.gzip + ')'
+    var info = result.type === best.type ? chalk.bold(result.type) : result.type
+    return info + ' (' + result.raw + ', ' + result.gzip + ')'
   }
 }
 

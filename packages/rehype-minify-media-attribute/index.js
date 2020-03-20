@@ -30,18 +30,18 @@ function transform(tree) {
 function visitor(node) {
   var props = node.properties
   var output
-  var val
+  var value
 
   if (is(node, ['link', 'source', 'style'])) {
-    val = props.media
+    value = props.media
 
-    if (typeof val === 'string') {
+    if (typeof value === 'string') {
       try {
-        output = clean.minify(prefix + val + suffix)
-        val = output.styles.slice(prefix.length, -suffix.length)
-      } catch (error) {}
+        output = clean.minify(prefix + value + suffix)
+        value = output.styles.slice(prefix.length, -suffix.length)
+      } catch (_) {}
 
-      props.media = val === 'all' || !val ? null : val
+      props.media = value === 'all' || !value ? null : value
     }
   }
 }
