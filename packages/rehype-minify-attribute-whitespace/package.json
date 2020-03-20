@@ -12,6 +12,10 @@
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-minify-attribute-whitespace",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/unified"
+  },
   "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com>"

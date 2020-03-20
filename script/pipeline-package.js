@@ -65,6 +65,7 @@ module.exports = trough()
       keywords: previous.keywords,
       repository: pkg.repository + '/tree/master/' + relative,
       bugs: pkg.bugs,
+      funding: pkg.funding,
       author: pkg.author,
       contributors: ctx.contributors || [pkg.author],
       browser: previous.browser || undefined,
