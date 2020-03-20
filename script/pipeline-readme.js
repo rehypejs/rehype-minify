@@ -188,10 +188,10 @@ module.exports = trough()
       ]),
       u('paragraph', [
         u('text', 'This project has a '),
-        u('linkReference', {identifier: 'coc'}, [u('text', 'Code of Conduct')]),
+        u('linkReference', {identifier: 'coc'}, [u('text', 'code of conduct')]),
         u(
           'text',
-          '.\nBy interacting with this repository, organisation, or community you agree to\nabide by its terms.'
+          '.\nBy interacting with this repository, organization, or community you agree to\nabide by its terms.'
         )
       ])
     )
@@ -255,8 +255,7 @@ module.exports = trough()
       }),
       u('definition', {
         identifier: 'chat-badge',
-        url:
-          'https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg'
+        url: 'https://img.shields.io/badge/chat-spectrum-7b16ff.svg'
       }),
       u('definition', {
         identifier: 'chat',
