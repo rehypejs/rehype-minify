@@ -41,7 +41,7 @@
     "rehype-minify-style-attribute": "^2.0.0",
     "rehype-minify-whitespace": "^4.0.0",
     "rehype-normalize-attribute-value-case": "^2.0.0",
-    "rehype-remove-comments": "^3.0.0",
+    "rehype-remove-comments": "^4.0.0",
     "rehype-remove-duplicate-attribute-values": "^2.0.0",
     "rehype-remove-empty-attribute": "^2.0.0",
     "rehype-remove-external-script-content": "^2.0.0",
