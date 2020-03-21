@@ -56,7 +56,7 @@ benchmarks.run(
     npm: 'https://www.npmjs.com/',
     nytimes: 'https://www.nytimes.com/',
     rocketchat: 'https://rocket.chat',
-    slack: 'https://slack.com/features',
+    slack: 'https://slack.com/intl/en-gb/features',
     stackoverflow: 'https://stackoverflow.com/',
     tc39: 'https://tc39.github.io/ecma262/',
     twitter: 'https://twitter.com/',
@@ -150,7 +150,9 @@ function request(ctx, next) {
       next(new Error('Empty response from ' + url))
     } else {
       ctx.file = vfile({path: fp, contents: buf})
-      vfile.write(ctx.file, next)
+      vfile.write(ctx.file, function(err) {
+        next(err)
+      })
     }
   }
 }
@@ -227,7 +229,9 @@ function process(ctx, next) {
     next()
   } else {
     fp = path.join(cache, ctx.name, ctx.type + '.html')
-    vfile.write({path: fp, contents: output}, next)
+    vfile.write({path: fp, contents: output}, function(err) {
+      next(err)
+    })
   }
 }
 
