@@ -8,6 +8,7 @@ exports.settings = {
   quoteSmart: true,
   preferUnquoted: true,
   omitOptionalTags: true,
+  bogusComments: true,
   collapseEmptyAttributes: true,
   closeEmptyElements: true,
   tightSelfClosing: true,
