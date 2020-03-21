@@ -3,11 +3,8 @@
 var fs = require('fs')
 var path = require('path')
 var zlib = require('zlib')
-var https = require('https')
+var fetch = require('node-fetch')
 var bail = require('bail')
-var chalk = require('chalk')
-var concat = require('concat-stream')
-var bytes = require('bytes')
 var unified = require('unified')
 var parse = require('rehype-parse')
 var stringify = require('rehype-stringify')
@@ -32,7 +29,6 @@ var benchmark = trough()
   .use(read)
   .use(request)
   .use(test)
-  .use(clean)
 
 var processorPipeline = trough()
   .use(process)
@@ -44,12 +40,14 @@ benchmarks.run(
     amazon: 'https://www.amazon.co.uk/',
     bbc: 'https://www.bbc.co.uk/',
     bootstrap:
-      'https://getbootstrap.com/docs/4.1/getting-started/introduction/',
+      'https://getbootstrap.com/docs/4.4/getting-started/introduction/',
+    ecmascript: 'https://tc39.es/ecma262/',
     eloquent: 'https://eloquentjavascript.net/20_node.html',
-    es6: 'https://kangax.github.io/compat-table/es6/',
+    'compat table': 'https://kangax.github.io/compat-table/es6/',
     github: 'https://github.com',
     google: 'https://www.google.com/',
     guardian: 'https://www.theguardian.com/us',
+    html: 'https://html.spec.whatwg.org',
     linkedin: 'https://www.linkedin.com/',
     microsoft: 'https://www.microsoft.com/en-us/',
     nbc: 'https://www.nbc.com/',
@@ -58,7 +56,6 @@ benchmarks.run(
     rocketchat: 'https://rocket.chat',
     slack: 'https://slack.com/intl/en-gb/features',
     stackoverflow: 'https://stackoverflow.com/',
-    tc39: 'https://tc39.github.io/ecma262/',
     twitter: 'https://twitter.com/',
     vice: 'https://www.vice.com/en_us',
     wikipedia: 'https://en.wikipedia.org/wiki/President_of_the_United_States'
@@ -67,6 +64,7 @@ benchmarks.run(
 )
 
 function all(ctx, next) {
+  var data = []
   var keys = Object.keys(ctx)
   var count = 0
 
@@ -81,27 +79,34 @@ function all(ctx, next) {
       if (err) {
         next(err)
       } else {
-        ctx[name] = {
+        data.push({
+          name: results.name,
           url: results.url,
-          input: {
-            raw: results.original.inputSize,
-            gzip: results.original.gzipSize
-          },
-          results: results.results
-        }
+          results: [results.original].concat(results.results).map(d => ({
+            type: d.type,
+            raw: d.outputSize,
+            gzip: d.gzipSize,
+            rawWin: d.rawWin,
+            gzipWin: d.gzipWin
+          }))
+        })
 
         if (count === keys.length) {
-          next()
+          next(null, data)
         }
       }
     }
   }
 }
 
-function save(ctx, next) {
-  console.log('save: ')
-  console.dir(ctx, {depth: null})
-  next()
+function save(data, next) {
+  data.sort((a, b) => a.name.localeCompare(b.name))
+
+  fs.writeFile(
+    path.join('script', 'benchmark-results.json'),
+    JSON.stringify(data, null, 2) + '\n',
+    next
+  )
 }
 
 function dir(ctx, next) {
@@ -131,22 +136,23 @@ function request(ctx, next) {
   if (ctx.file) {
     next()
   } else {
-    https.get(url, onrequest)
+    fetch(url)
+      .then(onfetch)
+      .then(onbody)
   }
 
-  function onrequest(response) {
-    response.on('error', onerror)
-    response.pipe(concat(onconcat))
+  function onfetch(response) {
+    if (response.status !== 200) {
+      throw new Error('Could not get `' + url + '` (' + response.status + ')')
+    }
+
+    return response.buffer()
   }
 
-  function onerror(err) {
-    next(new Error('Could not request `' + url + '`: ' + String(err)))
-  }
-
-  function onconcat(buf) {
+  function onbody(buf) {
     var fp = path.join(cache, ctx.name, 'index.html')
 
-    if (buf.length === 0) {
+    if (buf.length < 1024) {
       next(new Error('Empty response from ' + url))
     } else {
       ctx.file = vfile({path: fp, contents: buf})
@@ -196,29 +202,6 @@ function test(ctx, next) {
   }
 }
 
-function clean(ctx) {
-  var best
-
-  ctx.results = ctx.results.map(map)
-
-  console.log(
-    chalk.bold.green('✓ ' + ctx.name) +
-      ' ' +
-      ctx.results.map(stringify).join(', ')
-  )
-
-  function map(result) {
-    var info = {type: result.type, raw: result.rawWin, gzip: result.gzipWin}
-    best = !best || result.gzipSize < best.gzipSize ? result : best
-    return info
-  }
-
-  function stringify(result) {
-    var info = result.type === best.type ? chalk.bold(result.type) : result.type
-    return info + ' (' + result.raw + ', ' + result.gzip + ')'
-  }
-}
-
 function process(ctx, next) {
   var output = ctx.processFn(ctx.input, ctx)
   var fp
@@ -253,8 +236,6 @@ function size(ctx) {
   ctx.inputSize = ctx.input.length
   ctx.outputSize = ctx.output.length
   ctx.gzipSize = ctx.gzipped.length
-  ctx.raw = bytes(ctx.outputSize)
-  ctx.gzip = bytes(ctx.gzipSize)
   ctx.rawWin = win(original.inputSize, ctx.outputSize)
   ctx.gzipWin = win(original.gzipSize, ctx.gzipSize)
 

@@ -1,0 +1,569 @@
+[
+  {
+    "name": "amazon",
+    "url": "https://www.amazon.co.uk/",
+    "results": [
+      {
+        "type": "original",
+        "raw": 294296,
+        "gzip": 83004,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 269709,
+        "gzip": 77007,
+        "rawWin": "9.12%",
+        "gzipWin": "7.79%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 231255,
+        "gzip": 66537,
+        "rawWin": "27.26%",
+        "gzipWin": "24.75%"
+      }
+    ]
+  },
+  {
+    "name": "bbc",
+    "url": "https://www.bbc.co.uk/",
+    "results": [
+      {
+        "type": "original",
+        "raw": 270273,
+        "gzip": 41458,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 236900,
+        "gzip": 37246,
+        "rawWin": "14.09%",
+        "gzipWin": "11.31%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 233131,
+        "gzip": 36877,
+        "rawWin": "15.93%",
+        "gzipWin": "12.42%"
+      }
+    ]
+  },
+  {
+    "name": "bootstrap",
+    "url": "https://getbootstrap.com/docs/4.4/getting-started/introduction/",
+    "results": [
+      {
+        "type": "original",
+        "raw": 36026,
+        "gzip": 8600,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 29613,
+        "gzip": 8198,
+        "rawWin": "21.66%",
+        "gzipWin": "4.90%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 29509,
+        "gzip": 8184,
+        "rawWin": "22.08%",
+        "gzipWin": "5.08%"
+      }
+    ]
+  },
+  {
+    "name": "compat table",
+    "url": "https://kangax.github.io/compat-table/es6/",
+    "results": [
+      {
+        "type": "original",
+        "raw": 7112694,
+        "gzip": 215657,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 6113781,
+        "gzip": 208633,
+        "rawWin": "16.34%",
+        "gzipWin": "3.37%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 6088023,
+        "gzip": 203995,
+        "rawWin": "16.83%",
+        "gzipWin": "5.72%"
+      }
+    ]
+  },
+  {
+    "name": "ecmascript",
+    "url": "https://tc39.es/ecma262/",
+    "results": [
+      {
+        "type": "original",
+        "raw": 6585417,
+        "gzip": 768454,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 5971742,
+        "gzip": 730079,
+        "rawWin": "10.28%",
+        "gzipWin": "5.26%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 5981908,
+        "gzip": 730692,
+        "rawWin": "10.09%",
+        "gzipWin": "5.17%"
+      }
+    ]
+  },
+  {
+    "name": "eloquent",
+    "url": "https://eloquentjavascript.net/20_node.html",
+    "results": [
+      {
+        "type": "original",
+        "raw": 82012,
+        "gzip": 19587,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 77050,
+        "gzip": 19337,
+        "rawWin": "6.44%",
+        "gzipWin": "1.29%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 77043,
+        "gzip": 19343,
+        "rawWin": "6.45%",
+        "gzipWin": "1.26%"
+      }
+    ]
+  },
+  {
+    "name": "github",
+    "url": "https://github.com",
+    "results": [
+      {
+        "type": "original",
+        "raw": 135416,
+        "gzip": 35238,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 119069,
+        "gzip": 33565,
+        "rawWin": "13.73%",
+        "gzipWin": "4.98%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 120127,
+        "gzip": 33601,
+        "rawWin": "12.73%",
+        "gzipWin": "4.87%"
+      }
+    ]
+  },
+  {
+    "name": "google",
+    "url": "https://www.google.com/",
+    "results": [
+      {
+        "type": "original",
+        "raw": 14690,
+        "gzip": 6031,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 13726,
+        "gzip": 5763,
+        "rawWin": "7.02%",
+        "gzipWin": "4.65%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 13696,
+        "gzip": 5776,
+        "rawWin": "7.26%",
+        "gzipWin": "4.41%"
+      }
+    ]
+  },
+  {
+    "name": "guardian",
+    "url": "https://www.theguardian.com/us",
+    "results": [
+      {
+        "type": "original",
+        "raw": 965542,
+        "gzip": 130957,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 928217,
+        "gzip": 128189,
+        "rawWin": "4.02%",
+        "gzipWin": "2.16%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 923375,
+        "gzip": 128178,
+        "rawWin": "4.57%",
+        "gzipWin": "2.17%"
+      }
+    ]
+  },
+  {
+    "name": "html",
+    "url": "https://html.spec.whatwg.org",
+    "results": [
+      {
+        "type": "original",
+        "raw": 10726129,
+        "gzip": 1667327,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 10345815,
+        "gzip": 1579375,
+        "rawWin": "3.68%",
+        "gzipWin": "5.57%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 10343437,
+        "gzip": 1578677,
+        "rawWin": "3.70%",
+        "gzipWin": "5.62%"
+      }
+    ]
+  },
+  {
+    "name": "linkedin",
+    "url": "https://www.linkedin.com/",
+    "results": [
+      {
+        "type": "original",
+        "raw": 101546,
+        "gzip": 11029,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 74823,
+        "gzip": 9616,
+        "rawWin": "35.71%",
+        "gzipWin": "14.69%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 74673,
+        "gzip": 9586,
+        "rawWin": "35.99%",
+        "gzipWin": "15.05%"
+      }
+    ]
+  },
+  {
+    "name": "microsoft",
+    "url": "https://www.microsoft.com/en-us/",
+    "results": [
+      {
+        "type": "original",
+        "raw": 185128,
+        "gzip": 38617,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 168895,
+        "gzip": 36906,
+        "rawWin": "9.61%",
+        "gzipWin": "4.64%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 152591,
+        "gzip": 35957,
+        "rawWin": "21.32%",
+        "gzipWin": "7.40%"
+      }
+    ]
+  },
+  {
+    "name": "nbc",
+    "url": "https://www.nbc.com/",
+    "results": [
+      {
+        "type": "original",
+        "raw": 1511470,
+        "gzip": 181842,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 1444145,
+        "gzip": 179351,
+        "rawWin": "4.66%",
+        "gzipWin": "1.39%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 1441144,
+        "gzip": 179347,
+        "rawWin": "4.88%",
+        "gzipWin": "1.39%"
+      }
+    ]
+  },
+  {
+    "name": "npm",
+    "url": "https://www.npmjs.com/",
+    "results": [
+      {
+        "type": "original",
+        "raw": 30510,
+        "gzip": 9013,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 27576,
+        "gzip": 8600,
+        "rawWin": "10.64%",
+        "gzipWin": "4.80%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 27686,
+        "gzip": 8648,
+        "rawWin": "10.20%",
+        "gzipWin": "4.22%"
+      }
+    ]
+  },
+  {
+    "name": "nytimes",
+    "url": "https://www.nytimes.com/",
+    "results": [
+      {
+        "type": "original",
+        "raw": 1482326,
+        "gzip": 135679,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 1383246,
+        "gzip": 131360,
+        "rawWin": "7.16%",
+        "gzipWin": "3.29%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 1383369,
+        "gzip": 131383,
+        "rawWin": "7.15%",
+        "gzipWin": "3.27%"
+      }
+    ]
+  },
+  {
+    "name": "rocketchat",
+    "url": "https://rocket.chat",
+    "results": [
+      {
+        "type": "original",
+        "raw": 56676,
+        "gzip": 12977,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 42444,
+        "gzip": 11449,
+        "rawWin": "33.53%",
+        "gzipWin": "13.35%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 42328,
+        "gzip": 11451,
+        "rawWin": "33.90%",
+        "gzipWin": "13.33%"
+      }
+    ]
+  },
+  {
+    "name": "slack",
+    "url": "https://slack.com/intl/en-gb/features",
+    "results": [
+      {
+        "type": "original",
+        "raw": 116278,
+        "gzip": 27993,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 110378,
+        "gzip": 27362,
+        "rawWin": "5.35%",
+        "gzipWin": "2.31%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 110461,
+        "gzip": 27393,
+        "rawWin": "5.27%",
+        "gzipWin": "2.19%"
+      }
+    ]
+  },
+  {
+    "name": "stackoverflow",
+    "url": "https://stackoverflow.com/",
+    "results": [
+      {
+        "type": "original",
+        "raw": 112411,
+        "gzip": 19876,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 85654,
+        "gzip": 18006,
+        "rawWin": "31.24%",
+        "gzipWin": "10.39%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 112411,
+        "gzip": 19876,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      }
+    ]
+  },
+  {
+    "name": "twitter",
+    "url": "https://twitter.com/",
+    "results": [
+      {
+        "type": "original",
+        "raw": 310545,
+        "gzip": 55699,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 285065,
+        "gzip": 53851,
+        "rawWin": "8.94%",
+        "gzipWin": "3.43%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 259452,
+        "gzip": 52517,
+        "rawWin": "19.69%",
+        "gzipWin": "6.06%"
+      }
+    ]
+  },
+  {
+    "name": "vice",
+    "url": "https://www.vice.com/en_us",
+    "results": [
+      {
+        "type": "original",
+        "raw": 306900,
+        "gzip": 50078,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 281543,
+        "gzip": 48111,
+        "rawWin": "9.01%",
+        "gzipWin": "4.09%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 281850,
+        "gzip": 48136,
+        "rawWin": "8.89%",
+        "gzipWin": "4.03%"
+      }
+    ]
+  },
+  {
+    "name": "wikipedia",
+    "url": "https://en.wikipedia.org/wiki/President_of_the_United_States",
+    "results": [
+      {
+        "type": "original",
+        "raw": 594705,
+        "gzip": 114177,
+        "rawWin": "0.00%",
+        "gzipWin": "0.00%"
+      },
+      {
+        "type": "rehype-minify",
+        "raw": 560716,
+        "gzip": 111945,
+        "rawWin": "6.06%",
+        "gzipWin": "1.99%"
+      },
+      {
+        "type": "html-minifier",
+        "raw": 557373,
+        "gzip": 112050,
+        "rawWin": "6.70%",
+        "gzipWin": "1.90%"
+      }
+    ]
+  }
+]
