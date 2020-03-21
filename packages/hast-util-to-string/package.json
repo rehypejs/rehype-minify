@@ -1,6 +1,6 @@
 {
   "name": "hast-util-to-string",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "hast utility to get the plain-text value of a node",
   "license": "MIT",
   "keywords": [

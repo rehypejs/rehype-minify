@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-css-style",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "rehype plugin to minify `style` elements",
   "license": "MIT",
   "keywords": [

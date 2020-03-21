@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-attribute-whitespace",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "rehype plugin to minify white-space in attributes",
   "license": "MIT",
   "keywords": [

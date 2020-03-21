@@ -1,6 +1,6 @@
 {
   "name": "hast-util-is-body-ok-link",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "hast utility to check if a link element is “Body OK”",
   "license": "MIT",
   "keywords": [
