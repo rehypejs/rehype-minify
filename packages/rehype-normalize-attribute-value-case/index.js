@@ -1,6 +1,6 @@
 /**
  * @fileoverview
- *   Normalise casing of attribute values.
+ *   Normalize casing of attribute values.
  *
  *   This optimizes for repetition-based compression (such as GZip).
  * @example

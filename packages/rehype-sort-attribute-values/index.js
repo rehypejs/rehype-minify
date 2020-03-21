@@ -2,7 +2,7 @@
  * @fileoverview
  *   Sort attribute values.
  *
- *   This optimises for repetition-based compression (such as GZip).
+ *   This optimizes for repetition-based compression (such as GZip).
  * @example
  *   <div class="qux quux foo bar"></div>
  */

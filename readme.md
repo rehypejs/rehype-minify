@@ -105,7 +105,7 @@ Use of `rehype-preset-minify` is *safe* by default, if the tree is already safe.
 Other plugins can open you up to a [cross-site scripting (XSS)][xss] attack.
 Use [`rehype-sanitize`][sanitize] to make the tree safe.
 
-To further optimise the result disregarding security, use the extra plugins
+To further optimize the result disregarding security, use the extra plugins
 above and pass [`allowDangerousCharacters` to `rehype-stringify`][stringify].
 
 ## Related
