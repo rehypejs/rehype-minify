@@ -1,6 +1,6 @@
 {
   "name": "rehype-preset-minify",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "rehype preset to minify and mangle HTML",
   "license": "MIT",
   "keywords": [
