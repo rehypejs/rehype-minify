@@ -93,7 +93,7 @@ function minify(tree, options) {
       end = value.length
       start = 0
 
-      if (inlineElements.indexOf(parent.tagName) === -1) {
+      if (!isInlineElement(parent)) {
         if (empty(value.charAt(0)) && viable(previous)) {
           start++
         }
@@ -157,4 +157,8 @@ function collapseToNewLines(value) {
 
 function empty(character) {
   return character === ' ' || character === '\n'
+}
+
+function isInlineElement(element) {
+  return element && element.tagName && inlineElements.indexOf(element.tagName) !== -1
 }
