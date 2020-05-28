@@ -39,7 +39,7 @@ test('rehype-minify-whitespace', function(t) {
         ' ',
         h('meta', {itemProp: true})
       ]),
-      h('p', [h('a', {href: 'example.com'}, 'baz'), ' ', h('em', 'qux')])
+      h('p', [h('a', {href: 'example.com'}, ' baz'), ' ', h('em', ' qux')])
     ])
   )
 
@@ -96,7 +96,30 @@ test('rehype-minify-whitespace', function(t) {
         '\n',
         h('meta', {itemProp: true})
       ]),
-      h('p', [h('a', {href: 'example.com'}, 'baz'), ' ', h('em', 'qux')])
+      h('p', [h('a', {href: 'example.com'}, ' baz'), ' ', h('em', ' qux')])
+    ])
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(
+        h('main', [
+          h('p', [
+            h('strong', 'foo '),
+            h('em', 'bar '),
+            h('a', {href: 'example.com'}, ' baz '),
+            h('em', ' qux ')
+          ])
+        ])
+      ),
+    h('main', [
+      h('p', [
+        h('strong', 'foo '),
+        h('em', 'bar '),
+        h('a', {href: 'example.com'}, ' baz '),
+        h('em', ' qux ')
+      ])
     ])
   )
 
