@@ -6,23 +6,17 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-minify-url', function(t) {
-  t.throws(function() {
-    rehype()
-      .use(min)
-      .freeze()
+test('rehype-minify-url', function (t) {
+  t.throws(function () {
+    rehype().use(min).freeze()
   }, /^Error: Missing absolute `from` in options$/)
 
-  t.throws(function() {
-    rehype()
-      .use(min, {from: '/'})
-      .freeze()
+  t.throws(function () {
+    rehype().use(min, {from: '/'}).freeze()
   }, /^Error: Missing absolute `from` in options$/)
 
-  t.throws(function() {
-    rehype()
-      .use(min, {from: '/'})
-      .freeze()
+  t.throws(function () {
+    rehype().use(min, {from: '/'}).freeze()
   }, /^Error: Missing absolute `from` in options$/)
 
   var options = {from: 'http://example.com/one/alpha/'}

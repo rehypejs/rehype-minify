@@ -7,7 +7,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-remove-meta-http-equiv', function(t) {
+test('rehype-remove-meta-http-equiv', function (t) {
   t.deepEqual(
     rehype()
       .use(min)

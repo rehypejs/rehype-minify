@@ -5,7 +5,7 @@ var rehype = require('rehype')
 
 var min = require('.')
 
-test('rehype-sort-attributes', function(t) {
+test('rehype-sort-attributes', function (t) {
   t.equal(
     rehype()
       .use(min)

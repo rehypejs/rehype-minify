@@ -7,7 +7,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-concat-javascript', function(t) {
+test('rehype-concat-javascript', function (t) {
   t.deepEqual(
     rehype()
       .use(min)

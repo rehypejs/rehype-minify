@@ -6,7 +6,7 @@ var u = require('unist-builder')
 
 var min = require('.')
 
-test('rehype-minify-doctype', function(t) {
+test('rehype-minify-doctype', function (t) {
   t.deepEqual(
     rehype()
       .use(min)

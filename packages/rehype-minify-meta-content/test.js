@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-minify-meta-content', function(t) {
+test('rehype-minify-meta-content', function (t) {
   t.deepEqual(
     rehype()
       .use(min)
@@ -33,12 +33,7 @@ test('rehype-minify-meta-content', function(t) {
     h('meta', {name: 'viewport', content: true})
   )
 
-  t.deepEqual(
-    rehype()
-      .use(min)
-      .runSync(h('meta')),
-    h('meta')
-  )
+  t.deepEqual(rehype().use(min).runSync(h('meta')), h('meta'))
 
   t.end()
 })

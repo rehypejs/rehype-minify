@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-minify-whitespace', function(t) {
+test('rehype-minify-whitespace', function (t) {
   t.deepEqual(
     rehype()
       .use(min)

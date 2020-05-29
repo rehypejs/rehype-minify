@@ -20,20 +20,11 @@ try {
   fs.mkdirSync(cache)
 } catch (_) {}
 
-var benchmarks = trough()
-  .use(all)
-  .use(save)
+var benchmarks = trough().use(all).use(save)
 
-var benchmark = trough()
-  .use(dir)
-  .use(read)
-  .use(request)
-  .use(test)
+var benchmark = trough().use(dir).use(read).use(request).use(test)
 
-var processorPipeline = trough()
-  .use(process)
-  .use(gzip)
-  .use(size)
+var processorPipeline = trough().use(process).use(gzip).use(size)
 
 benchmarks.run(
   {
@@ -82,7 +73,7 @@ function all(ctx, next) {
         data.push({
           name: results.name,
           url: results.url,
-          results: [results.original].concat(results.results).map(d => ({
+          results: [results.original].concat(results.results).map((d) => ({
             type: d.type,
             raw: d.outputSize,
             gzip: d.gzipSize,
@@ -136,9 +127,7 @@ function request(ctx, next) {
   if (ctx.file) {
     next()
   } else {
-    fetch(url)
-      .then(onfetch)
-      .then(onbody)
+    fetch(url).then(onfetch).then(onbody)
   }
 
   function onfetch(response) {
@@ -156,7 +145,7 @@ function request(ctx, next) {
       next(new Error('Empty response from ' + url))
     } else {
       ctx.file = vfile({path: fp, contents: buf})
-      vfile.write(ctx.file, function(err) {
+      vfile.write(ctx.file, function (err) {
         next(err)
       })
     }
@@ -212,7 +201,7 @@ function process(ctx, next) {
     next()
   } else {
     fp = path.join(cache, ctx.name, ctx.type + '.html')
-    vfile.write({path: fp, contents: output}, function(err) {
+    vfile.write({path: fp, contents: output}, function (err) {
       next(err)
     })
   }

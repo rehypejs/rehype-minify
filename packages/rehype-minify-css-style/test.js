@@ -6,11 +6,9 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-minify-css-style', function(t) {
+test('rehype-minify-css-style', function (t) {
   t.deepEqual(
-    rehype()
-      .use(min)
-      .runSync(h('style', '* { color: #ff0000; }')),
+    rehype().use(min).runSync(h('style', '* { color: #ff0000; }')),
     h('style', '*{color:red}')
   )
 
@@ -22,9 +20,7 @@ test('rehype-minify-css-style', function(t) {
   )
 
   t.deepEqual(
-    rehype()
-      .use(min)
-      .runSync(h('style', '* { color }')),
+    rehype().use(min).runSync(h('style', '* { color }')),
     h('style', '* { color }')
   )
 

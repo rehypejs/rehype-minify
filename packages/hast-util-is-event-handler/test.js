@@ -4,7 +4,7 @@ var test = require('tape')
 
 var ok = require('.')
 
-test('hast-util-is-event-handler', function(t) {
+test('hast-util-is-event-handler', function (t) {
   t.ok(ok('oncut'), 'oncut')
   t.ok(ok('onend'), 'onend')
   t.ok(ok('onpushsubscriptionchange'), 'pushsubscriptionchange')

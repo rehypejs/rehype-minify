@@ -5,16 +5,16 @@ var vfile = require('to-vfile')
 var trough = require('trough')
 
 var filePipeline = trough()
-  .use(function(ctx, next) {
-    vfile.read(path.join(ctx.root, 'index.js'), function(err, file) {
+  .use(function (ctx, next) {
+    vfile.read(path.join(ctx.root, 'index.js'), function (err, file) {
       ctx.file = file
       next(err)
     })
   })
-  .use(function(ctx) {
+  .use(function (ctx) {
     var doc = ctx.file.toString()
 
-    ctx.plugins.forEach(function(name) {
+    ctx.plugins.forEach(function (name) {
       var pack = require(path.join(
         ctx.ancestor,
         'packages',
@@ -33,8 +33,8 @@ var filePipeline = trough()
     })
   })
 
-module.exports = trough().use(function(ctx, next) {
-  filePipeline.run(ctx, function(err) {
+module.exports = trough().use(function (ctx, next) {
+  filePipeline.run(ctx, function (err) {
     next(err)
   })
 })

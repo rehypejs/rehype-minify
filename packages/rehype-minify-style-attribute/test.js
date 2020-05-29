@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-minify-style-attribute', function(t) {
+test('rehype-minify-style-attribute', function (t) {
   t.deepEqual(
     rehype()
       .use(min)
@@ -67,12 +67,7 @@ test('rehype-minify-style-attribute', function(t) {
     h('i', {style: '!important'})
   )
 
-  t.deepEqual(
-    rehype()
-      .use(min)
-      .runSync(h('i')),
-    h('i')
-  )
+  t.deepEqual(rehype().use(min).runSync(h('i')), h('i'))
 
   t.end()
 })

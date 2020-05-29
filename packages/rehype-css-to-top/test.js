@@ -7,7 +7,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-css-to-top', function(t) {
+test('rehype-css-to-top', function (t) {
   t.deepEqual(
     rehype()
       .use(min)

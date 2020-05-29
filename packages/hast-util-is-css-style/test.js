@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var ok = require('.')
 
-test('hast-util-is-css-style', function(t) {
+test('hast-util-is-css-style', function (t) {
   t.equal(ok(h('style')), true, 'yes - a `style` node')
   t.equal(ok(h('style', {type: null})), true, 'yes - `style` without `type`')
   t.equal(

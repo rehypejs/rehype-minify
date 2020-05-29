@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var ok = require('.')
 
-test('hast-util-is-javascript', function(t) {
+test('hast-util-is-javascript', function (t) {
   t.ok(ok(h('script')), 'yes - for `script`')
   t.ok(ok(h('script', {src: 'index.js'})), 'yes - for `script` with src')
   t.ok(

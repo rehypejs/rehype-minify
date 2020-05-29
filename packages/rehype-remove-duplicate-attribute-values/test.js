@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-remove-duplicate-attribute-values', function(t) {
+test('rehype-remove-duplicate-attribute-values', function (t) {
   t.deepEqual(
     rehype()
       .use(min)

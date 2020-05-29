@@ -6,11 +6,9 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-remove-external-script-content', function(t) {
+test('rehype-remove-external-script-content', function (t) {
   t.deepEqual(
-    rehype()
-      .use(min)
-      .runSync(h('script', 'alert(true)')),
+    rehype().use(min).runSync(h('script', 'alert(true)')),
     h('script', 'alert(true)')
   )
 

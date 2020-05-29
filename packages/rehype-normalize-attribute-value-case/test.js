@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-normalize-attribute-value-case', function(t) {
+test('rehype-normalize-attribute-value-case', function (t) {
   t.deepEqual(
     rehype()
       .use(min)

@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-minify-meta-color', function(t) {
+test('rehype-minify-meta-color', function (t) {
   t.deepEqual(
     rehype()
       .use(min)

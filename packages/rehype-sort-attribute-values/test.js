@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-sort-attribute-values', function(t) {
+test('rehype-sort-attribute-values', function (t) {
   t.deepEqual(
     rehype()
       .use(min)
@@ -29,33 +29,13 @@ test('rehype-sort-attribute-values', function(t) {
     h('.foobar', [h('.foobar.foo')])
   )
 
-  t.deepEqual(
-    rehype()
-      .use(min)
-      .runSync(h('.foo.foo')),
-    h('.foo.foo')
-  )
+  t.deepEqual(rehype().use(min).runSync(h('.foo.foo')), h('.foo.foo'))
 
-  t.deepEqual(
-    rehype()
-      .use(min)
-      .runSync(h('.foo.foob')),
-    h('.foo.foob')
-  )
+  t.deepEqual(rehype().use(min).runSync(h('.foo.foob')), h('.foo.foob'))
 
-  t.deepEqual(
-    rehype()
-      .use(min)
-      .runSync(h('.foob.foo')),
-    h('.foo.foob')
-  )
+  t.deepEqual(rehype().use(min).runSync(h('.foob.foo')), h('.foo.foob'))
 
-  t.deepEqual(
-    rehype()
-      .use(min)
-      .runSync(h('.foob.fooa')),
-    h('.fooa.foob')
-  )
+  t.deepEqual(rehype().use(min).runSync(h('.foob.fooa')), h('.fooa.foob'))
 
   t.end()
 })

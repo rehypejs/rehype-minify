@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var ok = require('.')
 
-test('hast-util-is-css-link', function(t) {
+test('hast-util-is-css-link', function (t) {
   t.equal(
     ok(h('link', {rel: ['stylesheet']})),
     true,

@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-remove-script-type-javascript', function(t) {
+test('rehype-remove-script-type-javascript', function (t) {
   t.deepEqual(
     rehype()
       .use(min)

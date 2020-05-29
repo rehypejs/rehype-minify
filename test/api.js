@@ -9,13 +9,13 @@ var hidden = require('is-hidden')
 var trim = require('trim-trailing-lines')
 var minify = require('../packages/rehype-preset-minify')
 
-test('plugin', function(t) {
+test('plugin', function (t) {
   var root = path.join(__dirname, 'fixtures')
   var fixtures = fs.readdirSync(root).filter(negate(hidden))
 
   t.plan(fixtures.length * 2)
 
-  fixtures.forEach(function(name) {
+  fixtures.forEach(function (name) {
     var fp = path.join(root, name)
     var input = fs.readFileSync(path.join(fp, 'input.html'), 'utf8')
     var output = fs.readFileSync(path.join(fp, 'output.html'), 'utf8')
@@ -27,7 +27,7 @@ test('plugin', function(t) {
 
     rehype()
       .use(minify, config)
-      .process(input, function(err, doc) {
+      .process(input, function (err, doc) {
         t.ifErr(err, 'shouldn’t fail')
         t.equal(String(doc), trim(output), name)
       })

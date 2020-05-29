@@ -15,17 +15,17 @@ var vfile = require('to-vfile')
 var remarkSettings = require('remark-preset-wooorm').settings
 
 module.exports = trough()
-  .use(function(ctx, next) {
-    vfile.read(path.join(ctx.root, 'readme.md'), function(err, file) {
+  .use(function (ctx, next) {
+    vfile.read(path.join(ctx.root, 'readme.md'), function (err, file) {
       ctx.readme = file
       next(err)
     })
   })
-  .use(function(ctx, next) {
+  .use(function (ctx, next) {
     var others = []
     var core = []
 
-    ctx.plugins.forEach(function(name) {
+    ctx.plugins.forEach(function (name) {
       var pack = require(path.join(ctx.root, 'packages', name, 'package.json'))
       ;(pack.excludeFromPreset ? others : core).push(name)
     })
@@ -35,7 +35,7 @@ module.exports = trough()
       .use(plugin('plugins-core', core))
       .use(plugin('plugins-other', others))
       .use(benchmark)
-      .process(ctx.readme, function(err) {
+      .process(ctx.readme, function (err) {
         next(err)
       })
 
@@ -56,7 +56,7 @@ module.exports = trough()
           u(
             'list',
             {ordered: false},
-            list.map(function(name) {
+            list.map(function (name) {
               return u('listItem', [
                 u('link', {url: './packages/' + name}, [u('inlineCode', name)])
               ])
@@ -92,7 +92,7 @@ module.exports = trough()
         var foot = [h('th', {scope: 'row'}, 'total')]
         var sum = {}
 
-        var body = data.map(d => {
+        var body = data.map((d) => {
           var cells = [
             h(
               'th',
@@ -101,14 +101,14 @@ module.exports = trough()
             )
           ]
 
-          types.forEach(type => {
+          types.forEach((type) => {
             var best
 
-            d.results.slice(1).forEach(r => {
+            d.results.slice(1).forEach((r) => {
               best = !best || r[type] < best[type] ? r : best
             })
 
-            d.results.forEach(r => {
+            d.results.forEach((r) => {
               var key = type + ':' + r.type
               var value =
                 r.type === 'original' ? bytes(r[type]) : r[type + 'Win']
@@ -130,13 +130,13 @@ module.exports = trough()
           return h('tr', cells)
         })
 
-        types.forEach(type => {
+        types.forEach((type) => {
           var head = data[0]
-          var cells = head.results.map(d => h('th', d.type))
+          var cells = head.results.map((d) => h('th', d.type))
           h1.push(h('th', {colSpan: cells.length}, type))
           h2 = h2.concat(cells)
           foot = foot.concat(
-            head.results.map(d =>
+            head.results.map((d) =>
               h('td', {align: 'right'}, bytes(sum[type + ':' + d.type]))
             )
           )
@@ -152,19 +152,17 @@ module.exports = trough()
             ])
           )
 
-        var fragment = unified()
-          .use(stringify)
-          .stringify(tree)
+        var fragment = unified().use(stringify).stringify(tree)
 
         return [start, u('html', fragment), end]
       }
     }
   })
-  .use(function(ctx, next) {
-    fs.writeFile(ctx.readme.path, ctx.readme, function(err) {
+  .use(function (ctx, next) {
+    fs.writeFile(ctx.readme.path, ctx.readme, function (err) {
       next(err)
     })
   })
-  .use(function(ctx) {
+  .use(function (ctx) {
     ctx.readme.stored = true
   })

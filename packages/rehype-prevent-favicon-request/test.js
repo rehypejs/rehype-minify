@@ -7,7 +7,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-prevent-favicon-request', function(t) {
+test('rehype-prevent-favicon-request', function (t) {
   t.deepEqual(
     rehype()
       .use(min)
@@ -96,12 +96,7 @@ test('rehype-prevent-favicon-request', function(t) {
     ])
   )
 
-  t.deepEqual(
-    rehype()
-      .use(min)
-      .runSync(u('root', [])),
-    u('root', [])
-  )
+  t.deepEqual(rehype().use(min).runSync(u('root', [])), u('root', []))
 
   t.end()
 })

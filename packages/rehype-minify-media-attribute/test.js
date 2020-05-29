@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-minify-media-attribute', function(t) {
+test('rehype-minify-media-attribute', function (t) {
   t.deepEqual(
     rehype()
       .use(min)
@@ -40,12 +40,7 @@ test('rehype-minify-media-attribute', function(t) {
     h('source', {media: '!important', src: 'pear.jpg'})
   )
 
-  t.deepEqual(
-    rehype()
-      .use(min)
-      .runSync(h('div')),
-    h('div')
-  )
+  t.deepEqual(rehype().use(min).runSync(h('div')), h('div'))
 
   t.deepEqual(
     rehype()

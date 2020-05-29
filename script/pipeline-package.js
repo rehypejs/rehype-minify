@@ -9,22 +9,20 @@ var trough = require('trough')
 var uniq = require('uniq')
 
 module.exports = trough()
-  .use(function(ctx, next) {
-    vfile.read(path.join(ctx.root, 'package.json'), function(err, file) {
+  .use(function (ctx, next) {
+    vfile.read(path.join(ctx.root, 'package.json'), function (err, file) {
       ctx.package = file
       next(err)
     })
   })
-  .use(function(ctx, next) {
+  .use(function (ctx, next) {
     var fp = path.relative(ctx.ancestor, ctx.root)
     var cmd = 'git log --all --format="%cN <%cE>" "' + fp + '"'
 
-    exec(cmd, function(err, stdout) {
+    exec(cmd, function (err, stdout) {
       if (err) return next(err)
 
-      ctx.contributors = uniq(stdout.split('\n'))
-        .sort()
-        .filter(Boolean)
+      ctx.contributors = uniq(stdout.split('\n')).sort().filter(Boolean)
 
       if (ctx.contributors.length === 0) {
         ctx.contributors = null
@@ -33,14 +31,14 @@ module.exports = trough()
       next()
     })
   })
-  .use(function(ctx, next) {
-    findDown.all(['.js', '.json'], ctx.root, function(err, files) {
+  .use(function (ctx, next) {
+    findDown.all(['.js', '.json'], ctx.root, function (err, files) {
       if (files) {
         ctx.files = files
-          .map(function(file) {
+          .map(function (file) {
             return path.relative(ctx.root, file.path)
           })
-          .filter(function(name) {
+          .filter(function (name) {
             return name !== 'package.json' && !/(example|test)/.test(name)
           })
           .sort()
@@ -49,7 +47,7 @@ module.exports = trough()
       next(err)
     })
   })
-  .use(function(ctx) {
+  .use(function (ctx) {
     var previous = JSON.parse(ctx.package)
     var pkg = require(path.join(ctx.ancestor, 'package.json'))
     var relative = path.relative(ctx.ancestor, ctx.root)
@@ -74,9 +72,9 @@ module.exports = trough()
 
     ctx.package.contents = JSON.stringify(curr, 0, 2) + '\n'
   })
-  .use(function(ctx, next) {
+  .use(function (ctx, next) {
     fs.writeFile(ctx.package.path, ctx.package.contents, next)
   })
-  .use(function(ctx) {
+  .use(function (ctx) {
     ctx.package.stored = true
   })

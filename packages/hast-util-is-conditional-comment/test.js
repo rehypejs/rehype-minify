@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var ok = require('.')
 
-test('hast-util-is-conditional-comment', function(t) {
+test('hast-util-is-conditional-comment', function (t) {
   ;[
     '[if IE]>…<![endif]',
     '[if IE 6]>…<![endif]',
@@ -19,7 +19,7 @@ test('hast-util-is-conditional-comment', function(t) {
     '[if gt IE 6]>…<![endif]',
     '[if !IE]>',
     '<![endif]'
-  ].forEach(function(d) {
+  ].forEach(function (d) {
     t.equal(ok(u('comment', d)), true, 'yes - <!--' + d + '-->')
   })
 

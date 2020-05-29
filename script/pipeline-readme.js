@@ -19,14 +19,14 @@ var pkg = require(path.join(__dirname, '..', 'package'))
 var proc = remark().use({settings: preset.settings})
 
 module.exports = trough()
-  .use(function(ctx, next) {
-    vfile.read(path.join(ctx.root, 'package.json'), function(err, file) {
+  .use(function (ctx, next) {
+    vfile.read(path.join(ctx.root, 'package.json'), function (err, file) {
       ctx.config = file ? JSON.parse(String(file)) : {}
       next(err)
     })
   })
-  .use(function(ctx, next) {
-    vfile.read(path.join(ctx.root, 'index.js'), function(err, script) {
+  .use(function (ctx, next) {
+    vfile.read(path.join(ctx.root, 'index.js'), function (err, script) {
       var comments
 
       if (err) {
@@ -35,7 +35,7 @@ module.exports = trough()
         ctx.script = script
 
         comments = dox.parseComments(String(script))[0] || {}
-        ;(comments.tags || []).forEach(function(comment) {
+        ;(comments.tags || []).forEach(function (comment) {
           ctx.config[comment.type] = comment.string
         })
 
@@ -43,23 +43,17 @@ module.exports = trough()
       }
     })
   })
-  .use(function(ctx) {
+  .use(function (ctx) {
     var config = ctx.config
     var overview = config.fileoverview || config.description
     var licensee = author(config.author)
     var example = config.example
     var repo = pkg.repository
-    var org = repo
-      .split('/')
-      .slice(0, -1)
-      .join('/')
+    var org = repo.split('/').slice(0, -1).join('/')
     var master = repo + '/blob/master'
     var health = org + '/.github'
     var hMaster = health + '/blob/master'
-    var slug = repo
-      .split('/')
-      .slice(-2)
-      .join('/')
+    var slug = repo.split('/').slice(-2).join('/')
     var options
 
     var tree = [
@@ -284,9 +278,9 @@ module.exports = trough()
     ctx.readme = vfile(path.join(ctx.root, 'readme.md'))
     ctx.readme.contents = proc.stringify(u('root', tree), ctx.readme)
   })
-  .use(function(ctx, next) {
+  .use(function (ctx, next) {
     fs.writeFile(ctx.readme.path, String(ctx.readme), next)
   })
-  .use(function(ctx) {
+  .use(function (ctx) {
     ctx.readme.stored = true
   })

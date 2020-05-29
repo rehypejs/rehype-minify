@@ -5,7 +5,7 @@ var u = require('unist-builder')
 
 var toString = require('.')
 
-test('hast-util-to-string', function(t) {
+test('hast-util-to-string', function (t) {
   t.deepEqual(toString(u('comment', 'foo')), 'foo', 'should stringify comments')
 
   t.deepEqual(toString(u('text', 'foo')), 'foo', 'should stringify texts')

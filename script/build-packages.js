@@ -15,7 +15,7 @@ var presets = require('./pipeline-presets')
 var rootPath = path.join(__dirname, '..')
 var packages = path.join(rootPath, 'packages')
 
-fs.readdir(packages, function(err, basenames) {
+fs.readdir(packages, function (err, basenames) {
   var plugins
 
   bail(err)
@@ -24,12 +24,12 @@ fs.readdir(packages, function(err, basenames) {
   plugins = basenames.filter(plugin)
 
   // Generate all packages.
-  basenames.forEach(function(basename) {
+  basenames.forEach(function (basename) {
     trough()
-      .use(function(ctx, next) {
+      .use(function (ctx, next) {
         pack.run(ctx, next)
       })
-      .use(function(ctx, next) {
+      .use(function (ctx, next) {
         ;(preset(basename) ? presets : readme).run(ctx, next)
       })
       .run(

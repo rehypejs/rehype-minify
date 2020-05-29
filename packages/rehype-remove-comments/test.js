@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-remove-comments', function(t) {
+test('rehype-remove-comments', function (t) {
   t.deepEqual(
     rehype()
       .use(min)

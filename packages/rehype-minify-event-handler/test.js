@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var min = require('.')
 
-test('rehype-minify-event-handler', function(t) {
+test('rehype-minify-event-handler', function (t) {
   /* eslint-disable no-script-url */
   t.deepEqual(
     rehype()

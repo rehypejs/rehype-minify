@@ -6,7 +6,7 @@ var h = require('hastscript')
 
 var ok = require('.')
 
-test('hast-util-is-body-ok-link', function(t) {
+test('hast-util-is-body-ok-link', function (t) {
   t.equal(
     ok(h('link', {itemProp: 'foo'})),
     true,
