@@ -159,7 +159,7 @@ module.exports = trough()
     }
   })
   .use(function (ctx, next) {
-    fs.writeFile(ctx.readme.path, ctx.readme, function (err) {
+    fs.writeFile(ctx.readme.path, ctx.readme.contents, function (err) {
       next(err)
     })
   })
