@@ -24,40 +24,6 @@ var list = require('./list.json')
 
 var text = convert('text')
 
-var inlineElements = [
-  'b',
-  'big',
-  'i',
-  'small',
-  'tt',
-  'abbr',
-  'acronym',
-  'cite',
-  'code',
-  'dfn',
-  'em',
-  'kbd',
-  'strong',
-  'samp',
-  'var',
-  'a',
-  'bdo',
-  'br',
-  'img',
-  'map',
-  'object',
-  'q',
-  'script',
-  'span',
-  'sub',
-  'sup',
-  'button',
-  'input',
-  'label',
-  'select',
-  'textarea'
-]
-
 module.exports = collapse
 
 function collapse(options) {
@@ -93,7 +59,7 @@ function minify(tree, options) {
       end = value.length
       start = 0
 
-      if (!isInlineElement(parent)) {
+      if (!collapsable(parent)) {
         if (empty(value.charAt(0)) && viable(previous)) {
           start++
         }
@@ -157,8 +123,4 @@ function collapseToNewLines(value) {
 
 function empty(character) {
   return character === ' ' || character === '\n'
-}
-
-function isInlineElement(element) {
-  return element && element.tagName && inlineElements.indexOf(element.tagName) !== -1
 }
