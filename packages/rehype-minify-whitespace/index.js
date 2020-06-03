@@ -56,10 +56,8 @@ function minify(tree, options) {
       previous = parent.children[index - 1]
       next = parent.children[index + 1]
 
-      console.log(`before text "${node.value}"`)
       value = trimLeft(node.value, previous)
       value = trimRight(value, next)
-      console.log(`after text "${value}"`)
 
       // Remove the node if it’s collapsed entirely.
       if (!value) {
@@ -87,10 +85,8 @@ function minify(tree, options) {
             next = node.children[i + 1]
           }
 
-          console.log(`before child "${child.value}"`)
           child.value = trimLeft(child.value, previous)
           child.value = trimRight(child.value, next)
-          console.log(`after child "${child.value}"`)
 
           // Remove the node if it’s collapsed entirely.
           if (!child.value) {
