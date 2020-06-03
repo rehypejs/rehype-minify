@@ -119,6 +119,17 @@ function minify(tree, options) {
     return !node || inside || !collapsable(node)
   }
 
+  function findLastTextNode(element) {
+    var children = element.children
+    var child
+    while (children && children.length > 0) {
+      child = children[children.length - 1]
+      children = child.children
+    }
+
+    return child && text(child) ? child : null
+  }
+
   function trimLeft(value, previous) {
     value = whitespace(value)
     var end = value.length
@@ -129,10 +140,13 @@ function minify(tree, options) {
         start++
       } else {
         // if previous element is inline, check if last child has a trailing space
-        if (element(previous, list) && previous.children && previous.children.length > 0) {
-          var v = whitespace(previous.children[previous.children.length - 1].value)
-          if (v && empty(v.charAt(v.length - 1))) {
-            start++
+        if (element(previous, list)) {
+          var textNode = findLastTextNode(previous)
+          if (textNode) {
+            var v = whitespace(textNode.value)
+            if (v && empty(v.charAt(v.length - 1))) {
+              start++
+            }
           }
         } else {
           // if previous is a text, check if it has a trailing space
@@ -149,6 +163,17 @@ function minify(tree, options) {
     return value.slice(start, end)
   }
   
+  function findFirstTextNode(element) {
+    var children = element.children
+    var child
+    while (children && children.length > 0) {
+      child = children[0]
+      children = child.children
+    }
+
+    return child && text(child) ? child : null
+  }
+
   function trimRight(value, next) {
     value = whitespace(value)
     var end = value.length
@@ -159,10 +184,13 @@ function minify(tree, options) {
         end--
       } else {
         // if previous element is inline, check if first child has a leading space
-        if (element(next, list) && next.children && next.children.length > 0) {
-          var v = whitespace(next.children[0].value)
-          if (v && empty(v.charAt(0))) {
-            end--
+        if (element(next, list)) {
+          var textNode = findFirstTextNode(next);
+          if (textNode) {
+            var v = whitespace(textNode.value)
+            if (v && empty(v.charAt(0))) {
+              end--
+            }
           }
         } else {
           // if next is a text, check if it has a leading space

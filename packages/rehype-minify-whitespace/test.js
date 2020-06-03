@@ -259,27 +259,37 @@ test('rehype-minify-whitespace', function(t) {
     ])
   )
 
-  // "optimise" span spacing
-  // t.deepEqual(
-  //   rehype()
-  //     .use(min)
-  //     .runSync(
-  //       h('main', [
-  //         h('span', [
-  //           'foo ',
-  //           h('a', {href: 'example.com'}, ' bar '),
-  //           ' baz',
-  //         ])
-  //       ])
-  //     ),
-  //   h('main', [
-  //     h('span', [
-  //       'foo ',
-  //       h('a', {href: 'example.com'}, 'bar'),
-  //       ' baz',
-  //     ])
-  //   ])
-  // )
+  // complex inline nesting
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(
+        h('main', [
+          h('i', [
+            h('span', [
+              'foo ',
+            ]),
+            h('a', {href: 'example.com'}, [
+              h('span', [
+                'bar ',
+              ]),
+            ]),
+          ]),
+        ]),
+      ),
+    h('main', [
+      h('i', [
+        h('span', [
+          'foo ',
+        ]),
+        h('a', {href: 'example.com'}, [
+          h('span', [
+            'bar',
+          ]),
+        ]),
+      ]),
+    ])
+  )
 
   t.end()
 })
