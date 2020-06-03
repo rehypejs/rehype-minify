@@ -48,8 +48,6 @@ function minify(tree, options) {
     var previous
     var next
     var value
-    var start
-    var end
 
     // text node which is not inside an inline element
     if (text(node) && !element(parent, list)) {
