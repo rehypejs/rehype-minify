@@ -51,34 +51,41 @@ function minify(tree, options) {
     var start
     var end
 
-    if (text(node)) {
+    // text node which is not inside an inline element
+    if (text(node) && !element(parent, list)) {
       previous = parent.children[index - 1]
       next = parent.children[index + 1]
 
-      value = whitespace(node.value)
-      end = value.length
-      start = 0
-
-      if (!collapsable(parent)) {
-        if (empty(value.charAt(0)) && viable(previous)) {
-          start++
-        }
-
-        if (empty(value.charAt(end - 1)) && viable(next)) {
-          end--
-        }
-      }
-
-      value = value.slice(start, end)
+      console.log(`before text "${node.value}"`)
+      value = trimLeft(node.value, previous)
+      value = trimRight(value, next)
+      console.log(`after text "${value}"`)
 
       // Remove the node if it’s collapsed entirely.
       if (!value) {
         parent.children.splice(index, 1)
-
         return index
       }
 
       node.value = value
+    }
+
+    // inline element, check children
+    if (element(node, list)) {
+      node.children.forEach((child, i) => {
+        previous = parent.children[index - 1]
+        next = parent.children[index + 1]
+
+        console.log(`before child "${child.value}"`)
+        child.value = trimLeft(child.value, previous)
+        child.value = trimRight(child.value, next)
+        console.log(`after child "${child.value}"`)
+
+        // Remove the node if it’s collapsed entirely.
+        if (!child.value) {
+          node.children.splice(i, 1)
+        }
+      })
     }
 
     if (!seen && !inside) {
@@ -98,6 +105,66 @@ function minify(tree, options) {
 
   function viable(node) {
     return !node || inside || !collapsable(node)
+  }
+
+  function trimLeft(value, previous) {
+    value = whitespace(value)
+    var end = value.length
+    var start = 0
+  
+    if (empty(value.charAt(0))) {
+      if (!previous || viable(previous)) {
+        start++
+      } else {
+        // if previous element is inline, check if last child has a trailing space
+        if (element(previous, list) && previous.children && previous.children.length > 0) {
+          var v = whitespace(previous.children[previous.children.length - 1].value)
+          if (v && empty(v.charAt(v.length - 1))) {
+            start++
+          }
+        } else {
+          // if previous is a text, check if it has a trailing space
+          if (text(previous)) {
+            var v = whitespace(previous.value)
+            if (v && empty(v.charAt(v.length - 1))) {
+              start++
+            }
+          }
+        }
+      }
+    }
+  
+    return value.slice(start, end)
+  }
+  
+  function trimRight(value, next) {
+    value = whitespace(value)
+    var end = value.length
+    var start = 0
+  
+    if (empty(value.charAt(end - 1))) {
+      if (!next || viable(next)) {
+        end--
+      } else {
+        // if previous element is inline, check if first child has a leading space
+        if (element(next, list) && next.children && next.children.length > 0) {
+          var v = whitespace(next.children[0].value)
+          if (v && empty(v.charAt(0))) {
+            end--
+          }
+        } else {
+          // if next is a text, check if it has a leading space
+          if (text(next)) {
+            var v = whitespace(next.value)
+            if (v && empty(v.charAt(0))) {
+              end--
+            }
+          }
+        }
+      }
+    }
+  
+    return value.slice(start, end)
   }
 }
 
