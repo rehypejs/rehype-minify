@@ -73,17 +73,29 @@ function minify(tree, options) {
     // inline element, check children
     if (element(node, list)) {
       node.children.forEach((child, i) => {
-        previous = parent.children[index - 1]
-        next = parent.children[index + 1]
+        if (text(child)) {
+          if (i === 0) {
+            // previous is parent sibling
+            previous = parent.children[index - 1]
+          } else {
+            previous = node.children[i - 1]
+          }
 
-        console.log(`before child "${child.value}"`)
-        child.value = trimLeft(child.value, previous)
-        child.value = trimRight(child.value, next)
-        console.log(`after child "${child.value}"`)
+          if (i === node.children.length - 1) {
+            next = parent.children[index + 1]
+          } else {
+            next = node.children[i + 1]
+          }
 
-        // Remove the node if it’s collapsed entirely.
-        if (!child.value) {
-          node.children.splice(i, 1)
+          console.log(`before child "${child.value}"`)
+          child.value = trimLeft(child.value, previous)
+          child.value = trimRight(child.value, next)
+          console.log(`after child "${child.value}"`)
+
+          // Remove the node if it’s collapsed entirely.
+          if (!child.value) {
+            node.children.splice(i, 1)
+          }
         }
       })
     }

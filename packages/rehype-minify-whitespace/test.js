@@ -238,26 +238,26 @@ test('rehype-minify-whitespace', function(t) {
   )
 
   // keep span spacing
-  // t.deepEqual(
-  //   rehype()
-  //     .use(min)
-  //     .runSync(
-  //       h('main', [
-  //         h('span', [
-  //           'foo ',
-  //           h('a', {href: 'example.com'}, 'bar'),
-  //           ' baz',
-  //         ])
-  //       ])
-  //     ),
-  //   h('main', [
-  //     h('span', [
-  //       'foo ',
-  //       h('a', {href: 'example.com'}, 'bar'),
-  //       ' baz',
-  //     ])
-  //   ])
-  // )
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(
+        h('main', [
+          h('span', [
+            'foo ',
+            h('a', {href: 'example.com'}, 'bar'),
+            ' baz',
+          ])
+        ])
+      ),
+    h('main', [
+      h('span', [
+        'foo ',
+        h('a', {href: 'example.com'}, 'bar'),
+        ' baz',
+      ])
+    ])
+  )
 
   // "optimise" span spacing
   // t.deepEqual(
