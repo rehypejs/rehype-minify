@@ -101,6 +101,9 @@ Read their readmes carefully before using!
 
 <!--plugins-other end-->
 
+Also: pass [`allowDangerousCharacters`][stringify] to `rehype-stringify` if you
+trust your content.
+
 ## Benchmark
 
 Here’s a benchmark comparing the results from [`html-minifier`][html-minifier]
@@ -131,21 +134,21 @@ Note: `html-minifier` crashes on `stackoverflow`.
 <tbody>
   <tr>
     <th scope="row" align="left"><a href="https://www.amazon.co.uk/">amazon</a></th>
-    <td align="right">287.4KB</td>
-    <td align="right">9.12%</td>
-    <td align="right"><b>27.26%</b></td>
-    <td align="right">81.06KB</td>
-    <td align="right">7.79%</td>
-    <td align="right"><b>24.75%</b></td>
+    <td align="right">416.87KB</td>
+    <td align="right">8.85%</td>
+    <td align="right"><b>23.05%</b></td>
+    <td align="right">105.39KB</td>
+    <td align="right">6.85%</td>
+    <td align="right"><b>21.62%</b></td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://www.bbc.co.uk/">bbc</a></th>
-    <td align="right">263.94KB</td>
-    <td align="right">14.09%</td>
-    <td align="right"><b>15.93%</b></td>
-    <td align="right">40.49KB</td>
-    <td align="right">11.31%</td>
-    <td align="right"><b>12.42%</b></td>
+    <td align="right">281.23KB</td>
+    <td align="right">14.44%</td>
+    <td align="right"><b>16.39%</b></td>
+    <td align="right">41.97KB</td>
+    <td align="right">11.57%</td>
+    <td align="right"><b>13.07%</b></td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://getbootstrap.com/docs/4.4/getting-started/introduction/">bootstrap</a></th>
@@ -158,21 +161,21 @@ Note: `html-minifier` crashes on `stackoverflow`.
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://kangax.github.io/compat-table/es6/">compat table</a></th>
-    <td align="right">6.78MB</td>
-    <td align="right">16.34%</td>
-    <td align="right"><b>16.83%</b></td>
-    <td align="right">210.6KB</td>
-    <td align="right">3.37%</td>
-    <td align="right"><b>5.72%</b></td>
+    <td align="right">7.28MB</td>
+    <td align="right">16.52%</td>
+    <td align="right"><b>16.80%</b></td>
+    <td align="right">234.05KB</td>
+    <td align="right">3.67%</td>
+    <td align="right"><b>5.37%</b></td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://tc39.es/ecma262/">ecmascript</a></th>
-    <td align="right">6.28MB</td>
-    <td align="right"><b>10.28%</b></td>
-    <td align="right">10.09%</td>
-    <td align="right">750.44KB</td>
-    <td align="right"><b>5.26%</b></td>
-    <td align="right">5.17%</td>
+    <td align="right">6.25MB</td>
+    <td align="right">8.87%</td>
+    <td align="right"><b>9.18%</b></td>
+    <td align="right">752.17KB</td>
+    <td align="right">4.86%</td>
+    <td align="right"><b>4.87%</b></td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://eloquentjavascript.net/20_node.html">eloquent</a></th>
@@ -185,154 +188,156 @@ Note: `html-minifier` crashes on `stackoverflow`.
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://github.com">github</a></th>
-    <td align="right">132.24KB</td>
-    <td align="right"><b>13.73%</b></td>
-    <td align="right">12.73%</td>
-    <td align="right">34.41KB</td>
-    <td align="right"><b>4.98%</b></td>
-    <td align="right">4.87%</td>
+    <td align="right">128.92KB</td>
+    <td align="right"><b>13.36%</b></td>
+    <td align="right">12.30%</td>
+    <td align="right">33.72KB</td>
+    <td align="right">4.51%</td>
+    <td align="right"><b>4.57%</b></td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://www.google.com/">google</a></th>
-    <td align="right">14.35KB</td>
-    <td align="right">7.02%</td>
-    <td align="right"><b>7.26%</b></td>
-    <td align="right">5.89KB</td>
-    <td align="right"><b>4.65%</b></td>
-    <td align="right">4.41%</td>
+    <td align="right">12.13KB</td>
+    <td align="right"><b>7.97%</b></td>
+    <td align="right">7.91%</td>
+    <td align="right">5.29KB</td>
+    <td align="right"><b>4.96%</b></td>
+    <td align="right">4.49%</td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://www.theguardian.com/us">guardian</a></th>
-    <td align="right">942.91KB</td>
-    <td align="right">4.02%</td>
-    <td align="right"><b>4.57%</b></td>
-    <td align="right">127.89KB</td>
-    <td align="right">2.16%</td>
-    <td align="right"><b>2.17%</b></td>
+    <td align="right">940.44KB</td>
+    <td align="right">3.90%</td>
+    <td align="right"><b>4.51%</b></td>
+    <td align="right">130.18KB</td>
+    <td align="right">1.97%</td>
+    <td align="right"><b>2.06%</b></td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://html.spec.whatwg.org">html</a></th>
-    <td align="right">10.23MB</td>
-    <td align="right">3.68%</td>
-    <td align="right"><b>3.70%</b></td>
-    <td align="right">1.59MB</td>
-    <td align="right">5.57%</td>
-    <td align="right"><b>5.62%</b></td>
+    <td align="right">11.11MB</td>
+    <td align="right">3.35%</td>
+    <td align="right"><b>3.38%</b></td>
+    <td align="right">1.66MB</td>
+    <td align="right">5.42%</td>
+    <td align="right"><b>5.49%</b></td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://www.linkedin.com/">linkedin</a></th>
-    <td align="right">99.17KB</td>
-    <td align="right">35.71%</td>
-    <td align="right"><b>35.99%</b></td>
-    <td align="right">10.77KB</td>
-    <td align="right">14.69%</td>
-    <td align="right"><b>15.05%</b></td>
+    <td align="right">93.07KB</td>
+    <td align="right">35.98%</td>
+    <td align="right"><b>36.10%</b></td>
+    <td align="right">10.74KB</td>
+    <td align="right">12.87%</td>
+    <td align="right"><b>13.09%</b></td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://www.microsoft.com/en-us/">microsoft</a></th>
-    <td align="right">180.79KB</td>
-    <td align="right">9.61%</td>
-    <td align="right"><b>21.32%</b></td>
-    <td align="right">37.71KB</td>
-    <td align="right">4.64%</td>
-    <td align="right"><b>7.40%</b></td>
+    <td align="right">184.04KB</td>
+    <td align="right">9.55%</td>
+    <td align="right"><b>21.29%</b></td>
+    <td align="right">38.28KB</td>
+    <td align="right">4.82%</td>
+    <td align="right"><b>7.49%</b></td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://www.nbc.com/">nbc</a></th>
-    <td align="right">1.44MB</td>
-    <td align="right">4.66%</td>
-    <td align="right"><b>4.88%</b></td>
-    <td align="right">177.58KB</td>
-    <td align="right">1.39%</td>
-    <td align="right"><b>1.39%</b></td>
+    <td align="right">1.59MB</td>
+    <td align="right">4.85%</td>
+    <td align="right"><b>4.94%</b></td>
+    <td align="right">191.42KB</td>
+    <td align="right"><b>1.21%</b></td>
+    <td align="right">1.01%</td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://www.npmjs.com/">npm</a></th>
-    <td align="right">29.79KB</td>
-    <td align="right"><b>10.64%</b></td>
-    <td align="right">10.20%</td>
-    <td align="right">8.8KB</td>
-    <td align="right"><b>4.80%</b></td>
-    <td align="right">4.22%</td>
+    <td align="right">30.05KB</td>
+    <td align="right"><b>10.53%</b></td>
+    <td align="right">10.09%</td>
+    <td align="right">8.93KB</td>
+    <td align="right"><b>4.63%</b></td>
+    <td align="right">4.12%</td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://www.nytimes.com/">nytimes</a></th>
-    <td align="right">1.41MB</td>
-    <td align="right"><b>7.16%</b></td>
-    <td align="right">7.15%</td>
-    <td align="right">132.5KB</td>
-    <td align="right"><b>3.29%</b></td>
-    <td align="right">3.27%</td>
+    <td align="right">1.55MB</td>
+    <td align="right"><b>7.41%</b></td>
+    <td align="right">7.24%</td>
+    <td align="right">145.64KB</td>
+    <td align="right"><b>4.19%</b></td>
+    <td align="right">3.91%</td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://rocket.chat">rocketchat</a></th>
-    <td align="right">55.35KB</td>
-    <td align="right">33.53%</td>
-    <td align="right"><b>33.90%</b></td>
-    <td align="right">12.67KB</td>
-    <td align="right"><b>13.35%</b></td>
-    <td align="right">13.33%</td>
+    <td align="right">50.58KB</td>
+    <td align="right">31.44%</td>
+    <td align="right"><b>31.91%</b></td>
+    <td align="right">11.39KB</td>
+    <td align="right"><b>12.46%</b></td>
+    <td align="right">12.45%</td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://slack.com/intl/en-gb/features">slack</a></th>
-    <td align="right">113.55KB</td>
-    <td align="right"><b>5.35%</b></td>
-    <td align="right">5.27%</td>
-    <td align="right">27.34KB</td>
-    <td align="right"><b>2.31%</b></td>
-    <td align="right">2.19%</td>
+    <td align="right">117.08KB</td>
+    <td align="right"><b>6.05%</b></td>
+    <td align="right">5.24%</td>
+    <td align="right">27.78KB</td>
+    <td align="right"><b>2.63%</b></td>
+    <td align="right">2.08%</td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://stackoverflow.com/">stackoverflow</a></th>
-    <td align="right">109.78KB</td>
-    <td align="right"><b>31.24%</b></td>
+    <td align="right">112.67KB</td>
+    <td align="right"><b>31.50%</b></td>
     <td align="right">💥</td>
-    <td align="right">19.41KB</td>
-    <td align="right"><b>10.39%</b></td>
+    <td align="right">19.96KB</td>
+    <td align="right"><b>10.12%</b></td>
     <td align="right">💥</td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://twitter.com/">twitter</a></th>
-    <td align="right">303.27KB</td>
-    <td align="right">8.94%</td>
-    <td align="right"><b>19.69%</b></td>
-    <td align="right">54.39KB</td>
-    <td align="right">3.43%</td>
-    <td align="right"><b>6.06%</b></td>
+    <td align="right">261.7KB</td>
+    <td align="right">9.31%</td>
+    <td align="right"><b>19.80%</b></td>
+    <td align="right">47.36KB</td>
+    <td align="right">3.75%</td>
+    <td align="right"><b>6.50%</b></td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://www.vice.com/en_us">vice</a></th>
-    <td align="right">299.71KB</td>
-    <td align="right"><b>9.01%</b></td>
-    <td align="right">8.89%</td>
-    <td align="right">48.9KB</td>
-    <td align="right"><b>4.09%</b></td>
-    <td align="right">4.03%</td>
+    <td align="right">297.75KB</td>
+    <td align="right"><b>9.08%</b></td>
+    <td align="right">8.87%</td>
+    <td align="right">48.54KB</td>
+    <td align="right"><b>4.11%</b></td>
+    <td align="right">3.93%</td>
   </tr>
   <tr>
     <th scope="row" align="left"><a href="https://en.wikipedia.org/wiki/President_of_the_United_States">wikipedia</a></th>
-    <td align="right">580.77KB</td>
-    <td align="right">6.06%</td>
-    <td align="right"><b>6.70%</b></td>
-    <td align="right">111.5KB</td>
-    <td align="right"><b>1.99%</b></td>
-    <td align="right">1.90%</td>
+    <td align="right">588.07KB</td>
+    <td align="right">6.16%</td>
+    <td align="right"><b>6.81%</b></td>
+    <td align="right">112.16KB</td>
+    <td align="right"><b>1.94%</b></td>
+    <td align="right">1.87%</td>
   </tr>
 </tbody>
 <tfoot>
   <tr>
     <th scope="row">total</th>
-    <td align="right">29.59MB</td>
-    <td align="right">27.25MB</td>
-    <td align="right">27.17MB</td>
-    <td align="right">3.46MB</td>
-    <td align="right">3.3MB</td>
-    <td align="right">3.29MB</td>
+    <td align="right">31.32MB</td>
+    <td align="right">28.95MB</td>
+    <td align="right">28.85MB</td>
+    <td align="right">3.6MB</td>
+    <td align="right">3.44MB</td>
+    <td align="right">3.42MB</td>
   </tr>
 </tfoot>
 </table>
 
 <!--benchmark end-->
+
+Huge differences in results are suspicious and may point to bugs.
 
 💥 — Crash.
 

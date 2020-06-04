@@ -5,24 +5,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 294296,
-        "gzip": 83004,
+        "raw": 426876,
+        "gzip": 107917,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 269709,
-        "gzip": 77007,
-        "rawWin": "9.12%",
-        "gzipWin": "7.79%"
+        "raw": 392166,
+        "gzip": 100997,
+        "rawWin": "8.85%",
+        "gzipWin": "6.85%"
       },
       {
         "type": "html-minifier",
-        "raw": 231255,
-        "gzip": 66537,
-        "rawWin": "27.26%",
-        "gzipWin": "24.75%"
+        "raw": 346901,
+        "gzip": 88735,
+        "rawWin": "23.05%",
+        "gzipWin": "21.62%"
       }
     ]
   },
@@ -32,24 +32,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 270273,
-        "gzip": 41458,
+        "raw": 287983,
+        "gzip": 42973,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 236900,
-        "gzip": 37246,
-        "rawWin": "14.09%",
-        "gzipWin": "11.31%"
+        "raw": 251641,
+        "gzip": 38515,
+        "rawWin": "14.44%",
+        "gzipWin": "11.57%"
       },
       {
         "type": "html-minifier",
-        "raw": 233131,
-        "gzip": 36877,
-        "rawWin": "15.93%",
-        "gzipWin": "12.42%"
+        "raw": 247430,
+        "gzip": 38005,
+        "rawWin": "16.39%",
+        "gzipWin": "13.07%"
       }
     ]
   },
@@ -86,24 +86,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 7112694,
-        "gzip": 215657,
+        "raw": 7636163,
+        "gzip": 239670,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 6113781,
-        "gzip": 208633,
-        "rawWin": "16.34%",
-        "gzipWin": "3.37%"
+        "raw": 6553522,
+        "gzip": 231175,
+        "rawWin": "16.52%",
+        "gzipWin": "3.67%"
       },
       {
         "type": "html-minifier",
-        "raw": 6088023,
-        "gzip": 203995,
-        "rawWin": "16.83%",
-        "gzipWin": "5.72%"
+        "raw": 6537778,
+        "gzip": 227456,
+        "rawWin": "16.80%",
+        "gzipWin": "5.37%"
       }
     ]
   },
@@ -113,24 +113,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 6585417,
-        "gzip": 768454,
+        "raw": 6557779,
+        "gzip": 770224,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 5971742,
-        "gzip": 730079,
-        "rawWin": "10.28%",
-        "gzipWin": "5.26%"
+        "raw": 6023458,
+        "gzip": 734511,
+        "rawWin": "8.87%",
+        "gzipWin": "4.86%"
       },
       {
         "type": "html-minifier",
-        "raw": 5981908,
-        "gzip": 730692,
-        "rawWin": "10.09%",
-        "gzipWin": "5.17%"
+        "raw": 6006400,
+        "gzip": 734432,
+        "rawWin": "9.18%",
+        "gzipWin": "4.87%"
       }
     ]
   },
@@ -167,24 +167,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 135416,
-        "gzip": 35238,
+        "raw": 132014,
+        "gzip": 34527,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 119069,
-        "gzip": 33565,
-        "rawWin": "13.73%",
-        "gzipWin": "4.98%"
+        "raw": 116454,
+        "gzip": 33037,
+        "rawWin": "13.36%",
+        "gzipWin": "4.51%"
       },
       {
         "type": "html-minifier",
-        "raw": 120127,
-        "gzip": 33601,
-        "rawWin": "12.73%",
-        "gzipWin": "4.87%"
+        "raw": 117554,
+        "gzip": 33017,
+        "rawWin": "12.30%",
+        "gzipWin": "4.57%"
       }
     ]
   },
@@ -194,24 +194,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 14690,
-        "gzip": 6031,
+        "raw": 12420,
+        "gzip": 5422,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 13726,
-        "gzip": 5763,
-        "rawWin": "7.02%",
-        "gzipWin": "4.65%"
+        "raw": 11503,
+        "gzip": 5166,
+        "rawWin": "7.97%",
+        "gzipWin": "4.96%"
       },
       {
         "type": "html-minifier",
-        "raw": 13696,
-        "gzip": 5776,
-        "rawWin": "7.26%",
-        "gzipWin": "4.41%"
+        "raw": 11510,
+        "gzip": 5189,
+        "rawWin": "7.91%",
+        "gzipWin": "4.49%"
       }
     ]
   },
@@ -221,24 +221,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 965542,
-        "gzip": 130957,
+        "raw": 963009,
+        "gzip": 133302,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 928217,
-        "gzip": 128189,
-        "rawWin": "4.02%",
-        "gzipWin": "2.16%"
+        "raw": 926884,
+        "gzip": 130729,
+        "rawWin": "3.90%",
+        "gzipWin": "1.97%"
       },
       {
         "type": "html-minifier",
-        "raw": 923375,
-        "gzip": 128178,
-        "rawWin": "4.57%",
-        "gzipWin": "2.17%"
+        "raw": 921434,
+        "gzip": 130609,
+        "rawWin": "4.51%",
+        "gzipWin": "2.06%"
       }
     ]
   },
@@ -248,24 +248,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 10726129,
-        "gzip": 1667327,
+        "raw": 11648347,
+        "gzip": 1735775,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 10345815,
-        "gzip": 1579375,
-        "rawWin": "3.68%",
-        "gzipWin": "5.57%"
+        "raw": 11270543,
+        "gzip": 1646525,
+        "rawWin": "3.35%",
+        "gzipWin": "5.42%"
       },
       {
         "type": "html-minifier",
-        "raw": 10343437,
-        "gzip": 1578677,
-        "rawWin": "3.70%",
-        "gzipWin": "5.62%"
+        "raw": 11267716,
+        "gzip": 1645484,
+        "rawWin": "3.38%",
+        "gzipWin": "5.49%"
       }
     ]
   },
@@ -275,24 +275,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 101546,
-        "gzip": 11029,
+        "raw": 95304,
+        "gzip": 10995,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 74823,
-        "gzip": 9616,
-        "rawWin": "35.71%",
-        "gzipWin": "14.69%"
+        "raw": 70087,
+        "gzip": 9741,
+        "rawWin": "35.98%",
+        "gzipWin": "12.87%"
       },
       {
         "type": "html-minifier",
-        "raw": 74673,
-        "gzip": 9586,
-        "rawWin": "35.99%",
-        "gzipWin": "15.05%"
+        "raw": 70027,
+        "gzip": 9722,
+        "rawWin": "36.10%",
+        "gzipWin": "13.09%"
       }
     ]
   },
@@ -302,24 +302,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 185128,
-        "gzip": 38617,
+        "raw": 188460,
+        "gzip": 39199,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 168895,
-        "gzip": 36906,
-        "rawWin": "9.61%",
-        "gzipWin": "4.64%"
+        "raw": 172030,
+        "gzip": 37395,
+        "rawWin": "9.55%",
+        "gzipWin": "4.82%"
       },
       {
         "type": "html-minifier",
-        "raw": 152591,
-        "gzip": 35957,
-        "rawWin": "21.32%",
-        "gzipWin": "7.40%"
+        "raw": 155385,
+        "gzip": 36467,
+        "rawWin": "21.29%",
+        "gzipWin": "7.49%"
       }
     ]
   },
@@ -329,24 +329,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 1511470,
-        "gzip": 181842,
+        "raw": 1663349,
+        "gzip": 196013,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 1444145,
-        "gzip": 179351,
-        "rawWin": "4.66%",
-        "gzipWin": "1.39%"
+        "raw": 1586371,
+        "gzip": 193676,
+        "rawWin": "4.85%",
+        "gzipWin": "1.21%"
       },
       {
         "type": "html-minifier",
-        "raw": 1441144,
-        "gzip": 179347,
-        "rawWin": "4.88%",
-        "gzipWin": "1.39%"
+        "raw": 1585081,
+        "gzip": 194052,
+        "rawWin": "4.94%",
+        "gzipWin": "1.01%"
       }
     ]
   },
@@ -356,24 +356,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 30510,
-        "gzip": 9013,
+        "raw": 30767,
+        "gzip": 9148,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 27576,
-        "gzip": 8600,
-        "rawWin": "10.64%",
-        "gzipWin": "4.80%"
+        "raw": 27837,
+        "gzip": 8743,
+        "rawWin": "10.53%",
+        "gzipWin": "4.63%"
       },
       {
         "type": "html-minifier",
-        "raw": 27686,
-        "gzip": 8648,
-        "rawWin": "10.20%",
-        "gzipWin": "4.22%"
+        "raw": 27947,
+        "gzip": 8786,
+        "rawWin": "10.09%",
+        "gzipWin": "4.12%"
       }
     ]
   },
@@ -383,24 +383,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 1482326,
-        "gzip": 135679,
+        "raw": 1622068,
+        "gzip": 149138,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 1383246,
-        "gzip": 131360,
-        "rawWin": "7.16%",
-        "gzipWin": "3.29%"
+        "raw": 1510125,
+        "gzip": 143136,
+        "rawWin": "7.41%",
+        "gzipWin": "4.19%"
       },
       {
         "type": "html-minifier",
-        "raw": 1383369,
-        "gzip": 131383,
-        "rawWin": "7.15%",
-        "gzipWin": "3.27%"
+        "raw": 1512605,
+        "gzip": 143522,
+        "rawWin": "7.24%",
+        "gzipWin": "3.91%"
       }
     ]
   },
@@ -410,24 +410,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 56676,
-        "gzip": 12977,
+        "raw": 51799,
+        "gzip": 11660,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 42444,
-        "gzip": 11449,
-        "rawWin": "33.53%",
-        "gzipWin": "13.35%"
+        "raw": 39410,
+        "gzip": 10368,
+        "rawWin": "31.44%",
+        "gzipWin": "12.46%"
       },
       {
         "type": "html-minifier",
-        "raw": 42328,
-        "gzip": 11451,
-        "rawWin": "33.90%",
-        "gzipWin": "13.33%"
+        "raw": 39268,
+        "gzip": 10369,
+        "rawWin": "31.91%",
+        "gzipWin": "12.45%"
       }
     ]
   },
@@ -437,24 +437,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 116278,
-        "gzip": 27993,
+        "raw": 119889,
+        "gzip": 28449,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 110378,
-        "gzip": 27362,
-        "rawWin": "5.35%",
-        "gzipWin": "2.31%"
+        "raw": 113054,
+        "gzip": 27721,
+        "rawWin": "6.05%",
+        "gzipWin": "2.63%"
       },
       {
         "type": "html-minifier",
-        "raw": 110461,
-        "gzip": 27393,
-        "rawWin": "5.27%",
-        "gzipWin": "2.19%"
+        "raw": 113925,
+        "gzip": 27868,
+        "rawWin": "5.24%",
+        "gzipWin": "2.08%"
       }
     ]
   },
@@ -464,22 +464,22 @@
     "results": [
       {
         "type": "original",
-        "raw": 112411,
-        "gzip": 19876,
+        "raw": 115371,
+        "gzip": 20439,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 85654,
-        "gzip": 18006,
-        "rawWin": "31.24%",
-        "gzipWin": "10.39%"
+        "raw": 87737,
+        "gzip": 18560,
+        "rawWin": "31.50%",
+        "gzipWin": "10.12%"
       },
       {
         "type": "html-minifier",
-        "raw": 112411,
-        "gzip": 19876,
+        "raw": 115371,
+        "gzip": 20439,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       }
@@ -491,24 +491,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 310545,
-        "gzip": 55699,
+        "raw": 267984,
+        "gzip": 48492,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 285065,
-        "gzip": 53851,
-        "rawWin": "8.94%",
-        "gzipWin": "3.43%"
+        "raw": 245150,
+        "gzip": 46741,
+        "rawWin": "9.31%",
+        "gzipWin": "3.75%"
       },
       {
         "type": "html-minifier",
-        "raw": 259452,
-        "gzip": 52517,
-        "rawWin": "19.69%",
-        "gzipWin": "6.06%"
+        "raw": 223688,
+        "gzip": 45533,
+        "rawWin": "19.80%",
+        "gzipWin": "6.50%"
       }
     ]
   },
@@ -518,24 +518,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 306900,
-        "gzip": 50078,
+        "raw": 304891,
+        "gzip": 49702,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 281543,
-        "gzip": 48111,
-        "rawWin": "9.01%",
-        "gzipWin": "4.09%"
+        "raw": 279515,
+        "gzip": 47739,
+        "rawWin": "9.08%",
+        "gzipWin": "4.11%"
       },
       {
         "type": "html-minifier",
-        "raw": 281850,
-        "gzip": 48136,
-        "rawWin": "8.89%",
-        "gzipWin": "4.03%"
+        "raw": 280061,
+        "gzip": 47821,
+        "rawWin": "8.87%",
+        "gzipWin": "3.93%"
       }
     ]
   },
@@ -545,24 +545,24 @@
     "results": [
       {
         "type": "original",
-        "raw": 594705,
-        "gzip": 114177,
+        "raw": 602187,
+        "gzip": 114854,
         "rawWin": "0.00%",
         "gzipWin": "0.00%"
       },
       {
         "type": "rehype-minify",
-        "raw": 560716,
-        "gzip": 111945,
-        "rawWin": "6.06%",
-        "gzipWin": "1.99%"
+        "raw": 567221,
+        "gzip": 112663,
+        "rawWin": "6.16%",
+        "gzipWin": "1.94%"
       },
       {
         "type": "html-minifier",
-        "raw": 557373,
-        "gzip": 112050,
-        "rawWin": "6.70%",
-        "gzipWin": "1.90%"
+        "raw": 563803,
+        "gzip": 112749,
+        "rawWin": "6.81%",
+        "gzipWin": "1.87%"
       }
     ]
   }
