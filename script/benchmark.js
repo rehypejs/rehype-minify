@@ -272,7 +272,7 @@ function htmlMinifier(buf, ctx) {
     console.warn(
       'html-minifier error (%s)',
       ctx.name,
-      error.stack.slice(0, 2 ** 10)
+      error.stack.slice(0, Math.pow(2, 10))
     )
     return buf
   }

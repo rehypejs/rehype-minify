@@ -77,6 +77,7 @@
     "rules": {
       "unicorn/no-fn-reference-in-iterator": "off",
       "unicorn/prefer-includes": "off",
+      "prefer-exponentiation-operator": "off",
       "guard-for-in": "off",
       "no-eq-null": "off",
       "eqeqeq": [
