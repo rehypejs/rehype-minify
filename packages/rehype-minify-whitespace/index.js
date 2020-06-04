@@ -13,112 +13,235 @@
 'use strict'
 
 var collapseWhiteSpace = require('collapse-white-space')
-var whitespaceSensitive = require('html-whitespace-sensitive-tag-names')
-var convert = require('unist-util-is/convert')
-var modify = require('unist-util-modify-children')
-var element = require('hast-util-is-element')
-var has = require('hast-util-has-property')
+var is = require('hast-util-is-element')
 var embedded = require('hast-util-embedded')
-var bodyOK = require('hast-util-is-body-ok-link')
-var list = require('./list.json')
+var convert = require('unist-util-is/convert')
+var whitespace = require('hast-util-whitespace')
+var blocks = require('./block')
+var contents = require('./content')
+var skippables = require('./skippable')
 
-var text = convert('text')
+module.exports = minifyWhitespace
 
-module.exports = collapse
+var ignorableNode = convert(['doctype', 'comment'])
+var parent = convert(['element', 'root'])
+var root = convert(['root'])
+var element = convert(['element'])
+var text = convert(['text'])
 
-function collapse(options) {
+function minifyWhitespace(options) {
+  var collapse = (options || {}).newlines
+    ? collapseToNewLines
+    : collapseWhiteSpace
+
   return transform
+
   function transform(tree) {
-    return minify(tree, options || {})
+    minify(tree, {collapse: collapse, whitespace: 'normal'})
   }
 }
 
-function minify(tree, options) {
-  var whitespace = options.newlines ? collapseToNewLines : collapseWhiteSpace
-  var modifier = modify(visitor)
-  var inside = false
-  var seen = false
+function minify(node, options) {
+  var settings
 
-  visitor(tree)
+  if (parent(node)) {
+    settings = Object.assign({}, options)
 
-  return tree
-
-  function visitor(node, index, parent) {
-    var head
-    var previous
-    var next
-    var value
-    var start
-    var end
-
-    if (text(node)) {
-      previous = parent.children[index - 1]
-      next = parent.children[index + 1]
-
-      value = whitespace(node.value)
-      end = value.length
-      start = 0
-
-      if (empty(value.charAt(0)) && viable(previous)) {
-        start++
-      }
-
-      if (empty(value.charAt(end - 1)) && viable(next)) {
-        end--
-      }
-
-      value = value.slice(start, end)
-
-      // Remove the node if it’s collapsed entirely.
-      if (!value) {
-        parent.children.splice(index, 1)
-
-        return index
-      }
-
-      node.value = value
+    if (root(node) || blocklike(node)) {
+      settings.before = true
+      settings.after = true
     }
 
-    if (!seen && !inside) {
-      head = element(node, 'head')
-      inside = head
-      seen = head
-    }
+    settings.whitespace = inferWhiteSpace(node, options)
 
-    if (node.children && !element(node, whitespaceSensitive)) {
-      modifier(node)
-    }
-
-    if (head) {
-      inside = false
-    }
+    return all(node, settings)
   }
 
-  function viable(node) {
-    return !node || inside || !collapsable(node)
+  if (text(node)) {
+    if (options.whitespace === 'normal') {
+      return minifyText(node, options)
+    }
+
+    // Naïve collapse, but no trimming:
+    if (options.whitespace === 'nowrap') {
+      node.value = options.collapse(node.value)
+    }
+
+    // The `pre-wrap` or `pre` whitespace settings are neither collapsed nor
+    // trimmed.
+  }
+
+  return {
+    remove: false,
+    ignore: ignorableNode(node),
+    stripAtStart: false
   }
 }
 
-// Check if `node` is collapsable.
-function collapsable(node) {
-  return (
-    text(node) ||
-    element(node, list) ||
-    embedded(node) ||
-    bodyOK(node) ||
-    (element(node, 'meta') && has(node, 'itemProp'))
-  )
-}
+function minifyText(node, options) {
+  var value = options.collapse(node.value)
+  var start = 0
+  var end = value.length
+  var result = {remove: false, ignore: false, stripAtStart: false}
 
-// Collapse to spaces, or newlines if they’re in a run.
-function collapseToNewLines(value) {
-  var result = String(value).replace(/\s+/g, function ($0) {
-    return $0.indexOf('\n') === -1 ? ' ' : '\n'
-  })
+  if (options.before && removable(value.charAt(0))) {
+    start++
+  }
+
+  if (start !== end && removable(value.charAt(end - 1))) {
+    if (options.after) {
+      end--
+    } else {
+      result.stripAtStart = true
+    }
+  }
+
+  if (start === end) {
+    result.remove = true
+  } else {
+    node.value = value.slice(start, end)
+  }
 
   return result
 }
 
-function empty(character) {
+function all(parent, options) {
+  var before = options.before
+  var after = options.after
+  var children = parent.children
+  var length = children.length
+  var index = -1
+  var result
+
+  while (++index < length) {
+    result = minify(
+      children[index],
+      Object.assign({}, options, {
+        before: before,
+        after: collapsableAfter(children, index, after)
+      })
+    )
+
+    if (result.remove) {
+      children.splice(index, 1)
+      index--
+      length--
+    } else if (!result.ignore) {
+      before = result.stripAtStart
+    }
+
+    // If this element, such as a `<select>` or `<img>`, contributes content
+    // somehow, allow whitespace again.
+    if (content(children[index])) {
+      before = false
+    }
+  }
+
+  return {
+    remove: false,
+    ignore: length === 0,
+    stripAtStart: before || after
+  }
+}
+
+function collapsableAfter(nodes, index, after) {
+  var length = nodes.length
+  var node
+  var result
+
+  while (++index < length) {
+    node = nodes[index]
+    result = inferBoundary(node)
+
+    if (result === undefined && node.children && !skippable(node)) {
+      result = collapsableAfter(node.children, -1)
+    }
+
+    if (typeof result === 'boolean') {
+      return result
+    }
+  }
+
+  return after
+}
+
+// Infer two types of boundaries:
+//
+// 1. `true` — boundary for which whitespace around it does not contribute
+//    anything
+// 2. `false` — boundary for which whitespace around it *does* contribute
+//
+// No result (`undefined`) is returned if it is unknown.
+function inferBoundary(node) {
+  if (element(node)) {
+    if (content(node)) {
+      return false
+    }
+
+    if (blocklike(node)) {
+      return true
+    }
+
+    // Unknown: either depends on siblings if embedded or metadata, or on
+    // children.
+  } else if (text(node)) {
+    if (!whitespace(node)) {
+      return false
+    }
+  } else if (!ignorableNode(node)) {
+    return false
+  }
+}
+
+// Infer whether a node is skippable.
+function content(node) {
+  return embedded(node) || is(node, contents)
+}
+
+// See: <https://html.spec.whatwg.org/#the-css-user-agent-style-sheet-and-presentational-hints>
+function blocklike(node) {
+  return is(node, blocks)
+}
+
+function skippable(node) {
+  /* istanbul ignore next - currently only used on elements, but just to make sure. */
+  var props = node.properties || {}
+
+  return ignorableNode(node) || is(node, skippables) || props.hidden
+}
+
+function removable(character) {
   return character === ' ' || character === '\n'
+}
+
+// Collapse to spaces, or line feeds if they’re in a run.
+function collapseToNewLines(value) {
+  return String(value).replace(/\s+/g, replace)
+
+  function replace($0) {
+    return $0.indexOf('\n') === -1 ? ' ' : '\n'
+  }
+}
+
+// We don’t support void elements here (so `nobr wbr` -> `normal` is ignored).
+function inferWhiteSpace(node, options) {
+  var props = node.properties || {}
+
+  switch (node.tagName) {
+    case 'listing':
+    case 'plaintext':
+    case 'xmp':
+      return 'pre'
+    case 'nobr':
+      return 'nowrap'
+    case 'pre':
+      return props.wrap ? 'pre-wrap' : 'pre'
+    case 'td':
+    case 'th':
+      return props.noWrap ? 'nowrap' : options.whitespace
+    case 'textarea':
+      return 'pre-wrap'
+    default:
+      return options.whitespace
+  }
 }
