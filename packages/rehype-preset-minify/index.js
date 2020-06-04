@@ -21,6 +21,9 @@ exports.settings = {
 exports.plugins = [
   require('rehype-minify-attribute-whitespace'),
   require('rehype-minify-css-style'),
+  // Do `remove-meta-http-equiv` before `enumerated-attribute`, because the
+  // latter might minify things further.
+  require('rehype-remove-meta-http-equiv'),
   require('rehype-minify-enumerated-attribute'),
   require('rehype-minify-event-handler'),
   require('rehype-minify-javascript-script'),
@@ -36,7 +39,6 @@ exports.plugins = [
   require('rehype-remove-duplicate-attribute-values'),
   require('rehype-remove-empty-attribute'),
   require('rehype-remove-external-script-content'),
-  require('rehype-remove-meta-http-equiv'),
   require('rehype-remove-script-type-javascript'),
   require('rehype-remove-style-type-css'),
   require('rehype-sort-attribute-values'),
