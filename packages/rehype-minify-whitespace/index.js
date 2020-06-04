@@ -38,6 +38,7 @@ function minifyWhitespace(options) {
 
   function transform(tree) {
     minify(tree, {collapse: collapse, whitespace: 'normal'})
+    return tree
   }
 }
 

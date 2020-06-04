@@ -7,6 +7,14 @@ var h = require('hastscript')
 
 var min = require('.')
 
+test('rehype-minify-whitespace - api', function (t) {
+  t.deepEqual(
+    min({})(h('main')),
+    h('main'),
+    'should return a tree')
+  t.end()
+});
+
 test('rehype-minify-whitespace', function (t) {
   t.deepEqual(
     rehype()
