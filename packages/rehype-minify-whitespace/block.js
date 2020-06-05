@@ -31,7 +31,7 @@ module.exports = [
   'figure',
   'figcaption',
   'footer',
-  'form,',
+  'form',
   'header',
   'hr',
   'legend',
