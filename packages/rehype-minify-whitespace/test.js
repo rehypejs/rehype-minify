@@ -101,6 +101,53 @@ test('rehype-minify-whitespace', function (t) {
 
   t.deepEqual(
     rehype()
+      .use(min, {newlines: true})
+      .runSync(h('main', ['  a  ', h('br'), ' c '])),
+    h('main', ['a', h('br'), 'c']),
+    'should trim whitespace around `<br>` elements'
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(
+        h('form', [
+          '  ',
+          h('input', {list: 'a'}),
+          '  ',
+          h('datalist', {id: 'a'}, [
+            '  ',
+            h('option', 'b'),
+            '  ',
+            h('option', 'c'),
+            '  '
+          ]),
+          '  '
+        ])
+      ),
+    h('form', [
+      h('input', {list: 'a'}),
+      h('datalist', {id: 'a'}, [h('option', 'b'), h('option', 'c')])
+    ]),
+    'should trim whitespace in `<form>`s'
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(
+        h('section', [
+          '  a  ',
+          h('object', ['  b  ', h('p', '  c  '), '  d  ']),
+          '  e  '
+        ])
+      ),
+    h('section', ['a ', h('object', ['b', h('p', 'c'), 'd ']), ' e']),
+    'should trim whitespace around `<object>` elements'
+  )
+
+  t.deepEqual(
+    rehype()
       .use(min)
       .runSync(
         h('main', [

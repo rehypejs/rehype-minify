@@ -139,7 +139,7 @@ function all(parent, options) {
 
   return {
     remove: false,
-    ignore: length === 0,
+    ignore: false,
     stripAtStart: before || after
   }
 }
