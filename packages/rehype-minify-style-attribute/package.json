@@ -14,7 +14,7 @@
     "style",
     "attribute"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-minify-style-attribute",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-minify-style-attribute",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

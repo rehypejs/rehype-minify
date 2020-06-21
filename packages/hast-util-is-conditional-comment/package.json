@@ -13,7 +13,7 @@
     "conditional",
     "comment"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/hast-util-is-conditional-comment",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/hast-util-is-conditional-comment",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

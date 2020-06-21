@@ -13,7 +13,7 @@
     "mangle",
     "comment"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-remove-comments",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-remove-comments",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

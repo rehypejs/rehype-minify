@@ -13,7 +13,7 @@
     "javascript",
     "script"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/hast-util-is-javascript",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/hast-util-is-javascript",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

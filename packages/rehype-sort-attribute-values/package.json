@@ -15,7 +15,7 @@
     "attribute",
     "value"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-sort-attribute-values",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-sort-attribute-values",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

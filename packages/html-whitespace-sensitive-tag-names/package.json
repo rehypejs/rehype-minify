@@ -13,7 +13,7 @@
     "tag",
     "name"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/html-whitespace-sensitive-tag-names",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/html-whitespace-sensitive-tag-names",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

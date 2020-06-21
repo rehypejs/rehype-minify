@@ -13,7 +13,7 @@
     "css",
     "link"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/hast-util-is-css-link",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/hast-util-is-css-link",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

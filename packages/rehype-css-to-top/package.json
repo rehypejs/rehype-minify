@@ -15,7 +15,7 @@
     "head",
     "move"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-css-to-top",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-css-to-top",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

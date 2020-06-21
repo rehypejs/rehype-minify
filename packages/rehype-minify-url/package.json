@@ -13,7 +13,7 @@
     "mangle",
     "url"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-minify-url",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-minify-url",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

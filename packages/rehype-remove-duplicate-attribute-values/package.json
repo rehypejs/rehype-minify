@@ -16,7 +16,7 @@
     "attribute",
     "value"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-remove-duplicate-attribute-values",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-remove-duplicate-attribute-values",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

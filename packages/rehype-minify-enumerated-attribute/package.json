@@ -15,7 +15,7 @@
     "enum",
     "enumerated"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-minify-enumerated-attribute",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-minify-enumerated-attribute",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

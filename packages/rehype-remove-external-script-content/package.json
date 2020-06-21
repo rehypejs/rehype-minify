@@ -16,7 +16,7 @@
     "script",
     "src"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-remove-external-script-content",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-remove-external-script-content",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

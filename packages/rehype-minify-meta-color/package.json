@@ -14,7 +14,7 @@
     "meta",
     "color"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-minify-meta-color",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-minify-meta-color",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

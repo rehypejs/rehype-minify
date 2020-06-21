@@ -393,11 +393,11 @@ abide by its terms.
 
 [health]: https://github.com/rehypejs/.github
 
-[contributing]: https://github.com/rehypejs/.github/blob/master/contributing.md
+[contributing]: https://github.com/rehypejs/.github/blob/HEAD/contributing.md
 
-[support]: https://github.com/rehypejs/.github/blob/master/support.md
+[support]: https://github.com/rehypejs/.github/blob/HEAD/support.md
 
-[coc]: https://github.com/rehypejs/.github/blob/master/code-of-conduct.md
+[coc]: https://github.com/rehypejs/.github/blob/HEAD/code-of-conduct.md
 
 [license]: license
 
@@ -415,6 +415,6 @@ abide by its terms.
 
 [sanitize]: https://github.com/rehypejs/rehype-sanitize
 
-[stringify]: https://github.com/rehypejs/rehype/tree/master/packages/rehype-stringify#api
+[stringify]: https://github.com/rehypejs/rehype/tree/HEAD/packages/rehype-stringify#api
 
 [html-minifier]: https://github.com/kangax/html-minifier

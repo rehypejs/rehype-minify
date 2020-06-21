@@ -16,7 +16,7 @@
     "white",
     "space"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-minify-attribute-whitespace",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-minify-attribute-whitespace",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

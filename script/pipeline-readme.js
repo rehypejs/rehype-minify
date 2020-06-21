@@ -50,9 +50,9 @@ module.exports = trough()
     var example = config.example
     var repo = pkg.repository
     var org = repo.split('/').slice(0, -1).join('/')
-    var master = repo + '/blob/master'
+    var branchBase = repo + '/blob/main'
     var health = org + '/.github'
-    var hMaster = health + '/blob/master'
+    var hBranchBase = health + '/blob/main'
     var slug = repo.split('/').slice(-2).join('/')
     var options
 
@@ -264,14 +264,17 @@ module.exports = trough()
       u('definition', {identifier: 'health', url: health}),
       u('definition', {
         identifier: 'contributing',
-        url: hMaster + '/contributing.md'
+        url: hBranchBase + '/contributing.md'
       }),
-      u('definition', {identifier: 'support', url: hMaster + '/support.md'}),
+      u('definition', {
+        identifier: 'support',
+        url: hBranchBase + '/support.md'
+      }),
       u('definition', {
         identifier: 'coc',
-        url: hMaster + '/code-of-conduct.md'
+        url: hBranchBase + '/code-of-conduct.md'
       }),
-      u('definition', {identifier: 'license', url: master + '/license'}),
+      u('definition', {identifier: 'license', url: branchBase + '/license'}),
       u('definition', {identifier: 'author', url: licensee.url})
     )
 

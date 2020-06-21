@@ -14,7 +14,7 @@
     "meta",
     "http-equiv"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-remove-meta-http-equiv",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-remove-meta-http-equiv",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

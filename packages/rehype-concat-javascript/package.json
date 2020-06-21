@@ -16,7 +16,7 @@
     "concat",
     "combine"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-concat-javascript",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-concat-javascript",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

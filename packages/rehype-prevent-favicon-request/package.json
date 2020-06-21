@@ -17,7 +17,7 @@
     "prevent",
     "request"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-prevent-favicon-request",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-prevent-favicon-request",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

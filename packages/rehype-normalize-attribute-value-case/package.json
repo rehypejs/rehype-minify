@@ -15,7 +15,7 @@
     "value",
     "case"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-normalize-attribute-value-case",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-normalize-attribute-value-case",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

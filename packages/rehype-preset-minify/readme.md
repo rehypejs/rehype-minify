@@ -142,18 +142,18 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[license]: https://github.com/rehypejs/rehype-minify/blob/master/license
+[license]: https://github.com/rehypejs/rehype-minify/blob/main/license
 
 [author]: https://wooorm.com
 
 [health]: https://github.com/rehypejs/.github
 
-[contributing]: https://github.com/rehypejs/.github/blob/master/contributing.md
+[contributing]: https://github.com/rehypejs/.github/blob/HEAD/contributing.md
 
-[support]: https://github.com/rehypejs/.github/blob/master/support.md
+[support]: https://github.com/rehypejs/.github/blob/HEAD/support.md
 
-[coc]: https://github.com/rehypejs/.github/blob/master/code-of-conduct.md
+[coc]: https://github.com/rehypejs/.github/blob/HEAD/code-of-conduct.md
 
 [rehype]: https://github.com/rehypejs/rehype
 
-[cli]: https://github.com/rehypejs/rehype/tree/master/packages/rehype-cli
+[cli]: https://github.com/rehypejs/rehype/tree/HEAD/packages/rehype-cli

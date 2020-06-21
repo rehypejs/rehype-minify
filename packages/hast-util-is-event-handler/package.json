@@ -14,7 +14,7 @@
     "event",
     "handler"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/hast-util-is-event-handler",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/hast-util-is-event-handler",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

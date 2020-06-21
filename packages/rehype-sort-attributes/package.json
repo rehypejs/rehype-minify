@@ -14,7 +14,7 @@
     "attribute",
     "sort"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-sort-attributes",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-sort-attributes",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

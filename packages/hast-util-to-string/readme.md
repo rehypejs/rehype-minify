@@ -82,12 +82,12 @@ abide by its terms.
 
 [health]: https://github.com/rehypejs/.github
 
-[contributing]: https://github.com/rehypejs/.github/blob/master/contributing.md
+[contributing]: https://github.com/rehypejs/.github/blob/main/contributing.md
 
-[support]: https://github.com/rehypejs/.github/blob/master/support.md
+[support]: https://github.com/rehypejs/.github/blob/main/support.md
 
-[coc]: https://github.com/rehypejs/.github/blob/master/code-of-conduct.md
+[coc]: https://github.com/rehypejs/.github/blob/main/code-of-conduct.md
 
-[license]: https://github.com/rehypejs/rehype-minify/blob/master/license
+[license]: https://github.com/rehypejs/rehype-minify/blob/main/license
 
 [author]: https://wooorm.com

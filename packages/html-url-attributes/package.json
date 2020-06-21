@@ -10,7 +10,7 @@
     "url",
     "attribute"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/html-url-attributes",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/html-url-attributes",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

@@ -58,7 +58,7 @@ module.exports = trough()
       description: previous.description,
       license: pkg.license,
       keywords: previous.keywords,
-      repository: pkg.repository + '/tree/master/' + relative,
+      repository: pkg.repository + '/tree/main/' + relative,
       bugs: pkg.bugs,
       funding: pkg.funding,
       author: pkg.author,

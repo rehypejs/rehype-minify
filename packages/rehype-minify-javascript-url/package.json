@@ -15,7 +15,7 @@
     "javascript",
     "script"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/rehype-minify-javascript-url",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-minify-javascript-url",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",

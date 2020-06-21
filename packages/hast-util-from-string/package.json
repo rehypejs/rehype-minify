@@ -14,7 +14,7 @@
     "text",
     "content"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/master/packages/hast-util-from-string",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/hast-util-from-string",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",
