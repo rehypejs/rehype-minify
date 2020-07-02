@@ -1,6 +1,6 @@
 {
   "name": "hast-util-is-conditional-comment",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "hast utility to check if a node is a conditional comment",
   "license": "MIT",
   "keywords": [

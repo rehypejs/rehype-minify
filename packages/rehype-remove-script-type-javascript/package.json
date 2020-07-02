@@ -1,6 +1,6 @@
 {
   "name": "rehype-remove-script-type-javascript",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "rehype plugin to remove `type` and `language` on JavaScript scripts",
   "license": "MIT",
   "keywords": [

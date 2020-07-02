@@ -1,6 +1,6 @@
 {
   "name": "rehype-prevent-favicon-request",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "rehype plugin to prevent a `favicon.ico` requests",
   "license": "MIT",
   "keywords": [

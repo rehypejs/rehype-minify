@@ -1,6 +1,6 @@
 {
   "name": "rehype-remove-meta-http-equiv",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "rehype plugin to remove `http-equiv` `meta` elements for shorter output",
   "license": "MIT",
   "keywords": [
