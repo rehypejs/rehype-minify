@@ -249,13 +249,11 @@ module.exports = trough()
       }),
       u('definition', {
         identifier: 'chat-badge',
-        url: 'https://img.shields.io/badge/chat-spectrum-7b16ff.svg'
+        url: 'https://img.shields.io/badge/chat-discussions-success.svg'
       }),
       u('definition', {
         identifier: 'chat',
-        url:
-          'https://spectrum.chat/unified/' +
-          (config.name.slice(0, 5) === 'hast-' ? 'syntax-tree' : 'rehype')
+        url: 'https://github.com/rehypejs/rehype/discussions'
       }),
       u('definition', {
         identifier: 'npm',
