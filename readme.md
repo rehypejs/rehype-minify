@@ -65,6 +65,7 @@ They are mostly harmless (disclaimer: **rehype-minify** is quite young).
 *   [`rehype-minify-javascript-script`](./packages/rehype-minify-javascript-script)
 *   [`rehype-minify-javascript-url`](./packages/rehype-minify-javascript-url)
 *   [`rehype-minify-json-script`](./packages/rehype-minify-json-script)
+*   [`rehype-minify-language`](./packages/rehype-minify-language)
 *   [`rehype-minify-media-attribute`](./packages/rehype-minify-media-attribute)
 *   [`rehype-minify-meta-color`](./packages/rehype-minify-meta-color)
 *   [`rehype-minify-meta-content`](./packages/rehype-minify-meta-content)

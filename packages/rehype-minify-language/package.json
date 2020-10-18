@@ -1,0 +1,38 @@
+{
+  "name": "rehype-minify-language",
+  "version": "0.0.0",
+  "description": "rehype plugin to minify language attributes",
+  "license": "MIT",
+  "keywords": [
+    "unified",
+    "rehype",
+    "rehype-plugin",
+    "plugin",
+    "html",
+    "minify",
+    "mangle",
+    "language",
+    "lang",
+    "bcp",
+    "bcp47"
+  ],
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-minify-language",
+  "bugs": "https://github.com/rehypejs/rehype-minify/issues",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/unified"
+  },
+  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "bcp-47-normalize": "^1.1.0",
+    "hast-util-has-property": "^1.0.0",
+    "unist-util-visit": "^2.0.0"
+  },
+  "xo": false
+}

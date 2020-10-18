@@ -29,6 +29,7 @@ exports.plugins = [
   require('rehype-minify-javascript-script'),
   require('rehype-minify-javascript-url'),
   require('rehype-minify-json-script'),
+  require('rehype-minify-language'),
   require('rehype-minify-media-attribute'),
   require('rehype-minify-meta-color'),
   require('rehype-minify-meta-content'),
