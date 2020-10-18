@@ -12,7 +12,6 @@
 
 'use strict'
 
-var collapseWhiteSpace = require('collapse-white-space')
 var is = require('hast-util-is-element')
 var embedded = require('hast-util-embedded')
 var convert = require('unist-util-is/convert')
@@ -30,9 +29,9 @@ var element = convert(['element'])
 var text = convert(['text'])
 
 function minifyWhitespace(options) {
-  var collapse = (options || {}).newlines
-    ? collapseToNewLines
-    : collapseWhiteSpace
+  var collapse = collapseFactory(
+    (options || {}).newlines ? replaceNewlines : replaceWhitespace
+  )
 
   return transform
 
@@ -214,12 +213,19 @@ function removable(character) {
   return character === ' ' || character === '\n'
 }
 
-// Collapse to spaces, or line feeds if they’re in a run.
-function collapseToNewLines(value) {
-  return String(value).replace(/\s+/g, replace)
+function replaceNewlines(value) {
+  var match = /\r?\n|\r/.exec(value)
+  return match ? match[0] : ' '
+}
 
-  function replace($0) {
-    return $0.indexOf('\n') === -1 ? ' ' : '\n'
+function replaceWhitespace() {
+  return ' '
+}
+
+function collapseFactory(replace) {
+  return collapse
+  function collapse(value) {
+    return String(value).replace(/[\t\n\v\f\r ]+/g, replace)
   }
 }
 

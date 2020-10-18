@@ -686,5 +686,13 @@ test('rehype-minify-whitespace', function (t) {
     'should collapse and trim whitespace in tables'
   )
 
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(h('main', [' \u00A0 ', h('p', '  a \u00A0 '), ' \u00A0 '])),
+    h('main', ['\u00A0', h('p', 'a \u00A0'), '\u00A0']),
+    'should collapse and trim whitespace in tables'
+  )
+
   t.end()
 })

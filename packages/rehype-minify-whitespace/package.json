@@ -33,7 +33,6 @@
     "skippable.js"
   ],
   "dependencies": {
-    "collapse-white-space": "^1.0.0",
     "hast-util-embedded": "^1.0.0",
     "hast-util-is-element": "^1.0.0",
     "hast-util-whitespace": "^1.0.4",
