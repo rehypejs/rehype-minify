@@ -23,6 +23,27 @@ are also removed.
 npm install rehype-remove-comments
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-remove-comments'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use remove-comments > output.html
+```
+
 ## Example
 
 ##### In

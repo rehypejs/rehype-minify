@@ -25,6 +25,27 @@ passed through.
 npm install rehype-minify-url
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-minify-url'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use minify-url > output.html
+```
+
 ## Example
 
 With `{ from: 'https://example.com' }` as options.

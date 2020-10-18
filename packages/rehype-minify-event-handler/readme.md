@@ -20,6 +20,27 @@ Minify event handler attributes.
 npm install rehype-minify-event-handler
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-minify-event-handler'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use minify-event-handler > output.html
+```
+
 ## Example
 
 ##### In

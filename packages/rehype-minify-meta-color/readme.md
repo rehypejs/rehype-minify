@@ -20,6 +20,27 @@ Minify style attributes.
 npm install rehype-minify-meta-color
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-minify-meta-color'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use minify-meta-color > output.html
+```
+
 ## Example
 
 ##### In

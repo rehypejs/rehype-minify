@@ -3,7 +3,7 @@
  *   Remove `meta[http-equiv=content-language]` and
  *   `meta[http-equiv=content-type]` elements for shorter output.
  *
- *   Note: The missing white-space in the output is due to
+ *   Note: The missing whitespace in the output is due to
  *   [inikulin/parse5#150](https://github.com/inikulin/parse5/issues/150).
  * @example {"processor": {"fragment": false}}
  *

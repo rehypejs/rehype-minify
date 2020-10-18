@@ -23,6 +23,27 @@ to be undefined in one script and defined in another.
 npm install rehype-concat-javascript
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-concat-javascript'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use concat-javascript > output.html
+```
+
 ## Example
 
 ##### In

@@ -13,7 +13,7 @@
 Remove `meta[http-equiv=content-language]` and
 `meta[http-equiv=content-type]` elements for shorter output.
 
-Note: The missing white-space in the output is due to
+Note: The missing whitespace in the output is due to
 [inikulin/parse5#150](https://github.com/inikulin/parse5/issues/150).
 
 ## Install
@@ -22,6 +22,27 @@ Note: The missing white-space in the output is due to
 
 ```sh
 npm install rehype-remove-meta-http-equiv
+```
+
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-remove-meta-http-equiv'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use remove-meta-http-equiv > output.html
 ```
 
 ## Example

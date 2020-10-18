@@ -20,6 +20,27 @@ Remove duplicates in attribute values with unique tokens.
 npm install rehype-remove-duplicate-attribute-values
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-remove-duplicate-attribute-values'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use remove-duplicate-attribute-values > output.html
+```
+
 ## Example
 
 ##### In

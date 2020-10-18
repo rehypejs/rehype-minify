@@ -33,7 +33,7 @@ ok(h('style', {type: 'text/foo'})) //=> false
 
 ## API
 
-### `isCSSStyle(node)`
+### `isCssStyle(node)`
 
 Return `true` if `node` is a `<style>` element that has no `type`, an empty
 `type`, or `'text/css'` as its `type`.

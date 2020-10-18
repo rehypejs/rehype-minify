@@ -20,6 +20,27 @@ Minify `script` elements with a JavaScript body.
 npm install rehype-minify-javascript-script
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-minify-javascript-script'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use minify-javascript-script > output.html
+```
+
 ## Example
 
 ##### In

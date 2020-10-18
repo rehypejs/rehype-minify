@@ -1,9 +1,9 @@
 /**
  * @fileoverview
- *   Collapse white-space.
+ *   Collapse whitespace.
  *
  *   Normally, collapses to a single space.
- *   If `newlines: true`, collapses white-space containing newlines to `'\n'`
+ *   If `newlines: true`, collapses whitespace containing newlines to `'\n'`
  *   instead of `' '`.
  * @example
  *   <h1>Heading</h1>

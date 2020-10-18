@@ -22,6 +22,27 @@ This optimizes for repetition-based compression (such as GZip).
 npm install rehype-sort-attribute-values
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-sort-attribute-values'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use sort-attribute-values > output.html
+```
+
 ## Example
 
 ##### In

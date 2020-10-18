@@ -112,6 +112,35 @@ module.exports = trough()
       u('code', {lang: 'sh'}, 'npm install ' + config.name)
     )
 
+    if (ctx.plugins.indexOf(config.name) !== -1) {
+      tree.push(
+        u('heading', {depth: 2}, [u('text', 'Use')]),
+        u('paragraph', [u('text', 'On the API:')]),
+        u(
+          'code',
+          {lang: 'diff'},
+          [
+            ' unified()',
+            "   .use(require('rehype-parse'))",
+            "+  .use(require('" + config.name + "'))",
+            "   .use(require('rehype-stringify'))",
+            "   .process('<span>some html</span>', function (err, file) {",
+            '     console.error(report(err || file))',
+            '     console.log(String(file))',
+            '   })'
+          ].join('\n')
+        ),
+        u('paragraph', [u('text', 'On the CLI:')]),
+        u(
+          'code',
+          {lang: 'sh'},
+          'rehype input.html --use ' +
+            config.name.replace(/^rehype-/, '') +
+            ' > output.html'
+        )
+      )
+    }
+
     if (config.longdescription) {
       tree = tree.concat(proc.parse(strip(config.longdescription)).children)
     }

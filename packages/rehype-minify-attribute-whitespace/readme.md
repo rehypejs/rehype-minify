@@ -10,7 +10,7 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-Minify white-space in attributes.
+Minify whitespace in attributes.
 
 ## Install
 
@@ -18,6 +18,27 @@ Minify white-space in attributes.
 
 ```sh
 npm install rehype-minify-attribute-whitespace
+```
+
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-minify-attribute-whitespace'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use minify-attribute-whitespace > output.html
 ```
 
 ## Example

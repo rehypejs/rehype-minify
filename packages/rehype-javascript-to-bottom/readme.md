@@ -26,6 +26,27 @@ You can pass `filter`, a function called with each checked node, returning
 npm install rehype-javascript-to-bottom
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-javascript-to-bottom'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use javascript-to-bottom > output.html
+```
+
 ## Example
 
 ##### In

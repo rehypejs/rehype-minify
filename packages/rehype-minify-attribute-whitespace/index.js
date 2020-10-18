@@ -1,6 +1,6 @@
 /**
  * @fileoverview
- *   Minify white-space in attributes.
+ *   Minify whitespace in attributes.
  * @example
  *   <a href="  http://example.com "></a>
  */

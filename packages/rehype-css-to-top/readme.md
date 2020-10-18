@@ -23,6 +23,27 @@ This can *decrease* the time to
 npm install rehype-css-to-top
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-css-to-top'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use css-to-top > output.html
+```
+
 ## Example
 
 ##### In

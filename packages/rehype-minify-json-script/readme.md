@@ -20,6 +20,27 @@ Minify `script` elements with a JSON body.
 npm install rehype-minify-json-script
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-minify-json-script'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use minify-json-script > output.html
+```
+
 ## Example
 
 ##### In

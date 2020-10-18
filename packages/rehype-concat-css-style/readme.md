@@ -24,6 +24,27 @@ Those are [deprecated](https://github.com/whatwg/html/issues/552) anyway.
 npm install rehype-concat-css-style
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-concat-css-style'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use concat-css-style > output.html
+```
+
 ## Example
 
 ##### In

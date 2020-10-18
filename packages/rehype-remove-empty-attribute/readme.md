@@ -20,6 +20,27 @@ Remove empty attributes, if possible.
 npm install rehype-remove-empty-attribute
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-remove-empty-attribute'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use remove-empty-attribute > output.html
+```
+
 ## Example
 
 ##### In

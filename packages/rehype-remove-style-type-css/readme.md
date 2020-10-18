@@ -20,6 +20,27 @@ Remove `type` on CSS `style` and `link`s.
 npm install rehype-remove-style-type-css
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-remove-style-type-css'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use remove-style-type-css > output.html
+```
+
 ## Example
 
 ##### In

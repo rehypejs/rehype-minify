@@ -20,6 +20,27 @@ Minify CSS style elements.
 npm install rehype-minify-css-style
 ```
 
+## Use
+
+On the API:
+
+```diff
+ unified()
+   .use(require('rehype-parse'))
++  .use(require('rehype-minify-css-style'))
+   .use(require('rehype-stringify'))
+   .process('<span>some html</span>', function (err, file) {
+     console.error(report(err || file))
+     console.log(String(file))
+   })
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use minify-css-style > output.html
+```
+
 ## Example
 
 ##### In
