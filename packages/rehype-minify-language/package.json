@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-language",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "rehype plugin to minify language attributes",
   "license": "MIT",
   "keywords": [
