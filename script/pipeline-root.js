@@ -55,7 +55,7 @@ module.exports = trough()
           start,
           u(
             'list',
-            {ordered: false},
+            {spread: false, ordered: false},
             list.map(function (name) {
               return u('listItem', [
                 u('link', {url: './packages/' + name}, [u('inlineCode', name)])

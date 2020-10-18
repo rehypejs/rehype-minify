@@ -2,7 +2,7 @@
 
 var fs = require('fs')
 var path = require('path')
-var util = require('util')
+var inspect = require('util').inspect
 var dox = require('dox')
 var trim = require('trim')
 var remark = require('remark')
@@ -136,7 +136,7 @@ module.exports = trough()
         tree.push(
           u('paragraph', [
             u('text', 'With '),
-            u('inlineCode', util.inspect(options.plugin)),
+            u('inlineCode', inspect(options.plugin)),
             u('text', ' as options.')
           ])
         )
