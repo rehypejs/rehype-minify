@@ -34,7 +34,7 @@
     "html-url-attributes": "^1.0.0",
     "uglify-js": "^3.0.18",
     "unist-util-visit": "^2.0.0",
-    "trim": "0.0.1"
+    "trim": "1.0.0"
   },
   "xo": false
 }
