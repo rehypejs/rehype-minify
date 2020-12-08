@@ -233,11 +233,11 @@ module.exports = trough()
     tree.push(
       u('definition', {
         identifier: 'build-badge',
-        url: 'https://img.shields.io/travis/' + slug + '.svg'
+        url: 'https://github.com/' + slug + '/workflows/main/badge.svg'
       }),
       u('definition', {
         identifier: 'build',
-        url: 'https://travis-ci.org/' + slug
+        url: 'https://github.com/' + slug + '/actions'
       }),
       u('definition', {
         identifier: 'coverage-badge',

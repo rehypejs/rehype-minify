@@ -75,9 +75,9 @@ abide by its terms.
 
 [MIT][license] © [Titus Wormer][author]
 
-[build-badge]: https://img.shields.io/travis/rehypejs/rehype-minify.svg
+[build-badge]: https://github.com/rehypejs/rehype-minify/workflows/main/badge.svg
 
-[build]: https://travis-ci.org/rehypejs/rehype-minify
+[build]: https://github.com/rehypejs/rehype-minify/actions
 
 [coverage-badge]: https://img.shields.io/codecov/c/github/rehypejs/rehype-minify.svg
 
