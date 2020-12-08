@@ -50,7 +50,7 @@
   },
   "scripts": {
     "postinstall": "lerna bootstrap --no-ci",
-    "format": "remark . -qfo && prettier . --write && xo --fix",
+    "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
     "build-packages": "node script/build-packages",
     "build": "npm run build-packages",
     "test-api": "tape test packages/*/test.js",
@@ -75,17 +75,17 @@
     "prettier": true,
     "esnext": false,
     "rules": {
-      "unicorn/explicit-length-check": "off",
-      "unicorn/no-fn-reference-in-iterator": "off",
-      "unicorn/prefer-includes": "off",
-      "unicorn/prefer-optional-catch-binding": "off",
-      "prefer-exponentiation-operator": "off",
-      "guard-for-in": "off",
-      "no-eq-null": "off",
       "eqeqeq": [
         2,
         "allow-null"
-      ]
+      ],
+      "guard-for-in": "off",
+      "no-eq-null": "off",
+      "prefer-exponentiation-operator": "off",
+      "unicorn/explicit-length-check": "off",
+      "unicorn/no-fn-reference-in-iterator": "off",
+      "unicorn/prefer-includes": "off",
+      "unicorn/prefer-optional-catch-binding": "off"
     }
   },
   "remarkConfig": {
