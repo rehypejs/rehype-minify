@@ -3,6 +3,16 @@
 // This schema exposes a map of property names to (one or more) definitions.
 // Each definition defined how that attribute is enumerated.
 module.exports = {
+  autoComplete: {
+    tagNames: null,
+    missing: '',
+    states: [['', 'on'], 'off']
+  },
+  behavior: {
+    tagNames: 'marquee',
+    missing: 'scroll',
+    states: ['alternate', 'scroll', 'slide']
+  },
   charSet: {
     tagNames: ['meta', 'script'],
     // In HTML5, utf8 is implied.
@@ -218,53 +228,17 @@ module.exports = {
       ['x-user-defined']
     ]
   },
-  crossOrigin: {
-    tagNames: ['link', 'img', 'audio', 'video', 'script'],
-    missing: null,
-    invalid: '',
-    states: [['', 'anonymous'], 'use-credentials']
-  },
-  // Should also apply to `content` on `meta[name=referrer]`.
-  referrerpolicy: {
-    tagNames: ['link', 'a', 'area', 'img', 'iframe'],
-    missing: '',
-    invalid: '',
-    states: [
-      '',
-      'no-referrer',
-      'origin',
-      'no-referrer-when-downgrade',
-      'origin-when-cross-origin',
-      'unsafe-url'
-    ]
-  },
-  translate: {
-    tagNames: null,
-    missing: null,
-    invalid: null,
-    states: [['', 'yes'], 'no']
-  },
   contentEditable: {
     tagNames: null,
     missing: null,
     invalid: null,
     states: [null, ['', 'true'], 'false']
   },
-  spellCheck: {
-    tagNames: null,
+  crossOrigin: {
+    tagNames: ['link', 'img', 'audio', 'video', 'script'],
     missing: null,
-    invalid: null,
-    states: [null, ['', 'true'], 'false']
-  },
-  draggable: {
-    tagNames: null,
-    missing: null,
-    states: [null, 'true', 'false']
-  },
-  autoComplete: {
-    tagNames: null,
-    missing: '',
-    states: [['', 'on'], 'off']
+    invalid: '',
+    states: [['', 'anonymous'], 'use-credentials']
   },
   dir: {
     tagNames: null,
@@ -272,94 +246,15 @@ module.exports = {
     invalid: '',
     states: ['', 'ltr', 'rtl', 'auto']
   },
-  kind: {
-    tagNames: 'track',
-    missing: 'subtitles',
-    invalid: 'metadata',
-    states: ['subtitles', 'captions', 'descriptions', 'chapters', 'metadata']
+  direction: {
+    tagNames: 'marquee',
+    missing: 'left',
+    states: ['left', 'right', 'up', 'down']
   },
-  preload: {
-    tagNames: ['audio', 'video'],
-    // Note: https://html.spec.whatwg.org/#attr-media-preload
-    states: ['none', 'metadata', ['', 'auto']]
-  },
-  shape: {
-    tagNames: 'area',
-    missing: 'rect',
-    states: [
-      // The latter are non-conforming.
-      ['rect', 'rectangle'],
-      ['poly', 'polygon'],
-      ['circle', 'circ'],
-      'default'
-    ]
-  },
-  scope: {
-    tagNames: 'th',
-    missing: '',
-    states: ['', 'row', 'col', 'rowgroup', 'colgroup']
-  },
-  type: [
-    {
-      tagNames: 'button',
-      missing: 'submit',
-      states: ['submit', 'reset', 'button', 'menu']
-    },
-    {
-      tagNames: 'menu',
-      missing: '',
-      states: ['', 'context', 'toolbar']
-    },
-    {
-      tagNames: 'menuitem',
-      missing: 'command',
-      states: ['command', 'checkbox', 'radio']
-    },
-    {
-      tagNames: 'input',
-      missing: 'text',
-      states: [
-        'text',
-        'hidden',
-        'search',
-        'tel',
-        'url',
-        'email',
-        'password',
-        'date',
-        'month',
-        'week',
-        'time',
-        'datetime-local',
-        'number',
-        'range',
-        'color',
-        'checkbox',
-        'radio',
-        'file',
-        'submit',
-        'image',
-        'reset',
-        'button'
-      ]
-    }
-  ],
-  wrap: {
-    tagNames: 'textarea',
-    missing: 'soft',
-    states: ['soft', 'hard']
-  },
-  keyType: {
-    tagNames: 'keygen',
-    missing: 'rsa',
-    states: ['', 'rsa']
-  },
-  // Also for `formMethod` on submit buttons.
-  method: {
-    tagNames: 'form',
-    invalid: 'get',
-    missing: 'get',
-    states: ['get', 'post', 'dialog']
+  draggable: {
+    tagNames: null,
+    missing: null,
+    states: [null, 'true', 'false']
   },
   // Also for `formEncType` on submit buttons.
   encType: {
@@ -379,28 +274,133 @@ module.exports = {
     missing: '',
     states: [
       '',
-      'verbatim',
-      'latin',
-      'latin-name',
-      'latin-prose',
+      'email',
       'full-width-latin',
       'kana',
       'kana-name',
       'katakana',
+      'latin',
+      'latin-name',
+      'latin-prose',
       'numeric',
       'tel',
-      'email',
-      'url'
+      'url',
+      'verbatim'
     ]
   },
-  behavior: {
-    tagNames: 'marquee',
-    missing: 'scroll',
-    states: ['scroll', 'slide', 'alternate']
+  keytype: {
+    tagNames: 'keygen',
+    missing: 'rsa',
+    states: ['', 'rsa']
   },
-  direction: {
-    tagNames: 'marquee',
-    missing: 'left',
-    states: ['left', 'right', 'up', 'down']
+  kind: {
+    tagNames: 'track',
+    missing: 'subtitles',
+    invalid: 'metadata',
+    states: ['captions', 'chapters', 'descriptions', 'metadata', 'subtitles']
+  },
+  // Also for `formMethod` on submit buttons.
+  method: {
+    tagNames: 'form',
+    invalid: 'get',
+    missing: 'get',
+    states: ['dialog', 'get', 'post']
+  },
+  preload: {
+    tagNames: ['audio', 'video'],
+    // Note: https://html.spec.whatwg.org/#attr-media-preload
+    states: [['', 'auto'], 'metadata', 'none']
+  },
+  // Should also apply to `content` on `meta[name=referrer]`.
+  referrerPolicy: {
+    tagNames: ['a', 'area', 'iframe', 'img', 'link'],
+    missing: '',
+    invalid: '',
+    states: [
+      '',
+      'no-referrer',
+      'no-referrer-when-downgrade',
+      'origin',
+      'origin-when-cross-origin',
+      'unsafe-url'
+    ]
+  },
+  scope: {
+    tagNames: 'th',
+    missing: '',
+    states: ['', 'col', 'colgroup', 'row', 'rowgroup']
+  },
+  shape: {
+    tagNames: 'area',
+    missing: 'rect',
+    states: [
+      // The latter are non-conforming.
+      ['rect', 'rectangle'],
+      ['poly', 'polygon'],
+      ['circle', 'circ'],
+      'default'
+    ]
+  },
+  spellCheck: {
+    tagNames: null,
+    missing: null,
+    invalid: null,
+    states: [null, ['', 'true'], 'false']
+  },
+  translate: {
+    tagNames: null,
+    missing: null,
+    invalid: null,
+    states: [['', 'yes'], 'no']
+  },
+  type: [
+    {
+      tagNames: 'button',
+      missing: 'submit',
+      states: ['button', 'menu', 'reset', 'submit']
+    },
+    {
+      tagNames: 'menu',
+      missing: '',
+      states: ['', 'context', 'toolbar']
+    },
+    {
+      tagNames: 'menuitem',
+      missing: 'command',
+      states: ['checkbox', 'command', 'radio']
+    },
+    {
+      tagNames: 'input',
+      missing: 'text',
+      states: [
+        'button',
+        'checkbox',
+        'color',
+        'date',
+        'datetime-local',
+        'email',
+        'file',
+        'hidden',
+        'image',
+        'number',
+        'month',
+        'password',
+        'radio',
+        'range',
+        'reset',
+        'search',
+        'submit',
+        'tel',
+        'text',
+        'time',
+        'url',
+        'week'
+      ]
+    }
+  ],
+  wrap: {
+    tagNames: 'textarea',
+    missing: 'soft',
+    states: ['hard', 'soft']
   }
 }
