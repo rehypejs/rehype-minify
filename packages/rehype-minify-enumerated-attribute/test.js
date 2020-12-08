@@ -130,5 +130,50 @@ test('rehype-minify-enumerated-attribute', function (t) {
     h('link', {crossOrigin: ''})
   )
 
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(h('img', {loading: 'eager'})),
+    {
+      type: 'element',
+      tagName: 'img',
+      properties: {loading: null},
+      children: []
+    }
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(h('img', {loading: 'lazy'})),
+    h('img', {loading: 'lazy'})
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(h('img', {loading: 'xxx'})),
+    {
+      type: 'element',
+      tagName: 'img',
+      properties: {loading: null},
+      children: []
+    }
+  )
+
+  t.deepEqual(rehype().use(min).runSync(h('img')), h('img'))
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(h('li', {type: 'xxx'})),
+    {
+      type: 'element',
+      tagName: 'li',
+      properties: {type: null},
+      children: []
+    }
+  )
+
   t.end()
 })

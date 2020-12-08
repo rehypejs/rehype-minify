@@ -288,6 +288,12 @@ module.exports = {
       'verbatim'
     ]
   },
+  loading: {
+    tagNames: ['iframe', 'img'],
+    invalid: 'eager',
+    missing: 'eager',
+    states: ['eager', 'lazy']
+  },
   keytype: {
     tagNames: 'keygen',
     missing: 'rsa',
@@ -360,16 +366,6 @@ module.exports = {
       states: ['button', 'menu', 'reset', 'submit']
     },
     {
-      tagNames: 'menu',
-      missing: '',
-      states: ['', 'context', 'toolbar']
-    },
-    {
-      tagNames: 'menuitem',
-      missing: 'command',
-      states: ['checkbox', 'command', 'radio']
-    },
-    {
       tagNames: 'input',
       missing: 'text',
       states: [
@@ -396,6 +392,34 @@ module.exports = {
         'url',
         'week'
       ]
+    },
+    {
+      tagNames: 'li',
+      missing: '',
+      invalid: '',
+      states: ['1', 'a', 'A', 'i', 'I', 'circle', 'disc', 'none', 'square']
+    },
+    {
+      tagNames: 'menu',
+      missing: '',
+      states: ['', 'context', 'toolbar']
+    },
+    {
+      tagNames: 'menuitem',
+      missing: 'command',
+      states: ['checkbox', 'command', 'radio']
+    },
+    {
+      tagNames: 'ol',
+      missing: '',
+      invalid: '',
+      states: ['1', 'a', 'A', 'i', 'I']
+    },
+    {
+      tagNames: 'ul',
+      missing: '',
+      invalid: '',
+      states: ['circle', 'disc', 'none', 'square']
     }
   ],
   wrap: {
