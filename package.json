@@ -38,14 +38,14 @@
     "strip-indent": "^3.0.0",
     "tape": "^5.0.0",
     "to-vfile": "^6.0.0",
-    "trim": "0.0.1",
+    "trim": "1.0.0",
     "trim-trailing-lines": "^1.0.0",
     "trough": "^1.0.0",
     "unified": "^9.0.0",
     "uniq": "^1.0.0",
     "unist-builder": "^2.0.0",
     "vfile-find-down": "^5.0.0",
-    "xo": "^0.34.0",
+    "xo": "^0.36.0",
     "xtend": "^4.0.0"
   },
   "scripts": {
