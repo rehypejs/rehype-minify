@@ -353,6 +353,12 @@ module.exports = {
     invalid: null,
     states: [null, ['', 'true'], 'false']
   },
+  target: {
+    tagNames: ['a', 'area', 'base', 'form'],
+    missing: '',
+    allowUnknown: true,
+    states: ['_blank', '_parent', ['', '_self'], '_top']
+  },
   translate: {
     tagNames: null,
     missing: null,

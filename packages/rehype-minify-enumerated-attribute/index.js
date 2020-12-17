@@ -87,7 +87,7 @@ function minify(value, info) {
     result = state[0]
   } else if (typeof info.invalid === 'string') {
     result = info.invalid
-  } else if (typeof info.missing === 'string') {
+  } else if (typeof info.missing === 'string' && !info.allowUnknown) {
     result = info.missing
   } else {
     return value

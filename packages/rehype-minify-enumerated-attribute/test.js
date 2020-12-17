@@ -175,5 +175,47 @@ test('rehype-minify-enumerated-attribute', function (t) {
     }
   )
 
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(h('a', {target: 'b'})),
+    h('a', {target: 'b'}),
+    'should keep an unlisted `target`'
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(h('area', {target: '_blank'})),
+    h('area', {target: '_blank'}),
+    'should keep `area[target="_blank"]`'
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(h('a', {target: '_self'})),
+    {
+      type: 'element',
+      tagName: 'a',
+      properties: {target: null},
+      children: []
+    },
+    'should remove `[target="_self"]` on `base`'
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(h('form', {target: ''})),
+    {
+      type: 'element',
+      tagName: 'form',
+      properties: {target: null},
+      children: []
+    },
+    'should remove `[target=""]` on `form`'
+  )
+
   t.end()
 })
