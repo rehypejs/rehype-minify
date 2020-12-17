@@ -256,7 +256,7 @@ module.exports = {
     missing: null,
     states: [null, 'true', 'false']
   },
-  // Also for `formEncType` on submit buttons.
+  // When changing `encType`, please also change `formEncType`.
   encType: {
     tagNames: 'form',
     invalid: 'application/x-www-form-urlencoded',
@@ -266,6 +266,31 @@ module.exports = {
       'multipart/form-data',
       'text/plain'
     ]
+  },
+  // When changing `formEncType`, please also change `encType`.
+  formEncType: {
+    tagNames: ['button', 'input'],
+    invalid: 'application/x-www-form-urlencoded',
+    missing: 'application/x-www-form-urlencoded',
+    states: [
+      'application/x-www-form-urlencoded',
+      'multipart/form-data',
+      'text/plain'
+    ]
+  },
+  // When changing `formMethod`, please also change `method`.
+  formMethod: {
+    tagNames: ['button', 'input'],
+    invalid: 'get',
+    missing: 'get',
+    states: ['dialog', 'get', 'post']
+  },
+  // When changing `formTarget`, please also change `target`.
+  formTarget: {
+    tagNames: ['button', 'input'],
+    missing: '',
+    allowUnknown: true,
+    states: ['_blank', '_parent', ['', '_self'], '_top']
   },
   inputMode: {
     // In fact only applies to `text`, `search`, and `password`.
@@ -305,7 +330,7 @@ module.exports = {
     invalid: 'metadata',
     states: ['captions', 'chapters', 'descriptions', 'metadata', 'subtitles']
   },
-  // Also for `formMethod` on submit buttons.
+  // When changing `method`, please also change `formMethod`.
   method: {
     tagNames: 'form',
     invalid: 'get',
@@ -353,6 +378,7 @@ module.exports = {
     invalid: null,
     states: [null, ['', 'true'], 'false']
   },
+  // When changing `target`, please also change `formTarget`.
   target: {
     tagNames: ['a', 'area', 'base', 'form'],
     missing: '',
