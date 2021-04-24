@@ -25,6 +25,14 @@
 
 module.exports = toString
 
+/**
+ * @typedef {import('hast').Element} Element
+ */
+
+/**
+ * @param {Element} node The HTML element to get the plain-text value of.
+ * @returns {string} The plain text value of the HTML element.
+ */
 function toString(node) {
   // “The concatenation of data of all the Text node descendants of the context
   // object, in tree order.”
@@ -36,6 +44,10 @@ function toString(node) {
   return 'value' in node ? node.value : ''
 }
 
+/**
+ * @param {Element} node
+ * @returns {string}
+ */
 function one(node) {
   if (node.type === 'text') {
     return node.value
@@ -44,6 +56,10 @@ function one(node) {
   return node.children ? all(node) : ''
 }
 
+/**
+ * @param {Element} node
+ * @returns {string}
+ */
 function all(node) {
   var children = node.children
   var length = children.length
