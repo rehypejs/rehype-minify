@@ -13,6 +13,8 @@
     "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
   ],
   "devDependencies": {
+    "@types/hast": "^2.0.0",
+    "@types/tape": "^4.0.0",
     "bail": "^1.0.0",
     "bytes": "^3.0.0",
     "chalk": "^4.0.0",
@@ -41,6 +43,8 @@
     "trim": "1.0.0",
     "trim-trailing-lines": "^1.0.0",
     "trough": "^1.0.0",
+    "type-coverage": "^2.0.0",
+    "typescript": "^4.0.0",
     "unified": "^9.0.0",
     "uniq": "^1.0.0",
     "unist-builder": "^2.0.0",
