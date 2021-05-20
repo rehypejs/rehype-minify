@@ -22,7 +22,10 @@ module.exports = trough()
     exec(cmd, function (err, stdout) {
       if (err) return next(err)
 
-      ctx.contributors = uniq(stdout.split('\n')).sort().filter(Boolean)
+      ctx.contributors = uniq(stdout.split('\n'))
+        .sort()
+        .filter(Boolean)
+        .filter((d) => !d.includes('<noreply'))
 
       if (ctx.contributors.length === 0) {
         ctx.contributors = null
