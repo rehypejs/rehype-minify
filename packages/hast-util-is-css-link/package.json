@@ -27,7 +27,7 @@
     "index.js"
   ],
   "dependencies": {
-    "trim": "^0.0.1"
+    "trim": "^1.0.0"
   },
   "xo": false
 }
