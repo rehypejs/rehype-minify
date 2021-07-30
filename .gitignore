@@ -1,6 +1,5 @@
 .DS_Store
 *.log
-.nyc_output/
 benchmark-cache/
 coverage/
 node_modules/

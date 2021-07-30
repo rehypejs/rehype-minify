@@ -32,12 +32,13 @@ function visitor(node) {
   if (js(node) && !has(node, 'src')) {
     try {
       value = Uglify.minify(toString(node)).code
-      /* istanbul ignore else - not used, but just to be sure there’s an if */
       if (value.charAt(value.length - 1) === ';') {
         value = value.slice(0, -1)
       }
 
       fromString(node, value)
+      // Potential third party errors?
+      /* c8 ignore next */
     } catch (_) {}
   }
 }

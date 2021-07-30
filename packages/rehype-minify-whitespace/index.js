@@ -203,7 +203,8 @@ function blocklike(node) {
 }
 
 function skippable(node) {
-  /* istanbul ignore next - currently only used on elements, but just to make sure. */
+  // Currently only used on elements, but just to make sure.
+  /* c8 ignore next */
   var props = node.properties || {}
 
   return ignorableNode(node) || is(node, skippables) || props.hidden

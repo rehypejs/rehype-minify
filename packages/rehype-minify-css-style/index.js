@@ -34,6 +34,8 @@ function visitor(node) {
     try {
       value = toString(node)
       fromString(node, clean.minify(value).styles || value)
+      // Potential third party errors?
+      /* c8 ignore next */
     } catch (_) {}
   }
 }

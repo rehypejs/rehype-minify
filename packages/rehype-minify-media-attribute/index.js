@@ -39,6 +39,8 @@ function visitor(node) {
       try {
         output = clean.minify(prefix + value + suffix)
         value = output.styles.slice(prefix.length, -suffix.length)
+        // Potential third party errors?
+        /* c8 ignore next */
       } catch (_) {}
 
       props.media = value === 'all' || !value ? null : value
