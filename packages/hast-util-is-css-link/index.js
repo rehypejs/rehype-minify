@@ -15,7 +15,7 @@
  *
  *   ## API
  *
- *   ### `isCSSLink(node)`
+ *   ### `isCssLink(node)`
  *
  *   Return `true` if `node` is a `<link>` element with a `rel` list that
  *   contains `'stylesheet'` and has no `type`, an empty `type`, or `'text/css'`

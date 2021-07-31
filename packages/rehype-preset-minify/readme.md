@@ -62,7 +62,7 @@ After installing, add the following to `.rehyperc` (or `package.json` under
 Then use [**rehype-cli**][cli]:
 
 ```sh
-rehype src -o dist
+rehype src/ --output dist/
 ```
 
 ## API

@@ -14,11 +14,35 @@ Map of URL attributes in HTML.
 
 ## Install
 
+This package is [ESM only][esm]:
+Node 12+ is needed to use it and it must be `imported`ed instead of `required`d.
+
 [npm][]:
 
 ```sh
 npm install html-url-attributes
 ```
+
+This package exports the following identifiers:
+`urlAttributes`.
+There is no default export.
+
+## Use
+
+```js
+import {urlAttributes} from 'html-url-attributes'
+
+urlAttributes.formAction
+//=> ['button', 'input']
+urlAttributes.href
+//=> ['a', 'area', 'base', 'link']
+```
+
+## API
+
+### `urlAttributes`
+
+Map of URL attributes in HTML (`Record<string, string[]>`).
 
 ## Contribute
 
@@ -59,6 +83,8 @@ abide by its terms.
 [chat-badge]: https://img.shields.io/badge/chat-discussions-success.svg
 
 [chat]: https://github.com/rehypejs/rehype/discussions
+
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
 [npm]: https://docs.npmjs.com/cli/install
 

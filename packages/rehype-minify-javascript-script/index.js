@@ -15,7 +15,7 @@ import {toString} from 'hast-util-to-string'
 import {isJavaScript} from 'hast-util-is-javascript'
 import {hasProperty} from 'hast-util-has-property'
 
-export default function rehypeMinifyJavaScript() {
+export default function rehypeMinifyJavaScriptScript() {
   return transform
 }
 

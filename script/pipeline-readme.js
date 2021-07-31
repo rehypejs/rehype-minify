@@ -97,18 +97,63 @@ export const pipelineReadme = trough()
       ).children
     )
 
+    const mod = await import(ctx.script.path)
+    const specifiers = Object.keys(mod).filter((d) => d !== 'default')
+
     tree.push(
       u('heading', {depth: 2}, [u('text', 'Install')]),
+      u('paragraph', [
+        u('text', 'This package is '),
+        u('linkReference', {identifier: 'esm', referenceType: 'full'}, [
+          u('text', 'ESM only')
+        ]),
+        u('text', ':\nNode 12+ is needed to use it and it must be '),
+        u('inlineCode', 'imported'),
+        u('text', 'ed instead of '),
+        u('inlineCode', 'required'),
+        u('text', 'd.')
+      ]),
       u('paragraph', [
         u('linkReference', {identifier: 'npm', referenceType: 'collapsed'}, [
           u('text', 'npm')
         ]),
         u('text', ':')
       ]),
-      u('code', {lang: 'sh'}, 'npm install ' + config.name)
+      u('code', {lang: 'sh'}, 'npm install ' + config.name),
+      u('paragraph', [
+        ...(specifiers.length > 0
+          ? [
+              u('text', 'This package exports the following identifiers:\n'),
+              ...specifiers.flatMap((d, i) => {
+                const node = u('inlineCode', d)
+                return i ? [u('text', ', '), node] : node
+              }),
+              u('text', '.\n')
+            ]
+          : [u('text', 'This package exports no identifiers.\n')]),
+        ...('default' in mod && 'name' in mod.default
+          ? [
+              u('text', 'The default export is '),
+              u('inlineCode', mod.default.name)
+            ]
+          : [u('text', 'There is no default export.')])
+      ])
     )
 
     if (ctx.plugins.includes(config.name)) {
+      const id = config.name
+        .replace(/-([a-z])/g, ($0, $1) => $1.toUpperCase())
+        .replace(/Javascript/g, 'JavaScript')
+
+      if (!('default' in mod) || mod.default.name !== id) {
+        throw new Error(
+          'Expected default export called `' +
+            id +
+            '`' +
+            (mod.default ? ', not `' + mod.default.name + '`' : '')
+        )
+      }
+
       tree.push(
         u('heading', {depth: 2}, [u('text', 'Use')]),
         u('paragraph', [u('text', 'On the API:')]),
@@ -116,10 +161,15 @@ export const pipelineReadme = trough()
           'code',
           {lang: 'diff'},
           [
+            " import {unified} from 'unified'",
+            " import rehypeParse from 'rehype-parse'",
+            '+import ' + id + " from '" + config.name + "'",
+            " import rehypeStringify from 'rehype-stringify'",
+            '',
             ' unified()',
-            "   .use(require('rehype-parse'))",
-            "+  .use(require('" + config.name + "'))",
-            "   .use(require('rehype-stringify'))",
+            '   .use(rehypeParse)',
+            '+  .use(' + id + ')',
+            '   .use(rehypeStringify)',
             "   .process('<span>some html</span>', function (err, file) {",
             '     console.error(report(err || file))',
             '     console.log(String(file))',
@@ -132,7 +182,7 @@ export const pipelineReadme = trough()
           {lang: 'sh'},
           'rehype input.html --use ' +
             config.name.replace(/^rehype-/, '') +
-            ' > output.html'
+            ' --output output.html'
         )
       )
     }
@@ -170,16 +220,7 @@ export const pipelineReadme = trough()
       tree.push(
         u('heading', {depth: 5}, [u('text', 'In')]),
         u('code', {lang: 'html'}, example),
-        u('heading', {depth: 5}, [u('text', 'Out')])
-      )
-
-      const mod = await import(ctx.script.path)
-
-      if (!('default' in mod)) {
-        throw new Error('Expected plugin to `export default`')
-      }
-
-      tree.push(
+        u('heading', {depth: 5}, [u('text', 'Out')]),
         u(
           'code',
           {lang: 'html'},
@@ -278,6 +319,10 @@ export const pipelineReadme = trough()
       u('definition', {
         identifier: 'chat',
         url: 'https://github.com/rehypejs/rehype/discussions'
+      }),
+      u('definition', {
+        identifier: 'esm',
+        url: 'https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c'
       }),
       u('definition', {
         identifier: 'npm',

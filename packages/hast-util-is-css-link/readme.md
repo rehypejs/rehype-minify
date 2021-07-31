@@ -14,11 +14,18 @@ Check if an element is a CSS link.
 
 ## Install
 
+This package is [ESM only][esm]:
+Node 12+ is needed to use it and it must be `imported`ed instead of `required`d.
+
 [npm][]:
 
 ```sh
 npm install hast-util-is-css-link
 ```
+
+This package exports the following identifiers:
+`isCssLink`.
+There is no default export.
 
 ## Use
 
@@ -33,7 +40,7 @@ isCssLink(h('link', {rel: ['stylesheet'], type: 'text/foo'})) //=> false
 
 ## API
 
-### `isCSSLink(node)`
+### `isCssLink(node)`
 
 Return `true` if `node` is a `<link>` element with a `rel` list that
 contains `'stylesheet'` and has no `type`, an empty `type`, or `'text/css'`
@@ -78,6 +85,8 @@ abide by its terms.
 [chat-badge]: https://img.shields.io/badge/chat-discussions-success.svg
 
 [chat]: https://github.com/rehypejs/rehype/discussions
+
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
 [npm]: https://docs.npmjs.com/cli/install
 

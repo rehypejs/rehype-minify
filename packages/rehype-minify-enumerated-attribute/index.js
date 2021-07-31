@@ -18,7 +18,7 @@ import {schema} from './schema.js'
 
 const own = {}.hasOwnProperty
 
-export default function rehypeMinifyEnumeratedAttributes() {
+export default function rehypeMinifyEnumeratedAttribute() {
   return transform
 }
 

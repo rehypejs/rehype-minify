@@ -17,21 +17,32 @@ This can *decrease* the time to
 
 ## Install
 
+This package is [ESM only][esm]:
+Node 12+ is needed to use it and it must be `imported`ed instead of `required`d.
+
 [npm][]:
 
 ```sh
 npm install rehype-css-to-top
 ```
 
+This package exports no identifiers.
+The default export is `rehypeCssToTop`
+
 ## Use
 
 On the API:
 
 ```diff
+ import {unified} from 'unified'
+ import rehypeParse from 'rehype-parse'
++import rehypeCssToTop from 'rehype-css-to-top'
+ import rehypeStringify from 'rehype-stringify'
+
  unified()
-   .use(require('rehype-parse'))
-+  .use(require('rehype-css-to-top'))
-   .use(require('rehype-stringify'))
+   .use(rehypeParse)
++  .use(rehypeCssToTop)
+   .use(rehypeStringify)
    .process('<span>some html</span>', function (err, file) {
      console.error(report(err || file))
      console.log(String(file))
@@ -41,7 +52,7 @@ On the API:
 On the CLI:
 
 ```sh
-rehype input.html --use css-to-top > output.html
+rehype input.html --use css-to-top --output output.html
 ```
 
 ## Example
@@ -97,6 +108,8 @@ abide by its terms.
 [chat-badge]: https://img.shields.io/badge/chat-discussions-success.svg
 
 [chat]: https://github.com/rehypejs/rehype/discussions
+
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
 [npm]: https://docs.npmjs.com/cli/install
 

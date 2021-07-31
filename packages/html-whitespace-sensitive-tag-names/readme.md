@@ -14,11 +14,33 @@ List of whitespace sensitive HTML tag names.
 
 ## Install
 
+This package is [ESM only][esm]:
+Node 12+ is needed to use it and it must be `imported`ed instead of `required`d.
+
 [npm][]:
 
 ```sh
 npm install html-whitespace-sensitive-tag-names
 ```
+
+This package exports the following identifiers:
+`whitespaceSensitiveTagNames`.
+There is no default export.
+
+## Use
+
+```js
+import {whitespaceSensitiveTagNames} from 'html-whitespace-sensitive-tag-names'
+
+whitespaceSensitiveTagNames
+//=> ['pre', 'script', 'style', 'textarea']
+```
+
+## API
+
+### `whitespaceSensitiveTagNames`
+
+List of whitespace sensitive HTML tag names (`string[]`).
 
 ## Contribute
 
@@ -59,6 +81,8 @@ abide by its terms.
 [chat-badge]: https://img.shields.io/badge/chat-discussions-success.svg
 
 [chat]: https://github.com/rehypejs/rehype/discussions
+
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
 [npm]: https://docs.npmjs.com/cli/install
 

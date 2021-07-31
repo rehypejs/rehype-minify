@@ -11,7 +11,7 @@ import {schema} from './schema.js'
 
 const own = {}.hasOwnProperty
 
-export default function rehypeRemoveDuplicateAttributeValue() {
+export default function rehypeRemoveDuplicateAttributeValues() {
   return transform
 }
 
