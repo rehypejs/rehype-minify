@@ -18,7 +18,7 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var props = node.properties
+  const props = node.properties
 
   if (isJavaScript(node)) {
     if ('type' in props) {

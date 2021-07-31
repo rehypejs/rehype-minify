@@ -11,46 +11,45 @@ import {visit} from 'unist-util-visit'
 import {isElement} from 'hast-util-is-element'
 import {schema} from './schema.js'
 
-var own = {}.hasOwnProperty
+const own = {}.hasOwnProperty
 
 export default function rehypeSortAttributeValues() {
   return transform
 }
 
 function transform(tree) {
-  var counts = {}
-  var queues = []
+  const counts = {}
+  const queues = []
 
   visit(tree, 'element', visitor)
 
   flush(optimize())
 
   function visitor(node) {
-    var props = node.properties
-    var prop
-    var value
+    const props = node.properties
+    let prop
 
     for (prop in props) {
-      value = props[prop]
+      if (own.call(props, prop)) {
+        const value = props[prop]
 
-      if (
-        own.call(schema, prop) &&
-        isElement(node, schema[prop]) &&
-        Array.isArray(value)
-      ) {
-        add(prop, value)
+        if (
+          own.call(schema, prop) &&
+          isElement(node, schema[prop]) &&
+          Array.isArray(value)
+        ) {
+          add(prop, value)
+        }
       }
     }
   }
 
   function add(prop, values) {
-    var cache = counts[prop] || (counts[prop] = {known: []})
-    var length = values.length
-    var index = -1
-    var value
+    const cache = counts[prop] || (counts[prop] = {known: []})
+    let index = -1
 
-    while (++index < length) {
-      value = safe(values[index])
+    while (++index < values.length) {
+      const value = safe(values[index])
 
       if (value in cache) {
         cache[value]++
@@ -64,36 +63,28 @@ function transform(tree) {
   }
 
   function optimize() {
-    var caches = {}
-    var prop
-    var values
+    const caches = {}
+    let prop
 
     for (prop in counts) {
-      values = counts[prop]
-      caches[prop] = values.known.sort(sort)
+      if (own.call(counts, prop)) {
+        const values = counts[prop]
+        caches[prop] = values.known.sort(
+          (a, b) => values[safe(b)] - values[safe(a)] || compare(a, b, 0)
+        )
+      }
     }
 
     return caches
-
-    function sort(a, b) {
-      return values[safe(b)] - values[safe(a)] || compare(a, b, 0)
-    }
   }
 
   function flush(caches) {
-    var length = queues.length
-    var index = -1
-    var queue
-    var cache
+    let index = -1
 
-    while (++index < length) {
-      queue = queues[index]
-      cache = caches[queue[1]]
-      queue[0].sort(sorter)
-    }
-
-    function sorter(a, b) {
-      return cache.indexOf(a) - cache.indexOf(b)
+    while (++index < queues.length) {
+      const queue = queues[index]
+      const cache = caches[queue[1]]
+      queue[0].sort((a, b) => cache.indexOf(a) - cache.indexOf(b))
     }
   }
 }

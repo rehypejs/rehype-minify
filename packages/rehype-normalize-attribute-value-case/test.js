@@ -3,7 +3,7 @@ import {rehype} from 'rehype'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-normalize-attribute-value-case', function (t) {
+test('rehype-normalize-attribute-value-case', (t) => {
   t.deepEqual(
     rehype()
       .use(min)

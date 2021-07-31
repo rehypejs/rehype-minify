@@ -35,6 +35,6 @@ function visitor(node) {
   ) {
     try {
       fromString(node, JSON.stringify(JSON.parse(toString(node))))
-    } catch (_) {}
+    } catch {}
   }
 }

@@ -17,12 +17,12 @@ export default function rehypeCssToTop() {
 }
 
 function transform(tree) {
-  var head
-  var matches = []
+  const matches = []
+  let head
 
   visit(tree, 'element', visitor)
 
-  if (head && matches.length !== 0) {
+  if (head && matches.length > 0) {
     move()
   }
 
@@ -37,14 +37,11 @@ function transform(tree) {
   }
 
   function move() {
-    var length = matches.length
-    var index = -1
-    var match
-    var siblings
+    let index = -1
 
-    while (++index < length) {
-      match = matches[index]
-      siblings = match[0].children
+    while (++index < matches.length) {
+      const match = matches[index]
+      const siblings = match[0].children
       siblings.splice(siblings.indexOf(match[1]), 1)
       head.children.push(match[1])
     }

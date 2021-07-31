@@ -3,20 +3,20 @@ import {rehype} from 'rehype'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-minify-url', function (t) {
-  t.throws(function () {
+test('rehype-minify-url', (t) => {
+  t.throws(() => {
     rehype().use(min).freeze()
   }, /^Error: Missing absolute `from` in options$/)
 
-  t.throws(function () {
+  t.throws(() => {
     rehype().use(min, {from: '/'}).freeze()
   }, /^Error: Missing absolute `from` in options$/)
 
-  t.throws(function () {
+  t.throws(() => {
     rehype().use(min, {from: '/'}).freeze()
   }, /^Error: Missing absolute `from` in options$/)
 
-  var options = {from: 'http://example.com/one/alpha/'}
+  const options = {from: 'http://example.com/one/alpha/'}
 
   t.deepEqual(
     rehype()

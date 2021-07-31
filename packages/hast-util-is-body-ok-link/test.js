@@ -3,7 +3,7 @@ import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {isBodyOkLink} from './index.js'
 
-test('isBodyOkLink', function (t) {
+test('isBodyOkLink', (t) => {
   t.equal(
     isBodyOkLink(h('link', {itemProp: 'foo'})),
     true,

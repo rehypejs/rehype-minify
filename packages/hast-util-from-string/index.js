@@ -35,13 +35,13 @@
  */
 
 export function fromString(node, d) {
-  var value = d == null ? '' : String(d)
+  const value = d === undefined || d === null ? '' : String(d)
 
   if ('children' in node) {
     node.children = []
 
     if (value) {
-      node.children.push({type: 'text', value: value})
+      node.children.push({type: 'text', value})
     }
   } else {
     node.value = value

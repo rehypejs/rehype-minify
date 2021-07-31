@@ -2,7 +2,7 @@ import test from 'tape'
 import {u} from 'unist-builder'
 import {fromString} from './index.js'
 
-test('hast-util-from-string', function (t) {
+test('hast-util-from-string', (t) => {
   t.deepEqual(
     fromString(u('text'), 'foo'),
     u('text', 'foo'),

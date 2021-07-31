@@ -26,7 +26,7 @@
 import {hasProperty} from 'hast-util-has-property'
 import {isElement} from 'hast-util-is-element'
 
-const mime = [
+const mime = new Set([
   'application/ecmascript',
   'application/javascript',
   'application/x-ecmascript',
@@ -43,7 +43,7 @@ const mime = [
   'text/livescript',
   'text/x-ecmascript',
   'text/x-javascript'
-]
+])
 
 // Check node.
 export function isJavaScript(node) {
@@ -62,13 +62,11 @@ export function isJavaScript(node) {
 
 // Check one value.
 function check(d, prefix) {
-  var value
-
   if (typeof d !== 'string') {
     return false
   }
 
-  value = d.split(';', 1)[0].trim().toLowerCase()
+  const value = d.split(';', 1)[0].trim().toLowerCase()
 
-  return value === '' || mime.indexOf((prefix || '') + value) !== -1
+  return value === '' || mime.has((prefix || '') + value)
 }

@@ -2,7 +2,7 @@ import test from 'tape'
 import {u} from 'unist-builder'
 import {toString} from './index.js'
 
-test('hast-util-to-string', function (t) {
+test('hast-util-to-string', (t) => {
   t.deepEqual(toString(u('comment', 'foo')), 'foo', 'should stringify comments')
 
   t.deepEqual(toString(u('text', 'foo')), 'foo', 'should stringify texts')

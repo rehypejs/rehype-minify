@@ -3,7 +3,7 @@ import {rehype} from 'rehype'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-minify-javascript-url', function (t) {
+test('rehype-minify-javascript-url', (t) => {
   /* eslint-disable no-script-url */
   t.deepEqual(
     rehype()

@@ -4,7 +4,7 @@ import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-concat-javascript', function (t) {
+test('rehype-concat-javascript', (t) => {
   t.deepEqual(
     rehype()
       .use(min)

@@ -4,7 +4,7 @@ import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-remove-meta-http-equiv', function (t) {
+test('rehype-remove-meta-http-equiv', (t) => {
   t.deepEqual(
     rehype()
       .use(min)

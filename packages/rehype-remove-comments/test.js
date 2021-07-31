@@ -3,7 +3,7 @@ import {rehype} from 'rehype'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-remove-comments', function (t) {
+test('rehype-remove-comments', (t) => {
   t.deepEqual(
     rehype()
       .use(min)

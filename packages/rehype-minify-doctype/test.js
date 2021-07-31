@@ -3,7 +3,7 @@ import {rehype} from 'rehype'
 import {u} from 'unist-builder'
 import min from './index.js'
 
-test('rehype-minify-doctype', function (t) {
+test('rehype-minify-doctype', (t) => {
   t.deepEqual(
     rehype()
       .use(min)

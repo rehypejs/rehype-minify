@@ -12,7 +12,7 @@ import {bcp47Normalize} from 'bcp-47-normalize'
 import {visit} from 'unist-util-visit'
 import {hasProperty} from 'hast-util-has-property'
 
-var fields = ['hrefLang', 'lang', 'srcLang', 'xmlLang']
+const fields = ['hrefLang', 'lang', 'srcLang', 'xmlLang']
 
 export default function rehypeMinifyLanguage() {
   return transform
@@ -23,12 +23,11 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var props = node.properties
-  var index = -1
-  var prop
+  const props = node.properties
+  let index = -1
 
   while (++index < fields.length) {
-    prop = fields[index]
+    const prop = fields[index]
 
     if (hasProperty(node, prop) && typeof props[prop] === 'string') {
       // BCP 47 tags are case-insensitive, but in this project we prefer

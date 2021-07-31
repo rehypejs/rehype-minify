@@ -15,19 +15,18 @@
 import {visit} from 'unist-util-visit'
 import {isJavaScript} from 'hast-util-is-javascript'
 
-export default function rehypeJavaScriptToBottom(options) {
-  var settings = options || {}
-  var filter = settings.filter || yes
+export default function rehypeJavaScriptToBottom(options = {}) {
+  const filter = options.filter || yes
 
   return transform
 
   function transform(tree) {
-    var matches = []
-    var body
+    const matches = []
+    let body
 
     visit(tree, 'element', visitor)
 
-    if (body && matches.length !== 0) {
+    if (body && matches.length > 0) {
       move()
     }
 
@@ -42,14 +41,11 @@ export default function rehypeJavaScriptToBottom(options) {
     }
 
     function move() {
-      var length = matches.length
-      var index = -1
-      var match
-      var siblings
+      let index = -1
 
-      while (++index < length) {
-        match = matches[index]
-        siblings = match[0].children
+      while (++index < matches.length) {
+        const match = matches[index]
+        const siblings = match[0].children
         siblings.splice(siblings.indexOf(match[1]), 1)
         body.children.push(match[1])
       }

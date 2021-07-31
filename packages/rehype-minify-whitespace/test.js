@@ -4,7 +4,7 @@ import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-minify-whitespace', function (t) {
+test('rehype-minify-whitespace', (t) => {
   t.deepEqual(
     rehype()
       .use(min)

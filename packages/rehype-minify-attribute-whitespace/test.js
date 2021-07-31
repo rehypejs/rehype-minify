@@ -3,7 +3,7 @@ import {rehype} from 'rehype'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-minify-attribute-whitespace', function (t) {
+test('rehype-minify-attribute-whitespace', (t) => {
   t.deepEqual(
     rehype()
       .use(min)

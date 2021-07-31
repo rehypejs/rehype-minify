@@ -10,47 +10,49 @@ import {pipelinePackage} from './pipeline-package.js'
 import {pipelineReadme} from './pipeline-readme.js'
 import {pipelinePresets} from './pipeline-presets.js'
 
-var rootPath = process.cwd()
-var packages = path.join(rootPath, 'packages')
+const rootPath = process.cwd()
+const packages = path.join(rootPath, 'packages')
 
-fs.readdir(packages, function (error, basenames) {
-  var plugins
-
+fs.readdir(packages, (error, basenames) => {
   bail(error)
 
   basenames = basenames.filter(negate(isHidden))
-  plugins = basenames.filter(plugin)
+
+  const plugins = basenames.filter(
+    (name) =>
+      name.indexOf('rehype-') === 0 && name.indexOf('rehype-preset-') !== 0
+  )
 
   // Generate all packages.
-  basenames.forEach(function (basename) {
+  let index = -1
+
+  while (++index < basenames.length) {
+    const basename = basenames[index]
     trough()
-      .use(function (ctx, next) {
+      .use((ctx, next) => {
         pipelinePackage.run(ctx, next)
       })
-      .use(function (ctx, next) {
-        ;(preset(basename) ? pipelinePresets : pipelineReadme).run(ctx, next)
+      .use((ctx, next) => {
+        if (basename.indexOf('rehype-preset-') === 0) {
+          pipelinePresets.run(ctx, next)
+        } else {
+          pipelineReadme.run(ctx, next)
+        }
       })
       .run(
-        {
-          ancestor: rootPath,
-          root: path.join(packages, basename),
-          plugins: plugins
-        },
+        {ancestor: rootPath, root: path.join(packages, basename), plugins},
         wrap(basename)
       )
-  })
+  }
 
   // Generate root `readme.md`.
-  pipelineRoot.run(
-    {root: rootPath, plugins: plugins},
-    wrap(path.basename(rootPath))
-  )
+  pipelineRoot.run({root: rootPath, plugins}, wrap(path.basename(rootPath)))
 
   function wrap(basename) {
     return done
 
     function done(error, ctx) {
-      var key
+      let key
 
       if (error) {
         console.error(chalk.red('✗ ') + basename)
@@ -68,11 +70,3 @@ fs.readdir(packages, function (error, basenames) {
     }
   }
 })
-
-function plugin(name) {
-  return name.indexOf('rehype-') === 0 && !preset(name)
-}
-
-function preset(name) {
-  return name.indexOf('rehype-preset-') === 0
-}

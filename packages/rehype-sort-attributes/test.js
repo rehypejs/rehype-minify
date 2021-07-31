@@ -2,7 +2,7 @@ import test from 'tape'
 import {rehype} from 'rehype'
 import min from './index.js'
 
-test('rehype-sort-attributes', function (t) {
+test('rehype-sort-attributes', (t) => {
   t.equal(
     rehype()
       .use(min)

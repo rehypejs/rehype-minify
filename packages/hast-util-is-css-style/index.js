@@ -22,13 +22,15 @@
  */
 
 export function isCssStyle(node) {
-  var value
-
   if (!node || node.tagName !== 'style') {
     return false
   }
 
-  value = (node.properties || {}).type
+  const value = (node.properties || {}).type
 
-  return value == null || String(value).trim().toLowerCase() === 'text/css'
+  return (
+    value === undefined ||
+    value === null ||
+    String(value).trim().toLowerCase() === 'text/css'
+  )
 }

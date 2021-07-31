@@ -13,7 +13,7 @@ import {fromString} from 'hast-util-from-string'
 import {toString} from 'hast-util-to-string'
 import {isCssStyle} from 'hast-util-is-css-style'
 
-var clean = new CleanCSS()
+const clean = new CleanCSS()
 
 export default function rehypeMinifyCssStyle() {
   return transform
@@ -24,14 +24,12 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var value
-
   if (isCssStyle(node)) {
     try {
-      value = toString(node)
+      const value = toString(node)
       fromString(node, clean.minify(value).styles || value)
       // Potential third party errors?
       /* c8 ignore next */
-    } catch (_) {}
+    } catch {}
   }
 }

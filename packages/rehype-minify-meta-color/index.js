@@ -11,10 +11,10 @@ import {visit} from 'unist-util-visit'
 import {isElement} from 'hast-util-is-element'
 import {hasProperty} from 'hast-util-has-property'
 
-var clean = new CleanCSS()
+const clean = new CleanCSS()
 
-var prefix = '*{color:'
-var suffix = '}'
+const prefix = '*{color:'
+const suffix = '}'
 
 export default function rehypeMinifyMetaColor() {
   return transform
@@ -25,25 +25,23 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var props = node.properties
-  var name = props.name
-  var value
-  var output
+  const props = node.properties
+  const name = props.name
 
   if (
     isElement(node, 'meta') &&
     (name === 'msapplication-TileColor' || name === 'theme-color') &&
     hasProperty(node, 'content')
   ) {
-    value = props.content
+    let value = props.content
 
     if (typeof value === 'string') {
       try {
-        output = clean.minify(prefix + value + suffix)
+        const output = clean.minify(prefix + value + suffix)
         value = output.styles.slice(prefix.length, -suffix.length)
         // Potential third party errors?
         /* c8 ignore next */
-      } catch (_) {}
+      } catch {}
 
       props.content = value
     }

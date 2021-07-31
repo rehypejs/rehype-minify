@@ -1,7 +1,7 @@
 import test from 'tape'
 import {isEventHandler} from './index.js'
 
-test('hast-util-is-event-handler', function (t) {
+test('hast-util-is-event-handler', (t) => {
   t.ok(isEventHandler('oncut'), 'oncut')
   t.ok(isEventHandler('onend'), 'onend')
   t.ok(isEventHandler('onpushsubscriptionchange'), 'pushsubscriptionchange')

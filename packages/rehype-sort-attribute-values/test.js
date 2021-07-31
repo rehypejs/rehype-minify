@@ -3,7 +3,7 @@ import {rehype} from 'rehype'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-sort-attribute-values', function (t) {
+test('rehype-sort-attribute-values', (t) => {
   t.deepEqual(
     rehype()
       .use(min)

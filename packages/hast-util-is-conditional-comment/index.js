@@ -21,7 +21,7 @@
  *   conditional comments.
  */
 
-var re = /^\[if[ \t\f\n\r]+[^\]]+]|<!\[endif]$/
+const re = /^\[if[ \t\f\n\r]+[^\]]+]|<!\[endif]$/
 
 export function isConditionalComment(node) {
   return node && node.type === 'comment' && re.test(node.value)

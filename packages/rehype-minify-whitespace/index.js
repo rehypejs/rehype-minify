@@ -18,29 +18,27 @@ import {blocks} from './block.js'
 import {content as contents} from './content.js'
 import {skippable as skippables} from './skippable.js'
 
-var ignorableNode = convert(['doctype', 'comment'])
-var parent = convert(['element', 'root'])
-var root = convert(['root'])
-var element = convert(['element'])
-var text = convert(['text'])
+const ignorableNode = convert(['doctype', 'comment'])
+const parent = convert(['element', 'root'])
+const root = convert(['root'])
+const element = convert(['element'])
+const text = convert(['text'])
 
-export default function rehypeMinifyWhitespace(options) {
-  var collapse = collapseFactory(
-    (options || {}).newlines ? replaceNewlines : replaceWhitespace
+export default function rehypeMinifyWhitespace(options = {}) {
+  const collapse = collapseFactory(
+    options.newlines ? replaceNewlines : replaceWhitespace
   )
 
   return transform
 
   function transform(tree) {
-    minify(tree, {collapse: collapse, whitespace: 'normal'})
+    minify(tree, {collapse, whitespace: 'normal'})
   }
 }
 
 function minify(node, options) {
-  var settings
-
   if (parent(node)) {
-    settings = Object.assign({}, options)
+    const settings = Object.assign({}, options)
 
     if (root(node) || blocklike(node)) {
       settings.before = true
@@ -66,18 +64,14 @@ function minify(node, options) {
     // trimmed.
   }
 
-  return {
-    remove: false,
-    ignore: ignorableNode(node),
-    stripAtStart: false
-  }
+  return {remove: false, ignore: ignorableNode(node), stripAtStart: false}
 }
 
 function minifyText(node, options) {
-  var value = options.collapse(node.value)
-  var start = 0
-  var end = value.length
-  var result = {remove: false, ignore: false, stripAtStart: false}
+  const value = options.collapse(node.value)
+  const result = {remove: false, ignore: false, stripAtStart: false}
+  let start = 0
+  let end = value.length
 
   if (options.before && removable(value.charAt(0))) {
     start++
@@ -101,18 +95,17 @@ function minifyText(node, options) {
 }
 
 function all(parent, options) {
-  var before = options.before
-  var after = options.after
-  var children = parent.children
-  var length = children.length
-  var index = -1
-  var result
+  let before = options.before
+  const after = options.after
+  const children = parent.children
+  let length = children.length
+  let index = -1
 
   while (++index < length) {
-    result = minify(
+    const result = minify(
       children[index],
       Object.assign({}, options, {
-        before: before,
+        before,
         after: collapsableAfter(children, index, after)
       })
     )
@@ -132,21 +125,13 @@ function all(parent, options) {
     }
   }
 
-  return {
-    remove: false,
-    ignore: false,
-    stripAtStart: before || after
-  }
+  return {remove: false, ignore: false, stripAtStart: before || after}
 }
 
 function collapsableAfter(nodes, index, after) {
-  var length = nodes.length
-  var node
-  var result
-
-  while (++index < length) {
-    node = nodes[index]
-    result = inferBoundary(node)
+  while (++index < nodes.length) {
+    const node = nodes[index]
+    let result = inferBoundary(node)
 
     if (result === undefined && node.children && !skippable(node)) {
       result = collapsableAfter(node.children, -1)
@@ -201,7 +186,7 @@ function blocklike(node) {
 function skippable(node) {
   // Currently only used on elements, but just to make sure.
   /* c8 ignore next */
-  var props = node.properties || {}
+  const props = node.properties || {}
 
   return ignorableNode(node) || isElement(node, skippables) || props.hidden
 }
@@ -211,7 +196,7 @@ function removable(character) {
 }
 
 function replaceNewlines(value) {
-  var match = /\r?\n|\r/.exec(value)
+  const match = /\r?\n|\r/.exec(value)
   return match ? match[0] : ' '
 }
 
@@ -228,7 +213,7 @@ function collapseFactory(replace) {
 
 // We don’t support void elements here (so `nobr wbr` -> `normal` is ignored).
 function inferWhiteSpace(node, options) {
-  var props = node.properties || {}
+  const props = node.properties || {}
 
   switch (node.tagName) {
     case 'listing':

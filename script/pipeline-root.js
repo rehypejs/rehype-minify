@@ -13,29 +13,36 @@ import {toVFile} from 'to-vfile'
 import remarkPresetWooorm from 'remark-preset-wooorm'
 
 export const pipelineRoot = trough()
-  .use(function (ctx, next) {
-    toVFile.read(path.join(ctx.root, 'readme.md'), function (error, file) {
+  .use((ctx, next) => {
+    toVFile.read(path.join(ctx.root, 'readme.md'), (error, file) => {
       ctx.readme = file
       next(error)
     })
   })
-  .use(function (ctx, next) {
-    var others = []
-    var core = []
+  .use((ctx, next) => {
+    const others = []
+    const core = []
+    let index = -1
 
-    ctx.plugins.forEach(function (name) {
-      var pack = JSON.parse(
+    while (++index < ctx.plugins.length) {
+      const name = ctx.plugins[index]
+      const pack = JSON.parse(
         fs.readFileSync(path.join(ctx.root, 'packages', name, 'package.json'))
       )
-      ;(pack.excludeFromPreset ? others : core).push(name)
-    })
+
+      if (pack.excludeFromPreset) {
+        others.push(name)
+      } else {
+        core.push(name)
+      }
+    }
 
     remark()
       .data('settings', remarkPresetWooorm.settings)
       .use(plugin('plugins-core', core))
       .use(plugin('plugins-other', others))
       .use(benchmark)
-      .process(ctx.readme, function (error) {
+      .process(ctx.readme, (error) => {
         next(error)
       })
 
@@ -56,7 +63,7 @@ export const pipelineRoot = trough()
           u(
             'list',
             {spread: false, ordered: false},
-            list.map(function (name) {
+            list.map((name) => {
               return u('listItem', [
                 u('link', {url: './packages/' + name}, [u('inlineCode', name)])
               ])
@@ -68,7 +75,7 @@ export const pipelineRoot = trough()
     }
 
     function benchmark() {
-      var data
+      let data
 
       try {
         data = JSON.parse(
@@ -77,7 +84,7 @@ export const pipelineRoot = trough()
             basename: 'benchmark-results.json'
           })
         )
-      } catch (_) {}
+      } catch {}
 
       return data ? transform : undefined
 
@@ -86,14 +93,14 @@ export const pipelineRoot = trough()
       }
 
       function visit(start, nodes, end) {
-        var types = ['raw', 'gzip']
-        var h1 = [h('th', {rowSpan: 2}, 'name')]
-        var h2 = []
-        var foot = [h('th', {scope: 'row'}, 'total')]
-        var sum = {}
+        const types = ['raw', 'gzip']
+        const h1 = [h('th', {rowSpan: 2}, 'name')]
+        let h2 = []
+        let foot = [h('th', {scope: 'row'}, 'total')]
+        const sum = {}
 
-        var body = data.map((d) => {
-          var cells = [
+        const body = data.map((d) => {
+          const cells = [
             h(
               'th',
               {scope: 'row', align: 'left'},
@@ -101,16 +108,25 @@ export const pipelineRoot = trough()
             )
           ]
 
-          types.forEach((type) => {
-            var best
+          let index = -1
 
-            d.results.slice(1).forEach((r) => {
-              best = !best || r[type] < best[type] ? r : best
-            })
+          while (++index < types.length) {
+            const type = types[index]
+            let offset = 0 // Skip first.
+            let best
 
-            d.results.forEach((r) => {
-              var key = type + ':' + r.type
-              var value =
+            while (++offset < d.results.length) {
+              if (!best || d.results[offset][type] < best[type]) {
+                best = d.results[offset]
+              }
+            }
+
+            offset = -1
+
+            while (++offset < d.results.length) {
+              const r = d.results[offset]
+              const key = type + ':' + r.type
+              let value =
                 r.type === 'original' ? bytes(r[type]) : r[type + 'Win']
 
               sum[key] = (sum[key] || 0) + r[type]
@@ -124,15 +140,18 @@ export const pipelineRoot = trough()
               }
 
               cells.push(h('td', {align: 'right'}, value))
-            })
-          })
+            }
+          }
 
           return h('tr', cells)
         })
 
-        types.forEach((type) => {
-          var head = data[0]
-          var cells = head.results.map((d) => h('th', d.type))
+        let index = -1
+
+        while (++index < types.length) {
+          const type = types[index]
+          const head = data[0]
+          const cells = head.results.map((d) => h('th', d.type))
           h1.push(h('th', {colSpan: cells.length}, type))
           h2 = h2.concat(cells)
           foot = foot.concat(
@@ -140,9 +159,9 @@ export const pipelineRoot = trough()
               h('td', {align: 'right'}, bytes(sum[type + ':' + d.type]))
             )
           )
-        })
+        }
 
-        var tree = unified()
+        const tree = unified()
           .use(format)
           .runSync(
             h('table', [
@@ -152,17 +171,17 @@ export const pipelineRoot = trough()
             ])
           )
 
-        var fragment = unified().use(stringify).stringify(tree)
+        const fragment = unified().use(stringify).stringify(tree)
 
         return [start, u('html', fragment), end]
       }
     }
   })
-  .use(function (ctx, next) {
-    fs.writeFile(ctx.readme.path, ctx.readme.value, function (error) {
+  .use((ctx, next) => {
+    fs.writeFile(ctx.readme.path, ctx.readme.value, (error) => {
       next(error)
     })
   })
-  .use(function (ctx) {
+  .use((ctx) => {
     ctx.readme.stored = true
   })

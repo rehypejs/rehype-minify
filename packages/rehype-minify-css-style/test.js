@@ -3,7 +3,7 @@ import {rehype} from 'rehype'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-minify-css-style', function (t) {
+test('rehype-minify-css-style', (t) => {
   t.deepEqual(
     rehype().use(min).runSync(h('style', '* { color: #ff0000; }')),
     h('style', '*{color:red}')

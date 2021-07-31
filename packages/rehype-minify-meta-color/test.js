@@ -3,7 +3,7 @@ import {rehype} from 'rehype'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-minify-meta-color', function (t) {
+test('rehype-minify-meta-color', (t) => {
   t.deepEqual(
     rehype()
       .use(min)

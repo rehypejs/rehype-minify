@@ -24,10 +24,10 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var value
   if (isJavaScript(node) && !hasProperty(node, 'src')) {
     try {
-      value = Uglify.minify(toString(node)).code
+      let value = Uglify.minify(toString(node)).code
+
       if (value.charAt(value.length - 1) === ';') {
         value = value.slice(0, -1)
       }
@@ -35,6 +35,6 @@ function visitor(node) {
       fromString(node, value)
       // Potential third party errors?
       /* c8 ignore next */
-    } catch (_) {}
+    } catch {}
   }
 }

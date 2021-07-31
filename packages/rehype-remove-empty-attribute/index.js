@@ -10,7 +10,7 @@ import {isElement} from 'hast-util-is-element'
 import {isEventHandler} from 'hast-util-is-event-handler'
 import {schema} from './schema.js'
 
-var own = {}.hasOwnProperty
+const own = {}.hasOwnProperty
 
 export default function rehypeRemoveEmptyAttribute() {
   return transform
@@ -21,19 +21,20 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var props = node.properties
-  var prop
-  var value
+  const props = node.properties
+  let prop
 
   for (prop in props) {
-    value = props[prop]
+    if (own.call(props, prop)) {
+      const value = props[prop]
 
-    if (
-      (value === '' || (Array.isArray(value) && value.length === 0)) &&
-      (isEventHandler(prop) ||
-        (own.call(schema, prop) && isElement(node, schema[prop])))
-    ) {
-      props[prop] = null
+      if (
+        (value === '' || (Array.isArray(value) && value.length === 0)) &&
+        (isEventHandler(prop) ||
+          (own.call(schema, prop) && isElement(node, schema[prop])))
+      ) {
+        props[prop] = null
+      }
     }
   }
 }

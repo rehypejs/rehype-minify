@@ -4,7 +4,7 @@ import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-prevent-favicon-request', function (t) {
+test('rehype-prevent-favicon-request', (t) => {
   t.deepEqual(
     rehype()
       .use(min)

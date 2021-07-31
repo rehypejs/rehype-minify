@@ -18,15 +18,14 @@ import {hasProperty} from 'hast-util-has-property'
 import {isElement} from 'hast-util-is-element'
 import {urlAttributes} from 'html-url-attributes'
 
-var own = {}.hasOwnProperty
+const own = {}.hasOwnProperty
 
-export default function rehypeMinifyUrl(options) {
-  var settings = options || {}
-  var relate = new Relate(settings.from, settings)
+export default function rehypeMinifyUrl(options = {}) {
+  const relate = new Relate(options.from, options)
 
   try {
     relate.relate('/')
-  } catch (_) {
+  } catch {
     throw new Error('Missing absolute `from` in options')
   }
 
@@ -36,8 +35,8 @@ export default function rehypeMinifyUrl(options) {
     visit(tree, 'element', visitor)
 
     function visitor(node) {
-      var props = node.properties
-      var prop
+      const props = node.properties
+      let prop
 
       for (prop in props) {
         if (
@@ -57,11 +56,10 @@ function minify(value, relate) {
 }
 
 function all(value, relate) {
-  var length = value.length
-  var index = -1
-  var result = []
+  let index = -1
+  const result = []
 
-  while (++index < length) {
+  while (++index < value.length) {
     result[index] = one(value[index], relate)
   }
 
@@ -71,7 +69,7 @@ function all(value, relate) {
 function one(value, relate) {
   try {
     return relate.relate(value)
-  } catch (_) {}
+  } catch {}
 
   return value
 }

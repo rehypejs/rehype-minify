@@ -14,7 +14,7 @@ import {isElement} from 'hast-util-is-element'
 import {isEventHandler} from 'hast-util-is-event-handler'
 import {schema} from './schema.js'
 
-var own = {}.hasOwnProperty
+const own = {}.hasOwnProperty
 
 export default function rehypeMinifyAttributeWhitespace() {
   return transform
@@ -25,8 +25,8 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var props = node.properties
-  var prop
+  const props = node.properties
+  let prop
 
   for (prop in props) {
     if (
@@ -44,11 +44,10 @@ function minify(value) {
 }
 
 function all(value) {
-  var length = value.length
-  var index = -1
-  var result = []
+  let index = -1
+  const result = []
 
-  while (++index < length) {
+  while (++index < value.length) {
     result[index] = one(value[index])
   }
 

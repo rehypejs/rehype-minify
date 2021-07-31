@@ -12,8 +12,8 @@
 import {filter} from 'unist-util-filter'
 import {isConditionalComment} from 'hast-util-is-conditional-comment'
 
-export default function rehypeRemoveComments(options) {
-  var force = (options || {}).removeConditional
+export default function rehypeRemoveComments(options = {}) {
+  const force = options.removeConditional
 
   return transform
 

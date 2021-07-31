@@ -73,7 +73,7 @@ Use:
 import {rehype} from 'rehype'
 import rehypePresetMinify from 'rehype-preset-minify'
 
-var doc = `<!doctype html>
+const doc = `<!doctype html>
 <html>
   <head>
     <title>Hello</title>

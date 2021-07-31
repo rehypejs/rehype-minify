@@ -41,12 +41,11 @@ function one(node) {
 }
 
 function all(node) {
-  var children = node.children
-  var length = children.length
-  var index = -1
-  var result = []
+  const children = node.children
+  let index = -1
+  const result = []
 
-  while (++index < length) {
+  while (++index < children.length) {
     result[index] = one(children[index])
   }
 

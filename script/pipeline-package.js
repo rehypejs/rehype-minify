@@ -6,17 +6,17 @@ import {findDown} from 'vfile-find-down'
 import {trough} from 'trough'
 
 export const pipelinePackage = trough()
-  .use(function (ctx, next) {
-    toVFile.read(path.join(ctx.root, 'package.json'), function (error, file) {
+  .use((ctx, next) => {
+    toVFile.read(path.join(ctx.root, 'package.json'), (error, file) => {
       ctx.package = file
       next(error)
     })
   })
-  .use(function (ctx, next) {
-    var fp = path.relative(ctx.ancestor, ctx.root)
-    var cmd = 'git log --all --format="%cN <%cE>" "' + fp + '"'
+  .use((ctx, next) => {
+    const fp = path.relative(ctx.ancestor, ctx.root)
+    const cmd = 'git log --all --format="%cN <%cE>" "' + fp + '"'
 
-    exec(cmd, function (error, stdout) {
+    exec(cmd, (error, stdout) => {
       if (error) return next(error)
 
       ctx.contributors = [...new Set(stdout.split('\n'))]
@@ -31,14 +31,14 @@ export const pipelinePackage = trough()
       next()
     })
   })
-  .use(function (ctx, next) {
-    findDown(['.js', '.json'], ctx.root, function (error, files) {
+  .use((ctx, next) => {
+    findDown(['.js', '.json'], ctx.root, (error, files) => {
       if (files) {
         ctx.files = files
-          .map(function (file) {
+          .map((file) => {
             return path.relative(ctx.root, file.path)
           })
-          .filter(function (name) {
+          .filter((name) => {
             if (name === 'package.json' || /(example)/.test(name)) {
               return false
             }
@@ -56,14 +56,14 @@ export const pipelinePackage = trough()
       next(error)
     })
   })
-  .use(function (ctx) {
-    var previous = JSON.parse(ctx.package)
-    var pkg = JSON.parse(
+  .use((ctx) => {
+    const previous = JSON.parse(ctx.package)
+    const pkg = JSON.parse(
       fs.readFileSync(path.join(ctx.ancestor, 'package.json'))
     )
-    var relative = path.relative(ctx.ancestor, ctx.root)
+    const relative = path.relative(ctx.ancestor, ctx.root)
 
-    var curr = {
+    const curr = {
       name: path.basename(ctx.root),
       version: previous.version,
       description: previous.description,
@@ -87,9 +87,9 @@ export const pipelinePackage = trough()
 
     ctx.package.value = JSON.stringify(curr, 0, 2) + '\n'
   })
-  .use(function (ctx, next) {
+  .use((ctx, next) => {
     fs.writeFile(ctx.package.path, ctx.package.value, next)
   })
-  .use(function (ctx) {
+  .use((ctx) => {
     ctx.package.stored = true
   })

@@ -9,81 +9,78 @@
 
 import {visit} from 'unist-util-visit'
 
+const own = {}.hasOwnProperty
+
 export default function rehypeSortAttributes() {
   return transform
 }
 
 function transform(tree) {
-  var counts = {}
+  const counts = {}
 
   visit(tree, 'element', count)
 
-  var caches = optimize()
+  const caches = optimize()
 
   visit(tree, 'element', reorder)
 
   function count(node) {
-    var name = node.tagName
-    var cache = counts[name] || (counts[name] = {known: []})
-    var props = node.properties
-    var prop
-    var value
+    const name = node.tagName
+    const cache = counts[name] || (counts[name] = {known: []})
+    const props = node.properties
+    let prop
 
     for (prop in props) {
-      value = safe(prop)
+      if (own.call(props, prop)) {
+        const value = safe(prop)
 
-      if (value in cache) {
-        cache[value]++
-      } else {
-        cache[value] = 1
-        cache.known.push(prop)
+        if (value in cache) {
+          cache[value]++
+        } else {
+          cache[value] = 1
+          cache.known.push(prop)
+        }
       }
     }
   }
 
   function optimize() {
-    var caches = {}
-    var name
-    var values
+    const caches = {}
+    let name
 
     for (name in counts) {
-      values = counts[name]
-      caches[name] = values.known.sort(sort)
+      if (own.call(counts, name)) {
+        const values = counts[name]
+        caches[name] = values.known.sort(
+          (a, b) => values[safe(b)] - values[safe(a)] || compare(a, b, 0)
+        )
+      }
     }
 
     return caches
-
-    function sort(a, b) {
-      return values[safe(b)] - values[safe(a)] || compare(a, b, 0)
-    }
   }
 
   function reorder(node) {
-    var cache = caches[node.tagName]
-    var props = node.properties
-    var keys = []
-    var result = {}
-    var index = -1
-    var length
-    var prop
+    const cache = caches[node.tagName]
+    const props = node.properties
+    const keys = []
+    const result = {}
+    let index = -1
+    let prop
 
     for (prop in props) {
-      keys.push(prop)
+      if (own.call(props, prop)) {
+        keys.push(prop)
+      }
     }
 
-    keys.sort(sorter)
-    length = keys.length
+    keys.sort((a, b) => cache.indexOf(a) - cache.indexOf(b))
 
-    while (++index < length) {
-      prop = keys[index]
-      result[prop] = props[prop]
+    while (++index < keys.length) {
+      result[keys[index]] = props[keys[index]]
     }
 
     node.properties = result
-
-    function sorter(a, b) {
-      return cache.indexOf(a) - cache.indexOf(b)
-    }
   }
 }
 

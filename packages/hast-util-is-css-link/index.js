@@ -23,22 +23,18 @@
  */
 
 export function isCssLink(node) {
-  var props
-  var rel
-  var type
-
   if (!node || node.tagName !== 'link') {
     return false
   }
 
-  props = node.properties || {}
-  rel = props.rel
+  const props = node.properties || {}
+  const rel = props.rel
 
-  if (!rel || !rel.indexOf || rel.indexOf('stylesheet') === -1) {
+  if (!rel || !rel.indexOf || !rel.includes('stylesheet')) {
     return false
   }
 
-  type = String(props.type || '')
+  const type = String(props.type || '')
     .trim()
     .toLowerCase()
 

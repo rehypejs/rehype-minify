@@ -3,7 +3,7 @@ import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {isCssLink} from './index.js'
 
-test('hast-util-is-css-link', function (t) {
+test('hast-util-is-css-link', (t) => {
   t.equal(
     isCssLink(h('link', {rel: ['stylesheet']})),
     true,

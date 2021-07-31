@@ -3,7 +3,7 @@ import {rehype} from 'rehype'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-minify-event-handler', function (t) {
+test('rehype-minify-event-handler', (t) => {
   /* eslint-disable no-script-url */
   t.deepEqual(
     rehype()

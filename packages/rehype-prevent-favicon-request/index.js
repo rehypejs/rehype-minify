@@ -19,8 +19,8 @@ export default function rehypePreventFaviconRequest() {
 }
 
 function transform(tree) {
-  var head
-  var ico
+  let head
+  let ico
 
   visit(tree, 'element', visitor)
 
@@ -38,19 +38,17 @@ function transform(tree) {
   }
 
   function visitor(node) {
-    var rel
-
     if (node.tagName === 'head') {
       head = node
     }
 
     if (node.tagName === 'link') {
-      rel = node.properties.rel
+      const rel = node.properties.rel
 
       if (
         Array.isArray(rel) &&
-        rel.indexOf('shortcut') !== -1 &&
-        rel.indexOf('icon') !== -1
+        rel.includes('shortcut') &&
+        rel.includes('icon')
       ) {
         ico = node
         return false

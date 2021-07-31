@@ -3,8 +3,8 @@ import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {isConditionalComment} from './index.js'
 
-test('hast-util-is-conditional-comment', function (t) {
-  ;[
+test('hast-util-is-conditional-comment', (t) => {
+  const fixtures = [
     '[if IE]>…<![endif]',
     '[if IE 6]>…<![endif]',
     '[if IE 7]>…<![endif]',
@@ -16,13 +16,17 @@ test('hast-util-is-conditional-comment', function (t) {
     '[if gt IE 6]>…<![endif]',
     '[if !IE]>',
     '<![endif]'
-  ].forEach(function (d) {
+  ]
+  let index = -1
+
+  while (++index < fixtures.length) {
+    const d = fixtures[index]
     t.equal(
       isConditionalComment(u('comment', d)),
       true,
       'yes - <!--' + d + '-->'
     )
-  })
+  }
 
   t.equal(
     isConditionalComment(u('comments', 'foo')),

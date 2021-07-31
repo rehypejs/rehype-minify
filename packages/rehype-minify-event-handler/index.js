@@ -10,8 +10,8 @@ import {visit} from 'unist-util-visit'
 import {hasProperty} from 'hast-util-has-property'
 import {isEventHandler} from 'hast-util-is-event-handler'
 
-var prefix = 'function a(){'
-var suffix = '}a();'
+const prefix = 'function a(){'
+const suffix = '}a();'
 
 export default function rehypeMinifyEventHandler() {
   return transform
@@ -22,8 +22,8 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var props = node.properties
-  var name
+  const props = node.properties
+  let name
 
   for (name in props) {
     if (hasProperty(node, name) && isEventHandler(name)) {
@@ -33,17 +33,16 @@ function visitor(node) {
 }
 
 function minify(value) {
-  var result = value
-  var output
+  let result = value
 
   if (typeof result !== 'string') {
     return result
   }
 
   try {
-    output = Uglify.minify(prefix + result + suffix)
+    const output = Uglify.minify(prefix + result + suffix)
     result = output.code.slice(prefix.length, -suffix.length)
-  } catch (_) {}
+  } catch {}
 
   return result.trim()
 }

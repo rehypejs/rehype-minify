@@ -25,13 +25,9 @@
 import {isElement} from 'hast-util-is-element'
 import {hasProperty} from 'hast-util-has-property'
 
-var list = ['pingback', 'prefetch', 'stylesheet']
+const list = new Set(['pingback', 'prefetch', 'stylesheet'])
 
 export function isBodyOkLink(node) {
-  var length
-  var index
-  var rel
-
   if (!isElement(node, 'link')) {
     return false
   }
@@ -40,16 +36,15 @@ export function isBodyOkLink(node) {
     return true
   }
 
-  rel = (node.properties || {}).rel || []
-  length = rel.length
-  index = -1
+  const rel = (node.properties || {}).rel || []
+  let index = -1
 
   if (rel.length === 0) {
     return false
   }
 
-  while (++index < length) {
-    if (list.indexOf(rel[index]) === -1) {
+  while (++index < rel.length) {
+    if (!list.has(rel[index])) {
       return false
     }
   }

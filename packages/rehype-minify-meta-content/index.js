@@ -14,15 +14,15 @@ import {visit} from 'unist-util-visit'
 import {isElement} from 'hast-util-is-element'
 import {hasProperty} from 'hast-util-has-property'
 
-var own = {}.hasOwnProperty
+const own = {}.hasOwnProperty
 
-var handlers = {}
-
-handlers.viewport = viewport
-handlers.keywords = collapse
-handlers.robots = collapse
-handlers['apple-itunes-app'] = collapse
-handlers['apple-media-service-subscription'] = collapse
+const handlers = {
+  viewport,
+  keywords: collapse,
+  robots: collapse,
+  'apple-itunes-app': collapse,
+  'apple-media-service-subscription': collapse
+}
 
 export default function rehypeMinifyMetaContent() {
   return transform
@@ -33,8 +33,8 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var props = node.properties
-  var name = props.name
+  const props = node.properties
+  const name = props.name
 
   if (
     isElement(node, 'meta') &&

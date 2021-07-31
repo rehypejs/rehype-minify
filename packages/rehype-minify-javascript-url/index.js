@@ -11,14 +11,14 @@ import {hasProperty} from 'hast-util-has-property'
 import {isElement} from 'hast-util-is-element'
 import {urlAttributes} from 'html-url-attributes'
 
-var own = {}.hasOwnProperty
+const own = {}.hasOwnProperty
 
 /* eslint-disable no-script-url */
-var protocol = 'javascript:'
+const protocol = 'javascript:'
 /* eslint-enable no-script-url */
 
-var prefix = 'function a(){'
-var suffix = '}a();'
+const prefix = 'function a(){'
+const suffix = '}a();'
 
 export default function rehypeMinifyJavaScriptUrl() {
   return transform
@@ -29,8 +29,8 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var props = node.properties
-  var prop
+  const props = node.properties
+  let prop
 
   for (prop in props) {
     if (
@@ -44,8 +44,7 @@ function visitor(node) {
 }
 
 function minify(value) {
-  var result = value
-  var output
+  let result = value
 
   if (
     typeof result === 'string' &&
@@ -54,9 +53,9 @@ function minify(value) {
     result = result.slice(protocol.length)
 
     try {
-      output = Uglify.minify(prefix + result + suffix)
+      const output = Uglify.minify(prefix + result + suffix)
       result = output.code.slice(prefix.length, -suffix.length)
-    } catch (_) {}
+    } catch {}
 
     result = protocol + result.trim()
   }

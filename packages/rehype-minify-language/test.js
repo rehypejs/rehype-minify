@@ -3,7 +3,7 @@ import {rehype} from 'rehype'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-minify-language', function (t) {
+test('rehype-minify-language', (t) => {
   t.deepEqual(
     rehype()
       .use(min)

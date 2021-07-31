@@ -12,17 +12,17 @@ import htmlMinifier from 'html-minifier'
 import rehypePresetMinify from '../packages/rehype-preset-minify/index.js'
 import rehypeMinifyDoctype from '../packages/rehype-minify-doctype/index.js'
 
-var cache = 'benchmark-cache'
+const cache = 'benchmark-cache'
 
 try {
   fs.mkdirSync(cache)
-} catch (_) {}
+} catch {}
 
-var benchmarks = trough().use(all).use(save)
+const benchmarks = trough().use(all).use(save)
 
-var benchmark = trough().use(dir).use(read).use(request).use(test)
+const benchmark = trough().use(dir).use(read).use(request).use(test)
 
-var processorPipeline = trough().use(process).use(gzip).use(size)
+const processorPipeline = trough().use(process).use(gzip).use(size)
 
 benchmarks.run(
   {
@@ -53,16 +53,15 @@ benchmarks.run(
 )
 
 function all(ctx, next) {
-  var data = []
-  var keys = Object.keys(ctx)
-  var count = 0
+  const data = []
+  const keys = Object.keys(ctx)
+  let count = 0
+  let index = -1
 
-  keys.forEach(each)
+  while (++index < keys.length) {
+    const name = keys[index]
 
-  function each(name) {
-    benchmark.run({name: name, url: ctx[name]}, done)
-
-    function done(error, results) {
+    benchmark.run({name, url: ctx[name]}, (error, results) => {
       count++
 
       if (error) {
@@ -84,7 +83,7 @@ function all(ctx, next) {
           next(null, data)
         }
       }
-    }
+    })
   }
 }
 
@@ -120,7 +119,7 @@ function read(ctx, next) {
 }
 
 function request(ctx, next) {
-  var url = ctx.url
+  const url = ctx.url
 
   if (ctx.file) {
     next()
@@ -137,13 +136,13 @@ function request(ctx, next) {
   }
 
   function onbody(buf) {
-    var fp = path.join(cache, ctx.name, 'index.html')
+    const fp = path.join(cache, ctx.name, 'index.html')
 
     if (buf.length < 1024) {
       next(new Error('Empty response from ' + url))
     } else {
       ctx.file = toVFile({path: fp, value: buf})
-      toVFile.write(ctx.file, function (error) {
+      toVFile.write(ctx.file, (error) => {
         next(error)
       })
     }
@@ -151,9 +150,9 @@ function request(ctx, next) {
 }
 
 function test(ctx, next) {
-  var count = 0
-  var original = {processFn: identity, type: 'original'}
-  var results = [
+  let count = 0
+  const original = {processFn: identity, type: 'original'}
+  const results = [
     {processFn: rehypeMinify, type: 'rehype-minify'},
     {processFn: htmlMinify, type: 'html-minifier'}
   ]
@@ -168,16 +167,17 @@ function test(ctx, next) {
   function all(error) {
     if (error) {
       done(error)
-    } else {
-      results.forEach(each)
+      return
     }
-  }
 
-  function each(result) {
-    result.original = original
-    result.input = ctx.file.value
-    result.name = ctx.name
-    processorPipeline.run(result, done)
+    let index = -1
+    while (++index < results.length) {
+      const result = results[index]
+      result.original = original
+      result.input = ctx.file.value
+      result.name = ctx.name
+      processorPipeline.run(result, done)
+    }
   }
 
   function done(error) {
@@ -190,16 +190,15 @@ function test(ctx, next) {
 }
 
 function process(ctx, next) {
-  var output = ctx.processFn(ctx.input, ctx)
-  var fp
+  const output = ctx.processFn(ctx.input, ctx)
 
   ctx.output = output
 
   if (ctx.type === 'original') {
     next()
   } else {
-    fp = path.join(cache, ctx.name, ctx.type + '.html')
-    toVFile.write({path: fp, value: output}, function (error) {
+    const fp = path.join(cache, ctx.name, ctx.type + '.html')
+    toVFile.write({path: fp, value: output}, (error) => {
       next(error)
     })
   }
@@ -215,7 +214,7 @@ function gzip(ctx, next) {
 }
 
 function size(ctx) {
-  var original = ctx.original || {
+  const original = ctx.original || {
     inputSize: ctx.input.length,
     gzipSize: ctx.gzipped.length
   }
@@ -238,7 +237,7 @@ function htmlMinify(buf, ctx) {
   // <https://github.com/kangax/html-minifier/blob/346f73d/cli.js#L100>
   // and defaults removed for brevity:
   // <https://github.com/kangax/html-minifier>
-  var options = {
+  const options = {
     collapseBooleanAttributes: true,
     collapseWhitespace: true,
     // CustomAttrCollapse: /.*/,
@@ -270,14 +269,14 @@ function htmlMinify(buf, ctx) {
     console.warn(
       'html-minifier error (%s)',
       ctx.name,
-      error.stack.slice(0, Math.pow(2, 10))
+      error.stack.slice(0, 2 ** 10)
     )
     return buf
   }
 }
 
 function rehypeMinify(buf) {
-  var processor = unified()
+  const processor = unified()
     .use(rehypeParse)
     .use(rehypePresetMinify)
     .use(rehypeMinifyDoctype)

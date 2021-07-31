@@ -10,10 +10,10 @@ import CleanCSS from 'clean-css'
 import {visit} from 'unist-util-visit'
 import {isElement} from 'hast-util-is-element'
 
-var clean = new CleanCSS()
+const clean = new CleanCSS()
 
-var prefix = '@media '
-var suffix = '{i{color:red}}'
+const prefix = '@media '
+const suffix = '{i{color:red}}'
 
 export default function rehypeMinifyMediaAttribute() {
   return transform
@@ -24,20 +24,18 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var props = node.properties
-  var output
-  var value
+  const props = node.properties
 
   if (isElement(node, ['link', 'source', 'style'])) {
-    value = props.media
+    let value = props.media
 
     if (typeof value === 'string') {
       try {
-        output = clean.minify(prefix + value + suffix)
+        const output = clean.minify(prefix + value + suffix)
         value = output.styles.slice(prefix.length, -suffix.length)
         // Potential third party errors?
         /* c8 ignore next */
-      } catch (_) {}
+      } catch {}
 
       props.media = value === 'all' || !value ? null : value
     }

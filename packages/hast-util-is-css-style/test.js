@@ -3,7 +3,7 @@ import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {isCssStyle} from './index.js'
 
-test('hast-util-is-css-style', function (t) {
+test('hast-util-is-css-style', (t) => {
   t.equal(isCssStyle(h('style')), true, 'yes - a `style` node')
   t.equal(
     isCssStyle(h('style', {type: null})),

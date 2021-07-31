@@ -68,6 +68,6 @@ const plugins = [
   rehypeSortAttributes
 ]
 
-const preset = {settings, plugins}
+const rehypePresetMinify = {settings, plugins}
 
-export default preset
+export default rehypePresetMinify

@@ -19,7 +19,7 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var props = node.properties
+  const props = node.properties
 
   if ('type' in props && (isCssLink(node) || isCssStyle(node))) {
     props.type = null

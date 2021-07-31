@@ -16,7 +16,7 @@ import {hasProperty} from 'hast-util-has-property'
 import {isElement} from 'hast-util-is-element'
 import {schema} from './schema.js'
 
-var own = {}.hasOwnProperty
+const own = {}.hasOwnProperty
 
 export default function rehypeMinifyEnumeratedAttributes() {
   return transform
@@ -27,11 +27,8 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  var props = node.properties
-  var definitions
-  var length
-  var index
-  var prop
+  const props = node.properties
+  let prop
 
   for (prop in props) {
     if (
@@ -39,12 +36,12 @@ function visitor(node) {
       own.call(schema, prop) &&
       typeof props[prop] === 'string'
     ) {
-      definitions = schema[prop]
-      definitions = 'length' in definitions ? definitions : [definitions]
-      length = definitions.length
-      index = -1
+      const definitions = Array.isArray(schema[prop])
+        ? schema[prop]
+        : [schema[prop]]
+      let index = -1
 
-      while (++index < length) {
+      while (++index < definitions.length) {
         if (isElement(node, definitions[index].tagNames)) {
           props[prop] = minify(props[prop], definitions[index])
         }
@@ -54,24 +51,25 @@ function visitor(node) {
 }
 
 function minify(value, info) {
-  var insensitive = value.toLowerCase()
-  var states = info.states
-  var length = states.length
-  var index = -1
-  var known = false
-  var state
-  var result
+  const insensitive = value.toLowerCase()
+  const states = info.states
+  let index = -1
+  let known = false
+  let result
+  let state
 
-  while (++index < length) {
+  while (++index < states.length) {
     state = states[index]
 
     if (state === null) {
       continue
-    } else if (typeof state === 'string') {
+    }
+
+    if (typeof state === 'string') {
       state = [state]
     }
 
-    if (state.indexOf(insensitive) !== -1) {
+    if (state.includes(insensitive)) {
       known = true
       break
     }

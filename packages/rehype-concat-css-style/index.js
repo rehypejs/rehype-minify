@@ -20,7 +20,7 @@ export default function rehypeConcatCssStyle() {
 }
 
 function transform(tree) {
-  var matches = []
+  const matches = []
 
   visit(tree, 'element', visitor)
 
@@ -35,17 +35,14 @@ function transform(tree) {
   }
 
   function concat() {
-    var length = matches.length
-    var index = -1
-    var contents = []
-    var match
-    var siblings
+    let index = -1
+    const contents = []
 
-    while (++index < length) {
-      match = matches[index]
+    while (++index < matches.length) {
+      const match = matches[index]
 
       if (index) {
-        siblings = match[0].children
+        const siblings = match[0].children
         siblings.splice(siblings.indexOf(match[1]), 1)
       }
 

@@ -4,7 +4,7 @@ import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-javascript-to-bottom', function (t) {
+test('rehype-javascript-to-bottom', (t) => {
   t.deepEqual(
     rehype()
       .use(min)

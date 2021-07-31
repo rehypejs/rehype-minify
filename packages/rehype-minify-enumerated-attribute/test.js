@@ -3,7 +3,7 @@ import {rehype} from 'rehype'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-minify-enumerated-attribute', function (t) {
+test('rehype-minify-enumerated-attribute', (t) => {
   t.deepEqual(
     rehype()
       .use(min)

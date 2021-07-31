@@ -3,7 +3,7 @@ import {rehype} from 'rehype'
 import {h} from 'hastscript'
 import min from './index.js'
 
-test('rehype-remove-style-type-css', function (t) {
+test('rehype-remove-style-type-css', (t) => {
   t.deepEqual(
     rehype()
       .use(min)

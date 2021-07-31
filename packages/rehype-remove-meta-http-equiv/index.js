@@ -28,14 +28,13 @@ export default function rehypeRemoveMetaHttpEquiv() {
 }
 
 function transform(tree) {
-  var html
-  var head
-  var charSet
-  var contentType
-  var contentLanguage
-  var contentTypeParent
-  var contentLanguageParent
-  var value
+  let html
+  let head
+  let charSet
+  let contentType
+  let contentLanguage
+  let contentTypeParent
+  let contentLanguageParent
 
   visit(tree, 'element', visitor)
 
@@ -48,7 +47,7 @@ function transform(tree) {
 
   // `meta` has precedence over `meta[charset]`.
   if (contentType) {
-    value = contentType.properties.content.replace(/^.+charset=/i, '')
+    const value = contentType.properties.content.replace(/^.+charset=/i, '')
 
     if (charSet) {
       charSet.properties.charSet = value
@@ -79,7 +78,7 @@ function transform(tree) {
       if (hasProperty(node, 'charSet')) {
         charSet = node
       } else if (hasProperty(node, 'httpEquiv')) {
-        value = stringify(node.properties.httpEquiv).toLowerCase()
+        const value = stringify(node.properties.httpEquiv).toLowerCase()
 
         if (value === 'content-language') {
           contentLanguage = node
@@ -93,7 +92,7 @@ function transform(tree) {
   }
 
   function remove(parent, child) {
-    var siblings = parent.children
+    const siblings = parent.children
     siblings.splice(siblings.indexOf(child), 1)
   }
 }

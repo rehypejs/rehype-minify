@@ -3,7 +3,7 @@ import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {isJavaScript} from './index.js'
 
-test('hast-util-is-javascript', function (t) {
+test('hast-util-is-javascript', (t) => {
   t.ok(isJavaScript(h('script')), 'yes - for `script`')
   t.ok(
     isJavaScript(h('script', {src: 'index.js'})),
