@@ -4,7 +4,7 @@ import test from 'tape'
 import rehype from 'rehype'
 import negate from 'negate'
 import hidden from 'is-hidden'
-import trim from 'trim-trailing-lines'
+import trimTrailingLines from 'trim-trailing-lines'
 import minify from '../packages/rehype-preset-minify/index.js'
 
 test('plugin', function (t) {
@@ -27,7 +27,7 @@ test('plugin', function (t) {
       .use(minify, config)
       .process(input, function (error, doc) {
         t.ifErr(error, 'shouldn’t fail')
-        t.equal(String(doc), trim(output), name)
+        t.equal(String(doc), trimTrailingLines(output), name)
       })
   })
 })

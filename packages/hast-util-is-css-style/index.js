@@ -21,8 +21,6 @@
  *   `type`, or `'text/css'` as its `type`.
  */
 
-import trim from 'trim'
-
 export function isCssStyle(node) {
   var value
 
@@ -32,5 +30,5 @@ export function isCssStyle(node) {
 
   value = (node.properties || {}).type
 
-  return value == null || trim(value).toLowerCase() === 'text/css'
+  return value == null || String(value).trim().toLowerCase() === 'text/css'
 }

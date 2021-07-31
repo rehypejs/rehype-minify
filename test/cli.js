@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import {exec} from 'child_process'
 import test from 'tape'
-import trim from 'trim-trailing-lines'
+import trimTrailingLines from 'trim-trailing-lines'
 
 test('preset', function (t) {
   var input = path.join('test', 'fixtures', 'small', 'input.html')
@@ -16,7 +16,7 @@ test('preset', function (t) {
     t.ifErr(error)
     t.equal(
       stdout,
-      trim(String(fs.readFileSync(output))),
+      trimTrailingLines(String(fs.readFileSync(output))),
       'should minify from the preset'
     )
   })

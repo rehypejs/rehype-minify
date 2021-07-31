@@ -2,7 +2,6 @@ import fs from 'fs'
 import path from 'path'
 import {inspect} from 'util'
 import dox from 'dox'
-import trim from 'trim'
 import remark from 'remark'
 import rehype from 'rehype'
 import u from 'unist-builder'
@@ -146,7 +145,7 @@ export const pipelineReadme = trough()
     if (example && ctx.script) {
       options = example.slice(0, example.indexOf('\n'))
 
-      if (trim(options)) {
+      if (options.trim()) {
         try {
           options = JSON.parse(options)
           example = example.slice(example.indexOf('\n') + 1)
@@ -185,13 +184,12 @@ export const pipelineReadme = trough()
         u(
           'code',
           {lang: 'html'},
-          trim(
-            rehype()
-              .data('settings', options.processor || {fragment: true})
-              .use(mod.default, options.plugin || undefined)
-              .processSync(example)
-              .toString()
-          )
+          rehype()
+            .data('settings', options.processor || {fragment: true})
+            .use(mod.default, options.plugin || undefined)
+            .processSync(example)
+            .toString()
+            .trim()
         )
       )
     }

@@ -6,7 +6,6 @@
  */
 
 import Uglify from 'uglify-js'
-import trim from 'trim'
 import visit from 'unist-util-visit'
 import has from 'hast-util-has-property'
 import {isEventHandler} from 'hast-util-is-event-handler'
@@ -46,5 +45,5 @@ function minify(value) {
     result = output.code.slice(prefix.length, -suffix.length)
   } catch (_) {}
 
-  return trim(result)
+  return result.trim()
 }

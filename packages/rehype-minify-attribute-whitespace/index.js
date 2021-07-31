@@ -8,7 +8,6 @@
 // Note: Don’t include non-strings (such as `boolean`s) here, they’re already
 // handled in the generator.
 
-import trim from 'trim'
 import array from 'x-is-array'
 import visit from 'unist-util-visit'
 import has from 'hast-util-has-property'
@@ -58,5 +57,5 @@ function all(value) {
 }
 
 function one(value) {
-  return typeof value === 'string' ? trim(value) : value
+  return typeof value === 'string' ? String(value).trim() : value
 }

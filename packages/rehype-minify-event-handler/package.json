@@ -36,8 +36,7 @@
     "hast-util-is-event-handler": "^1.0.0",
     "hast-util-has-property": "^1.0.0",
     "uglify-js": "^3.0.18",
-    "unist-util-visit": "^2.0.0",
-    "trim": "1.0.0"
+    "unist-util-visit": "^2.0.0"
   },
   "scripts": {
     "test": "node --conditions development test.js"

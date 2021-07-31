@@ -6,7 +6,6 @@
  */
 
 import Uglify from 'uglify-js'
-import trim from 'trim'
 import visit from 'unist-util-visit'
 import has from 'hast-util-has-property'
 import is from 'hast-util-is-element'
@@ -59,7 +58,7 @@ function minify(value) {
       result = output.code.slice(prefix.length, -suffix.length)
     } catch (_) {}
 
-    result = protocol + trim(result)
+    result = protocol + result.trim()
   }
 
   return result

@@ -29,9 +29,7 @@
   "files": [
     "index.js"
   ],
-  "dependencies": {
-    "trim": "^1.0.0"
-  },
+  "dependencies": {},
   "scripts": {
     "test": "node --conditions development test.js"
   },

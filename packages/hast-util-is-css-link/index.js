@@ -22,8 +22,6 @@
  *   as its `type`.
  */
 
-import trim from 'trim'
-
 export function isCssLink(node) {
   var props
   var rel
@@ -40,7 +38,9 @@ export function isCssLink(node) {
     return false
   }
 
-  type = trim(props.type || '').toLowerCase()
+  type = String(props.type || '')
+    .trim()
+    .toLowerCase()
 
   return !type || type === 'text/css'
 }

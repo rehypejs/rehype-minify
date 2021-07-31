@@ -25,7 +25,6 @@
 
 import has from 'hast-util-has-property'
 import is from 'hast-util-is-element'
-import trim from 'trim'
 
 const mime = [
   'application/ecmascript',
@@ -67,7 +66,7 @@ function check(d, prefix) {
     return false
   }
 
-  value = trim(d.split(';', 1)[0]).toLowerCase()
+  value = d.split(';', 1)[0].trim().toLowerCase()
 
   return value === '' || mime.indexOf((prefix || '') + value) !== -1
 }
