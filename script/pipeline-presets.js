@@ -1,11 +1,11 @@
 import fs from 'fs'
 import path from 'path'
-import vfile from 'to-vfile'
-import trough from 'trough'
+import {toVFile} from 'to-vfile'
+import {trough} from 'trough'
 
 var filePipeline = trough()
   .use(function (ctx, next) {
-    vfile.read(path.join(ctx.root, 'index.js'), function (error, file) {
+    toVFile.read(path.join(ctx.root, 'index.js'), function (error, file) {
       ctx.file = file
       next(error)
     })

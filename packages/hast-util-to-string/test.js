@@ -1,5 +1,5 @@
 import test from 'tape'
-import u from 'unist-builder'
+import {u} from 'unist-builder'
 import {toString} from './index.js'
 
 test('hast-util-to-string', function (t) {

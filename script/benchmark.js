@@ -2,15 +2,15 @@ import fs from 'fs'
 import path from 'path'
 import zlib from 'zlib'
 import fetch from 'node-fetch'
-import bail from 'bail'
-import unified from 'unified'
-import parse from 'rehype-parse'
-import stringify from 'rehype-stringify'
-import vfile from 'to-vfile'
-import trough from 'trough'
+import {bail} from 'bail'
+import {unified} from 'unified'
+import rehypeParse from 'rehype-parse'
+import rehypeStringify from 'rehype-stringify'
+import {toVFile} from 'to-vfile'
+import {trough} from 'trough'
 import htmlMinifier from 'html-minifier'
 import rehypePresetMinify from '../packages/rehype-preset-minify/index.js'
-import minifyDoctype from '../packages/rehype-minify-doctype/index.js'
+import rehypeMinifyDoctype from '../packages/rehype-minify-doctype/index.js'
 
 var cache = 'benchmark-cache'
 
@@ -107,7 +107,7 @@ function dir(ctx, next) {
 }
 
 function read(ctx, next) {
-  vfile.read(path.join(cache, ctx.name, 'index.html'), done)
+  toVFile.read(path.join(cache, ctx.name, 'index.html'), done)
 
   function done(error, file) {
     if (file) {
@@ -142,8 +142,8 @@ function request(ctx, next) {
     if (buf.length < 1024) {
       next(new Error('Empty response from ' + url))
     } else {
-      ctx.file = vfile({path: fp, contents: buf})
-      vfile.write(ctx.file, function (error) {
+      ctx.file = toVFile({path: fp, value: buf})
+      toVFile.write(ctx.file, function (error) {
         next(error)
       })
     }
@@ -161,7 +161,7 @@ function test(ctx, next) {
   ctx.original = original
   ctx.results = results
 
-  original.input = ctx.file.contents
+  original.input = ctx.file.value
   original.name = ctx.name
   processorPipeline.run(original, all)
 
@@ -175,7 +175,7 @@ function test(ctx, next) {
 
   function each(result) {
     result.original = original
-    result.input = ctx.file.contents
+    result.input = ctx.file.value
     result.name = ctx.name
     processorPipeline.run(result, done)
   }
@@ -199,7 +199,7 @@ function process(ctx, next) {
     next()
   } else {
     fp = path.join(cache, ctx.name, ctx.type + '.html')
-    vfile.write({path: fp, contents: output}, function (error) {
+    toVFile.write({path: fp, value: output}, function (error) {
       next(error)
     })
   }
@@ -278,12 +278,12 @@ function htmlMinify(buf, ctx) {
 
 function rehypeMinify(buf) {
   var processor = unified()
-    .use(parse)
+    .use(rehypeParse)
     .use(rehypePresetMinify)
-    .use(minifyDoctype)
-    .use(stringify)
+    .use(rehypeMinifyDoctype)
+    .use(rehypeStringify)
 
-  return Buffer.from(processor.processSync(buf).contents, 'utf8')
+  return Buffer.from(processor.processSync(buf).value, 'utf8')
 }
 
 function identity(buf) {

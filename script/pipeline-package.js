@@ -1,13 +1,13 @@
 import fs from 'fs'
 import path from 'path'
 import {exec} from 'child_process'
-import vfile from 'to-vfile'
-import findDown from 'vfile-find-down'
-import trough from 'trough'
+import {toVFile} from 'to-vfile'
+import {findDown} from 'vfile-find-down'
+import {trough} from 'trough'
 
 export const pipelinePackage = trough()
   .use(function (ctx, next) {
-    vfile.read(path.join(ctx.root, 'package.json'), function (error, file) {
+    toVFile.read(path.join(ctx.root, 'package.json'), function (error, file) {
       ctx.package = file
       next(error)
     })
@@ -32,7 +32,7 @@ export const pipelinePackage = trough()
     })
   })
   .use(function (ctx, next) {
-    findDown.all(['.js', '.json'], ctx.root, function (error, files) {
+    findDown(['.js', '.json'], ctx.root, function (error, files) {
       if (files) {
         ctx.files = files
           .map(function (file) {
@@ -85,10 +85,10 @@ export const pipelinePackage = trough()
       xo: false
     }
 
-    ctx.package.contents = JSON.stringify(curr, 0, 2) + '\n'
+    ctx.package.value = JSON.stringify(curr, 0, 2) + '\n'
   })
   .use(function (ctx, next) {
-    fs.writeFile(ctx.package.path, ctx.package.contents, next)
+    fs.writeFile(ctx.package.path, ctx.package.value, next)
   })
   .use(function (ctx) {
     ctx.package.stored = true

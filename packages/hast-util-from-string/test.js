@@ -1,5 +1,5 @@
 import test from 'tape'
-import u from 'unist-builder'
+import {u} from 'unist-builder'
 import {fromString} from './index.js'
 
 test('hast-util-from-string', function (t) {

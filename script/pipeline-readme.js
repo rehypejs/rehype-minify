@@ -3,10 +3,10 @@ import path from 'path'
 import {inspect} from 'util'
 import dox from 'dox'
 import remark from 'remark'
-import rehype from 'rehype'
-import u from 'unist-builder'
-import vfile from 'to-vfile'
-import trough from 'trough'
+import {rehype} from 'rehype'
+import {u} from 'unist-builder'
+import {toVFile} from 'to-vfile'
+import {trough} from 'trough'
 import author from 'parse-author'
 import strip from 'strip-indent'
 import preset from 'remark-preset-wooorm'
@@ -17,13 +17,13 @@ var proc = remark().use({settings: preset.settings})
 
 export const pipelineReadme = trough()
   .use(function (ctx, next) {
-    vfile.read(path.join(ctx.root, 'package.json'), function (error, file) {
+    toVFile.read(path.join(ctx.root, 'package.json'), function (error, file) {
       ctx.config = file ? JSON.parse(String(file)) : {}
       next(error)
     })
   })
   .use(function (ctx, next) {
-    vfile.read(path.join(ctx.root, 'index.js'), function (error, script) {
+    toVFile.read(path.join(ctx.root, 'index.js'), function (error, script) {
       var comments
 
       if (error) {
@@ -307,8 +307,8 @@ export const pipelineReadme = trough()
       u('definition', {identifier: 'author', url: licensee.url})
     )
 
-    ctx.readme = vfile(path.join(ctx.root, 'readme.md'))
-    ctx.readme.contents = proc.stringify(u('root', tree), ctx.readme)
+    ctx.readme = toVFile(path.join(ctx.root, 'readme.md'))
+    ctx.readme.value = proc.stringify(u('root', tree), ctx.readme)
   })
   .use(function (ctx, next) {
     fs.writeFile(ctx.readme.path, String(ctx.readme), next)

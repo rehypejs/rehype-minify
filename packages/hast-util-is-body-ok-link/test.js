@@ -1,6 +1,6 @@
 import test from 'tape'
-import u from 'unist-builder'
-import h from 'hastscript'
+import {u} from 'unist-builder'
+import {h} from 'hastscript'
 import {isBodyOkLink} from './index.js'
 
 test('isBodyOkLink', function (t) {

@@ -1,20 +1,20 @@
 import fs from 'fs'
 import path from 'path'
 import bytes from 'bytes'
-import u from 'unist-builder'
-import h from 'hastscript'
-import trough from 'trough'
-import unified from 'unified'
+import {u} from 'unist-builder'
+import {h} from 'hastscript'
+import {trough} from 'trough'
+import {unified} from 'unified'
 import format from 'rehype-format'
 import stringify from 'rehype-stringify'
 import remark from 'remark'
-import zone from 'mdast-zone'
-import vfile from 'to-vfile'
+import {zone} from 'mdast-zone'
+import {toVFile} from 'to-vfile'
 import remarkPresetWooorm from 'remark-preset-wooorm'
 
 export const pipelineRoot = trough()
   .use(function (ctx, next) {
-    vfile.read(path.join(ctx.root, 'readme.md'), function (error, file) {
+    toVFile.read(path.join(ctx.root, 'readme.md'), function (error, file) {
       ctx.readme = file
       next(error)
     })
@@ -72,7 +72,7 @@ export const pipelineRoot = trough()
 
       try {
         data = JSON.parse(
-          vfile.readSync({
+          toVFile.readSync({
             dirname: 'script',
             basename: 'benchmark-results.json'
           })
@@ -159,7 +159,7 @@ export const pipelineRoot = trough()
     }
   })
   .use(function (ctx, next) {
-    fs.writeFile(ctx.readme.path, ctx.readme.contents, function (error) {
+    fs.writeFile(ctx.readme.path, ctx.readme.value, function (error) {
       next(error)
     })
   })

@@ -1,6 +1,6 @@
 import test from 'tape'
-import rehype from 'rehype'
-import h from 'hastscript'
+import {rehype} from 'rehype'
+import {h} from 'hastscript'
 import min from './index.js'
 
 test('rehype-minify-language', function (t) {

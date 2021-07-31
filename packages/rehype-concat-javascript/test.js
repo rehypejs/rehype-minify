@@ -1,7 +1,7 @@
 import test from 'tape'
-import rehype from 'rehype'
-import u from 'unist-builder'
-import h from 'hastscript'
+import {rehype} from 'rehype'
+import {u} from 'unist-builder'
+import {h} from 'hastscript'
 import min from './index.js'
 
 test('rehype-concat-javascript', function (t) {

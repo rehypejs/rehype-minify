@@ -1,15 +1,15 @@
 import fs from 'fs'
 import path from 'path'
 import test from 'tape'
-import rehype from 'rehype'
+import {rehype} from 'rehype'
 import negate from 'negate'
-import hidden from 'is-hidden'
-import trimTrailingLines from 'trim-trailing-lines'
+import {isHidden} from 'is-hidden'
+import {trimTrailingLines} from 'trim-trailing-lines'
 import minify from '../packages/rehype-preset-minify/index.js'
 
 test('plugin', function (t) {
   var root = path.join('test', 'fixtures')
-  var fixtures = fs.readdirSync(root).filter(negate(hidden))
+  var fixtures = fs.readdirSync(root).filter(negate(isHidden))
 
   t.plan(fixtures.length * 2)
 

@@ -1,6 +1,6 @@
 import test from 'tape'
-import u from 'unist-builder'
-import h from 'hastscript'
+import {u} from 'unist-builder'
+import {h} from 'hastscript'
 import {isCssStyle} from './index.js'
 
 test('hast-util-is-css-style', function (t) {

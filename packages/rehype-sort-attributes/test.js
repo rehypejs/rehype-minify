@@ -1,5 +1,5 @@
 import test from 'tape'
-import rehype from 'rehype'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-sort-attributes', function (t) {

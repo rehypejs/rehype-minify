@@ -1,9 +1,9 @@
 import fs from 'fs'
 import path from 'path'
 import chalk from 'chalk'
-import bail from 'bail'
-import trough from 'trough'
-import hidden from 'is-hidden'
+import {bail} from 'bail'
+import {trough} from 'trough'
+import {isHidden} from 'is-hidden'
 import negate from 'negate'
 import {pipelineRoot} from './pipeline-root.js'
 import {pipelinePackage} from './pipeline-package.js'
@@ -18,7 +18,7 @@ fs.readdir(packages, function (error, basenames) {
 
   bail(error)
 
-  basenames = basenames.filter(negate(hidden))
+  basenames = basenames.filter(negate(isHidden))
   plugins = basenames.filter(plugin)
 
   // Generate all packages.
