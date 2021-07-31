@@ -22,8 +22,8 @@
  *     entries are `pingback`, `prefetch`, or `stylesheet`.
  */
 
-import is from 'hast-util-is-element'
-import has from 'hast-util-has-property'
+import {isElement} from 'hast-util-is-element'
+import {hasProperty} from 'hast-util-has-property'
 
 var list = ['pingback', 'prefetch', 'stylesheet']
 
@@ -32,11 +32,11 @@ export function isBodyOkLink(node) {
   var index
   var rel
 
-  if (!is(node, 'link')) {
+  if (!isElement(node, 'link')) {
     return false
   }
 
-  if (has(node, 'itemProp')) {
+  if (hasProperty(node, 'itemProp')) {
     return true
   }
 

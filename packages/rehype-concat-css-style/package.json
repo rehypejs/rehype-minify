@@ -33,7 +33,7 @@
     "index.js"
   ],
   "dependencies": {
-    "unist-util-visit": "^2.0.0",
+    "unist-util-visit": "^4.0.0",
     "hast-util-is-css-style": "^1.0.0",
     "hast-util-from-string": "^1.0.0",
     "hast-util-to-string": "^1.0.0"

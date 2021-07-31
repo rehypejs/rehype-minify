@@ -9,11 +9,11 @@
  */
 
 import Uglify from 'uglify-js'
-import visit from 'unist-util-visit'
+import {visit} from 'unist-util-visit'
 import {fromString} from 'hast-util-from-string'
 import {toString} from 'hast-util-to-string'
 import {isJavaScript} from 'hast-util-is-javascript'
-import has from 'hast-util-has-property'
+import {hasProperty} from 'hast-util-has-property'
 
 export default function rehypeMinifyJavaScript() {
   return transform
@@ -25,7 +25,7 @@ function transform(tree) {
 
 function visitor(node) {
   var value
-  if (isJavaScript(node) && !has(node, 'src')) {
+  if (isJavaScript(node) && !hasProperty(node, 'src')) {
     try {
       value = Uglify.minify(toString(node)).code
       if (value.charAt(value.length - 1) === ';') {

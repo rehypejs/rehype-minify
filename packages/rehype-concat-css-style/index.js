@@ -10,7 +10,7 @@
  *   <style>i{color:blue}</style>
  */
 
-import visit from 'unist-util-visit'
+import {visit} from 'unist-util-visit'
 import {isCssStyle} from 'hast-util-is-css-style'
 import {fromString} from 'hast-util-from-string'
 import {toString} from 'hast-util-to-string'

@@ -5,9 +5,9 @@
  *   <script src="index.js">Hello!</script>
  */
 
-import visit from 'unist-util-visit'
+import {visit} from 'unist-util-visit'
 import {isJavaScript} from 'hast-util-is-javascript'
-import has from 'hast-util-has-property'
+import {hasProperty} from 'hast-util-has-property'
 
 export default function rehypeRemoveExternalScriptContent() {
   return transform
@@ -18,7 +18,7 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  if (isJavaScript(node) && has(node, 'src')) {
+  if (isJavaScript(node) && hasProperty(node, 'src')) {
     node.children = []
   }
 }

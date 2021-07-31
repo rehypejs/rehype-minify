@@ -6,8 +6,8 @@
  */
 
 import Uglify from 'uglify-js'
-import visit from 'unist-util-visit'
-import has from 'hast-util-has-property'
+import {visit} from 'unist-util-visit'
+import {hasProperty} from 'hast-util-has-property'
 import {isEventHandler} from 'hast-util-is-event-handler'
 
 var prefix = 'function a(){'
@@ -26,7 +26,7 @@ function visitor(node) {
   var name
 
   for (name in props) {
-    if (has(node, name) && isEventHandler(name)) {
+    if (hasProperty(node, name) && isEventHandler(name)) {
       props[name] = minify(props[name])
     }
   }

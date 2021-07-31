@@ -7,8 +7,8 @@
  */
 
 import CleanCSS from 'clean-css'
-import visit from 'unist-util-visit'
-import is from 'hast-util-is-element'
+import {visit} from 'unist-util-visit'
+import {isElement} from 'hast-util-is-element'
 
 var clean = new CleanCSS()
 
@@ -28,7 +28,7 @@ function visitor(node) {
   var output
   var value
 
-  if (is(node, ['link', 'source', 'style'])) {
+  if (isElement(node, ['link', 'source', 'style'])) {
     value = props.media
 
     if (typeof value === 'string') {

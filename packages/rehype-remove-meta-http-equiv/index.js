@@ -18,10 +18,10 @@
  *   </html>
  */
 
-import visit from 'unist-util-visit'
-import spaces from 'space-separated-tokens'
-import has from 'hast-util-has-property'
-import is from 'hast-util-is-element'
+import {visit} from 'unist-util-visit'
+import {stringify} from 'space-separated-tokens'
+import {hasProperty} from 'hast-util-has-property'
+import {isElement} from 'hast-util-is-element'
 
 export default function rehypeRemoveMetaHttpEquiv() {
   return transform
@@ -67,19 +67,19 @@ function transform(tree) {
 
   function visitor(node, index, parent) {
     // Stop walking as we only need the `head`.
-    if (is(node, 'body')) {
+    if (isElement(node, 'body')) {
       return false
     }
 
-    if (is(node, 'html')) {
+    if (isElement(node, 'html')) {
       html = node
-    } else if (is(node, 'head')) {
+    } else if (isElement(node, 'head')) {
       head = node
-    } else if (is(node, 'meta')) {
-      if (has(node, 'charSet')) {
+    } else if (isElement(node, 'meta')) {
+      if (hasProperty(node, 'charSet')) {
         charSet = node
-      } else if (has(node, 'httpEquiv')) {
-        value = spaces.stringify(node.properties.httpEquiv).toLowerCase()
+      } else if (hasProperty(node, 'httpEquiv')) {
+        value = stringify(node.properties.httpEquiv).toLowerCase()
 
         if (value === 'content-language') {
           contentLanguage = node

@@ -6,7 +6,7 @@
  *   <script language="javascript1.5"></script>
  */
 
-import visit from 'unist-util-visit'
+import {visit} from 'unist-util-visit'
 import {isJavaScript} from 'hast-util-is-javascript'
 
 export default function rehypeRemoveScriptTypeJavaScript() {

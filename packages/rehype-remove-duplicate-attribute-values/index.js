@@ -5,8 +5,8 @@
  *   <div class="foo foo"></label>
  */
 
-import visit from 'unist-util-visit'
-import is from 'hast-util-is-element'
+import {visit} from 'unist-util-visit'
+import {isElement} from 'hast-util-is-element'
 import {schema} from './schema.js'
 
 var own = {}.hasOwnProperty
@@ -29,7 +29,7 @@ function visitor(node) {
 
     if (
       own.call(schema, prop) &&
-      is(node, schema[prop]) &&
+      isElement(node, schema[prop]) &&
       Array.isArray(value)
     ) {
       props[prop] = [...new Set(value)]

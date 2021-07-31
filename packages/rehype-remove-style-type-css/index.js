@@ -6,7 +6,7 @@
  *   <style type="text/css"></style>
  */
 
-import visit from 'unist-util-visit'
+import {visit} from 'unist-util-visit'
 import {isCssLink} from 'hast-util-is-css-link'
 import {isCssStyle} from 'hast-util-is-css-style'
 

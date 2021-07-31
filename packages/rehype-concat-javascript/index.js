@@ -9,8 +9,8 @@
  *   <script>function bar() {}</script>
  */
 
-import visit from 'unist-util-visit'
-import has from 'hast-util-has-property'
+import {visit} from 'unist-util-visit'
+import {hasProperty} from 'hast-util-has-property'
 import {isJavaScript} from 'hast-util-is-javascript'
 import {fromString} from 'hast-util-from-string'
 import {toString} from 'hast-util-to-string'
@@ -29,7 +29,7 @@ function transform(tree) {
   }
 
   function visitor(node, index, parent) {
-    if (isJavaScript(node) && !has(node, 'src')) {
+    if (isJavaScript(node) && !hasProperty(node, 'src')) {
       matches.push([parent, node])
     }
   }

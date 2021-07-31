@@ -33,9 +33,9 @@
     "index.js"
   ],
   "dependencies": {
-    "bcp-47-normalize": "^1.1.0",
-    "hast-util-has-property": "^1.0.0",
-    "unist-util-visit": "^2.0.0"
+    "bcp-47-normalize": "^2.0.0",
+    "hast-util-has-property": "^2.0.0",
+    "unist-util-visit": "^4.0.0"
   },
   "scripts": {
     "test": "node --conditions development test.js"

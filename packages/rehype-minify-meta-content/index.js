@@ -9,10 +9,10 @@
  *   <meta name="keywords" content="foo, bar baz, qux">
  */
 
-import comma from 'comma-separated-tokens'
-import visit from 'unist-util-visit'
-import is from 'hast-util-is-element'
-import has from 'hast-util-has-property'
+import {parse, stringify} from 'comma-separated-tokens'
+import {visit} from 'unist-util-visit'
+import {isElement} from 'hast-util-is-element'
+import {hasProperty} from 'hast-util-has-property'
 
 var own = {}.hasOwnProperty
 
@@ -37,8 +37,8 @@ function visitor(node) {
   var name = props.name
 
   if (
-    is(node, 'meta') &&
-    has(node, 'content') &&
+    isElement(node, 'meta') &&
+    hasProperty(node, 'content') &&
     own.call(handlers, name) &&
     typeof props.content === 'string'
   ) {
@@ -53,7 +53,7 @@ function viewport(value) {
 }
 
 function collapse(value) {
-  return comma.stringify(comma.parse(value), {padLeft: false})
+  return stringify(parse(value), {padLeft: false})
 }
 
 function toNumber(value) {

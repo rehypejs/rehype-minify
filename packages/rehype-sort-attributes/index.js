@@ -7,7 +7,7 @@
  *   <div id="foo"><strong class="bar" id="baz">qux</strong></div>
  */
 
-import visit from 'unist-util-visit'
+import {visit} from 'unist-util-visit'
 
 export default function rehypeSortAttributes() {
   return transform

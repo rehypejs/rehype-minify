@@ -10,10 +10,10 @@
  *   <p><strong>This</strong> and <em>that</em></p>
  */
 
-import is from 'hast-util-is-element'
-import embedded from 'hast-util-embedded'
-import convert from 'unist-util-is/convert.js'
-import whitespace from 'hast-util-whitespace'
+import {isElement} from 'hast-util-is-element'
+import {embedded} from 'hast-util-embedded'
+import {convert} from 'unist-util-is'
+import {whitespace} from 'hast-util-whitespace'
 import {blocks} from './block.js'
 import {content as contents} from './content.js'
 import {skippable as skippables} from './skippable.js'
@@ -190,12 +190,12 @@ function inferBoundary(node) {
 
 // Infer whether a node is skippable.
 function content(node) {
-  return embedded(node) || is(node, contents)
+  return embedded(node) || isElement(node, contents)
 }
 
 // See: <https://html.spec.whatwg.org/#the-css-user-agent-style-sheet-and-presentational-hints>
 function blocklike(node) {
-  return is(node, blocks)
+  return isElement(node, blocks)
 }
 
 function skippable(node) {
@@ -203,7 +203,7 @@ function skippable(node) {
   /* c8 ignore next */
   var props = node.properties || {}
 
-  return ignorableNode(node) || is(node, skippables) || props.hidden
+  return ignorableNode(node) || isElement(node, skippables) || props.hidden
 }
 
 function removable(character) {

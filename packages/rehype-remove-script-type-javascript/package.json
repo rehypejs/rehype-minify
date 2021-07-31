@@ -33,7 +33,7 @@
   ],
   "dependencies": {
     "hast-util-is-javascript": "^1.0.0",
-    "unist-util-visit": "^2.0.0"
+    "unist-util-visit": "^4.0.0"
   },
   "scripts": {
     "test": "node --conditions development test.js"

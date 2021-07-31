@@ -13,9 +13,9 @@
  */
 
 import Relate from 'relateurl'
-import visit from 'unist-util-visit'
-import has from 'hast-util-has-property'
-import is from 'hast-util-is-element'
+import {visit} from 'unist-util-visit'
+import {hasProperty} from 'hast-util-has-property'
+import {isElement} from 'hast-util-is-element'
 import {urlAttributes} from 'html-url-attributes'
 
 var own = {}.hasOwnProperty
@@ -41,9 +41,9 @@ export default function rehypeMinifyUrl(options) {
 
       for (prop in props) {
         if (
-          has(node, prop) &&
+          hasProperty(node, prop) &&
           own.call(urlAttributes, prop) &&
-          is(node, urlAttributes[prop])
+          isElement(node, urlAttributes[prop])
         ) {
           props[prop] = minify(props[prop], relate)
         }

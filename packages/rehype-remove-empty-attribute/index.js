@@ -5,8 +5,8 @@
  *   <label for id=""></label>
  */
 
-import visit from 'unist-util-visit'
-import is from 'hast-util-is-element'
+import {visit} from 'unist-util-visit'
+import {isElement} from 'hast-util-is-element'
 import {isEventHandler} from 'hast-util-is-event-handler'
 import {schema} from './schema.js'
 
@@ -31,7 +31,7 @@ function visitor(node) {
     if (
       (value === '' || (Array.isArray(value) && value.length === 0)) &&
       (isEventHandler(prop) ||
-        (own.call(schema, prop) && is(node, schema[prop])))
+        (own.call(schema, prop) && isElement(node, schema[prop])))
     ) {
       props[prop] = null
     }

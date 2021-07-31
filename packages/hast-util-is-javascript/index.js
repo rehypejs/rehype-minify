@@ -23,8 +23,8 @@
  *   `type`, has no `type` and a valid JavaScript `language`, or has neither.
  */
 
-import has from 'hast-util-has-property'
-import is from 'hast-util-is-element'
+import {hasProperty} from 'hast-util-has-property'
+import {isElement} from 'hast-util-is-element'
 
 const mime = [
   'application/ecmascript',
@@ -47,15 +47,17 @@ const mime = [
 
 // Check node.
 export function isJavaScript(node) {
-  if (!is(node, 'script')) {
+  if (!isElement(node, 'script')) {
     return false
   }
 
-  if (has(node, 'type')) {
+  if (hasProperty(node, 'type')) {
     return check(node.properties.type)
   }
 
-  return !has(node, 'language') || check(node.properties.language, 'text/')
+  return (
+    !hasProperty(node, 'language') || check(node.properties.language, 'text/')
+  )
 }
 
 // Check one value.

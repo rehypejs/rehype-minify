@@ -9,7 +9,7 @@
  *   <!doctype html><html><head></head><body><link rel="stylesheet" href="index.css"></body></html>
  */
 
-import visit from 'unist-util-visit'
+import {visit} from 'unist-util-visit'
 import {isCssLink} from 'hast-util-is-css-link'
 
 export default function rehypeCssToTop() {

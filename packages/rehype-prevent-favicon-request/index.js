@@ -12,7 +12,7 @@
  *   <!doctype html><html><head></head><body></body></html>
  */
 
-import visit from 'unist-util-visit'
+import {visit} from 'unist-util-visit'
 
 export default function rehypePreventFaviconRequest() {
   return transform

@@ -7,9 +7,9 @@
  *   <form method="GET"></form>
  */
 
-import visit from 'unist-util-visit'
-import has from 'hast-util-has-property'
-import is from 'hast-util-is-element'
+import {visit} from 'unist-util-visit'
+import {hasProperty} from 'hast-util-has-property'
+import {isElement} from 'hast-util-is-element'
 import {schema} from './schema.js'
 
 var own = {}.hasOwnProperty
@@ -27,7 +27,11 @@ function visitor(node) {
   var prop
 
   for (prop in props) {
-    if (has(node, prop) && own.call(schema, prop) && is(node, schema[prop])) {
+    if (
+      hasProperty(node, prop) &&
+      own.call(schema, prop) &&
+      isElement(node, schema[prop])
+    ) {
       props[prop] = minify(props[prop])
     }
   }

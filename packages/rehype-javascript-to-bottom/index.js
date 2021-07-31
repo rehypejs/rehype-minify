@@ -12,7 +12,7 @@
  *   <!doctype html><html><head><script src="index.js"></script></head><body></body></html>
  */
 
-import visit from 'unist-util-visit'
+import {visit} from 'unist-util-visit'
 import {isJavaScript} from 'hast-util-is-javascript'
 
 export default function rehypeJavaScriptToBottom(options) {

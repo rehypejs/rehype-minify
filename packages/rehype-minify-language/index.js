@@ -8,9 +8,9 @@
  *   <track src="colour.vtt" srclang="en-GB" label="English (UK)">
  */
 
-import normalize from 'bcp-47-normalize'
-import visit from 'unist-util-visit'
-import has from 'hast-util-has-property'
+import {bcp47Normalize} from 'bcp-47-normalize'
+import {visit} from 'unist-util-visit'
+import {hasProperty} from 'hast-util-has-property'
 
 var fields = ['hrefLang', 'lang', 'srcLang', 'xmlLang']
 
@@ -30,10 +30,10 @@ function visitor(node) {
   while (++index < fields.length) {
     prop = fields[index]
 
-    if (has(node, prop) && typeof props[prop] === 'string') {
+    if (hasProperty(node, prop) && typeof props[prop] === 'string') {
       // BCP 47 tags are case-insensitive, but in this project we prefer
       // lowercase which *should* help GZIP.
-      props[prop] = (normalize(props[prop]) || props[prop]).toLowerCase()
+      props[prop] = (bcp47Normalize(props[prop]) || props[prop]).toLowerCase()
     }
   }
 }

@@ -7,8 +7,8 @@
  *   <div class="qux quux foo bar"></div>
  */
 
-import visit from 'unist-util-visit'
-import is from 'hast-util-is-element'
+import {visit} from 'unist-util-visit'
+import {isElement} from 'hast-util-is-element'
 import {schema} from './schema.js'
 
 var own = {}.hasOwnProperty
@@ -35,7 +35,7 @@ function transform(tree) {
 
       if (
         own.call(schema, prop) &&
-        is(node, schema[prop]) &&
+        isElement(node, schema[prop]) &&
         Array.isArray(value)
       ) {
         add(prop, value)

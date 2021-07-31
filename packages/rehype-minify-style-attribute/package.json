@@ -31,9 +31,9 @@
     "index.js"
   ],
   "dependencies": {
-    "clean-css": "^4.0.12",
-    "hast-util-has-property": "^1.0.0",
-    "unist-util-visit": "^2.0.0"
+    "clean-css": "^5.0.0",
+    "hast-util-has-property": "^2.0.0",
+    "unist-util-visit": "^4.0.0"
   },
   "scripts": {
     "test": "node --conditions development test.js"

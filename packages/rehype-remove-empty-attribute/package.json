@@ -32,9 +32,9 @@
     "schema.js"
   ],
   "dependencies": {
-    "hast-util-is-element": "^1.0.0",
+    "hast-util-is-element": "^2.0.0",
     "hast-util-is-event-handler": "^1.0.0",
-    "unist-util-visit": "^2.0.0"
+    "unist-util-visit": "^4.0.0"
   },
   "scripts": {
     "test": "node --conditions development test.js"

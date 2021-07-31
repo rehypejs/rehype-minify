@@ -8,9 +8,9 @@
 // Note: Don’t include non-strings (such as `boolean`s) here, they’re already
 // handled in the generator.
 
-import visit from 'unist-util-visit'
-import has from 'hast-util-has-property'
-import is from 'hast-util-is-element'
+import {visit} from 'unist-util-visit'
+import {hasProperty} from 'hast-util-has-property'
+import {isElement} from 'hast-util-is-element'
 import {isEventHandler} from 'hast-util-is-event-handler'
 import {schema} from './schema.js'
 
@@ -30,9 +30,9 @@ function visitor(node) {
 
   for (prop in props) {
     if (
-      has(node, prop) &&
+      hasProperty(node, prop) &&
       (isEventHandler(prop) ||
-        (own.call(schema, prop) && is(node, schema[prop])))
+        (own.call(schema, prop) && isElement(node, schema[prop])))
     ) {
       props[prop] = minify(props[prop])
     }

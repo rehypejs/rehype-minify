@@ -11,9 +11,9 @@
  *   </video>
  */
 
-import visit from 'unist-util-visit'
-import has from 'hast-util-has-property'
-import is from 'hast-util-is-element'
+import {visit} from 'unist-util-visit'
+import {hasProperty} from 'hast-util-has-property'
+import {isElement} from 'hast-util-is-element'
 import {schema} from './schema.js'
 
 var own = {}.hasOwnProperty
@@ -35,7 +35,7 @@ function visitor(node) {
 
   for (prop in props) {
     if (
-      has(node, prop) &&
+      hasProperty(node, prop) &&
       own.call(schema, prop) &&
       typeof props[prop] === 'string'
     ) {
@@ -45,7 +45,7 @@ function visitor(node) {
       index = -1
 
       while (++index < length) {
-        if (is(node, definitions[index].tagNames)) {
+        if (isElement(node, definitions[index].tagNames)) {
           props[prop] = minify(props[prop], definitions[index])
         }
       }

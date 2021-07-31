@@ -6,8 +6,8 @@
  */
 
 import CleanCSS from 'clean-css'
-import visit from 'unist-util-visit'
-import has from 'hast-util-has-property'
+import {visit} from 'unist-util-visit'
+import {hasProperty} from 'hast-util-has-property'
 
 var clean = new CleanCSS()
 
@@ -27,7 +27,7 @@ function visitor(node) {
   var value
   var output
 
-  if (has(node, 'style')) {
+  if (hasProperty(node, 'style')) {
     props = node.properties
     value = props.style
 

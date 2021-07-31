@@ -7,9 +7,9 @@
  */
 
 import CleanCSS from 'clean-css'
-import visit from 'unist-util-visit'
-import is from 'hast-util-is-element'
-import has from 'hast-util-has-property'
+import {visit} from 'unist-util-visit'
+import {isElement} from 'hast-util-is-element'
+import {hasProperty} from 'hast-util-has-property'
 
 var clean = new CleanCSS()
 
@@ -31,9 +31,9 @@ function visitor(node) {
   var output
 
   if (
-    is(node, 'meta') &&
+    isElement(node, 'meta') &&
     (name === 'msapplication-TileColor' || name === 'theme-color') &&
-    has(node, 'content')
+    hasProperty(node, 'content')
   ) {
     value = props.content
 

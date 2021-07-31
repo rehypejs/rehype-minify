@@ -15,10 +15,10 @@
  *   </script>
  */
 
-import visit from 'unist-util-visit'
+import {visit} from 'unist-util-visit'
 import {fromString} from 'hast-util-from-string'
 import {toString} from 'hast-util-to-string'
-import is from 'hast-util-is-element'
+import {isElement} from 'hast-util-is-element'
 
 export default function rehypeMinifyJsonScript() {
   return transform
@@ -29,7 +29,10 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  if (is(node, 'script') && node.properties.type === 'application/ld+json') {
+  if (
+    isElement(node, 'script') &&
+    node.properties.type === 'application/ld+json'
+  ) {
     try {
       fromString(node, JSON.stringify(JSON.parse(toString(node))))
     } catch (_) {}
