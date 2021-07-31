@@ -12,14 +12,10 @@
  *   <!doctype html><html><head></head><body></body></html>
  */
 
-'use strict'
+import array from 'x-is-array'
+import visit from 'unist-util-visit'
 
-var array = require('x-is-array')
-var visit = require('unist-util-visit')
-
-module.exports = doctype
-
-function doctype() {
+export default function rehypePreventFaviconRequest() {
   return transform
 }
 

@@ -23,14 +23,14 @@ npm install hast-util-is-javascript
 ## Use
 
 ```js
-var h = require('hastscript')
-var ok = require('hast-util-is-javascript')
+import {h} from 'hastscript'
+import {isJavaScript} from 'hast-util-is-javascript'
 
-ok(h('script')) //=> true
-ok(h('script', {type: 'text/ecmascript'})) //=> true
-ok(h('script', {language: 'ecmascript'})) //=> true
-ok(h('script', {type: 'text/fooscript'})) //=> false
-ok(h('script', {language: 'fooscript'})) //=> false
+isJavaScript(h('script')) //=> true
+isJavaScript(h('script', {type: 'text/ecmascript'})) //=> true
+isJavaScript(h('script', {language: 'ecmascript'})) //=> true
+isJavaScript(h('script', {type: 'text/fooscript'})) //=> false
+isJavaScript(h('script', {language: 'fooscript'})) //=> false
 ```
 
 ## API

@@ -23,12 +23,12 @@ npm install hast-util-is-event-handler
 ## Use
 
 ```js
-var ok = require('hast-util-is-event-handler')
+import {isEventHandler} from 'hast-util-is-event-handler'
 
-ok('oncut') //=> true
-ok('onpushsubscriptionchange') //=> true
-ok('ones') //=> false
-ok('class') //=> false
+isEventHandler('oncut') //=> true
+isEventHandler('onpushsubscriptionchange') //=> true
+isEventHandler('ones') //=> false
+isEventHandler('class') //=> false
 ```
 
 ## API

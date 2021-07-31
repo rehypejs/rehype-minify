@@ -70,8 +70,8 @@ rehype src -o dist
 Use:
 
 ```js
-var rehype = require('rehype')
-var minify = require('rehype-preset-minify')
+import {rehype} from 'rehype'
+import rehypePresetMinify from 'rehype-preset-minify'
 
 var doc = `<!doctype html>
 <html>
@@ -85,9 +85,9 @@ var doc = `<!doctype html>
 `
 
 rehype()
-  .use(minify)
-  .process(doc, function(err, file) {
-    if (err) throw err
+  .use(rehypePresetMinify)
+  .process(doc)
+  .then((file) => {
     console.log(String(file))
   })
 ```

@@ -8,17 +8,13 @@
  *   <track src="colour.vtt" srclang="en-GB" label="English (UK)">
  */
 
-'use strict'
-
-var normalize = require('bcp-47-normalize')
-var visit = require('unist-util-visit')
-var has = require('hast-util-has-property')
-
-module.exports = language
+import normalize from 'bcp-47-normalize'
+import visit from 'unist-util-visit'
+import has from 'hast-util-has-property'
 
 var fields = ['hrefLang', 'lang', 'srcLang', 'xmlLang']
 
-function language() {
+export default function rehypeMinifyLanguage() {
   return transform
 }
 

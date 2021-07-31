@@ -5,19 +5,15 @@
  *   <div class="foo foo"></label>
  */
 
-'use strict'
-
-var uniq = require('uniq')
-var array = require('x-is-array')
-var visit = require('unist-util-visit')
-var is = require('hast-util-is-element')
-var attributes = require('./schema')
-
-module.exports = empty
+import uniq from 'uniq'
+import array from 'x-is-array'
+import visit from 'unist-util-visit'
+import is from 'hast-util-is-element'
+import {schema} from './schema.js'
 
 var own = {}.hasOwnProperty
 
-function empty() {
+export default function rehypeRemoveDuplicateAttributeValue() {
   return transform
 }
 
@@ -33,11 +29,7 @@ function visitor(node) {
   for (prop in props) {
     value = props[prop]
 
-    if (
-      own.call(attributes, prop) &&
-      is(node, attributes[prop]) &&
-      array(value)
-    ) {
+    if (own.call(schema, prop) && is(node, schema[prop]) && array(value)) {
       uniq(value)
     }
   }

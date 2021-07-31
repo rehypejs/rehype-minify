@@ -9,17 +9,13 @@
  *   <script>function bar() {}</script>
  */
 
-'use strict'
+import visit from 'unist-util-visit'
+import has from 'hast-util-has-property'
+import {isJavaScript} from 'hast-util-is-javascript'
+import {fromString} from 'hast-util-from-string'
+import {toString} from 'hast-util-to-string'
 
-var visit = require('unist-util-visit')
-var has = require('hast-util-has-property')
-var javascript = require('hast-util-is-javascript')
-var fromString = require('hast-util-from-string')
-var toString = require('hast-util-to-string')
-
-module.exports = concatJS
-
-function concatJS() {
+export default function rehypeConcatJavaScript() {
   return transform
 }
 
@@ -33,7 +29,7 @@ function transform(tree) {
   }
 
   function visitor(node, index, parent) {
-    if (javascript(node) && !has(node, 'src')) {
+    if (isJavaScript(node) && !has(node, 'src')) {
       matches.push([parent, node])
     }
   }

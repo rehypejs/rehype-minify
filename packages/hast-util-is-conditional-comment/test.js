@@ -1,10 +1,7 @@
-'use strict'
-
-var test = require('tape')
-var u = require('unist-builder')
-var h = require('hastscript')
-
-var ok = require('.')
+import test from 'tape'
+import u from 'unist-builder'
+import h from 'hastscript'
+import {isConditionalComment} from './index.js'
 
 test('hast-util-is-conditional-comment', function (t) {
   ;[
@@ -20,12 +17,20 @@ test('hast-util-is-conditional-comment', function (t) {
     '[if !IE]>',
     '<![endif]'
   ].forEach(function (d) {
-    t.equal(ok(u('comment', d)), true, 'yes - <!--' + d + '-->')
+    t.equal(
+      isConditionalComment(u('comment', d)),
+      true,
+      'yes - <!--' + d + '-->'
+    )
   })
 
-  t.equal(ok(u('comments', 'foo')), false, 'no - for other comments')
-  t.equal(ok(h('div')), false, 'no - for elements')
-  t.equal(ok(u('text', 'foo')), false, 'no - for texts')
+  t.equal(
+    isConditionalComment(u('comments', 'foo')),
+    false,
+    'no - for other comments'
+  )
+  t.equal(isConditionalComment(h('div')), false, 'no - for elements')
+  t.equal(isConditionalComment(u('text', 'foo')), false, 'no - for texts')
 
   t.end()
 })

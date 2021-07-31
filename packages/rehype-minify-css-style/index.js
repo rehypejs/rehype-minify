@@ -7,19 +7,15 @@
  *   </style>
  */
 
-'use strict'
-
-var CleanCSS = require('clean-css')
-var visit = require('unist-util-visit')
-var fromString = require('hast-util-from-string')
-var toString = require('hast-util-to-string')
-var css = require('hast-util-is-css-style')
-
-module.exports = cssStyle
+import CleanCSS from 'clean-css'
+import visit from 'unist-util-visit'
+import {fromString} from 'hast-util-from-string'
+import {toString} from 'hast-util-to-string'
+import {isCssStyle} from 'hast-util-is-css-style'
 
 var clean = new CleanCSS()
 
-function cssStyle() {
+export default function rehypeMinifyCssStyle() {
   return transform
 }
 
@@ -30,7 +26,7 @@ function transform(tree) {
 function visitor(node) {
   var value
 
-  if (css(node)) {
+  if (isCssStyle(node)) {
     try {
       value = toString(node)
       fromString(node, clean.minify(value).styles || value)

@@ -5,20 +5,16 @@
  *   <h1 onclick="javascript:alert(false)">Hello</h1>
  */
 
-'use strict'
-
-var Uglify = require('uglify-js')
-var trim = require('trim')
-var visit = require('unist-util-visit')
-var has = require('hast-util-has-property')
-var handler = require('hast-util-is-event-handler')
-
-module.exports = eventHandler
+import Uglify from 'uglify-js'
+import trim from 'trim'
+import visit from 'unist-util-visit'
+import has from 'hast-util-has-property'
+import {isEventHandler} from 'hast-util-is-event-handler'
 
 var prefix = 'function a(){'
 var suffix = '}a();'
 
-function eventHandler() {
+export default function rehypeMinifyEventHandler() {
   return transform
 }
 
@@ -31,7 +27,7 @@ function visitor(node) {
   var name
 
   for (name in props) {
-    if (has(node, name) && handler(name)) {
+    if (has(node, name) && isEventHandler(name)) {
       props[name] = minify(props[name])
     }
   }

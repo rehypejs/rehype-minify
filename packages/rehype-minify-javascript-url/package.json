@@ -25,6 +25,9 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com>"
   ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "index.js",
   "files": [
     "index.js"
   ],
@@ -35,6 +38,9 @@
     "uglify-js": "^3.0.18",
     "unist-util-visit": "^2.0.0",
     "trim": "1.0.0"
+  },
+  "scripts": {
+    "test": "node --conditions development test.js"
   },
   "xo": false
 }

@@ -1,24 +1,22 @@
-'use strict'
+import fs from 'fs'
+import path from 'path'
+import bytes from 'bytes'
+import u from 'unist-builder'
+import h from 'hastscript'
+import trough from 'trough'
+import unified from 'unified'
+import format from 'rehype-format'
+import stringify from 'rehype-stringify'
+import remark from 'remark'
+import zone from 'mdast-zone'
+import vfile from 'to-vfile'
+import remarkPresetWooorm from 'remark-preset-wooorm'
 
-var fs = require('fs')
-var path = require('path')
-var bytes = require('bytes')
-var u = require('unist-builder')
-var h = require('hastscript')
-var trough = require('trough')
-var unified = require('unified')
-var format = require('rehype-format')
-var stringify = require('rehype-stringify')
-var remark = require('remark')
-var zone = require('mdast-zone')
-var vfile = require('to-vfile')
-var remarkSettings = require('remark-preset-wooorm').settings
-
-module.exports = trough()
+export const pipelineRoot = trough()
   .use(function (ctx, next) {
-    vfile.read(path.join(ctx.root, 'readme.md'), function (err, file) {
+    vfile.read(path.join(ctx.root, 'readme.md'), function (error, file) {
       ctx.readme = file
-      next(err)
+      next(error)
     })
   })
   .use(function (ctx, next) {
@@ -26,17 +24,19 @@ module.exports = trough()
     var core = []
 
     ctx.plugins.forEach(function (name) {
-      var pack = require(path.join(ctx.root, 'packages', name, 'package.json'))
+      var pack = JSON.parse(
+        fs.readFileSync(path.join(ctx.root, 'packages', name, 'package.json'))
+      )
       ;(pack.excludeFromPreset ? others : core).push(name)
     })
 
     remark()
-      .data('settings', remarkSettings)
+      .data('settings', remarkPresetWooorm.settings)
       .use(plugin('plugins-core', core))
       .use(plugin('plugins-other', others))
       .use(benchmark)
-      .process(ctx.readme, function (err) {
-        next(err)
+      .process(ctx.readme, function (error) {
+        next(error)
       })
 
     function plugin(name, list) {
@@ -159,8 +159,8 @@ module.exports = trough()
     }
   })
   .use(function (ctx, next) {
-    fs.writeFile(ctx.readme.path, ctx.readme.contents, function (err) {
-      next(err)
+    fs.writeFile(ctx.readme.path, ctx.readme.contents, function (error) {
+      next(error)
     })
   })
   .use(function (ctx) {

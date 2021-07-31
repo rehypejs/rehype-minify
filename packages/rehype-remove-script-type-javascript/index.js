@@ -6,14 +6,10 @@
  *   <script language="javascript1.5"></script>
  */
 
-'use strict'
+import visit from 'unist-util-visit'
+import {isJavaScript} from 'hast-util-is-javascript'
 
-var visit = require('unist-util-visit')
-var js = require('hast-util-is-javascript')
-
-module.exports = removeScriptType
-
-function removeScriptType() {
+export default function rehypeRemoveScriptTypeJavaScript() {
   return transform
 }
 
@@ -24,7 +20,7 @@ function transform(tree) {
 function visitor(node) {
   var props = node.properties
 
-  if (js(node)) {
+  if (isJavaScript(node)) {
     if ('type' in props) {
       props.type = null
     }

@@ -5,15 +5,11 @@
  *   <script src="index.js">Hello!</script>
  */
 
-'use strict'
+import visit from 'unist-util-visit'
+import {isJavaScript} from 'hast-util-is-javascript'
+import has from 'hast-util-has-property'
 
-var visit = require('unist-util-visit')
-var js = require('hast-util-is-javascript')
-var has = require('hast-util-has-property')
-
-module.exports = scriptJS
-
-function scriptJS() {
+export default function rehypeRemoveExternalScriptContent() {
   return transform
 }
 
@@ -22,7 +18,7 @@ function transform(tree) {
 }
 
 function visitor(node) {
-  if (js(node) && has(node, 'src')) {
+  if (isJavaScript(node) && has(node, 'src')) {
     node.children = []
   }
 }

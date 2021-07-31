@@ -12,20 +12,16 @@
  *   <a href="/foo/../bar.html"></a>
  */
 
-'use strict'
-
-var Relate = require('relateurl')
-var array = require('x-is-array')
-var visit = require('unist-util-visit')
-var has = require('hast-util-has-property')
-var is = require('hast-util-is-element')
-var attributes = require('html-url-attributes')
-
-module.exports = url
+import Relate from 'relateurl'
+import array from 'x-is-array'
+import visit from 'unist-util-visit'
+import has from 'hast-util-has-property'
+import is from 'hast-util-is-element'
+import {urlAttributes} from 'html-url-attributes'
 
 var own = {}.hasOwnProperty
 
-function url(options) {
+export default function rehypeMinifyUrl(options) {
   var settings = options || {}
   var relate = new Relate(settings.from, settings)
 
@@ -47,8 +43,8 @@ function url(options) {
       for (prop in props) {
         if (
           has(node, prop) &&
-          own.call(attributes, prop) &&
-          is(node, attributes[prop])
+          own.call(urlAttributes, prop) &&
+          is(node, urlAttributes[prop])
         ) {
           props[prop] = minify(props[prop], relate)
         }

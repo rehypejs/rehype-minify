@@ -1,10 +1,7 @@
-'use strict'
-
-var test = require('tape')
-var rehype = require('rehype')
-var h = require('hastscript')
-
-var min = require('.')
+import test from 'tape'
+import rehype from 'rehype'
+import h from 'hastscript'
+import min from './index.js'
 
 test('rehype-minify-style-attribute', function (t) {
   t.deepEqual(

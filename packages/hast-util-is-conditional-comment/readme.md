@@ -23,12 +23,12 @@ npm install hast-util-is-conditional-comment
 ## Use
 
 ```js
-var u = require('unist-builder')
-var ok = require('hast-util-is-conditional-comment')
+import {u} from 'unist-builder'
+import {isConditionalComment} from 'hast-util-is-conditional-comment'
 
-ok(u('comment', '[if IE]>...<![endif]')) //=> true
-ok(u('comment', '<![endif]')) //=> true
-ok(u('comment', 'foo')) //=> false
+isConditionalComment(u('comment', '[if IE]>...<![endif]')) //=> true
+isConditionalComment(u('comment', '<![endif]')) //=> true
+isConditionalComment(u('comment', 'foo')) //=> false
 ```
 
 ## API

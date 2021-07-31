@@ -1,8 +1,6 @@
-'use strict'
-
 // This schema exposes a map of property names to (one or more) definitions.
 // Each definition defined how that attribute is enumerated.
-module.exports = {
+export const schema = {
   autoComplete: {
     tagNames: null,
     missing: '',

@@ -12,6 +12,8 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
   ],
+  "sideEffects": false,
+  "type": "module",
   "devDependencies": {
     "bail": "^1.0.0",
     "bytes": "^3.0.0",
@@ -45,7 +47,7 @@
     "uniq": "^1.0.0",
     "unist-builder": "^2.0.0",
     "vfile-find-down": "^5.0.0",
-    "xo": "^0.36.0",
+    "xo": "^0.38.0",
     "xtend": "^4.0.0"
   },
   "scripts": {
@@ -53,8 +55,8 @@
     "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
     "build-packages": "node script/build-packages",
     "build": "npm run build-packages",
-    "test-api": "tape test packages/*/test.js",
-    "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov tape test/index.js packages/*/test.js",
+    "test-api": "node --conditions development test/index.js && lerna run test",
+    "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
     "test": "npm run format && npm run build && npm run test-coverage"
   },
   "nyc": {
@@ -81,6 +83,9 @@
       ],
       "guard-for-in": "off",
       "no-eq-null": "off",
+      "unicorn/no-array-callback-reference": "off",
+      "unicorn/no-array-push-push": "off",
+      "unicorn/no-array-for-each": "off",
       "prefer-exponentiation-operator": "off",
       "unicorn/explicit-length-check": "off",
       "unicorn/no-fn-reference-in-iterator": "off",

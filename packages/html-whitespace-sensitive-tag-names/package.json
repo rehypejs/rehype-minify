@@ -23,8 +23,12 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com>"
   ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "index.js",
   "files": [
-    "index.json"
+    "index.js"
   ],
+  "scripts": {},
   "xo": false
 }

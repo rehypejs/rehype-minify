@@ -10,17 +10,13 @@
  *   <p><strong>This</strong> and <em>that</em></p>
  */
 
-'use strict'
-
-var is = require('hast-util-is-element')
-var embedded = require('hast-util-embedded')
-var convert = require('unist-util-is/convert')
-var whitespace = require('hast-util-whitespace')
-var blocks = require('./block')
-var contents = require('./content')
-var skippables = require('./skippable')
-
-module.exports = minifyWhitespace
+import is from 'hast-util-is-element'
+import embedded from 'hast-util-embedded'
+import convert from 'unist-util-is/convert.js'
+import whitespace from 'hast-util-whitespace'
+import {blocks} from './block.js'
+import {content as contents} from './content.js'
+import {skippable as skippables} from './skippable.js'
 
 var ignorableNode = convert(['doctype', 'comment'])
 var parent = convert(['element', 'root'])
@@ -28,7 +24,7 @@ var root = convert(['root'])
 var element = convert(['element'])
 var text = convert(['text'])
 
-function minifyWhitespace(options) {
+export default function rehypeMinifyWhitespace(options) {
   var collapse = collapseFactory(
     (options || {}).newlines ? replaceNewlines : replaceWhitespace
   )

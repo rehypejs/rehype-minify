@@ -5,12 +5,12 @@
  *   ## Use
  *
  *   ```js
- *   var h = require('hastscript')
- *   var ok = require('hast-util-is-css-style')
+ *   import {h} from 'hastscript'
+ *   import {isCssStyle} from 'hast-util-is-css-style'
  *
- *   ok(h('style')) //=> true
- *   ok(h('style', {type: ' TEXT/CSS '})) //=> true
- *   ok(h('style', {type: 'text/foo'})) //=> false
+ *   isCssStyle(h('style')) //=> true
+ *   isCssStyle(h('style', {type: ' TEXT/CSS '})) //=> true
+ *   isCssStyle(h('style', {type: 'text/foo'})) //=> false
  *   ```
  *
  *   ## API
@@ -21,13 +21,9 @@
  *   `type`, or `'text/css'` as its `type`.
  */
 
-'use strict'
+import trim from 'trim'
 
-var trim = require('trim')
-
-module.exports = cssStyle
-
-function cssStyle(node) {
+export function isCssStyle(node) {
   var value
 
   if (!node || node.tagName !== 'style') {

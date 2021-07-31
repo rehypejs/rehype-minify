@@ -1,4 +1,4 @@
-module.exports = [
+export const skippable = [
   'area',
   'base',
   'basefont',

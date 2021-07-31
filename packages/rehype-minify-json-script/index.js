@@ -15,16 +15,12 @@
  *   </script>
  */
 
-'use strict'
+import visit from 'unist-util-visit'
+import {fromString} from 'hast-util-from-string'
+import {toString} from 'hast-util-to-string'
+import is from 'hast-util-is-element'
 
-var visit = require('unist-util-visit')
-var fromString = require('hast-util-from-string')
-var toString = require('hast-util-to-string')
-var is = require('hast-util-is-element')
-
-module.exports = scriptJSON
-
-function scriptJSON() {
+export default function rehypeMinifyJsonScript() {
   return transform
 }
 

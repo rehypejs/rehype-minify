@@ -26,6 +26,9 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com>"
   ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "index.js",
   "files": [
     "index.js"
   ],
@@ -34,6 +37,9 @@
     "hast-util-is-css-style": "^1.0.0",
     "hast-util-from-string": "^1.0.0",
     "hast-util-to-string": "^1.0.0"
+  },
+  "scripts": {
+    "test": "node --conditions development test.js"
   },
   "excludeFromPreset": true,
   "xo": false

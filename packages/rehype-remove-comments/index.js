@@ -9,14 +9,10 @@
  *   <!--[if IE 6]>OK<![endif]-->
  */
 
-'use strict'
+import filter from 'unist-util-filter'
+import {isConditionalComment} from 'hast-util-is-conditional-comment'
 
-var filter = require('unist-util-filter')
-var conditional = require('hast-util-is-conditional-comment')
-
-module.exports = comments
-
-function comments(options) {
+export default function rehypeRemoveComments(options) {
   var force = (options || {}).removeConditional
 
   return transform
@@ -27,7 +23,7 @@ function comments(options) {
 }
 
 function soft(node) {
-  return hard(node) || conditional(node)
+  return hard(node) || isConditionalComment(node)
 }
 
 function hard(node) {

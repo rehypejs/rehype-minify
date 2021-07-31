@@ -24,8 +24,14 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com>"
   ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "index.js",
   "files": [
     "index.js"
   ],
+  "scripts": {
+    "test": "node --conditions development test.js"
+  },
   "xo": false
 }

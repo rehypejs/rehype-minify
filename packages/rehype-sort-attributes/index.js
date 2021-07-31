@@ -7,13 +7,9 @@
  *   <div id="foo"><strong class="bar" id="baz">qux</strong></div>
  */
 
-'use strict'
+import visit from 'unist-util-visit'
 
-var visit = require('unist-util-visit')
-
-module.exports = sort
-
-function sort() {
+export default function rehypeSortAttributes() {
   return transform
 }
 

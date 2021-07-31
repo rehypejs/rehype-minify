@@ -25,8 +25,8 @@ npm install hast-util-from-string
 ## Use
 
 ```js
-var h = require('hastscript')
-var fromString = require('hast-util-from-string')
+import {h} from 'hastscript'
+import {fromString} from 'hast-util-from-string'
 
 fromString(h('p'), 'Alpha')
 // { type: 'element',

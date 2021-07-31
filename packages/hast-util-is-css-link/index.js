@@ -5,12 +5,12 @@
  *   ## Use
  *
  *   ```js
- *   var h = require('hastscript')
- *   var ok = require('hast-util-is-css-link')
+ *   import {h} from 'hastscript'
+ *   import {isCssLink} from 'hast-util-is-css-link'
  *
- *   ok(h('link', {rel: ['stylesheet', 'author']})) //=> true
- *   ok(h('link', {rel: ['stylesheet'], type: 'text/css'})) //=> true
- *   ok(h('link', {rel: ['stylesheet'], type: 'text/foo'})) //=> false
+ *   isCssLink(h('link', {rel: ['stylesheet', 'author']})) //=> true
+ *   isCssLink(h('link', {rel: ['stylesheet'], type: 'text/css'})) //=> true
+ *   isCssLink(h('link', {rel: ['stylesheet'], type: 'text/foo'})) //=> false
  *   ```
  *
  *   ## API
@@ -22,13 +22,9 @@
  *   as its `type`.
  */
 
-'use strict'
+import trim from 'trim'
 
-var trim = require('trim')
-
-module.exports = cssLink
-
-function cssLink(node) {
+export function isCssLink(node) {
   var props
   var rel
   var type

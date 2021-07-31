@@ -7,19 +7,15 @@
  *   <form method="GET"></form>
  */
 
-'use strict'
-
-var array = require('x-is-array')
-var visit = require('unist-util-visit')
-var has = require('hast-util-has-property')
-var is = require('hast-util-is-element')
-var attributes = require('./schema')
-
-module.exports = casing
+import array from 'x-is-array'
+import visit from 'unist-util-visit'
+import has from 'hast-util-has-property'
+import is from 'hast-util-is-element'
+import {schema} from './schema.js'
 
 var own = {}.hasOwnProperty
 
-function casing() {
+export default function rehypeNormalizeAttributeValueCase() {
   return transform
 }
 
@@ -32,11 +28,7 @@ function visitor(node) {
   var prop
 
   for (prop in props) {
-    if (
-      has(node, prop) &&
-      own.call(attributes, prop) &&
-      is(node, attributes[prop])
-    ) {
+    if (has(node, prop) && own.call(schema, prop) && is(node, schema[prop])) {
       props[prop] = minify(props[prop])
     }
   }

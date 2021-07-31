@@ -1,5 +1,5 @@
 // See: <https://html.spec.whatwg.org/#the-css-user-agent-style-sheet-and-presentational-hints>
-module.exports = [
+export const blocks = [
   'address', // Flow content.
   'article', // Sections and headings.
   'aside', // Sections and headings.

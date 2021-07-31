@@ -5,16 +5,12 @@
  *   <img src="javascript:alert(true)">
  */
 
-'use strict'
-
-var Uglify = require('uglify-js')
-var trim = require('trim')
-var visit = require('unist-util-visit')
-var has = require('hast-util-has-property')
-var is = require('hast-util-is-element')
-var attributes = require('html-url-attributes')
-
-module.exports = url
+import Uglify from 'uglify-js'
+import trim from 'trim'
+import visit from 'unist-util-visit'
+import has from 'hast-util-has-property'
+import is from 'hast-util-is-element'
+import {urlAttributes} from 'html-url-attributes'
 
 var own = {}.hasOwnProperty
 
@@ -25,7 +21,7 @@ var protocol = 'javascript:'
 var prefix = 'function a(){'
 var suffix = '}a();'
 
-function url() {
+export default function rehypeMinifyJavaScriptUrl() {
   return transform
 }
 
@@ -40,8 +36,8 @@ function visitor(node) {
   for (prop in props) {
     if (
       has(node, prop) &&
-      own.call(attributes, prop) &&
-      is(node, attributes[prop])
+      own.call(urlAttributes, prop) &&
+      is(node, urlAttributes[prop])
     ) {
       props[prop] = minify(props[prop])
     }

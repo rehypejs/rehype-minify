@@ -10,16 +10,12 @@
  *   <style>i{color:blue}</style>
  */
 
-'use strict'
+import visit from 'unist-util-visit'
+import {isCssStyle} from 'hast-util-is-css-style'
+import {fromString} from 'hast-util-from-string'
+import {toString} from 'hast-util-to-string'
 
-var visit = require('unist-util-visit')
-var css = require('hast-util-is-css-style')
-var fromString = require('hast-util-from-string')
-var toString = require('hast-util-to-string')
-
-module.exports = concatCSSStyle
-
-function concatCSSStyle() {
+export default function rehypeConcatCssStyle() {
   return transform
 }
 
@@ -33,7 +29,7 @@ function transform(tree) {
   }
 
   function visitor(node, index, parent) {
-    if (css(node)) {
+    if (isCssStyle(node)) {
       matches.push([parent, node])
     }
   }

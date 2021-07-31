@@ -27,12 +27,18 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com>"
   ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "index.js",
   "files": [
     "index.js"
   ],
   "dependencies": {
     "unist-util-visit": "^2.0.0",
     "x-is-array": "^0.1.0"
+  },
+  "scripts": {
+    "test": "node --conditions development test.js"
   },
   "excludeFromPreset": true,
   "xo": false

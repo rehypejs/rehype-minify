@@ -9,14 +9,10 @@
  *   <!doctype html><html><head></head><body><link rel="stylesheet" href="index.css"></body></html>
  */
 
-'use strict'
+import visit from 'unist-util-visit'
+import {isCssLink} from 'hast-util-is-css-link'
 
-var visit = require('unist-util-visit')
-var css = require('hast-util-is-css-link')
-
-module.exports = cssToTop
-
-function cssToTop() {
+export default function rehypeCssToTop() {
   return transform
 }
 
@@ -35,7 +31,7 @@ function transform(tree) {
       head = node
     }
 
-    if (css(node) && parent.tagName !== 'head') {
+    if (isCssLink(node) && parent.tagName !== 'head') {
       matches.push([parent, node])
     }
   }

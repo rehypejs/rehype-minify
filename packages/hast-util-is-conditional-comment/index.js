@@ -5,12 +5,12 @@
  *   ## Use
  *
  *   ```js
- *   var u = require('unist-builder')
- *   var ok = require('hast-util-is-conditional-comment')
+ *   import {u} from 'unist-builder'
+ *   import {isConditionalComment} from 'hast-util-is-conditional-comment'
  *
- *   ok(u('comment', '[if IE]>...<![endif]')) //=> true
- *   ok(u('comment', '<![endif]')) //=> true
- *   ok(u('comment', 'foo')) //=> false
+ *   isConditionalComment(u('comment', '[if IE]>...<![endif]')) //=> true
+ *   isConditionalComment(u('comment', '<![endif]')) //=> true
+ *   isConditionalComment(u('comment', 'foo')) //=> false
  *   ```
  *
  *   ## API
@@ -21,12 +21,8 @@
  *   conditional comments.
  */
 
-'use strict'
-
-module.exports = conditional
-
 var re = /^\[if[ \t\f\n\r]+[^\]]+]|<!\[endif]$/
 
-function conditional(node) {
+export function isConditionalComment(node) {
   return node && node.type === 'comment' && re.test(node.value)
 }

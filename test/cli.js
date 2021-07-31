@@ -1,15 +1,13 @@
-'use strict'
-
-var fs = require('fs')
-var path = require('path')
-var exec = require('child_process').exec
-var test = require('tape')
-var trim = require('trim-trailing-lines')
+import fs from 'fs'
+import path from 'path'
+import {exec} from 'child_process'
+import test from 'tape'
+import trim from 'trim-trailing-lines'
 
 test('preset', function (t) {
   var input = path.join('test', 'fixtures', 'small', 'input.html')
   var output = path.join('test', 'fixtures', 'small', 'output.html')
-  var bin = require.resolve('rehype-cli/cli')
+  var bin = path.join('./node_modules', 'rehype-cli', 'cli.js')
 
   t.plan(2)
 

@@ -1,16 +1,14 @@
-'use strict'
-
-var fs = require('fs')
-var path = require('path')
-var test = require('tape')
-var rehype = require('rehype')
-var negate = require('negate')
-var hidden = require('is-hidden')
-var trim = require('trim-trailing-lines')
-var minify = require('../packages/rehype-preset-minify')
+import fs from 'fs'
+import path from 'path'
+import test from 'tape'
+import rehype from 'rehype'
+import negate from 'negate'
+import hidden from 'is-hidden'
+import trim from 'trim-trailing-lines'
+import minify from '../packages/rehype-preset-minify/index.js'
 
 test('plugin', function (t) {
-  var root = path.join(__dirname, 'fixtures')
+  var root = path.join('test', 'fixtures')
   var fixtures = fs.readdirSync(root).filter(negate(hidden))
 
   t.plan(fixtures.length * 2)
@@ -27,8 +25,8 @@ test('plugin', function (t) {
 
     rehype()
       .use(minify, config)
-      .process(input, function (err, doc) {
-        t.ifErr(err, 'shouldn’t fail')
+      .process(input, function (error, doc) {
+        t.ifErr(error, 'shouldn’t fail')
         t.equal(String(doc), trim(output), name)
       })
   })

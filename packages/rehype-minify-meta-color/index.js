@@ -6,21 +6,17 @@
  *   <meta name="msapplication-TileColor" content="#ff0000">
  */
 
-'use strict'
-
-var CleanCSS = require('clean-css')
-var visit = require('unist-util-visit')
-var is = require('hast-util-is-element')
-var has = require('hast-util-has-property')
-
-module.exports = styleAttribute
+import CleanCSS from 'clean-css'
+import visit from 'unist-util-visit'
+import is from 'hast-util-is-element'
+import has from 'hast-util-has-property'
 
 var clean = new CleanCSS()
 
 var prefix = '*{color:'
 var suffix = '}'
 
-function styleAttribute() {
+export default function rehypeMinifyMetaColor() {
   return transform
 }
 

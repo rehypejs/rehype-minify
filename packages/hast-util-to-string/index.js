@@ -5,8 +5,8 @@
  *   ## Use
  *
  *   ```js
- *   var h = require('hastscript')
- *   var toString = require('hast-util-to-string')
+ *   import {h} from 'hastscript'
+ *   import {toString} from 'hast-util-to-string'
  *
  *   toString(h('p', 'Alpha'))
  *   //=> 'Alpha'
@@ -21,11 +21,7 @@
  *   Transform a node to a string.
  */
 
-'use strict'
-
-module.exports = toString
-
-function toString(node) {
+export function toString(node) {
   // “The concatenation of data of all the Text node descendants of the context
   // object, in tree order.”
   if ('children' in node) {

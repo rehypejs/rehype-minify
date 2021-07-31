@@ -5,14 +5,14 @@
  *   ## Use
  *
  *   ```js
- *   var h = require('hastscript')
- *   var ok = require('hast-util-is-javascript')
+ *   import {h} from 'hastscript'
+ *   import {isJavaScript} from 'hast-util-is-javascript'
  *
- *   ok(h('script')) //=> true
- *   ok(h('script', {type: 'text/ecmascript'})) //=> true
- *   ok(h('script', {language: 'ecmascript'})) //=> true
- *   ok(h('script', {type: 'text/fooscript'})) //=> false
- *   ok(h('script', {language: 'fooscript'})) //=> false
+ *   isJavaScript(h('script')) //=> true
+ *   isJavaScript(h('script', {type: 'text/ecmascript'})) //=> true
+ *   isJavaScript(h('script', {language: 'ecmascript'})) //=> true
+ *   isJavaScript(h('script', {type: 'text/fooscript'})) //=> false
+ *   isJavaScript(h('script', {language: 'fooscript'})) //=> false
  *   ```
  *
  *   ## API
@@ -23,17 +23,31 @@
  *   `type`, has no `type` and a valid JavaScript `language`, or has neither.
  */
 
-'use strict'
+import has from 'hast-util-has-property'
+import is from 'hast-util-is-element'
+import trim from 'trim'
 
-var has = require('hast-util-has-property')
-var is = require('hast-util-is-element')
-var trim = require('trim')
-var mime = require('./index.json')
-
-module.exports = javascript
+const mime = [
+  'application/ecmascript',
+  'application/javascript',
+  'application/x-ecmascript',
+  'application/x-javascript',
+  'text/ecmascript',
+  'text/javascript',
+  'text/javascript1.0',
+  'text/javascript1.1',
+  'text/javascript1.2',
+  'text/javascript1.3',
+  'text/javascript1.4',
+  'text/javascript1.5',
+  'text/jscript',
+  'text/livescript',
+  'text/x-ecmascript',
+  'text/x-javascript'
+]
 
 // Check node.
-function javascript(node) {
+export function isJavaScript(node) {
   if (!is(node, 'script')) {
     return false
   }

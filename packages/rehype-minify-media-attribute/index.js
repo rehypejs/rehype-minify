@@ -6,20 +6,16 @@
  *   <link rel="stylesheet" media="all" href="index.css">
  */
 
-'use strict'
-
-var CleanCSS = require('clean-css')
-var visit = require('unist-util-visit')
-var is = require('hast-util-is-element')
-
-module.exports = mediaAttribute
+import CleanCSS from 'clean-css'
+import visit from 'unist-util-visit'
+import is from 'hast-util-is-element'
 
 var clean = new CleanCSS()
 
 var prefix = '@media '
 var suffix = '{i{color:red}}'
 
-function mediaAttribute() {
+export default function rehypeMinifyMediaAttribute() {
   return transform
 }
 

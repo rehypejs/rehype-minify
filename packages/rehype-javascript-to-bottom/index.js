@@ -12,14 +12,10 @@
  *   <!doctype html><html><head><script src="index.js"></script></head><body></body></html>
  */
 
-'use strict'
+import visit from 'unist-util-visit'
+import {isJavaScript} from 'hast-util-is-javascript'
 
-var visit = require('unist-util-visit')
-var js = require('hast-util-is-javascript')
-
-module.exports = jsToBottom
-
-function jsToBottom(options) {
+export default function rehypeJavaScriptToBottom(options) {
   var settings = options || {}
   var filter = settings.filter || yes
 
@@ -40,7 +36,7 @@ function jsToBottom(options) {
         body = node
       }
 
-      if (js(node) && filter(node)) {
+      if (isJavaScript(node) && filter(node)) {
         matches.push([parent, node])
       }
     }

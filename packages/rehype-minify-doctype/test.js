@@ -1,10 +1,7 @@
-'use strict'
-
-var test = require('tape')
-var rehype = require('rehype')
-var u = require('unist-builder')
-
-var min = require('.')
+import test from 'tape'
+import rehype from 'rehype'
+import u from 'unist-builder'
+import min from './index.js'
 
 test('rehype-minify-doctype', function (t) {
   t.deepEqual(

@@ -11,18 +11,14 @@
  *   </video>
  */
 
-'use strict'
-
-var visit = require('unist-util-visit')
-var has = require('hast-util-has-property')
-var is = require('hast-util-is-element')
-var schema = require('./schema')
-
-module.exports = enums
+import visit from 'unist-util-visit'
+import has from 'hast-util-has-property'
+import is from 'hast-util-is-element'
+import {schema} from './schema.js'
 
 var own = {}.hasOwnProperty
 
-function enums() {
+export default function rehypeMinifyEnumeratedAttributes() {
   return transform
 }
 

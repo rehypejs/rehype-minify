@@ -1,24 +1,22 @@
-'use strict'
+import fs from 'fs'
+import path from 'path'
+import chalk from 'chalk'
+import bail from 'bail'
+import trough from 'trough'
+import hidden from 'is-hidden'
+import negate from 'negate'
+import {pipelineRoot} from './pipeline-root.js'
+import {pipelinePackage} from './pipeline-package.js'
+import {pipelineReadme} from './pipeline-readme.js'
+import {pipelinePresets} from './pipeline-presets.js'
 
-var fs = require('fs')
-var path = require('path')
-var chalk = require('chalk')
-var bail = require('bail')
-var trough = require('trough')
-var hidden = require('is-hidden')
-var negate = require('negate')
-var root = require('./pipeline-root')
-var pack = require('./pipeline-package')
-var readme = require('./pipeline-readme')
-var presets = require('./pipeline-presets')
-
-var rootPath = path.join(__dirname, '..')
+var rootPath = process.cwd()
 var packages = path.join(rootPath, 'packages')
 
-fs.readdir(packages, function (err, basenames) {
+fs.readdir(packages, function (error, basenames) {
   var plugins
 
-  bail(err)
+  bail(error)
 
   basenames = basenames.filter(negate(hidden))
   plugins = basenames.filter(plugin)
@@ -27,10 +25,10 @@ fs.readdir(packages, function (err, basenames) {
   basenames.forEach(function (basename) {
     trough()
       .use(function (ctx, next) {
-        pack.run(ctx, next)
+        pipelinePackage.run(ctx, next)
       })
       .use(function (ctx, next) {
-        ;(preset(basename) ? presets : readme).run(ctx, next)
+        ;(preset(basename) ? pipelinePresets : pipelineReadme).run(ctx, next)
       })
       .run(
         {
@@ -43,18 +41,21 @@ fs.readdir(packages, function (err, basenames) {
   })
 
   // Generate root `readme.md`.
-  root.run({root: rootPath, plugins: plugins}, wrap(path.basename(rootPath)))
+  pipelineRoot.run(
+    {root: rootPath, plugins: plugins},
+    wrap(path.basename(rootPath))
+  )
 
   function wrap(basename) {
     return done
 
-    function done(err, ctx) {
+    function done(error, ctx) {
       var key
 
-      if (err) {
+      if (error) {
         console.error(chalk.red('✗ ') + basename)
-        err.message = 'Could not process `' + basename + '`: ' + err.message
-        throw err
+        error.message = 'Could not process `' + basename + '`: ' + error.message
+        throw error
       }
 
       console.log(chalk.green('✓ ') + basename)

@@ -23,8 +23,8 @@ npm install hast-util-to-string
 ## Use
 
 ```js
-var h = require('hastscript')
-var toString = require('hast-util-to-string')
+import {h} from 'hastscript'
+import {toString} from 'hast-util-to-string'
 
 toString(h('p', 'Alpha'))
 //=> 'Alpha'

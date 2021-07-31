@@ -6,15 +6,11 @@
  *   <style type="text/css"></style>
  */
 
-'use strict'
+import visit from 'unist-util-visit'
+import {isCssLink} from 'hast-util-is-css-link'
+import {isCssStyle} from 'hast-util-is-css-style'
 
-var visit = require('unist-util-visit')
-var link = require('hast-util-is-css-link')
-var style = require('hast-util-is-css-style')
-
-module.exports = removeStyleType
-
-function removeStyleType() {
+export default function rehypeRemoveStyleTypeCss() {
   return transform
 }
 
@@ -25,7 +21,7 @@ function transform(tree) {
 function visitor(node) {
   var props = node.properties
 
-  if ('type' in props && (link(node) || style(node))) {
+  if ('type' in props && (isCssLink(node) || isCssStyle(node))) {
     props.type = null
   }
 }

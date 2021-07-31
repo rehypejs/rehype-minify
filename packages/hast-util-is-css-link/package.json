@@ -23,11 +23,17 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com>"
   ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "index.js",
   "files": [
     "index.js"
   ],
   "dependencies": {
     "trim": "^1.0.0"
+  },
+  "scripts": {
+    "test": "node --conditions development test.js"
   },
   "xo": false
 }

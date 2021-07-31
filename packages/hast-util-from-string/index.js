@@ -8,8 +8,8 @@
  *   ## Use
  *
  *   ```js
- *   var h = require('hastscript')
- *   var fromString = require('hast-util-from-string')
+ *   import {h} from 'hastscript'
+ *   import {fromString} from 'hast-util-from-string'
  *
  *   fromString(h('p'), 'Alpha')
  *   // { type: 'element',
@@ -34,11 +34,7 @@
  *   all its children.
  */
 
-'use strict'
-
-module.exports = fromString
-
-function fromString(node, d) {
+export function fromString(node, d) {
   var value = d == null ? '' : String(d)
 
   if ('children' in node) {

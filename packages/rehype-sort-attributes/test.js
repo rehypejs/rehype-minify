@@ -1,9 +1,6 @@
-'use strict'
-
-var test = require('tape')
-var rehype = require('rehype')
-
-var min = require('.')
+import test from 'tape'
+import rehype from 'rehype'
+import min from './index.js'
 
 test('rehype-sort-attributes', function (t) {
   t.equal(

@@ -18,16 +18,12 @@
  *   </html>
  */
 
-'use strict'
+import visit from 'unist-util-visit'
+import spaces from 'space-separated-tokens'
+import has from 'hast-util-has-property'
+import is from 'hast-util-is-element'
 
-var visit = require('unist-util-visit')
-var spaces = require('space-separated-tokens').stringify
-var has = require('hast-util-has-property')
-var is = require('hast-util-is-element')
-
-module.exports = removeHTTPEquiv
-
-function removeHTTPEquiv() {
+export default function rehypeRemoveMetaHttpEquiv() {
   return transform
 }
 
@@ -83,7 +79,7 @@ function transform(tree) {
       if (has(node, 'charSet')) {
         charSet = node
       } else if (has(node, 'httpEquiv')) {
-        value = spaces(node.properties.httpEquiv).toLowerCase()
+        value = spaces.stringify(node.properties.httpEquiv).toLowerCase()
 
         if (value === 'content-language') {
           contentLanguage = node

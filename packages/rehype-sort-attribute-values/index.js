@@ -7,18 +7,14 @@
  *   <div class="qux quux foo bar"></div>
  */
 
-'use strict'
-
-var array = require('x-is-array')
-var visit = require('unist-util-visit')
-var is = require('hast-util-is-element')
-var attributes = require('./schema')
-
-module.exports = sortAttributeValues
+import array from 'x-is-array'
+import visit from 'unist-util-visit'
+import is from 'hast-util-is-element'
+import {schema} from './schema.js'
 
 var own = {}.hasOwnProperty
 
-function sortAttributeValues() {
+export default function rehypeSortAttributeValues() {
   return transform
 }
 
@@ -38,11 +34,7 @@ function transform(tree) {
     for (prop in props) {
       value = props[prop]
 
-      if (
-        own.call(attributes, prop) &&
-        is(node, attributes[prop]) &&
-        array(value)
-      ) {
+      if (own.call(schema, prop) && is(node, schema[prop]) && array(value)) {
         add(prop, value)
       }
     }

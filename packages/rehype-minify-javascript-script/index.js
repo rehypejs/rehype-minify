@@ -8,18 +8,14 @@
  *   </script>
  */
 
-'use strict'
+import Uglify from 'uglify-js'
+import visit from 'unist-util-visit'
+import {fromString} from 'hast-util-from-string'
+import {toString} from 'hast-util-to-string'
+import {isJavaScript} from 'hast-util-is-javascript'
+import has from 'hast-util-has-property'
 
-var Uglify = require('uglify-js')
-var visit = require('unist-util-visit')
-var fromString = require('hast-util-from-string')
-var toString = require('hast-util-to-string')
-var js = require('hast-util-is-javascript')
-var has = require('hast-util-has-property')
-
-module.exports = scriptJS
-
-function scriptJS() {
+export default function rehypeMinifyJavaScript() {
   return transform
 }
 
@@ -29,7 +25,7 @@ function transform(tree) {
 
 function visitor(node) {
   var value
-  if (js(node) && !has(node, 'src')) {
+  if (isJavaScript(node) && !has(node, 'src')) {
     try {
       value = Uglify.minify(toString(node)).code
       if (value.charAt(value.length - 1) === ';') {

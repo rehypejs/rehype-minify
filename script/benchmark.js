@@ -1,18 +1,16 @@
-'use strict'
-
-var fs = require('fs')
-var path = require('path')
-var zlib = require('zlib')
-var fetch = require('node-fetch')
-var bail = require('bail')
-var unified = require('unified')
-var parse = require('rehype-parse')
-var stringify = require('rehype-stringify')
-var vfile = require('to-vfile')
-var trough = require('trough')
-var htmlMinify = require('html-minifier').minify
-var rehypePresetMinify = require('../packages/rehype-preset-minify')
-var minifyDoctype = require('../packages/rehype-minify-doctype')
+import fs from 'fs'
+import path from 'path'
+import zlib from 'zlib'
+import fetch from 'node-fetch'
+import bail from 'bail'
+import unified from 'unified'
+import parse from 'rehype-parse'
+import stringify from 'rehype-stringify'
+import vfile from 'to-vfile'
+import trough from 'trough'
+import htmlMinifier from 'html-minifier'
+import rehypePresetMinify from '../packages/rehype-preset-minify/index.js'
+import minifyDoctype from '../packages/rehype-minify-doctype/index.js'
 
 var cache = 'benchmark-cache'
 
@@ -64,11 +62,11 @@ function all(ctx, next) {
   function each(name) {
     benchmark.run({name: name, url: ctx[name]}, done)
 
-    function done(err, results) {
+    function done(error, results) {
       count++
 
-      if (err) {
-        next(err)
+      if (error) {
+        next(error)
       } else {
         data.push({
           name: results.name,
@@ -103,20 +101,20 @@ function save(data, next) {
 function dir(ctx, next) {
   fs.mkdir(path.join(cache, ctx.name), done)
 
-  function done(err) {
-    next(err && err.code === 'EEXIST' ? null : err)
+  function done(error) {
+    next(error && error.code === 'EEXIST' ? null : error)
   }
 }
 
 function read(ctx, next) {
   vfile.read(path.join(cache, ctx.name, 'index.html'), done)
 
-  function done(err, file) {
+  function done(error, file) {
     if (file) {
       ctx.file = file
       next()
     } else {
-      next(err && err.code === 'ENOENT' ? null : err)
+      next(error && error.code === 'ENOENT' ? null : error)
     }
   }
 }
@@ -145,8 +143,8 @@ function request(ctx, next) {
       next(new Error('Empty response from ' + url))
     } else {
       ctx.file = vfile({path: fp, contents: buf})
-      vfile.write(ctx.file, function (err) {
-        next(err)
+      vfile.write(ctx.file, function (error) {
+        next(error)
       })
     }
   }
@@ -157,7 +155,7 @@ function test(ctx, next) {
   var original = {processFn: identity, type: 'original'}
   var results = [
     {processFn: rehypeMinify, type: 'rehype-minify'},
-    {processFn: htmlMinifier, type: 'html-minifier'}
+    {processFn: htmlMinify, type: 'html-minifier'}
   ]
 
   ctx.original = original
@@ -167,9 +165,9 @@ function test(ctx, next) {
   original.name = ctx.name
   processorPipeline.run(original, all)
 
-  function all(err) {
-    if (err) {
-      done(err)
+  function all(error) {
+    if (error) {
+      done(error)
     } else {
       results.forEach(each)
     }
@@ -182,11 +180,11 @@ function test(ctx, next) {
     processorPipeline.run(result, done)
   }
 
-  function done(err) {
+  function done(error) {
     count++
 
-    if (err || count === results.length) {
-      next(err)
+    if (error || count === results.length) {
+      next(error)
     }
   }
 }
@@ -201,8 +199,8 @@ function process(ctx, next) {
     next()
   } else {
     fp = path.join(cache, ctx.name, ctx.type + '.html')
-    vfile.write({path: fp, contents: output}, function (err) {
-      next(err)
+    vfile.write({path: fp, contents: output}, function (error) {
+      next(error)
     })
   }
 }
@@ -210,9 +208,9 @@ function process(ctx, next) {
 function gzip(ctx, next) {
   zlib.gzip(ctx.output, done)
 
-  function done(err, buf) {
+  function done(error, buf) {
     ctx.gzipped = buf
-    next(err)
+    next(error)
   }
 }
 
@@ -233,7 +231,7 @@ function size(ctx) {
   }
 }
 
-function htmlMinifier(buf, ctx) {
+function htmlMinify(buf, ctx) {
   // Based on:
   // <https://github.com/kangax/html-minifier/blob/gh-pages/sample-cli-config-file.conf>
   // but passed through the CLI normalization:
@@ -267,7 +265,7 @@ function htmlMinifier(buf, ctx) {
   }
 
   try {
-    return Buffer.from(htmlMinify(String(buf), options), 'utf8')
+    return Buffer.from(htmlMinifier.minify(String(buf), options), 'utf8')
   } catch (error) {
     console.warn(
       'html-minifier error (%s)',

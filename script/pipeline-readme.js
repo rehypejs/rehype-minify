@@ -1,36 +1,34 @@
-'use strict'
+import fs from 'fs'
+import path from 'path'
+import {inspect} from 'util'
+import dox from 'dox'
+import trim from 'trim'
+import remark from 'remark'
+import rehype from 'rehype'
+import u from 'unist-builder'
+import vfile from 'to-vfile'
+import trough from 'trough'
+import author from 'parse-author'
+import strip from 'strip-indent'
+import preset from 'remark-preset-wooorm'
 
-var fs = require('fs')
-var path = require('path')
-var inspect = require('util').inspect
-var dox = require('dox')
-var trim = require('trim')
-var remark = require('remark')
-var rehype = require('rehype')
-var u = require('unist-builder')
-var vfile = require('to-vfile')
-var trough = require('trough')
-var author = require('parse-author')
-var strip = require('strip-indent')
-var preset = require('remark-preset-wooorm')
-
-var pkg = require(path.join(__dirname, '..', 'package'))
+var pkg = JSON.parse(fs.readFileSync('package.json'))
 
 var proc = remark().use({settings: preset.settings})
 
-module.exports = trough()
+export const pipelineReadme = trough()
   .use(function (ctx, next) {
-    vfile.read(path.join(ctx.root, 'package.json'), function (err, file) {
+    vfile.read(path.join(ctx.root, 'package.json'), function (error, file) {
       ctx.config = file ? JSON.parse(String(file)) : {}
-      next(err)
+      next(error)
     })
   })
   .use(function (ctx, next) {
-    vfile.read(path.join(ctx.root, 'index.js'), function (err, script) {
+    vfile.read(path.join(ctx.root, 'index.js'), function (error, script) {
       var comments
 
-      if (err) {
-        next(err.code === 'ENOENT' ? null : err)
+      if (error) {
+        next(error.code === 'ENOENT' ? null : error)
       } else {
         ctx.script = script
 
@@ -43,7 +41,7 @@ module.exports = trough()
       }
     })
   })
-  .use(function (ctx) {
+  .use(async function (ctx) {
     var config = ctx.config
     var overview = config.fileoverview || config.description
     var licensee = author(config.author)
@@ -177,6 +175,12 @@ module.exports = trough()
         u('heading', {depth: 5}, [u('text', 'Out')])
       )
 
+      const mod = await import(ctx.script.path)
+
+      if (!('default' in mod)) {
+        throw new Error('Expected plugin to `export default`')
+      }
+
       tree.push(
         u(
           'code',
@@ -184,7 +188,7 @@ module.exports = trough()
           trim(
             rehype()
               .data('settings', options.processor || {fragment: true})
-              .use(require(ctx.script.path), options.plugin || undefined)
+              .use(mod.default, options.plugin || undefined)
               .processSync(example)
               .toString()
           )

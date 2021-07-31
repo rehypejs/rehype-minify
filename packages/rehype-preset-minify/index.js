@@ -1,6 +1,28 @@
-'use strict'
+import rehypeMinifyAttributeWhitespace from 'rehype-minify-attribute-whitespace'
+import rehypeMinifyCssStyle from 'rehype-minify-css-style'
+import rehypeRemoveMetaHttpEquiv from 'rehype-remove-meta-http-equiv'
+import rehypeMinifyEnumeratedAttribute from 'rehype-minify-enumerated-attribute'
+import rehypeMinifyEventHandler from 'rehype-minify-event-handler'
+import rehypeMinifyJavaScriptScript from 'rehype-minify-javascript-script'
+import rehypeMinifyJavaScriptUrl from 'rehype-minify-javascript-url'
+import rehypeMinifyJsonScript from 'rehype-minify-json-script'
+import rehypeMinifyLanguage from 'rehype-minify-language'
+import rehypeMinifyMediaAttribute from 'rehype-minify-media-attribute'
+import rehypeMinifyMetaColor from 'rehype-minify-meta-color'
+import rehypeMinifyMetaContent from 'rehype-minify-meta-content'
+import rehypeMinifyStyleAttribute from 'rehype-minify-style-attribute'
+import rehypeMinifyWhitespace from 'rehype-minify-whitespace'
+import rehypeNormalizeAttributeValueCase from 'rehype-normalize-attribute-value-case'
+import rehypeRemoveComments from 'rehype-remove-comments'
+import rehypeRemoveDuplicateAttributeValues from 'rehype-remove-duplicate-attribute-values'
+import rehypeRemoveEmptyAttribute from 'rehype-remove-empty-attribute'
+import rehypeRemoveExternalScriptContent from 'rehype-remove-external-script-content'
+import rehypeRemoveScriptTypeJavaScript from 'rehype-remove-script-type-javascript'
+import rehypeRemoveStyleTypeCss from 'rehype-remove-style-type-css'
+import rehypeSortAttributeValues from 'rehype-sort-attribute-values'
+import rehypeSortAttributes from 'rehype-sort-attributes'
 
-exports.settings = {
+const settings = {
   entities: {
     omitOptionalSemicolons: true,
     useShortestReferences: true
@@ -18,30 +40,34 @@ exports.settings = {
   allowParseErrors: true
 }
 
-exports.plugins = [
-  require('rehype-minify-attribute-whitespace'),
-  require('rehype-minify-css-style'),
+const plugins = [
+  rehypeMinifyAttributeWhitespace,
+  rehypeMinifyCssStyle,
   // Do `remove-meta-http-equiv` before `enumerated-attribute`, because the
   // latter might minify things further.
-  require('rehype-remove-meta-http-equiv'),
-  require('rehype-minify-enumerated-attribute'),
-  require('rehype-minify-event-handler'),
-  require('rehype-minify-javascript-script'),
-  require('rehype-minify-javascript-url'),
-  require('rehype-minify-json-script'),
-  require('rehype-minify-language'),
-  require('rehype-minify-media-attribute'),
-  require('rehype-minify-meta-color'),
-  require('rehype-minify-meta-content'),
-  require('rehype-minify-style-attribute'),
-  require('rehype-minify-whitespace'),
-  require('rehype-normalize-attribute-value-case'),
-  require('rehype-remove-comments'),
-  require('rehype-remove-duplicate-attribute-values'),
-  require('rehype-remove-empty-attribute'),
-  require('rehype-remove-external-script-content'),
-  require('rehype-remove-script-type-javascript'),
-  require('rehype-remove-style-type-css'),
-  require('rehype-sort-attribute-values'),
-  require('rehype-sort-attributes')
+  rehypeRemoveMetaHttpEquiv,
+  rehypeMinifyEnumeratedAttribute,
+  rehypeMinifyEventHandler,
+  rehypeMinifyJavaScriptScript,
+  rehypeMinifyJavaScriptUrl,
+  rehypeMinifyJsonScript,
+  rehypeMinifyLanguage,
+  rehypeMinifyMediaAttribute,
+  rehypeMinifyMetaColor,
+  rehypeMinifyMetaContent,
+  rehypeMinifyStyleAttribute,
+  rehypeMinifyWhitespace,
+  rehypeNormalizeAttributeValueCase,
+  rehypeRemoveComments,
+  rehypeRemoveDuplicateAttributeValues,
+  rehypeRemoveEmptyAttribute,
+  rehypeRemoveExternalScriptContent,
+  rehypeRemoveScriptTypeJavaScript,
+  rehypeRemoveStyleTypeCss,
+  rehypeSortAttributeValues,
+  rehypeSortAttributes
 ]
+
+const preset = {settings, plugins}
+
+export default preset

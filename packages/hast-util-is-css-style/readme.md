@@ -23,12 +23,12 @@ npm install hast-util-is-css-style
 ## Use
 
 ```js
-var h = require('hastscript')
-var ok = require('hast-util-is-css-style')
+import {h} from 'hastscript'
+import {isCssStyle} from 'hast-util-is-css-style'
 
-ok(h('style')) //=> true
-ok(h('style', {type: ' TEXT/CSS '})) //=> true
-ok(h('style', {type: 'text/foo'})) //=> false
+isCssStyle(h('style')) //=> true
+isCssStyle(h('style', {type: ' TEXT/CSS '})) //=> true
+isCssStyle(h('style', {type: 'text/foo'})) //=> false
 ```
 
 ## API

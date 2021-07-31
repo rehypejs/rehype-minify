@@ -5,12 +5,12 @@
  *   ## Use
  *
  *   ```js
- *   var h = require('hastscript')
- *   var ok = require('hast-util-is-body-ok-link')
+ *   import {h} from 'hastscript'
+ *   import {isBodyOkLink} from 'hast-util-is-body-ok-link'
  *
- *   ok(h('link', {itemProp: 'foo'})) //=> true
- *   ok(h('link', {rel: ['stylesheet'], href: 'index.css'})) //=> true
- *   ok(h('link', {rel: ['author'], href: 'index.css'})) //=> false
+ *   isBodyOkLink(h('link', {itemProp: 'foo'})) //=> true
+ *   isBodyOkLink(h('link', {rel: ['stylesheet'], href: 'index.css'})) //=> true
+ *   isBodyOkLink(h('link', {rel: ['author'], href: 'index.css'})) //=> false
  *   ```
  *
  *   ## API
@@ -22,16 +22,12 @@
  *     entries are `pingback`, `prefetch`, or `stylesheet`.
  */
 
-'use strict'
-
-var is = require('hast-util-is-element')
-var has = require('hast-util-has-property')
-
-module.exports = ok
+import is from 'hast-util-is-element'
+import has from 'hast-util-has-property'
 
 var list = ['pingback', 'prefetch', 'stylesheet']
 
-function ok(node) {
+export function isBodyOkLink(node) {
   var length
   var index
   var rel

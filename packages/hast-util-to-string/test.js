@@ -1,9 +1,6 @@
-'use strict'
-
-var test = require('tape')
-var u = require('unist-builder')
-
-var toString = require('.')
+import test from 'tape'
+import u from 'unist-builder'
+import {toString} from './index.js'
 
 test('hast-util-to-string', function (t) {
   t.deepEqual(toString(u('comment', 'foo')), 'foo', 'should stringify comments')

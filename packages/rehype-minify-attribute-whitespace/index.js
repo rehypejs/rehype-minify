@@ -8,21 +8,17 @@
 // Note: Don’t include non-strings (such as `boolean`s) here, they’re already
 // handled in the generator.
 
-'use strict'
-
-var trim = require('trim')
-var array = require('x-is-array')
-var visit = require('unist-util-visit')
-var has = require('hast-util-has-property')
-var is = require('hast-util-is-element')
-var handler = require('hast-util-is-event-handler')
-var attributes = require('./schema')
-
-module.exports = whitespace
+import trim from 'trim'
+import array from 'x-is-array'
+import visit from 'unist-util-visit'
+import has from 'hast-util-has-property'
+import is from 'hast-util-is-element'
+import {isEventHandler} from 'hast-util-is-event-handler'
+import {schema} from './schema.js'
 
 var own = {}.hasOwnProperty
 
-function whitespace() {
+export default function rehypeMinifyAttributeWhitespace() {
   return transform
 }
 
@@ -37,8 +33,8 @@ function visitor(node) {
   for (prop in props) {
     if (
       has(node, prop) &&
-      (handler(prop) ||
-        (own.call(attributes, prop) && is(node, attributes[prop])))
+      (isEventHandler(prop) ||
+        (own.call(schema, prop) && is(node, schema[prop])))
     ) {
       props[prop] = minify(props[prop])
     }

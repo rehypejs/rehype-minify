@@ -24,6 +24,9 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com>"
   ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "index.js",
   "files": [
     "index.js"
   ],
@@ -34,6 +37,9 @@
     "hast-util-has-property": "^1.0.0",
     "hast-util-is-javascript": "^1.0.0",
     "hast-util-to-string": "^1.0.0"
+  },
+  "scripts": {
+    "test": "node --conditions development test.js"
   },
   "xo": false
 }

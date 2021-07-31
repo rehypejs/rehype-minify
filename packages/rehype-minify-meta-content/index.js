@@ -9,14 +9,10 @@
  *   <meta name="keywords" content="foo, bar baz, qux">
  */
 
-'use strict'
-
-var comma = require('comma-separated-tokens')
-var visit = require('unist-util-visit')
-var is = require('hast-util-is-element')
-var has = require('hast-util-has-property')
-
-module.exports = content
+import comma from 'comma-separated-tokens'
+import visit from 'unist-util-visit'
+import is from 'hast-util-is-element'
+import has from 'hast-util-has-property'
 
 var own = {}.hasOwnProperty
 
@@ -28,7 +24,7 @@ handlers.robots = collapse
 handlers['apple-itunes-app'] = collapse
 handlers['apple-media-service-subscription'] = collapse
 
-function content() {
+export default function rehypeMinifyMetaContent() {
   return transform
 }
 
@@ -40,10 +36,13 @@ function visitor(node) {
   var props = node.properties
   var name = props.name
 
-  if (is(node, 'meta') && has(node, 'content') && own.call(handlers, name)) {
-    if (typeof props.content === 'string') {
-      props.content = handlers[name](props.content)
-    }
+  if (
+    is(node, 'meta') &&
+    has(node, 'content') &&
+    own.call(handlers, name) &&
+    typeof props.content === 'string'
+  ) {
+    props.content = handlers[name](props.content)
   }
 }
 

@@ -5,19 +5,15 @@
  *   <label for id=""></label>
  */
 
-'use strict'
-
-var array = require('x-is-array')
-var visit = require('unist-util-visit')
-var is = require('hast-util-is-element')
-var handler = require('hast-util-is-event-handler')
-var attributes = require('./schema')
-
-module.exports = empty
+import array from 'x-is-array'
+import visit from 'unist-util-visit'
+import is from 'hast-util-is-element'
+import {isEventHandler} from 'hast-util-is-event-handler'
+import {schema} from './schema.js'
 
 var own = {}.hasOwnProperty
 
-function empty() {
+export default function rehypeRemoveEmptyAttribute() {
   return transform
 }
 
@@ -35,8 +31,8 @@ function visitor(node) {
 
     if (
       (value === '' || (array(value) && value.length === 0)) &&
-      (handler(prop) ||
-        (own.call(attributes, prop) && is(node, attributes[prop])))
+      (isEventHandler(prop) ||
+        (own.call(schema, prop) && is(node, schema[prop])))
     ) {
       props[prop] = null
     }
