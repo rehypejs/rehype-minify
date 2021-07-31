@@ -43,7 +43,6 @@
     "trim-trailing-lines": "^1.0.0",
     "trough": "^1.0.0",
     "unified": "^9.0.0",
-    "uniq": "^1.0.0",
     "unist-builder": "^2.0.0",
     "vfile-find-down": "^5.0.0",
     "xo": "^0.38.0",

@@ -35,7 +35,6 @@
   ],
   "dependencies": {
     "hast-util-is-element": "^1.0.0",
-    "uniq": "^1.0.1",
     "unist-util-visit": "^2.0.0"
   },
   "scripts": {

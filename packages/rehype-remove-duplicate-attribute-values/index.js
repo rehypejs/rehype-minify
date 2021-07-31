@@ -5,7 +5,6 @@
  *   <div class="foo foo"></label>
  */
 
-import uniq from 'uniq'
 import visit from 'unist-util-visit'
 import is from 'hast-util-is-element'
 import {schema} from './schema.js'
@@ -33,7 +32,7 @@ function visitor(node) {
       is(node, schema[prop]) &&
       Array.isArray(value)
     ) {
-      uniq(value)
+      props[prop] = [...new Set(value)]
     }
   }
 }

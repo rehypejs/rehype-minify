@@ -4,7 +4,6 @@ import {exec} from 'child_process'
 import vfile from 'to-vfile'
 import findDown from 'vfile-find-down'
 import trough from 'trough'
-import uniq from 'uniq'
 
 export const pipelinePackage = trough()
   .use(function (ctx, next) {
@@ -20,7 +19,7 @@ export const pipelinePackage = trough()
     exec(cmd, function (error, stdout) {
       if (error) return next(error)
 
-      ctx.contributors = uniq(stdout.split('\n'))
+      ctx.contributors = [...new Set(stdout.split('\n'))]
         .sort()
         .filter(Boolean)
         .filter((d) => !d.includes('<noreply'))
