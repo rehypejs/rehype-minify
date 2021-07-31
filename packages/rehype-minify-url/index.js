@@ -69,6 +69,8 @@ function all(value, relate) {
 function one(value, relate) {
   try {
     return relate.relate(value)
+    // Coverage bug on Erbium.
+    /* c8 ignore next */
   } catch {}
 
   return value
