@@ -6,7 +6,6 @@
  */
 
 import uniq from 'uniq'
-import array from 'x-is-array'
 import visit from 'unist-util-visit'
 import is from 'hast-util-is-element'
 import {schema} from './schema.js'
@@ -29,7 +28,11 @@ function visitor(node) {
   for (prop in props) {
     value = props[prop]
 
-    if (own.call(schema, prop) && is(node, schema[prop]) && array(value)) {
+    if (
+      own.call(schema, prop) &&
+      is(node, schema[prop]) &&
+      Array.isArray(value)
+    ) {
       uniq(value)
     }
   }

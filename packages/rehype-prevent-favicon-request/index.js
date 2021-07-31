@@ -12,7 +12,6 @@
  *   <!doctype html><html><head></head><body></body></html>
  */
 
-import array from 'x-is-array'
 import visit from 'unist-util-visit'
 
 export default function rehypePreventFaviconRequest() {
@@ -49,7 +48,7 @@ function transform(tree) {
       rel = node.properties.rel
 
       if (
-        array(rel) &&
+        Array.isArray(rel) &&
         rel.indexOf('shortcut') !== -1 &&
         rel.indexOf('icon') !== -1
       ) {

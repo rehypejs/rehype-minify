@@ -7,7 +7,6 @@
  *   <div class="qux quux foo bar"></div>
  */
 
-import array from 'x-is-array'
 import visit from 'unist-util-visit'
 import is from 'hast-util-is-element'
 import {schema} from './schema.js'
@@ -34,7 +33,11 @@ function transform(tree) {
     for (prop in props) {
       value = props[prop]
 
-      if (own.call(schema, prop) && is(node, schema[prop]) && array(value)) {
+      if (
+        own.call(schema, prop) &&
+        is(node, schema[prop]) &&
+        Array.isArray(value)
+      ) {
         add(prop, value)
       }
     }

@@ -7,7 +7,6 @@
  *   <form method="GET"></form>
  */
 
-import array from 'x-is-array'
 import visit from 'unist-util-visit'
 import has from 'hast-util-has-property'
 import is from 'hast-util-is-element'
@@ -35,7 +34,7 @@ function visitor(node) {
 }
 
 function minify(value) {
-  return (array(value) ? all : one)(value)
+  return (Array.isArray(value) ? all : one)(value)
 }
 
 function all(value) {

@@ -13,7 +13,6 @@
  */
 
 import Relate from 'relateurl'
-import array from 'x-is-array'
 import visit from 'unist-util-visit'
 import has from 'hast-util-has-property'
 import is from 'hast-util-is-element'
@@ -54,7 +53,7 @@ export default function rehypeMinifyUrl(options) {
 }
 
 function minify(value, relate) {
-  return (array(value) ? all : one)(value, relate)
+  return (Array.isArray(value) ? all : one)(value, relate)
 }
 
 function all(value, relate) {
