@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-json-script",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "rehype plugin to minify `script` elements with a JSON body",
   "license": "MIT",
   "keywords": [
@@ -34,9 +34,9 @@
   ],
   "dependencies": {
     "@types/hast": "^2.0.0",
-    "hast-util-from-string": "^1.0.0",
+    "hast-util-from-string": "^2.0.0",
     "hast-util-is-element": "^2.0.0",
-    "hast-util-to-string": "^1.0.0",
+    "hast-util-to-string": "^2.0.0",
     "unified": "^10.0.0",
     "unist-util-visit": "^4.0.0"
   },

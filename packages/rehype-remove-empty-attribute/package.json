@@ -1,6 +1,6 @@
 {
   "name": "rehype-remove-empty-attribute",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "rehype plugin to remove empty attributes",
   "license": "MIT",
   "keywords": [
@@ -37,7 +37,7 @@
   "dependencies": {
     "@types/hast": "^2.0.0",
     "hast-util-is-element": "^2.0.0",
-    "hast-util-is-event-handler": "^1.0.0",
+    "hast-util-is-event-handler": "^2.0.0",
     "unified": "^10.0.0",
     "unist-util-visit": "^4.0.0"
   },

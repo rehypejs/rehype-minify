@@ -1,6 +1,6 @@
 {
   "name": "rehype-concat-javascript",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "rehype plugin to concatenate JS `<script>` elements together",
   "license": "MIT",
   "keywords": [
@@ -36,10 +36,10 @@
   ],
   "dependencies": {
     "@types/hast": "^2.0.0",
-    "hast-util-from-string": "^1.0.0",
+    "hast-util-from-string": "^2.0.0",
     "hast-util-has-property": "^2.0.0",
-    "hast-util-is-javascript": "^1.0.0",
-    "hast-util-to-string": "^1.0.0",
+    "hast-util-is-javascript": "^2.0.0",
+    "hast-util-to-string": "^2.0.0",
     "unist-util-visit": "^4.0.0",
     "unified": "^10.0.0"
   },

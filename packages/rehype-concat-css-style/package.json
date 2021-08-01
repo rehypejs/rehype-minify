@@ -1,6 +1,6 @@
 {
   "name": "rehype-concat-css-style",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "rehype plugin to concatenate CSS `<style>` elements together",
   "license": "MIT",
   "keywords": [
@@ -36,9 +36,9 @@
   ],
   "dependencies": {
     "@types/hast": "^2.0.0",
-    "hast-util-is-css-style": "^1.0.0",
-    "hast-util-from-string": "^1.0.0",
-    "hast-util-to-string": "^1.0.0",
+    "hast-util-is-css-style": "^2.0.0",
+    "hast-util-from-string": "^2.0.0",
+    "hast-util-to-string": "^2.0.0",
     "unified": "^10.0.0",
     "unist-util-visit": "^4.0.0"
   },
