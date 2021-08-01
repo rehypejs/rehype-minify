@@ -21,8 +21,19 @@
  *   `type`, or `'text/css'` as its `type`.
  */
 
+/**
+ * @typedef {import('hast').Root} Root
+ * @typedef {Root|Root['children'][number]} Node
+ */
+
+/**
+ * Check if an element is a CSS `<style>` element.
+ *
+ * @param {Node} node
+ * @returns {boolean}
+ */
 export function isCssStyle(node) {
-  if (!node || node.tagName !== 'style') {
+  if (!node || !('tagName' in node) || node.tagName !== 'style') {
     return false
   }
 

@@ -29,6 +29,7 @@ test('hast-util-is-conditional-comment', (t) => {
   }
 
   t.equal(
+    // @ts-expect-error: incorrect node.
     isConditionalComment(u('comments', 'foo')),
     false,
     'no - for other comments'

@@ -47,7 +47,7 @@ test('isBodyOkLink', (t) => {
   )
 
   t.equal(
-    isBodyOkLink(u('element', {tagName: 'link'})),
+    isBodyOkLink(u('element', {tagName: 'link'}, [])),
     false,
     'no - for `link`s without `rel` or `itemProp` (2)'
   )

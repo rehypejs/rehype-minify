@@ -52,6 +52,7 @@ test('rehype-css-to-top', (t) => {
   t.deepEqual(
     rehype()
       .use(min)
+      // @ts-expect-error: plugin is typed as only accepting root but it’s fine.
       .runSync(h('body', h('link', {rel: ['stylesheet'], href: 'index.css'}))),
     h('body', h('link', {rel: ['stylesheet'], href: 'index.css'}))
   )

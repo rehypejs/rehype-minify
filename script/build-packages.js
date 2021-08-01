@@ -1,10 +1,19 @@
+/**
+ * @typedef {import('trough').Callback} Next
+ * @typedef {import('vfile').VFile} VFile
+ *
+ * @typedef Context
+ * @property {string} root
+ * @property {string} [ancestor]
+ * @property {string[]} [plugins]
+ */
+
 import fs from 'fs'
 import path from 'path'
 import chalk from 'chalk'
 import {bail} from 'bail'
 import {trough} from 'trough'
 import {isHidden} from 'is-hidden'
-import negate from 'negate'
 import {pipelineRoot} from './pipeline-root.js'
 import {pipelinePackage} from './pipeline-package.js'
 import {pipelineReadme} from './pipeline-readme.js'
@@ -16,7 +25,7 @@ const packages = path.join(rootPath, 'packages')
 fs.readdir(packages, (error, basenames) => {
   bail(error)
 
-  basenames = basenames.filter(negate(isHidden))
+  basenames = basenames.filter((d) => !isHidden(d))
 
   const plugins = basenames.filter(
     (name) =>
@@ -28,17 +37,30 @@ fs.readdir(packages, (error, basenames) => {
 
   while (++index < basenames.length) {
     const basename = basenames[index]
+
     trough()
-      .use((ctx, next) => {
-        pipelinePackage.run(ctx, next)
-      })
-      .use((ctx, next) => {
-        if (basename.indexOf('rehype-preset-') === 0) {
-          pipelinePresets.run(ctx, next)
-        } else {
-          pipelineReadme.run(ctx, next)
+      .use(
+        /**
+         * @param {Context} ctx
+         * @param {Next} next
+         */
+        (ctx, next) => {
+          pipelinePackage.run(ctx, next)
         }
-      })
+      )
+      .use(
+        /**
+         * @param {Context} ctx
+         * @param {Next} next
+         */
+        (ctx, next) => {
+          if (basename.indexOf('rehype-preset-') === 0) {
+            pipelinePresets.run(ctx, next)
+          } else {
+            pipelineReadme.run(ctx, next)
+          }
+        }
+      )
       .run(
         {ancestor: rootPath, root: path.join(packages, basename), plugins},
         wrap(basename)
@@ -48,10 +70,18 @@ fs.readdir(packages, (error, basenames) => {
   // Generate root `readme.md`.
   pipelineRoot.run({root: rootPath, plugins}, wrap(path.basename(rootPath)))
 
+  /**
+   * @param {string} basename
+   */
   function wrap(basename) {
     return done
 
+    /**
+     * @param {Error?} error
+     * @param {Record<string, VFile>} ctx
+     */
     function done(error, ctx) {
+      /** @type {string} */
       let key
 
       if (error) {

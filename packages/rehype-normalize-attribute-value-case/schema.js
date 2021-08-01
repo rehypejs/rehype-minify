@@ -1,3 +1,6 @@
+/**
+ * @type {Record<string, string[]|null>}
+ */
 export const schema = {
   acceptCharset: ['form'],
   autoComplete: ['form'],

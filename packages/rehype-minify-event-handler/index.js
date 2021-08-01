@@ -13,25 +13,35 @@ import {isEventHandler} from 'hast-util-is-event-handler'
 const prefix = 'function a(){'
 const suffix = '}a();'
 
+/**
+ * @typedef {import('hast').Root} Root
+ */
+
+/**
+ * Minify event handler attributes.
+ *
+ * @type {import('unified').Plugin<[], Root>}
+ */
 export default function rehypeMinifyEventHandler() {
-  return transform
-}
+  return (tree) => {
+    visit(tree, 'element', (node) => {
+      const props = node.properties || {}
+      /** @type {string} */
+      let name
 
-function transform(tree) {
-  visit(tree, 'element', visitor)
-}
-
-function visitor(node) {
-  const props = node.properties
-  let name
-
-  for (name in props) {
-    if (hasProperty(node, name) && isEventHandler(name)) {
-      props[name] = minify(props[name])
-    }
+      for (name in props) {
+        if (hasProperty(node, name) && isEventHandler(name)) {
+          props[name] = minify(props[name])
+        }
+      }
+    })
   }
 }
 
+/**
+ * @param {null|undefined|string|number|boolean|Array.<string|number>} value
+ * @returns {null|undefined|string|number|boolean|Array.<string|number>}
+ */
 function minify(value) {
   let result = value
 

@@ -31,7 +31,7 @@ test('hast-util-is-css-style', (t) => {
     'yes - `style` with `[type= text/css ]`'
   )
   t.equal(
-    isCssStyle(u('element', {tagName: 'style'})),
+    isCssStyle(u('element', {tagName: 'style'}, [])),
     true,
     'yes - without properties'
   )
@@ -42,8 +42,13 @@ test('hast-util-is-css-style', (t) => {
     'no - `style` with `[type=text/foo]`'
   )
   t.equal(isCssStyle(h('div')), false, 'no - other elements')
-  t.equal(isCssStyle(u('element', {tagName: 'p'})), false, 'no - other nodes')
+  t.equal(
+    isCssStyle(u('element', {tagName: 'p'}, [])),
+    false,
+    'no - other nodes'
+  )
   t.equal(isCssStyle(u('text', 'foo')), false, 'no - other nodes')
+  // @ts-expect-error: not enough arguments.
   t.equal(isCssStyle(), false, 'no - nothing')
 
   t.end()

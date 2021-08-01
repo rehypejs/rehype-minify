@@ -29,20 +29,34 @@
   "sideEffects": false,
   "type": "module",
   "main": "index.js",
+  "types": "index.d.ts",
   "files": [
+    "block.d.ts",
     "block.js",
+    "content.d.ts",
     "content.js",
+    "index.d.ts",
     "index.js",
+    "skippable.d.ts",
     "skippable.js"
   ],
   "dependencies": {
+    "@types/hast": "^2.0.0",
     "hast-util-embedded": "^2.0.0",
     "hast-util-is-element": "^2.0.0",
     "hast-util-whitespace": "^2.0.0",
+    "unified": "^10.0.0",
     "unist-util-is": "^5.0.0"
   },
   "scripts": {
+    "build": "rimraf \"*.d.ts\" && tsc && type-coverage",
     "test": "node --conditions development test.js"
   },
-  "xo": false
+  "xo": false,
+  "typeCoverage": {
+    "atLeast": 100,
+    "detail": true,
+    "strict": true,
+    "ignoreCatch": true
+  }
 }

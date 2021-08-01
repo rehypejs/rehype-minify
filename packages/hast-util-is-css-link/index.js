@@ -22,15 +22,26 @@
  *   as its `type`.
  */
 
+/**
+ * @typedef {import('hast').Root} Root
+ * @typedef {Root|Root['children'][number]} Node
+ */
+
+/**
+ * Check if an element is a CSS link.
+ *
+ * @param {Node} node
+ * @returns {boolean}
+ */
 export function isCssLink(node) {
-  if (!node || node.tagName !== 'link') {
+  if (!node || !('tagName' in node) || node.tagName !== 'link') {
     return false
   }
 
   const props = node.properties || {}
   const rel = props.rel
 
-  if (!rel || !rel.indexOf || !rel.includes('stylesheet')) {
+  if (!rel || !Array.isArray(rel) || !rel.includes('stylesheet')) {
     return false
   }
 

@@ -1,9 +1,13 @@
 /**
  * @fileoverview
- *   Minify style attributes.
+ *   Minify theme color attributes.
  * @example
  *   <meta name="theme-color" content="#0000ff">
  *   <meta name="msapplication-TileColor" content="#ff0000">
+ */
+
+/**
+ * @typedef {import('hast').Root} Root
  */
 
 import CleanCSS from 'clean-css'
@@ -16,34 +20,35 @@ const clean = new CleanCSS()
 const prefix = '*{color:'
 const suffix = '}'
 
+/**
+ * Minify theme color attributes.
+ *
+ * @type {import('unified').Plugin<[], Root>}
+ */
 export default function rehypeMinifyMetaColor() {
-  return transform
-}
+  return (tree) => {
+    visit(tree, 'element', (node) => {
+      const props = node.properties || {}
+      const name = props.name
 
-function transform(tree) {
-  visit(tree, 'element', visitor)
-}
+      if (
+        isElement(node, 'meta') &&
+        (name === 'msapplication-TileColor' || name === 'theme-color') &&
+        hasProperty(node, 'content')
+      ) {
+        let value = props.content
 
-function visitor(node) {
-  const props = node.properties
-  const name = props.name
+        if (typeof value === 'string') {
+          try {
+            const output = clean.minify(prefix + value + suffix)
+            value = output.styles.slice(prefix.length, -suffix.length)
+            // Potential third party errors?
+            /* c8 ignore next */
+          } catch {}
 
-  if (
-    isElement(node, 'meta') &&
-    (name === 'msapplication-TileColor' || name === 'theme-color') &&
-    hasProperty(node, 'content')
-  ) {
-    let value = props.content
-
-    if (typeof value === 'string') {
-      try {
-        const output = clean.minify(prefix + value + suffix)
-        value = output.styles.slice(prefix.length, -suffix.length)
-        // Potential third party errors?
-        /* c8 ignore next */
-      } catch {}
-
-      props.content = value
-    }
+          props.content = value
+        }
+      }
+    })
   }
 }

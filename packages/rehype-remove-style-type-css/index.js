@@ -6,22 +6,29 @@
  *   <style type="text/css"></style>
  */
 
+/**
+ * @typedef {import('hast').Root} Root
+ */
+
 import {visit} from 'unist-util-visit'
 import {isCssLink} from 'hast-util-is-css-link'
 import {isCssStyle} from 'hast-util-is-css-style'
 
+/**
+ * Remove `type` on CSS `style` and `link`s.
+ *
+ * @type {import('unified').Plugin<[], Root>}
+ */
 export default function rehypeRemoveStyleTypeCss() {
-  return transform
-}
-
-function transform(tree) {
-  visit(tree, 'element', visitor)
-}
-
-function visitor(node) {
-  const props = node.properties
-
-  if ('type' in props && (isCssLink(node) || isCssStyle(node))) {
-    props.type = null
+  return (tree) => {
+    visit(tree, 'element', (node) => {
+      if (
+        node.properties &&
+        'type' in node.properties &&
+        (isCssLink(node) || isCssStyle(node))
+      ) {
+        node.properties.type = null
+      }
+    })
   }
 }

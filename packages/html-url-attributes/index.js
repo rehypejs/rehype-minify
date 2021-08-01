@@ -20,6 +20,9 @@
  *   Map of URL attributes in HTML (`Record<string, string[]>`).
  */
 
+/**
+ * @type {Record<string, string[]|null>}
+ */
 export const urlAttributes = {
   action: ['form'],
   cite: ['blockquote', 'del', 'ins', 'q'],

@@ -1,5 +1,6 @@
 import test from 'tape'
 import {rehype} from 'rehype'
+import {u} from 'unist-builder'
 import min from './index.js'
 
 test('rehype-sort-attributes', (t) => {
@@ -24,6 +25,13 @@ test('rehype-sort-attributes', (t) => {
       '<a href="#juliett" hidden title="india"></a>',
       '<img src="lima.jpg" srcset="kilo.jpg">'
     ].join('\n')
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(u('root', [{type: 'element', tagName: 'div', children: []}])),
+    u('root', [{type: 'element', tagName: 'div', properties: {}, children: []}])
   )
 
   t.end()

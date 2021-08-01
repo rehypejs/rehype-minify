@@ -10,7 +10,7 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-Minify style attributes.
+Minify theme color attributes.
 
 ## Install
 

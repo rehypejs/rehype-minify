@@ -15,26 +15,31 @@ import {toString} from 'hast-util-to-string'
 import {isJavaScript} from 'hast-util-is-javascript'
 import {hasProperty} from 'hast-util-has-property'
 
+/**
+ * @typedef {import('hast').Root} Root
+ */
+
+/**
+ * Minify `script` elements with a JavaScript body.
+ *
+ * @type {import('unified').Plugin<[], Root>}
+ */
 export default function rehypeMinifyJavaScriptScript() {
-  return transform
-}
+  return (tree) => {
+    visit(tree, 'element', (node) => {
+      if (isJavaScript(node) && !hasProperty(node, 'src')) {
+        try {
+          let value = Uglify.minify(toString(node)).code
 
-function transform(tree) {
-  visit(tree, 'element', visitor)
-}
+          if (value.charAt(value.length - 1) === ';') {
+            value = value.slice(0, -1)
+          }
 
-function visitor(node) {
-  if (isJavaScript(node) && !hasProperty(node, 'src')) {
-    try {
-      let value = Uglify.minify(toString(node)).code
-
-      if (value.charAt(value.length - 1) === ';') {
-        value = value.slice(0, -1)
+          fromString(node, value)
+          // Potential third party errors?
+          /* c8 ignore next */
+        } catch {}
       }
-
-      fromString(node, value)
-      // Potential third party errors?
-      /* c8 ignore next */
-    } catch {}
+    })
   }
 }

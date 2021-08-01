@@ -2,14 +2,13 @@ import fs from 'fs'
 import path from 'path'
 import test from 'tape'
 import {rehype} from 'rehype'
-import negate from 'negate'
 import {isHidden} from 'is-hidden'
 import {trimTrailingLines} from 'trim-trailing-lines'
 import minify from '../packages/rehype-preset-minify/index.js'
 
 test('plugin', (t) => {
   const root = path.join('test', 'fixtures')
-  const fixtures = fs.readdirSync(root).filter(negate(isHidden))
+  const fixtures = fs.readdirSync(root).filter((d) => !isHidden(d))
 
   t.plan(fixtures.length * 2)
 
@@ -20,6 +19,7 @@ test('plugin', (t) => {
     const fp = path.join(root, name)
     const input = fs.readFileSync(path.join(fp, 'input.html'), 'utf8')
     const output = fs.readFileSync(path.join(fp, 'output.html'), 'utf8')
+    /** @type {Record<string, unknown>} */
     let config
 
     try {
@@ -27,6 +27,7 @@ test('plugin', (t) => {
     } catch {}
 
     rehype()
+      // @ts-expect-error: to do type.
       .use(minify, config)
       .process(input, (error, doc) => {
         t.ifErr(error, 'shouldn’t fail')

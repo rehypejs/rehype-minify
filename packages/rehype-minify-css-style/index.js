@@ -15,21 +15,26 @@ import {isCssStyle} from 'hast-util-is-css-style'
 
 const clean = new CleanCSS()
 
+/**
+ * @typedef {import('hast').Root} Root
+ */
+
+/**
+ * Minify CSS style elements.
+ *
+ * @type {import('unified').Plugin<[], Root>}
+ */
 export default function rehypeMinifyCssStyle() {
-  return transform
-}
-
-function transform(tree) {
-  visit(tree, 'element', visitor)
-}
-
-function visitor(node) {
-  if (isCssStyle(node)) {
-    try {
-      const value = toString(node)
-      fromString(node, clean.minify(value).styles || value)
-      // Potential third party errors?
-      /* c8 ignore next */
-    } catch {}
+  return (tree) => {
+    visit(tree, 'element', (node) => {
+      if (isCssStyle(node)) {
+        try {
+          const value = toString(node)
+          fromString(node, clean.minify(value).styles || value)
+          // Potential third party errors?
+          /* c8 ignore next */
+        } catch {}
+      }
+    })
   }
 }

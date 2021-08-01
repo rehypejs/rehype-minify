@@ -10,6 +10,14 @@
  * @example
  *   {"plugin": {"from": "https://example.com"}}
  *   <a href="/foo/../bar.html"></a>
+ *
+ * @typedef {import('hast').Root} Root
+ * @typedef {import('relateurl')} RelateUrl
+ * @typedef {import('relateurl').Options} RelateOptions
+ * @typedef MinifyOptions
+ * @property {string} from
+ *   Base URL of page.
+ * @typedef {RelateOptions & MinifyOptions} Options
  */
 
 import Relate from 'relateurl'
@@ -20,8 +28,20 @@ import {urlAttributes} from 'html-url-attributes'
 
 const own = {}.hasOwnProperty
 
-export default function rehypeMinifyUrl(options = {}) {
-  const relate = new Relate(options.from, options)
+/**
+ * Minify URLs.
+ * Uses [`relateurl`](https://www.npmjs.com/package/relateurl).
+ * `from` in options is required (which must be an absolute url to where the
+ * file is hosted.
+ * All other [options](https://www.npmjs.com/package/relateurl#options) are
+ * passed through.
+ *
+ * @type {import('unified').Plugin<[Options?] | void[], Root>}
+ */
+export default function rehypeMinifyUrl(options) {
+  const {from, ...rest} = options || {}
+  // @ts-expect-error: checked next.
+  const relate = new Relate(from, rest)
 
   try {
     relate.relate('/')
@@ -29,13 +49,10 @@ export default function rehypeMinifyUrl(options = {}) {
     throw new Error('Missing absolute `from` in options')
   }
 
-  return transform
-
-  function transform(tree) {
-    visit(tree, 'element', visitor)
-
-    function visitor(node) {
-      const props = node.properties
+  return (tree) => {
+    visit(tree, 'element', (node) => {
+      const props = node.properties || {}
+      /** @type {string} */
       let prop
 
       for (prop in props) {
@@ -47,16 +64,26 @@ export default function rehypeMinifyUrl(options = {}) {
           props[prop] = minify(props[prop], relate)
         }
       }
-    }
+    })
   }
 }
 
+/**
+ * @param {null|undefined|string|number|boolean|Array.<string|number>} value
+ * @param {RelateUrl} relate
+ */
 function minify(value, relate) {
-  return (Array.isArray(value) ? all : one)(value, relate)
+  return Array.isArray(value) ? all(value, relate) : one(value, relate)
 }
 
+/**
+ * @param {Array.<string|number>} value
+ * @param {RelateUrl} relate
+ * @returns {Array.<string|number>}
+ */
 function all(value, relate) {
   let index = -1
+  /** @type {Array.<string|number>} */
   const result = []
 
   while (++index < value.length) {
@@ -66,8 +93,15 @@ function all(value, relate) {
   return result
 }
 
+/**
+ * @template {null|undefined|string|number|boolean} Thing
+ * @param {Thing} value
+ * @param {RelateUrl} relate
+ * @returns {Thing}
+ */
 function one(value, relate) {
   try {
+    // @ts-expect-error: let `relate` handle non-strings.
     return relate.relate(value)
     // Coverage bug on Erbium.
     /* c8 ignore next */

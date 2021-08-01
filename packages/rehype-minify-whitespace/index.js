@@ -10,6 +10,32 @@
  *   <p><strong>This</strong> and <em>that</em></p>
  */
 
+/**
+ * @typedef {import('hast').Root} Root
+ * @typedef {import('hast').Element} Element
+ * @typedef {import('hast').Text} Text
+ * @typedef {Root|Root['children'][number]} Node
+ *
+ * @typedef Options
+ * @property {boolean} [newlines=false]
+ *   If `newlines: true`, collapses whitespace containing newlines to `'\n'`
+ *   instead of `' '`.
+ *   The default is to collapse to a single space.
+ *
+ * @typedef {'pre'|'nowrap'|'pre-wrap'|'normal'} Whitespace
+ *
+ * @typedef Context
+ * @property {ReturnType<collapseFactory>} collapse
+ * @property {Whitespace} whitespace
+ * @property {boolean} [before]
+ * @property {boolean} [after]
+ *
+ * @typedef Result
+ * @property {boolean} remove
+ * @property {boolean} ignore
+ * @property {boolean} stripAtStart
+ */
+
 import {isElement} from 'hast-util-is-element'
 import {embedded} from 'hast-util-embedded'
 import {convert} from 'unist-util-is'
@@ -19,45 +45,53 @@ import {content as contents} from './content.js'
 import {skippable as skippables} from './skippable.js'
 
 const ignorableNode = convert(['doctype', 'comment'])
-const parent = convert(['element', 'root'])
-const root = convert(['root'])
-const element = convert(['element'])
-const text = convert(['text'])
 
+/**
+ * Collapse whitespace.
+ *
+ * Normally, collapses to a single space.
+ * If `newlines: true`, collapses whitespace containing newlines to `'\n'`
+ * instead of `' '`.
+ *
+ * @type {import('unified').Plugin<[Options?] | void[], Root>}
+ */
 export default function rehypeMinifyWhitespace(options = {}) {
   const collapse = collapseFactory(
     options.newlines ? replaceNewlines : replaceWhitespace
   )
 
-  return transform
-
-  function transform(tree) {
+  return (tree) => {
     minify(tree, {collapse, whitespace: 'normal'})
   }
 }
 
-function minify(node, options) {
-  if (parent(node)) {
-    const settings = Object.assign({}, options)
+/**
+ * @param {Node} node
+ * @param {Context} context
+ * @returns {Result}
+ */
+function minify(node, context) {
+  if ('children' in node) {
+    const settings = Object.assign({}, context)
 
-    if (root(node) || blocklike(node)) {
+    if (node.type === 'root' || blocklike(node)) {
       settings.before = true
       settings.after = true
     }
 
-    settings.whitespace = inferWhiteSpace(node, options)
+    settings.whitespace = inferWhiteSpace(node, context)
 
     return all(node, settings)
   }
 
-  if (text(node)) {
-    if (options.whitespace === 'normal') {
-      return minifyText(node, options)
+  if (node.type === 'text') {
+    if (context.whitespace === 'normal') {
+      return minifyText(node, context)
     }
 
     // Naïve collapse, but no trimming:
-    if (options.whitespace === 'nowrap') {
-      node.value = options.collapse(node.value)
+    if (context.whitespace === 'nowrap') {
+      node.value = context.collapse(node.value)
     }
 
     // The `pre-wrap` or `pre` whitespace settings are neither collapsed nor
@@ -67,18 +101,23 @@ function minify(node, options) {
   return {remove: false, ignore: ignorableNode(node), stripAtStart: false}
 }
 
-function minifyText(node, options) {
-  const value = options.collapse(node.value)
+/**
+ * @param {Text} node
+ * @param {Context} context
+ * @returns {Result}
+ */
+function minifyText(node, context) {
+  const value = context.collapse(node.value)
   const result = {remove: false, ignore: false, stripAtStart: false}
   let start = 0
   let end = value.length
 
-  if (options.before && removable(value.charAt(0))) {
+  if (context.before && removable(value.charAt(0))) {
     start++
   }
 
   if (start !== end && removable(value.charAt(end - 1))) {
-    if (options.after) {
+    if (context.after) {
       end--
     } else {
       result.stripAtStart = true
@@ -94,9 +133,14 @@ function minifyText(node, options) {
   return result
 }
 
-function all(parent, options) {
-  let before = options.before
-  const after = options.after
+/**
+ * @param {Root|Element} parent
+ * @param {Context} context
+ * @returns {Result}
+ */
+function all(parent, context) {
+  let before = context.before
+  const after = context.after
   const children = parent.children
   let length = children.length
   let index = -1
@@ -104,7 +148,7 @@ function all(parent, options) {
   while (++index < length) {
     const result = minify(
       children[index],
-      Object.assign({}, options, {
+      Object.assign({}, context, {
         before,
         after: collapsableAfter(children, index, after)
       })
@@ -125,15 +169,21 @@ function all(parent, options) {
     }
   }
 
-  return {remove: false, ignore: false, stripAtStart: before || after}
+  return {remove: false, ignore: false, stripAtStart: Boolean(before || after)}
 }
 
+/**
+ * @param {Node[]} nodes
+ * @param {number} index
+ * @param {boolean|undefined} [after]
+ * @returns {boolean|undefined}
+ */
 function collapsableAfter(nodes, index, after) {
   while (++index < nodes.length) {
     const node = nodes[index]
     let result = inferBoundary(node)
 
-    if (result === undefined && node.children && !skippable(node)) {
+    if (result === undefined && 'children' in node && !skippable(node)) {
       result = collapsableAfter(node.children, -1)
     }
 
@@ -145,15 +195,20 @@ function collapsableAfter(nodes, index, after) {
   return after
 }
 
-// Infer two types of boundaries:
-//
-// 1. `true` — boundary for which whitespace around it does not contribute
-//    anything
-// 2. `false` — boundary for which whitespace around it *does* contribute
-//
-// No result (`undefined`) is returned if it is unknown.
+/**
+ * Infer two types of boundaries:
+ *
+ * 1. `true` — boundary for which whitespace around it does not contribute
+ *    anything
+ * 2. `false` — boundary for which whitespace around it *does* contribute
+ *
+ * No result (`undefined`) is returned if it is unknown.
+ *
+ * @param {Node} node
+ * @returns {boolean|undefined}
+ */
 function inferBoundary(node) {
-  if (element(node)) {
+  if (node.type === 'element') {
     if (content(node)) {
       return false
     }
@@ -164,7 +219,7 @@ function inferBoundary(node) {
 
     // Unknown: either depends on siblings if embedded or metadata, or on
     // children.
-  } else if (text(node)) {
+  } else if (node.type === 'text') {
     if (!whitespace(node)) {
       return false
     }
@@ -173,63 +228,105 @@ function inferBoundary(node) {
   }
 }
 
-// Infer whether a node is skippable.
+/**
+ * Infer whether a node is skippable.
+ *
+ * @param {Node} node
+ * @returns {boolean}
+ */
 function content(node) {
   return embedded(node) || isElement(node, contents)
 }
 
-// See: <https://html.spec.whatwg.org/#the-css-user-agent-style-sheet-and-presentational-hints>
+/**
+ * See: <https://html.spec.whatwg.org/#the-css-user-agent-style-sheet-and-presentational-hints>
+ *
+ * @param {Element} node
+ * @returns {boolean}
+ */
 function blocklike(node) {
   return isElement(node, blocks)
 }
 
+/**
+ * @param {Element|Root} node
+ * @returns {boolean}
+ */
 function skippable(node) {
-  // Currently only used on elements, but just to make sure.
-  /* c8 ignore next */
-  const props = node.properties || {}
-
-  return ignorableNode(node) || isElement(node, skippables) || props.hidden
+  return (
+    Boolean(
+      'properties' in node && node.properties && node.properties.hidden
+    ) ||
+    ignorableNode(node) ||
+    isElement(node, skippables)
+  )
 }
 
+/**
+ * @param {string} character
+ * @returns {boolean}
+ */
 function removable(character) {
   return character === ' ' || character === '\n'
 }
 
+/**
+ * @param {string} value
+ * @returns {string}
+ */
 function replaceNewlines(value) {
   const match = /\r?\n|\r/.exec(value)
   return match ? match[0] : ' '
 }
 
+/**
+ * @returns {string}
+ */
 function replaceWhitespace() {
   return ' '
 }
 
+/**
+ * @param {(value: string) => string} replace
+ */
 function collapseFactory(replace) {
   return collapse
+
+  /**
+   * @param {string} value
+   * @returns {string}
+   */
   function collapse(value) {
     return String(value).replace(/[\t\n\v\f\r ]+/g, replace)
   }
 }
 
-// We don’t support void elements here (so `nobr wbr` -> `normal` is ignored).
-function inferWhiteSpace(node, options) {
-  const props = node.properties || {}
-
-  switch (node.tagName) {
-    case 'listing':
-    case 'plaintext':
-    case 'xmp':
-      return 'pre'
-    case 'nobr':
-      return 'nowrap'
-    case 'pre':
-      return props.wrap ? 'pre-wrap' : 'pre'
-    case 'td':
-    case 'th':
-      return props.noWrap ? 'nowrap' : options.whitespace
-    case 'textarea':
-      return 'pre-wrap'
-    default:
-      return options.whitespace
+/**
+ * We don’t support void elements here (so `nobr wbr` -> `normal` is ignored).
+ *
+ * @param {Root|Element} node
+ * @param {Context} context
+ * @returns {Whitespace}
+ */
+function inferWhiteSpace(node, context) {
+  if ('tagName' in node && node.properties) {
+    switch (node.tagName) {
+      case 'listing':
+      case 'plaintext':
+      case 'xmp':
+        return 'pre'
+      case 'nobr':
+        return 'nowrap'
+      case 'pre':
+        return node.properties.wrap ? 'pre-wrap' : 'pre'
+      case 'td':
+      case 'th':
+        return node.properties.noWrap ? 'nowrap' : context.whitespace
+      case 'textarea':
+        return 'pre-wrap'
+      default:
+    }
   }
+
+  return context.whitespace
 }

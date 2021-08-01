@@ -45,22 +45,38 @@ const mime = new Set([
   'text/x-javascript'
 ])
 
-// Check node.
+/**
+ * @typedef {import('hast').Root} Root
+ * @typedef {Root|Root['children'][number]} Node
+ */
+
+/**
+ * Check if an element is a JavaScript script.
+ *
+ * @param {Node} node
+ * @returns {boolean}
+ */
 export function isJavaScript(node) {
   if (!isElement(node, 'script')) {
     return false
   }
 
+  const props = node.properties || {}
+
   if (hasProperty(node, 'type')) {
-    return check(node.properties.type)
+    return check(props.type)
   }
 
-  return (
-    !hasProperty(node, 'language') || check(node.properties.language, 'text/')
-  )
+  return !hasProperty(node, 'language') || check(props.language, 'text/')
 }
 
-// Check one value.
+/**
+ * Check one value.
+ *
+ * @param {unknown} d
+ * @param {string} [prefix]
+ * @returns {boolean}
+ */
 function check(d, prefix) {
   if (typeof d !== 'string') {
     return false

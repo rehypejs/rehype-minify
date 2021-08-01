@@ -4,12 +4,14 @@ import {fromString} from './index.js'
 
 test('hast-util-from-string', (t) => {
   t.deepEqual(
+    // @ts-expect-error: `value` missing.
     fromString(u('text'), 'foo'),
     u('text', 'foo'),
     'should set text nodes'
   )
 
   t.deepEqual(
+    // @ts-expect-error: `value` missing.
     fromString(u('text')),
     u('text', ''),
     'should reset text nodes (1)'

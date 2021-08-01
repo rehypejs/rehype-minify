@@ -18,45 +18,62 @@ import {schema} from './schema.js'
 
 const own = {}.hasOwnProperty
 
+/**
+ * @typedef {import('hast').Root} Root
+ * @typedef {import('./schema.js').Info} Info
+ */
+
+/**
+ * Minify enumerated attributes.
+ *
+ * Sometimes attributes or their values can be dropped entirely, or a shorter
+ * value can be used.
+ *
+ * @type {import('unified').Plugin<[], Root>}
+ */
 export default function rehypeMinifyEnumeratedAttribute() {
-  return transform
-}
+  return (tree) => {
+    visit(tree, 'element', (node) => {
+      const props = node.properties || {}
+      /** @type {string} */
+      let prop
 
-function transform(tree) {
-  visit(tree, 'element', visitor)
-}
+      for (prop in props) {
+        if (own.call(schema, prop)) {
+          const value = props[prop]
 
-function visitor(node) {
-  const props = node.properties
-  let prop
+          if (hasProperty(node, prop) && typeof value === 'string') {
+            const info = schema[prop]
+            const definitions = Array.isArray(info) ? info : [info]
+            let index = -1
 
-  for (prop in props) {
-    if (
-      hasProperty(node, prop) &&
-      own.call(schema, prop) &&
-      typeof props[prop] === 'string'
-    ) {
-      const definitions = Array.isArray(schema[prop])
-        ? schema[prop]
-        : [schema[prop]]
-      let index = -1
-
-      while (++index < definitions.length) {
-        if (isElement(node, definitions[index].tagNames)) {
-          props[prop] = minify(props[prop], definitions[index])
+            while (++index < definitions.length) {
+              // eslint-disable-next-line max-depth
+              if (isElement(node, definitions[index].tagNames)) {
+                props[prop] = minify(value, definitions[index])
+              }
+            }
+          }
         }
       }
-    }
+    })
   }
 }
 
+/**
+ * @param {string} value
+ * @param {Info} info
+ * @returns {string|null}
+ */
 function minify(value, info) {
   const insensitive = value.toLowerCase()
   const states = info.states
   let index = -1
   let known = false
-  let result
-  let state
+  /** @type {string|null} */
+  let result = null
+  /** @type {string|string[]|null} */
+  let state = null
 
   while (++index < states.length) {
     state = states[index]

@@ -20,21 +20,27 @@ import {fromString} from 'hast-util-from-string'
 import {toString} from 'hast-util-to-string'
 import {isElement} from 'hast-util-is-element'
 
+/**
+ * @typedef {import('hast').Root} Root
+ */
+
+/**
+ * Minify `script` elements with a JSON body.
+ *
+ * @type {import('unified').Plugin<[], Root>}
+ */
 export default function rehypeMinifyJsonScript() {
-  return transform
-}
-
-function transform(tree) {
-  visit(tree, 'element', visitor)
-}
-
-function visitor(node) {
-  if (
-    isElement(node, 'script') &&
-    node.properties.type === 'application/ld+json'
-  ) {
-    try {
-      fromString(node, JSON.stringify(JSON.parse(toString(node))))
-    } catch {}
+  return (tree) => {
+    visit(tree, 'element', (node) => {
+      if (
+        isElement(node, 'script') &&
+        node.properties &&
+        node.properties.type === 'application/ld+json'
+      ) {
+        try {
+          fromString(node, JSON.stringify(JSON.parse(toString(node))))
+        } catch {}
+      }
+    })
   }
 }

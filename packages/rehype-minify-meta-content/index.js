@@ -9,53 +9,56 @@
  *   <meta name="keywords" content="foo, bar baz, qux">
  */
 
+/**
+ * @typedef {import('hast').Root} Root
+ */
+
 import {parse, stringify} from 'comma-separated-tokens'
 import {visit} from 'unist-util-visit'
 import {isElement} from 'hast-util-is-element'
 import {hasProperty} from 'hast-util-has-property'
 
-const own = {}.hasOwnProperty
+const lists = new Set([
+  'viewport',
+  'keywords',
+  'robots',
+  'apple-itunes-app',
+  'apple-media-service-subscription'
+])
 
-const handlers = {
-  viewport,
-  keywords: collapse,
-  robots: collapse,
-  'apple-itunes-app': collapse,
-  'apple-media-service-subscription': collapse
-}
-
+/**
+ * Minify `content` on `meta` elements.
+ *
+ * Note: `meta[name=theme-color]` and `meta[name=msapplication-TileColor]`
+ * are handled by `rehype-minify-meta-color`.
+ *
+ * @type {import('unified').Plugin<[], Root>}
+ */
 export default function rehypeMinifyMetaContent() {
-  return transform
-}
+  return (tree) => {
+    visit(tree, 'element', (node) => {
+      const props = node.properties || {}
+      const name = String(props.name || '')
+      let value = props.content
 
-function transform(tree) {
-  visit(tree, 'element', visitor)
-}
+      if (
+        isElement(node, 'meta') &&
+        hasProperty(node, 'content') &&
+        typeof value === 'string'
+      ) {
+        if (name === 'viewport') {
+          value = value
+            .replace(/(\d+\.\d+)/, (d) => String(Number(d)))
+            .replace(/user-scalable=\s*yes/, '')
+          // Fall through.
+        }
 
-function visitor(node) {
-  const props = node.properties
-  const name = props.name
+        if (lists.has(name)) {
+          value = stringify(parse(value), {padLeft: false})
+        }
 
-  if (
-    isElement(node, 'meta') &&
-    hasProperty(node, 'content') &&
-    own.call(handlers, name) &&
-    typeof props.content === 'string'
-  ) {
-    props.content = handlers[name](props.content)
+        props.content = value
+      }
+    })
   }
-}
-
-function viewport(value) {
-  return collapse(
-    value.replace(/(\d+\.\d+)/, toNumber).replace(/user-scalable=\s*yes/, '')
-  )
-}
-
-function collapse(value) {
-  return stringify(parse(value), {padLeft: false})
-}
-
-function toNumber(value) {
-  return Number(value)
 }

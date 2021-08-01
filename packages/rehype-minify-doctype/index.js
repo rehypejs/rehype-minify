@@ -8,22 +8,27 @@
 
 import {visit} from 'unist-util-visit'
 
+/**
+ * @typedef {import('hast').Root} Root
+ */
+
+/**
+ * Minify the doctype.
+ *
+ * @type {import('unified').Plugin<[], Root>}
+ */
 export default function rehypeMinifyDoctype() {
-  return transform
-}
+  return (tree) => {
+    visit(tree, 'doctype', (node) => {
+      if (node.public) {
+        node.public = undefined
+      }
 
-function transform(tree) {
-  visit(tree, 'doctype', visitor)
-}
+      if (node.system) {
+        node.system = undefined
+      }
 
-function visitor(node) {
-  if (node.public) {
-    node.public = null
+      return false
+    })
   }
-
-  if (node.system) {
-    node.system = null
-  }
-
-  return false
 }

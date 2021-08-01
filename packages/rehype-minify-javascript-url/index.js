@@ -11,6 +11,10 @@ import {hasProperty} from 'hast-util-has-property'
 import {isElement} from 'hast-util-is-element'
 import {urlAttributes} from 'html-url-attributes'
 
+/**
+ * @typedef {import('hast').Root} Root
+ */
+
 const own = {}.hasOwnProperty
 
 /* eslint-disable no-script-url */
@@ -20,45 +24,44 @@ const protocol = 'javascript:'
 const prefix = 'function a(){'
 const suffix = '}a();'
 
+/**
+ * Minify JavaScript URLs.
+ *
+ * @type {import('unified').Plugin<[], Root>}
+ */
 export default function rehypeMinifyJavaScriptUrl() {
-  return transform
-}
+  return (tree) => {
+    visit(tree, 'element', (node) => {
+      const props = node.properties || {}
+      /** @type {string} */
+      let prop
 
-function transform(tree) {
-  visit(tree, 'element', visitor)
-}
+      for (prop in props) {
+        if (
+          hasProperty(node, prop) &&
+          own.call(urlAttributes, prop) &&
+          isElement(node, urlAttributes[prop])
+        ) {
+          const value = props[prop]
+          let result = value
 
-function visitor(node) {
-  const props = node.properties
-  let prop
+          if (
+            typeof result === 'string' &&
+            result.slice(0, protocol.length).toLowerCase() === protocol
+          ) {
+            result = result.slice(protocol.length)
 
-  for (prop in props) {
-    if (
-      hasProperty(node, prop) &&
-      own.call(urlAttributes, prop) &&
-      isElement(node, urlAttributes[prop])
-    ) {
-      props[prop] = minify(props[prop])
-    }
+            try {
+              const output = Uglify.minify(prefix + result + suffix)
+              result = output.code.slice(prefix.length, -suffix.length)
+            } catch {}
+
+            result = protocol + result.trim()
+          }
+
+          props[prop] = result
+        }
+      }
+    })
   }
-}
-
-function minify(value) {
-  let result = value
-
-  if (
-    typeof result === 'string' &&
-    result.slice(0, protocol.length).toLowerCase() === protocol
-  ) {
-    result = result.slice(protocol.length)
-
-    try {
-      const output = Uglify.minify(prefix + result + suffix)
-      result = output.code.slice(prefix.length, -suffix.length)
-    } catch {}
-
-    result = protocol + result.trim()
-  }
-
-  return result
 }

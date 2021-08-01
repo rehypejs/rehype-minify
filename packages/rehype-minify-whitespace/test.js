@@ -9,34 +9,38 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          '  ',
-          h('p', [
+        u('root', [
+          h('main', [
             '  ',
-            h('strong', 'foo'),
+            h('p', [
+              '  ',
+              h('strong', 'foo'),
+              '  ',
+              h('em', 'bar'),
+              '  ',
+              h('meta', {itemProp: true}),
+              '  '
+            ]),
             '  ',
-            h('em', 'bar'),
-            '  ',
-            h('meta', {itemProp: true}),
+            h('p', [
+              h('a', {href: 'example.com'}, ' baz'),
+              '  ',
+              h('em', ' qux')
+            ]),
             '  '
-          ]),
-          '  ',
-          h('p', [
-            h('a', {href: 'example.com'}, ' baz'),
-            '  ',
-            h('em', ' qux')
-          ]),
-          '  '
+          ])
         ])
       ),
-    h('main', [
-      h('p', [
-        h('strong', 'foo'),
-        ' ',
-        h('em', 'bar'),
-        h('meta', {itemProp: true})
-      ]),
-      h('p', [h('a', {href: 'example.com'}, 'baz'), ' ', h('em', 'qux')])
+    u('root', [
+      h('main', [
+        h('p', [
+          h('strong', 'foo'),
+          ' ',
+          h('em', 'bar'),
+          h('meta', {itemProp: true})
+        ]),
+        h('p', [h('a', {href: 'example.com'}, 'baz'), ' ', h('em', 'qux')])
+      ])
     ])
   )
 
@@ -44,20 +48,24 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('head', [
-          '  ',
-          h('meta', {itemProp: true}),
-          '  ',
-          h('noscript', [
+        u('root', [
+          h('head', [
             '  ',
-            h('link', {rel: ['stylesheet'], href: 'index.css'}),
-            '  '
+            h('meta', {itemProp: true}),
+            '  ',
+            h('noscript', [
+              '  ',
+              h('link', {rel: ['stylesheet'], href: 'index.css'}),
+              '  '
+            ])
           ])
         ])
       ),
-    h('head', [
-      h('meta', {itemProp: true}),
-      h('noscript', [h('link', {rel: ['stylesheet'], href: 'index.css'})])
+    u('root', [
+      h('head', [
+        h('meta', {itemProp: true}),
+        h('noscript', [h('link', {rel: ['stylesheet'], href: 'index.css'})])
+      ])
     ])
   )
 
@@ -65,42 +73,46 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min, {newlines: true})
       .runSync(
-        h('main', [
-          '  ',
-          h('p', [
-            '\n ',
-            h('strong', 'foo'),
-            ' \n',
-            h('em', 'bar'),
-            ' \n',
-            h('meta', {itemProp: true}),
-            ' \n'
-          ]),
-          ' \n',
-          h('p', [
-            h('a', {href: 'example.com'}, ' baz'),
+        u('root', [
+          h('main', [
             '  ',
-            h('em', ' qux')
-          ]),
-          '  '
+            h('p', [
+              '\n ',
+              h('strong', 'foo'),
+              ' \n',
+              h('em', 'bar'),
+              ' \n',
+              h('meta', {itemProp: true}),
+              ' \n'
+            ]),
+            ' \n',
+            h('p', [
+              h('a', {href: 'example.com'}, ' baz'),
+              '  ',
+              h('em', ' qux')
+            ]),
+            '  '
+          ])
         ])
       ),
-    h('main', [
-      h('p', [
-        h('strong', 'foo'),
-        '\n',
-        h('em', 'bar'),
-        h('meta', {itemProp: true})
-      ]),
-      h('p', [h('a', {href: 'example.com'}, 'baz'), ' ', h('em', 'qux')])
+    u('root', [
+      h('main', [
+        h('p', [
+          h('strong', 'foo'),
+          '\n',
+          h('em', 'bar'),
+          h('meta', {itemProp: true})
+        ]),
+        h('p', [h('a', {href: 'example.com'}, 'baz'), ' ', h('em', 'qux')])
+      ])
     ])
   )
 
   t.deepEqual(
     rehype()
       .use(min, {newlines: true})
-      .runSync(h('main', ['  a  ', h('br'), ' c '])),
-    h('main', ['a', h('br'), 'c']),
+      .runSync(u('root', [h('main', ['  a  ', h('br'), ' c '])])),
+    u('root', [h('main', ['a', h('br'), 'c'])]),
     'should trim whitespace around `<br>` elements'
   )
 
@@ -108,23 +120,27 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('form', [
-          '  ',
-          h('input', {list: 'a'}),
-          '  ',
-          h('datalist', {id: 'a'}, [
+        u('root', [
+          h('form', [
             '  ',
-            h('option', 'b'),
+            h('input', {list: 'a'}),
             '  ',
-            h('option', 'c'),
+            h('datalist', {id: 'a'}, [
+              '  ',
+              h('option', 'b'),
+              '  ',
+              h('option', 'c'),
+              '  '
+            ]),
             '  '
-          ]),
-          '  '
+          ])
         ])
       ),
-    h('form', [
-      h('input', {list: 'a'}),
-      h('datalist', {id: 'a'}, [h('option', 'b'), h('option', 'c')])
+    u('root', [
+      h('form', [
+        h('input', {list: 'a'}),
+        h('datalist', {id: 'a'}, [h('option', 'b'), h('option', 'c')])
+      ])
     ]),
     'should trim whitespace in `<form>`s'
   )
@@ -133,13 +149,17 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('section', [
-          '  a  ',
-          h('object', ['  b  ', h('p', '  c  '), '  d  ']),
-          '  e  '
+        u('root', [
+          h('section', [
+            '  a  ',
+            h('object', ['  b  ', h('p', '  c  '), '  d  ']),
+            '  e  '
+          ])
         ])
       ),
-    h('section', ['a ', h('object', ['b', h('p', 'c'), 'd ']), ' e']),
+    u('root', [
+      h('section', ['a ', h('object', ['b', h('p', 'c'), 'd ']), ' e'])
+    ]),
     'should trim whitespace around `<object>` elements'
   )
 
@@ -147,21 +167,25 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          h('p', [
-            h('strong', 'foo '),
-            h('em', 'bar '),
-            h('a', {href: 'example.com'}, ' baz '),
-            h('em', ' qux ')
+        u('root', [
+          h('main', [
+            h('p', [
+              h('strong', 'foo '),
+              h('em', 'bar '),
+              h('a', {href: 'example.com'}, ' baz '),
+              h('em', ' qux ')
+            ])
           ])
         ])
       ),
-    h('main', [
-      h('p', [
-        h('strong', 'foo '),
-        h('em', 'bar '),
-        h('a', {href: 'example.com'}, 'baz '),
-        h('em', 'qux')
+    u('root', [
+      h('main', [
+        h('p', [
+          h('strong', 'foo '),
+          h('em', 'bar '),
+          h('a', {href: 'example.com'}, 'baz '),
+          h('em', 'qux')
+        ])
       ])
     ])
   )
@@ -170,51 +194,77 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [h('p', [' ', h('span', [' ', h('strong', ' '), ' ']), ' '])])
+        u('root', [
+          h('main', [
+            h('p', [' ', h('span', [' ', h('strong', ' '), ' ']), ' '])
+          ])
+        ])
       ),
-    h('main', [h('p', [h('span', [h('strong')])])])
-  )
-
-  t.deepEqual(
-    rehype()
-      .use(min)
-      .runSync(h('main', [h('strong', 'a'), h('span', [h('span', ' '), 'b'])])),
-    h('main', [h('strong', 'a'), h('span', [h('span', ' '), 'b'])])
-  )
-
-  t.deepEqual(rehype().use(min).runSync(h('main', '  ')), h('main'))
-
-  t.deepEqual(rehype().use(min).runSync(h('main', '\n ')), h('main'))
-
-  t.deepEqual(
-    rehype()
-      .use(min)
-      .runSync(h('main', ['  ', h('p'), '  ', h('p'), '  '])),
-    h('main', [h('p'), h('p')])
-  )
-
-  t.deepEqual(
-    rehype()
-      .use(min)
-      .runSync(h('main', ['  ', h('div', ['  ', ' foo ', ' \n', ' bar '])])),
-    h('main', [h('div', ['foo ', 'bar'])])
+    u('root', [h('main', [h('p', [h('span', [h('strong')])])])])
   )
 
   t.deepEqual(
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          h('i', [
-            h('span', 'foo '),
-            h('a', {href: 'example.com'}, [h('span', 'bar ')])
+        u('root', [
+          h('main', [h('strong', 'a'), h('span', [h('span', ' '), 'b'])])
+        ])
+      ),
+    u('root', [h('main', [h('strong', 'a'), h('span', [h('span', ' '), 'b'])])])
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(u('root', [h('main', '  ')])),
+    u('root', [h('main')])
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(u('root', [h('main', '\n ')])),
+    u('root', [h('main')])
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(u('root', [h('main', ['  ', h('p'), '  ', h('p'), '  '])])),
+    u('root', [h('main', [h('p'), h('p')])])
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(
+        u('root', [
+          h('main', ['  ', h('div', ['  ', ' foo ', ' \n', ' bar '])])
+        ])
+      ),
+    u('root', [h('main', [h('div', ['foo ', 'bar'])])])
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(
+        u('root', [
+          h('main', [
+            h('i', [
+              h('span', 'foo '),
+              h('a', {href: 'example.com'}, [h('span', 'bar ')])
+            ])
           ])
         ])
       ),
-    h('main', [
-      h('i', [
-        h('span', 'foo '),
-        h('a', {href: 'example.com'}, [h('span', 'bar')])
+    u('root', [
+      h('main', [
+        h('i', [
+          h('span', 'foo '),
+          h('a', {href: 'example.com'}, [h('span', 'bar')])
+        ])
       ])
     ])
   )
@@ -223,12 +273,16 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          h('span', ['foo ', h('a', {href: 'example.com'}, 'bar'), ' baz'])
+        u('root', [
+          h('main', [
+            h('span', ['foo ', h('a', {href: 'example.com'}, 'bar'), ' baz'])
+          ])
         ])
       ),
-    h('main', [
-      h('span', ['foo ', h('a', {href: 'example.com'}, 'bar'), ' baz'])
+    u('root', [
+      h('main', [
+        h('span', ['foo ', h('a', {href: 'example.com'}, 'bar'), ' baz'])
+      ])
     ])
   )
 
@@ -236,20 +290,20 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          h('p'),
-          [
+        u('root', [
+          h('main', [
+            h('p'),
             h('i', [h('span', 'foo ')]),
             h('i', [h('a', {href: 'example.com'}, [h('span', 'bar ')])])
-          ]
+          ])
         ])
       ),
-    h('main', [
-      h('p'),
-      [
+    u('root', [
+      h('main', [
+        h('p'),
         h('i', [h('span', 'foo ')]),
         h('i', [h('a', {href: 'example.com'}, [h('span', 'bar')])])
-      ]
+      ])
     ])
   )
 
@@ -307,32 +361,32 @@ test('rehype-minify-whitespace', (t) => {
   t.deepEqual(
     rehype()
       .use(min)
-      .runSync(h('p', [h('label', ' a '), ' ', h('input')])),
-    h('p', [h('label', 'a '), h('input')]),
+      .runSync(u('root', [h('p', [h('label', ' a '), ' ', h('input')])])),
+    u('root', [h('p', [h('label', 'a '), h('input')])]),
     'should prefer whitespace in earlier elements'
   )
 
   t.deepEqual(
     rehype()
       .use(min)
-      .runSync(h('p', [h('label', 'a'), ' ', h('input')])),
-    h('p', [h('label', 'a'), ' ', h('input')]),
+      .runSync(u('root', [h('p', [h('label', 'a'), ' ', h('input')])])),
+    u('root', [h('p', [h('label', 'a'), ' ', h('input')])]),
     'should allow whitespace before an input'
   )
 
   t.deepEqual(
     rehype()
       .use(min)
-      .runSync(h('p', [h('label', 'a'), ' ', h('button')])),
-    h('p', [h('label', 'a'), ' ', h('button')]),
+      .runSync(u('root', [h('p', [h('label', 'a'), ' ', h('button')])])),
+    u('root', [h('p', [h('label', 'a'), ' ', h('button')])]),
     'should allow whitespace before an empty button'
   )
 
   t.deepEqual(
     rehype()
       .use(min)
-      .runSync(h('main', [h('p', ' a '), ' b ', h('p', ' c ')])),
-    h('main', [h('p', 'a'), 'b', h('p', 'c')]),
+      .runSync(u('root', [h('main', [h('p', ' a '), ' b ', h('p', ' c ')])])),
+    u('root', [h('main', [h('p', 'a'), 'b', h('p', 'c')])]),
     'should trim whitespace between blocks'
   )
 
@@ -340,32 +394,36 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('head', [
-          '  ',
-          h('meta', {charSet: 'utf8'}),
-          '  ',
-          h('title', '  a  '),
-          '  ',
-          h('link'),
-          '  ',
-          h('script', '  b  '),
-          '  ',
-          h('meta'),
-          '  ',
-          h('script', '  c  '),
-          '  ',
-          h('style', '  d  '),
-          '  '
+        u('root', [
+          h('head', [
+            '  ',
+            h('meta', {charSet: 'utf8'}),
+            '  ',
+            h('title', '  a  '),
+            '  ',
+            h('link'),
+            '  ',
+            h('script', '  b  '),
+            '  ',
+            h('meta'),
+            '  ',
+            h('script', '  c  '),
+            '  ',
+            h('style', '  d  '),
+            '  '
+          ])
         ])
       ),
-    h('head', [
-      h('meta', {charSet: 'utf8'}),
-      h('title', 'a'),
-      h('link'),
-      h('script', 'b'),
-      h('meta'),
-      h('script', 'c'),
-      h('style', 'd')
+    u('root', [
+      h('head', [
+        h('meta', {charSet: 'utf8'}),
+        h('title', 'a'),
+        h('link'),
+        h('script', 'b'),
+        h('meta'),
+        h('script', 'c'),
+        h('style', 'd')
+      ])
     ]),
     'should trim whitespace in head'
   )
@@ -374,28 +432,32 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('p', [
-          '  a  ',
-          h('select', [
-            '  ',
-            h('optgroup', {label: 'b'}, [
+        u('root', [
+          h('p', [
+            '  a  ',
+            h('select', [
               '  ',
-              h('option', '  c  '),
-              '  ',
-              h('option', '  d  '),
+              h('optgroup', {label: 'b'}, [
+                '  ',
+                h('option', '  c  '),
+                '  ',
+                h('option', '  d  '),
+                '  '
+              ]),
               '  '
             ]),
-            '  '
-          ]),
-          '  e  '
+            '  e  '
+          ])
         ])
       ),
-    h('p', [
-      'a ',
-      h('select', [
-        h('optgroup', {label: 'b'}, [h('option', 'c'), h('option', 'd')])
-      ]),
-      ' e'
+    u('root', [
+      h('p', [
+        'a ',
+        h('select', [
+          h('optgroup', {label: 'b'}, [h('option', 'c'), h('option', 'd')])
+        ]),
+        ' e'
+      ])
     ]),
     'should trim whitespace in selects'
   )
@@ -404,17 +466,21 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('p', [
-          '  a  ',
-          h('img'),
-          '  b  ',
-          h('video'),
-          '  c  ',
-          h('audio'),
-          '  d  '
+        u('root', [
+          h('p', [
+            '  a  ',
+            h('img'),
+            '  b  ',
+            h('video'),
+            '  c  ',
+            h('audio'),
+            '  d  '
+          ])
         ])
       ),
-    h('p', ['a ', h('img'), ' b ', h('video'), ' c ', h('audio'), ' d']),
+    u('root', [
+      h('p', ['a ', h('img'), ' b ', h('video'), ' c ', h('audio'), ' d'])
+    ]),
     'should trim whitespace around media'
   )
 
@@ -422,21 +488,25 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('p', [
-          '  a  ',
-          h('video', [h('track'), '  b  ', h('a', '  c  '), '  d  ']),
-          '  e  '
+        u('root', [
+          h('p', [
+            '  a  ',
+            h('video', [h('track'), '  b  ', h('a', '  c  '), '  d  ']),
+            '  e  '
+          ])
         ])
       ),
-    h('p', ['a ', h('video', [h('track'), 'b ', h('a', 'c '), 'd ']), ' e']),
+    u('root', [
+      h('p', ['a ', h('video', [h('track'), 'b ', h('a', 'c '), 'd ']), ' e'])
+    ]),
     'should trim whitespace inside media'
   )
 
   t.deepEqual(
     rehype()
       .use(min)
-      .runSync(h('p', ['  a  ', u('comment', '  b  '), '  c  '])),
-    h('p', ['a ', u('comment', '  b  '), 'c']),
+      .runSync(u('root', [h('p', ['  a  ', u('comment', '  b  '), '  c  '])])),
+    u('root', [h('p', ['a ', u('comment', '  b  '), 'c'])]),
     'should trim whitespace around comments (#1)'
   )
 
@@ -444,9 +514,11 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [h('p', '  a  '), u('comment', '  b  '), h('p', '  c  ')])
+        u('root', [
+          h('main', [h('p', '  a  '), u('comment', '  b  '), h('p', '  c  ')])
+        ])
       ),
-    h('main', [h('p', 'a'), u('comment', '  b  '), h('p', 'c')]),
+    u('root', [h('main', [h('p', 'a'), u('comment', '  b  '), h('p', 'c')])]),
     'should trim whitespace around comments (#2)'
   )
 
@@ -454,21 +526,25 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          h('p', '  a  '),
-          '  ',
-          h('x', {hidden: true}, '  b  '),
-          '  ',
-          h('p', '  c  '),
-          '  ',
-          h('p', ['  d  ', h('x', {hidden: true}, '  e  '), '  f  '])
+        u('root', [
+          h('main', [
+            h('p', '  a  '),
+            '  ',
+            h('x', {hidden: true}, '  b  '),
+            '  ',
+            h('p', '  c  '),
+            '  ',
+            h('p', ['  d  ', h('x', {hidden: true}, '  e  '), '  f  '])
+          ])
         ])
       ),
-    h('main', [
-      h('p', 'a'),
-      h('x', {hidden: true}, 'b'),
-      h('p', 'c'),
-      h('p', ['d ', h('x', {hidden: true}, 'e '), 'f'])
+    u('root', [
+      h('main', [
+        h('p', 'a'),
+        h('x', {hidden: true}, 'b'),
+        h('p', 'c'),
+        h('p', ['d ', h('x', {hidden: true}, 'e '), 'f'])
+      ])
     ]),
     'should trim whitespace around hidden elements'
   )
@@ -477,17 +553,30 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          h('p', '  a  '),
-          '  ',
-          u('x'),
-          '  ',
-          h('p', '  c  '),
-          '  ',
-          h('p', ['  d  ', u('x'), '  f  '])
+        u('root', [
+          h('main', [
+            h('p', '  a  '),
+            '  ',
+            // @ts-expect-error: custom node.
+            u('x'),
+            '  ',
+            h('p', '  c  '),
+            '  ',
+            // @ts-expect-error: custom node.
+            h('p', ['  d  ', u('x'), '  f  '])
+          ])
         ])
       ),
-    h('main', [h('p', 'a'), u('x'), h('p', 'c'), h('p', ['d ', u('x'), ' f'])]),
+    u('root', [
+      h('main', [
+        h('p', 'a'),
+        // @ts-expect-error: custom node.
+        u('x'),
+        h('p', 'c'),
+        // @ts-expect-error: custom node.
+        h('p', ['d ', u('x'), ' f'])
+      ])
+    ]),
     'should not trim whitespace around unknown nodes'
   )
 
@@ -495,17 +584,30 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          h('p', '  a  '),
-          '  ',
-          u('x'),
-          '  ',
-          h('p', '  c  '),
-          '  ',
-          h('p', ['  d  ', u('x'), '  f  '])
+        u('root', [
+          h('main', [
+            h('p', '  a  '),
+            '  ',
+            // @ts-expect-error: custom node.
+            u('x'),
+            '  ',
+            h('p', '  c  '),
+            '  ',
+            // @ts-expect-error: custom node.
+            h('p', ['  d  ', u('x'), '  f  '])
+          ])
         ])
       ),
-    h('main', [h('p', 'a'), u('x'), h('p', 'c'), h('p', ['d ', u('x'), ' f'])]),
+    u('root', [
+      h('main', [
+        h('p', 'a'),
+        // @ts-expect-error: custom node.
+        u('x'),
+        h('p', 'c'),
+        // @ts-expect-error: custom node.
+        h('p', ['d ', u('x'), ' f'])
+      ])
+    ]),
     'should not trim whitespace around unknown nodes'
   )
 
@@ -513,15 +615,17 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          h('p', '  a  '),
-          '  ',
-          h('xmp', '  1 < 3  '),
-          '  ',
-          h('p', '  b  ')
+        u('root', [
+          h('main', [
+            h('p', '  a  '),
+            '  ',
+            h('xmp', '  1 < 3  '),
+            '  ',
+            h('p', '  b  ')
+          ])
         ])
       ),
-    h('main', [h('p', 'a'), h('xmp', '  1 < 3  '), h('p', 'b')]),
+    u('root', [h('main', [h('p', 'a'), h('xmp', '  1 < 3  '), h('p', 'b')])]),
     'should not trim whitespace in `xmp`'
   )
 
@@ -529,15 +633,19 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          h('p', '  a  '),
-          '  ',
-          h('listing', '  1 < 3  '),
-          '  ',
-          h('p', '  b  ')
+        u('root', [
+          h('main', [
+            h('p', '  a  '),
+            '  ',
+            h('listing', '  1 < 3  '),
+            '  ',
+            h('p', '  b  ')
+          ])
         ])
       ),
-    h('main', [h('p', 'a'), h('listing', '  1 < 3  '), h('p', 'b')]),
+    u('root', [
+      h('main', [h('p', 'a'), h('listing', '  1 < 3  '), h('p', 'b')])
+    ]),
     'should not trim whitespace in `listing`'
   )
 
@@ -567,15 +675,19 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          h('p', '  a  '),
-          '  ',
-          h('listing', '  1 < 3  '),
-          '  ',
-          h('p', '  b  ')
+        u('root', [
+          h('main', [
+            h('p', '  a  '),
+            '  ',
+            h('listing', '  1 < 3  '),
+            '  ',
+            h('p', '  b  ')
+          ])
         ])
       ),
-    h('main', [h('p', 'a'), h('listing', '  1 < 3  '), h('p', 'b')]),
+    u('root', [
+      h('main', [h('p', 'a'), h('listing', '  1 < 3  '), h('p', 'b')])
+    ]),
     'should not trim whitespace in `listing`'
   )
 
@@ -583,15 +695,19 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          h('p', '  a  '),
-          '  ',
-          h('listing', '  1 < 3  '),
-          '  ',
-          h('p', '  b  ')
+        u('root', [
+          h('main', [
+            h('p', '  a  '),
+            '  ',
+            h('listing', '  1 < 3  '),
+            '  ',
+            h('p', '  b  ')
+          ])
         ])
       ),
-    h('main', [h('p', 'a'), h('listing', '  1 < 3  '), h('p', 'b')]),
+    u('root', [
+      h('main', [h('p', 'a'), h('listing', '  1 < 3  '), h('p', 'b')])
+    ]),
     'should not trim whitespace in `listing`'
   )
 
@@ -599,17 +715,23 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('p', ['  ', h('nobr', '  Long   line   with   no   breaks  '), '  '])
+        u('root', [
+          h('p', [
+            '  ',
+            h('nobr', '  Long   line   with   no   breaks  '),
+            '  '
+          ])
+        ])
       ),
-    h('p', [h('nobr', ' Long line with no breaks ')]),
+    u('root', [h('p', [h('nobr', ' Long line with no breaks ')])]),
     'should collapse but not trim whitespace in `nobr`'
   )
 
   t.deepEqual(
     rehype()
       .use(min)
-      .runSync(h('p', ['  a  ', h('textarea', '  b  '), '  c  '])),
-    h('p', ['a ', h('textarea', '  b  '), ' c']),
+      .runSync(u('root', [h('p', ['  a  ', h('textarea', '  b  '), '  c  '])])),
+    u('root', [h('p', ['a ', h('textarea', '  b  '), ' c'])]),
     'should not collapse or trim whitespace in `textarea`'
   )
 
@@ -617,15 +739,19 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          h('p', '  a  '),
-          '  ',
-          h('pre', h('code', '  1 < 3  ')),
-          '  ',
-          h('p', '  b  ')
+        u('root', [
+          h('main', [
+            h('p', '  a  '),
+            '  ',
+            h('pre', h('code', '  1 < 3  ')),
+            '  ',
+            h('p', '  b  ')
+          ])
         ])
       ),
-    h('main', [h('p', 'a'), h('pre', h('code', '  1 < 3  ')), h('p', 'b')]),
+    u('root', [
+      h('main', [h('p', 'a'), h('pre', h('code', '  1 < 3  ')), h('p', 'b')])
+    ]),
     'should not collapse or trim whitespace in `pre`'
   )
 
@@ -633,18 +759,22 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          h('p', '  a  '),
-          '  ',
-          h('pre', {wrap: true}, h('code', '  1 < 3  ')),
-          '  ',
-          h('p', '  b  ')
+        u('root', [
+          h('main', [
+            h('p', '  a  '),
+            '  ',
+            h('pre', {wrap: true}, h('code', '  1 < 3  ')),
+            '  ',
+            h('p', '  b  ')
+          ])
         ])
       ),
-    h('main', [
-      h('p', 'a'),
-      h('pre', {wrap: true}, h('code', '  1 < 3  ')),
-      h('p', 'b')
+    u('root', [
+      h('main', [
+        h('p', 'a'),
+        h('pre', {wrap: true}, h('code', '  1 < 3  ')),
+        h('p', 'b')
+      ])
     ]),
     'should not collapse or trim whitespace in `pre[wrap]`'
   )
@@ -653,32 +783,36 @@ test('rehype-minify-whitespace', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('main', [
-          '  ',
-          h('p', '  a  '),
-          '  ',
-          h('table', [
+        u('root', [
+          h('main', [
             '  ',
-            h('thead', [
+            h('p', '  a  '),
+            '  ',
+            h('table', [
               '  ',
-              h('tr', ['  ', h('th', {noWrap: true}, '  b  '), '  ']),
-              '  '
+              h('thead', [
+                '  ',
+                h('tr', ['  ', h('th', {noWrap: true}, '  b  '), '  ']),
+                '  '
+              ]),
+              '  ',
+              h('tbody', ['  ', h('tr', ['  ', h('td', '  c  '), '  ']), '  '])
             ]),
             '  ',
-            h('tbody', ['  ', h('tr', ['  ', h('td', '  c  '), '  ']), '  '])
-          ]),
-          '  ',
-          h('p', '  d  '),
-          '  '
+            h('p', '  d  '),
+            '  '
+          ])
         ])
       ),
-    h('main', [
-      h('p', 'a'),
-      h('table', [
-        h('thead', [h('tr', [h('th', {noWrap: true}, ' b ')])]),
-        h('tbody', [h('tr', [h('td', 'c')])])
-      ]),
-      h('p', 'd')
+    u('root', [
+      h('main', [
+        h('p', 'a'),
+        h('table', [
+          h('thead', [h('tr', [h('th', {noWrap: true}, ' b ')])]),
+          h('tbody', [h('tr', [h('td', 'c')])])
+        ]),
+        h('p', 'd')
+      ])
     ]),
     'should collapse and trim whitespace in tables'
   )
@@ -686,8 +820,10 @@ test('rehype-minify-whitespace', (t) => {
   t.deepEqual(
     rehype()
       .use(min)
-      .runSync(h('main', [' \u00A0 ', h('p', '  a \u00A0 '), ' \u00A0 '])),
-    h('main', ['\u00A0', h('p', 'a \u00A0'), '\u00A0']),
+      .runSync(
+        u('root', [h('main', [' \u00A0 ', h('p', '  a \u00A0 '), ' \u00A0 '])])
+      ),
+    u('root', [h('main', ['\u00A0', h('p', 'a \u00A0'), '\u00A0'])]),
     'should collapse and trim whitespace in tables'
   )
 

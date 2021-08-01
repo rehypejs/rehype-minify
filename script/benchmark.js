@@ -1,3 +1,46 @@
+/**
+ * @typedef {import('trough').Callback} Next
+ * @typedef {import('vfile').VFile} VFile
+ *
+ * @typedef Result
+ * @property {string} type
+ * @property {number} outputSize
+ * @property {number} gzipSize
+ * @property {string} rawWin
+ * @property {string} gzipWin
+ *
+ * @typedef CleanResult
+ * @property {string} type
+ * @property {number} raw
+ * @property {number} gzip
+ * @property {string} rawWin
+ * @property {string} gzipWin
+ *
+ * @typedef Datum
+ * @property {string} name
+ * @property {string} url
+ * @property {CleanResult[]} results
+ *
+ * @callback ProcessFn
+ * @param {Uint8Array} buf
+ * @param {{name: string}} ctx
+ * @returns {Uint8Array}
+ *
+ * @typedef Raw
+ * @property {ProcessFn} processFn
+ * @property {'original'|'html-minifier'|'rehype-minify'} type
+ * @property {Uint8Array} [input]
+ * @property {number} [inputSize]
+ * @property {Uint8Array} [output]
+ * @property {number} [outputSize]
+ * @property {Uint8Array} [gzipped]
+ * @property {number} [gzipSize]
+ * @property {Raw} [original]
+ * @property {string} [rawWin]
+ * @property {string} [gzipWin]
+ * @property {string} name
+ */
+
 import fs from 'fs'
 import path from 'path'
 import zlib from 'zlib'
@@ -18,11 +61,208 @@ try {
   fs.mkdirSync(cache)
 } catch {}
 
-const benchmarks = trough().use(all).use(save)
+const benchmarks = trough()
+  .use(
+    /**
+     * @param {Record<string, string>} ctx
+     * @param {Next} next
+     */
+    (ctx, next) => {
+      /** @type {Datum[]} */
+      const data = []
+      const keys = Object.keys(ctx)
+      let count = 0
+      let index = -1
 
-const benchmark = trough().use(dir).use(read).use(request).use(test)
+      while (++index < keys.length) {
+        const name = keys[index]
 
-const processorPipeline = trough().use(process).use(gzip).use(size)
+        benchmark.run(
+          {name, url: ctx[name]},
+          /**
+           * @param {Error?} error
+           * @param {{name: string, url: string, file: VFile, original: Result, results: Result[]}} results
+           */
+          (error, results) => {
+            count++
+
+            if (error) {
+              next(error)
+            } else {
+              data.push({
+                name: results.name,
+                url: results.url,
+                results: [results.original]
+                  .concat(results.results)
+                  .map((d) => ({
+                    type: d.type,
+                    raw: d.outputSize,
+                    gzip: d.gzipSize,
+                    rawWin: d.rawWin,
+                    gzipWin: d.gzipWin
+                  }))
+              })
+
+              if (count === keys.length) {
+                next(null, data)
+              }
+            }
+          }
+        )
+      }
+    }
+  )
+  .use(
+    /**
+     * @param {Datum[]} data
+     * @param {Next} next
+     */
+    (data, next) => {
+      data.sort((a, b) => a.name.localeCompare(b.name))
+
+      fs.writeFile(
+        path.join('script', 'benchmark-results.json'),
+        JSON.stringify(data, null, 2) + '\n',
+        next
+      )
+    }
+  )
+
+const benchmark = trough()
+  .use(
+    /**
+     * @param {{name: string, url: string}} ctx
+     * @param {Next} next
+     */
+    (ctx, next) => {
+      fs.mkdir(path.join(cache, ctx.name), (error) => {
+        next(error && error.code === 'EEXIST' ? null : error)
+      })
+    }
+  )
+  .use(
+    /**
+     * @param {{name: string, url: string, file?: VFile}} ctx
+     * @param {Next} next
+     */
+    (ctx, next) => {
+      toVFile.read(path.join(cache, ctx.name, 'index.html'), (error, file) => {
+        if (file) {
+          ctx.file = file
+          next()
+        } else {
+          next(error && error.code === 'ENOENT' ? null : error)
+        }
+      })
+    }
+  )
+  .use(
+    /**
+     * @param {{name: string, url: string, file: VFile}} ctx
+     * @param {Next} next
+     */
+    (ctx, next) => {
+      const url = ctx.url
+
+      if (ctx.file) {
+        next()
+      } else {
+        fetch(url)
+          .then((response) => {
+            if (response.status !== 200) {
+              throw new Error(
+                'Could not get `' + url + '` (' + response.status + ')'
+              )
+            }
+
+            return response.buffer()
+          })
+          .then((buf) => {
+            const fp = path.join(cache, ctx.name, 'index.html')
+
+            if (buf.length < 1024) {
+              next(new Error('Empty response from ' + url))
+            } else {
+              ctx.file = toVFile({path: fp, value: buf})
+              toVFile.write(ctx.file, (error) => {
+                next(error)
+              })
+            }
+          })
+      }
+    }
+  )
+  .use(test)
+
+const processorPipeline = trough()
+  .use(
+    /**
+     * @param {Raw} ctx
+     * @param {Next} next
+     */
+    (ctx, next) => {
+      if (!ctx.input) throw new Error('Expected `input`')
+
+      const output = ctx.processFn(ctx.input, ctx)
+
+      ctx.output = output
+
+      if (ctx.type === 'original') {
+        next()
+      } else {
+        const fp = path.join(cache, ctx.name, ctx.type + '.html')
+        toVFile.write({path: fp, value: output}, (error) => {
+          next(error)
+        })
+      }
+    }
+  )
+  .use(
+    /**
+     * @param {Raw} ctx
+     * @param {Next} next
+     */
+    (ctx, next) => {
+      if (!ctx.output) throw new Error('Expected output')
+      zlib.gzip(ctx.output, (error, buf) => {
+        ctx.gzipped = buf
+        next(error)
+      })
+    }
+  )
+  .use(
+    /**
+     * @param {Raw} ctx
+     */
+    (ctx) => {
+      if (!ctx.input) throw new Error('Expected `input`')
+      if (!ctx.gzipped) throw new Error('Expected `gzipped`')
+      if (!ctx.output) throw new Error('Expected `output`')
+
+      const original = ctx.original || {
+        inputSize: ctx.input.length,
+        gzipSize: ctx.gzipped.length
+      }
+
+      if (!original.inputSize) throw new Error('Expected `inputSize`')
+      if (!original.gzipSize) throw new Error('Expected `gzipSize`')
+
+      ctx.inputSize = ctx.input.length
+      ctx.outputSize = ctx.output.length
+      ctx.gzipSize = ctx.gzipped.length
+      ctx.rawWin = win(original.inputSize, ctx.outputSize)
+      ctx.gzipWin = win(original.gzipSize, ctx.gzipSize)
+
+      /**
+       * @param {number} input
+       * @param {number} output
+       * @returns {string}
+       */
+      function win(input, output) {
+        return (((input / output) % 1) * 100).toFixed(2) + '%'
+      }
+    }
+  )
 
 benchmarks.run(
   {
@@ -52,239 +292,139 @@ benchmarks.run(
   bail
 )
 
-function all(ctx, next) {
-  const data = []
-  const keys = Object.keys(ctx)
-  let count = 0
-  let index = -1
-
-  while (++index < keys.length) {
-    const name = keys[index]
-
-    benchmark.run({name, url: ctx[name]}, (error, results) => {
-      count++
-
-      if (error) {
-        next(error)
-      } else {
-        data.push({
-          name: results.name,
-          url: results.url,
-          results: [results.original].concat(results.results).map((d) => ({
-            type: d.type,
-            raw: d.outputSize,
-            gzip: d.gzipSize,
-            rawWin: d.rawWin,
-            gzipWin: d.gzipWin
-          }))
-        })
-
-        if (count === keys.length) {
-          next(null, data)
-        }
-      }
-    })
-  }
-}
-
-function save(data, next) {
-  data.sort((a, b) => a.name.localeCompare(b.name))
-
-  fs.writeFile(
-    path.join('script', 'benchmark-results.json'),
-    JSON.stringify(data, null, 2) + '\n',
-    next
-  )
-}
-
-function dir(ctx, next) {
-  fs.mkdir(path.join(cache, ctx.name), done)
-
-  function done(error) {
-    next(error && error.code === 'EEXIST' ? null : error)
-  }
-}
-
-function read(ctx, next) {
-  toVFile.read(path.join(cache, ctx.name, 'index.html'), done)
-
-  function done(error, file) {
-    if (file) {
-      ctx.file = file
-      next()
-    } else {
-      next(error && error.code === 'ENOENT' ? null : error)
-    }
-  }
-}
-
-function request(ctx, next) {
-  const url = ctx.url
-
-  if (ctx.file) {
-    next()
-  } else {
-    fetch(url).then(onfetch).then(onbody)
-  }
-
-  function onfetch(response) {
-    if (response.status !== 200) {
-      throw new Error('Could not get `' + url + '` (' + response.status + ')')
-    }
-
-    return response.buffer()
-  }
-
-  function onbody(buf) {
-    const fp = path.join(cache, ctx.name, 'index.html')
-
-    if (buf.length < 1024) {
-      next(new Error('Empty response from ' + url))
-    } else {
-      ctx.file = toVFile({path: fp, value: buf})
-      toVFile.write(ctx.file, (error) => {
-        next(error)
-      })
-    }
-  }
-}
-
+/**
+ * @param {{name: string, url: string, file: VFile, original?: Raw, results?: Raw[]}} ctx
+ * @param {Next} next
+ */
 function test(ctx, next) {
   let count = 0
-  const original = {processFn: identity, type: 'original'}
+  /** @type {Raw} */
+  const original = {
+    name: ctx.name,
+    processFn(buf) {
+      return buf
+    },
+    type: 'original'
+  }
+  /** @type {Raw[]} */
   const results = [
-    {processFn: rehypeMinify, type: 'rehype-minify'},
-    {processFn: htmlMinify, type: 'html-minifier'}
+    {
+      name: ctx.name,
+      processFn(buf) {
+        // To do, fix
+        // type-coverage:ignore-next-line
+        const processor = unified()
+          .use(rehypeParse)
+          .use(rehypePresetMinify)
+          .use(rehypeMinifyDoctype)
+          .use(rehypeStringify)
+
+        // @ts-expect-error: `value` is a string.
+        return Buffer.from(processor.processSync(buf).value, 'utf8')
+      },
+      type: 'rehype-minify'
+    },
+    {
+      name: ctx.name,
+      processFn(buf, ctx) {
+        // Based on:
+        // <https://github.com/kangax/html-minifier/blob/gh-pages/sample-cli-config-file.conf>
+        // but passed through the CLI normalization:
+        // <https://github.com/kangax/html-minifier/blob/346f73d/cli.js#L100>
+        // and defaults removed for brevity:
+        // <https://github.com/kangax/html-minifier>
+        const options = {
+          collapseBooleanAttributes: true,
+          collapseWhitespace: true,
+          // CustomAttrCollapse: /.*/,
+          decodeEntities: true,
+          ignoreCustomFragments: [
+            /<#[\s\S]*?#>/,
+            /<%[\s\S]*?%>/,
+            /<\?[\s\S]*?\?>/
+          ],
+          includeAutoGeneratedTags: false,
+          maxLineLength: 0,
+          minifyCSS: true,
+          minifyJS: true,
+          processConditionalComments: true,
+          processScripts: ['text/html'],
+          removeAttributeQuotes: true,
+          removeComments: true,
+          removeEmptyAttributes: true,
+          removeOptionalTags: true,
+          removeRedundantAttributes: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          removeTagWhitespace: true,
+          sortAttributes: true,
+          sortClassName: true,
+          trimCustomFragments: true,
+          useShortDoctype: true
+        }
+
+        try {
+          return Buffer.from(htmlMinifier.minify(String(buf), options), 'utf8')
+        } catch (error) {
+          console.warn(
+            'html-minifier error (%s)',
+            ctx.name,
+            error.stack.slice(0, 2 ** 10)
+          )
+          return buf
+        }
+      },
+      type: 'html-minifier'
+    }
   ]
 
   ctx.original = original
   ctx.results = results
 
+  if (!ctx.file.value || typeof ctx.file.value === 'string') {
+    throw new Error('Expected buffer in file')
+  }
+
   original.input = ctx.file.value
-  original.name = ctx.name
-  processorPipeline.run(original, all)
 
-  function all(error) {
-    if (error) {
-      done(error)
-      return
+  processorPipeline.run(
+    original,
+    /**
+     * @param {Error?} error
+     */
+    (error) => {
+      if (error) {
+        next(error)
+        return
+      }
+
+      let index = -1
+
+      while (++index < results.length) {
+        const result = results[index]
+
+        if (!ctx.file.value || typeof ctx.file.value === 'string') {
+          throw new Error('Expected buffer in file')
+        }
+
+        result.original = original
+        result.input = ctx.file.value
+        result.name = ctx.name
+
+        processorPipeline.run(
+          result,
+          /**
+           * @param {Error?} error
+           */
+          (error) => {
+            count++
+
+            if (error || count === results.length) {
+              next(error)
+            }
+          }
+        )
+      }
     }
-
-    let index = -1
-    while (++index < results.length) {
-      const result = results[index]
-      result.original = original
-      result.input = ctx.file.value
-      result.name = ctx.name
-      processorPipeline.run(result, done)
-    }
-  }
-
-  function done(error) {
-    count++
-
-    if (error || count === results.length) {
-      next(error)
-    }
-  }
-}
-
-function process(ctx, next) {
-  const output = ctx.processFn(ctx.input, ctx)
-
-  ctx.output = output
-
-  if (ctx.type === 'original') {
-    next()
-  } else {
-    const fp = path.join(cache, ctx.name, ctx.type + '.html')
-    toVFile.write({path: fp, value: output}, (error) => {
-      next(error)
-    })
-  }
-}
-
-function gzip(ctx, next) {
-  zlib.gzip(ctx.output, done)
-
-  function done(error, buf) {
-    ctx.gzipped = buf
-    next(error)
-  }
-}
-
-function size(ctx) {
-  const original = ctx.original || {
-    inputSize: ctx.input.length,
-    gzipSize: ctx.gzipped.length
-  }
-
-  ctx.inputSize = ctx.input.length
-  ctx.outputSize = ctx.output.length
-  ctx.gzipSize = ctx.gzipped.length
-  ctx.rawWin = win(original.inputSize, ctx.outputSize)
-  ctx.gzipWin = win(original.gzipSize, ctx.gzipSize)
-
-  function win(input, output) {
-    return (((input / output) % 1) * 100).toFixed(2) + '%'
-  }
-}
-
-function htmlMinify(buf, ctx) {
-  // Based on:
-  // <https://github.com/kangax/html-minifier/blob/gh-pages/sample-cli-config-file.conf>
-  // but passed through the CLI normalization:
-  // <https://github.com/kangax/html-minifier/blob/346f73d/cli.js#L100>
-  // and defaults removed for brevity:
-  // <https://github.com/kangax/html-minifier>
-  const options = {
-    collapseBooleanAttributes: true,
-    collapseWhitespace: true,
-    // CustomAttrCollapse: /.*/,
-    decodeEntities: true,
-    ignoreCustomFragments: [/<#[\s\S]*?#>/, /<%[\s\S]*?%>/, /<\?[\s\S]*?\?>/],
-    includeAutoGeneratedTags: false,
-    maxLineLength: 0,
-    minifyCSS: true,
-    minifyJS: true,
-    processConditionalComments: true,
-    processScripts: ['text/html'],
-    removeAttributeQuotes: true,
-    removeComments: true,
-    removeEmptyAttributes: true,
-    removeOptionalTags: true,
-    removeRedundantAttributes: true,
-    removeScriptTypeAttributes: true,
-    removeStyleLinkTypeAttributes: true,
-    removeTagWhitespace: true,
-    sortAttributes: true,
-    sortClassName: true,
-    trimCustomFragments: true,
-    useShortDoctype: true
-  }
-
-  try {
-    return Buffer.from(htmlMinifier.minify(String(buf), options), 'utf8')
-  } catch (error) {
-    console.warn(
-      'html-minifier error (%s)',
-      ctx.name,
-      error.stack.slice(0, 2 ** 10)
-    )
-    return buf
-  }
-}
-
-function rehypeMinify(buf) {
-  const processor = unified()
-    .use(rehypeParse)
-    .use(rehypePresetMinify)
-    .use(rehypeMinifyDoctype)
-    .use(rehypeStringify)
-
-  return Buffer.from(processor.processSync(buf).value, 'utf8')
-}
-
-function identity(buf) {
-  return buf
+  )
 }

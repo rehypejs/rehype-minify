@@ -21,6 +21,18 @@
  *   Transform a node to a string.
  */
 
+/**
+ * @typedef {import('hast').Root} Root
+ * @typedef {import('hast').Element} Element
+ * @typedef {Root|Root['children'][number]} Node
+ */
+
+/**
+ * Get the plain-text value of a hast node.
+ *
+ * @param {Node} node
+ * @returns {string}
+ */
 export function toString(node) {
   // “The concatenation of data of all the Text node descendants of the context
   // object, in tree order.”
@@ -32,21 +44,29 @@ export function toString(node) {
   return 'value' in node ? node.value : ''
 }
 
+/**
+ * @param {Node} node
+ * @returns {string}
+ */
 function one(node) {
   if (node.type === 'text') {
     return node.value
   }
 
-  return node.children ? all(node) : ''
+  return 'children' in node ? all(node) : ''
 }
 
+/**
+ * @param {Root|Element} node
+ * @returns {string}
+ */
 function all(node) {
-  const children = node.children
   let index = -1
+  /** @type {string[]} */
   const result = []
 
-  while (++index < children.length) {
-    result[index] = one(children[index])
+  while (++index < node.children.length) {
+    result[index] = one(node.children[index])
   }
 
   return result.join('')

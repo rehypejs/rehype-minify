@@ -27,6 +27,17 @@ import {hasProperty} from 'hast-util-has-property'
 
 const list = new Set(['pingback', 'prefetch', 'stylesheet'])
 
+/**
+ * @typedef {import('hast').Root} Root
+ * @typedef {Root|Root['children'][number]} Node
+ */
+
+/**
+ * Check if a `link` element is “Body OK”.
+ *
+ * @param {Node} node
+ * @returns {boolean}
+ */
 export function isBodyOkLink(node) {
   if (!isElement(node, 'link')) {
     return false
@@ -36,15 +47,16 @@ export function isBodyOkLink(node) {
     return true
   }
 
-  const rel = (node.properties || {}).rel || []
+  const props = node.properties || {}
+  const rel = props.rel || []
   let index = -1
 
-  if (rel.length === 0) {
+  if (!Array.isArray(rel) || rel.length === 0) {
     return false
   }
 
   while (++index < rel.length) {
-    if (!list.has(rel[index])) {
+    if (!list.has(String(rel[index]))) {
       return false
     }
   }

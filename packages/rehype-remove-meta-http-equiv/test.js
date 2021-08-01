@@ -9,47 +9,55 @@ test('rehype-remove-meta-http-equiv', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('head', [
-          h('meta', {charSet: 'utf8'}),
-          h('meta', {
-            httpEquiv: ['content-type'],
-            content: 'text/html; charset=chinese'
-          })
+        u('root', [
+          h('head', [
+            h('meta', {charSet: 'utf8'}),
+            h('meta', {
+              httpEquiv: ['content-type'],
+              content: 'text/html; charset=chinese'
+            })
+          ])
         ])
       ),
-    h('head', [h('meta', {charSet: 'chinese'})])
+    u('root', [h('head', [h('meta', {charSet: 'chinese'})])])
   )
 
   t.deepEqual(
     rehype()
       .use(min)
       .runSync(
-        h('head', [
-          h('meta', {
-            httpEquiv: ['content-type'],
-            content: 'text/html; charset=chinese'
-          })
+        u('root', [
+          h('head', [
+            h('meta', {
+              httpEquiv: ['content-type'],
+              content: 'text/html; charset=chinese'
+            })
+          ])
         ])
       ),
-    h('head', [h('meta', {charSet: 'chinese'})])
+    u('root', [h('head', [h('meta', {charSet: 'chinese'})])])
   )
 
   t.deepEqual(
     rehype()
       .use(min)
       .runSync(
-        h('html', [
-          h('meta', {
-            httpEquiv: ['content-type'],
-            content: 'text/html; charset=chinese'
-          })
+        u('root', [
+          h('html', [
+            h('meta', {
+              httpEquiv: ['content-type'],
+              content: 'text/html; charset=chinese'
+            })
+          ])
         ])
       ),
-    h('html', [
-      h('meta', {
-        httpEquiv: ['content-type'],
-        content: 'text/html; charset=chinese'
-      })
+    u('root', [
+      h('html', [
+        h('meta', {
+          httpEquiv: ['content-type'],
+          content: 'text/html; charset=chinese'
+        })
+      ])
     ])
   )
 
@@ -57,37 +65,47 @@ test('rehype-remove-meta-http-equiv', (t) => {
     rehype()
       .use(min)
       .runSync(
-        h('head', [
-          h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
+        u('root', [
+          h('head', [
+            h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
+          ])
         ])
       ),
-    h('head', [h('meta', {httpEquiv: ['content-language'], content: 'en-US'})])
+    u('root', [
+      h('head', [
+        h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
+      ])
+    ])
   )
 
   t.deepEqual(
     rehype()
       .use(min)
       .runSync(
-        h('html', [
-          h('head', [
-            h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
+        u('root', [
+          h('html', [
+            h('head', [
+              h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
+            ])
           ])
         ])
       ),
-    h('html', {lang: 'en-US'}, [h('head', [])])
+    u('root', [h('html', {lang: 'en-US'}, [h('head', [])])])
   )
 
   t.deepEqual(
     rehype()
       .use(min)
       .runSync(
-        h('html', {lang: 'en-GB'}, [
-          h('head', [
-            h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
+        u('root', [
+          h('html', {lang: 'en-GB'}, [
+            h('head', [
+              h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
+            ])
           ])
         ])
       ),
-    h('html', {lang: 'en-US'}, [h('head', [])])
+    u('root', [h('html', {lang: 'en-US'}, [h('head', [])])])
   )
 
   t.deepEqual(

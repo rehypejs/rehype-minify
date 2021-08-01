@@ -34,6 +34,21 @@
  *   all its children.
  */
 
+/**
+ * @typedef {import('hast').Root} Root
+ * @typedef {Root|Root['children'][number]} Node
+ */
+
+/**
+ * Set the plain-text value of a hast node.
+ * This is like the DOMs `Node#textContent` setter.
+ * The given node is returned.
+ *
+ * @template {Node} Thing
+ * @param {Thing} node
+ * @param {string|null|undefined} [d]
+ * @returns {Thing}
+ */
 export function fromString(node, d) {
   const value = d === undefined || d === null ? '' : String(d)
 
@@ -43,7 +58,7 @@ export function fromString(node, d) {
     if (value) {
       node.children.push({type: 'text', value})
     }
-  } else {
+  } else if (node.type !== 'doctype') {
     node.value = value
   }
 

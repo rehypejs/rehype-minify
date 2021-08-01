@@ -21,11 +21,17 @@
  *   more.
  */
 
+/**
+ * Check if a property is an event handler.
+ *
+ * @param {string} name
+ * @returns {boolean}
+ */
 export function isEventHandler(name) {
-  return (
+  return Boolean(
     name &&
-    name.slice &&
-    name.slice(0, 2).toLowerCase() === 'on' &&
-    name.length >= 5
+      name.slice &&
+      name.slice(0, 2).toLowerCase() === 'on' &&
+      name.length >= 5
   )
 }

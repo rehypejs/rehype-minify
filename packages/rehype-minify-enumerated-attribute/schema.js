@@ -1,5 +1,18 @@
-// This schema exposes a map of property names to (one or more) definitions.
-// Each definition defined how that attribute is enumerated.
+/**
+ * @typedef Info
+ * @property {string|string[]|null} tagNames
+ * @property {string|null} [missing]
+ * @property {string|null} [invalid]
+ * @property {Array.<null|string|string[]>} states
+ * @property {true} [allowUnknown]
+ */
+
+/**
+ * This schema exposes a map of property names to (one or more) definitions.
+ * Each definition defined how that attribute is enumerated.
+ *
+ * @type {Record<string, Info|Info[]>}
+ */
 export const schema = {
   autoComplete: {
     tagNames: null,

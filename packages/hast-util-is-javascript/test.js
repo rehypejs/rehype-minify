@@ -34,6 +34,7 @@ test('hast-util-is-javascript', (t) => {
     'yes - for `javascript1.5` language'
   )
 
+  // @ts-expect-error: not enough arguments.
   t.notOk(isJavaScript(), 'no - for nothing')
   t.notOk(isJavaScript(u('root', [])), 'no - for other nodes')
   t.notOk(isJavaScript(h('p')), 'no - for other elements')
@@ -53,6 +54,11 @@ test('hast-util-is-javascript', (t) => {
   t.notOk(
     isJavaScript(h('script', {language: true})),
     'no - for non-string language'
+  )
+
+  t.ok(
+    isJavaScript({type: 'element', tagName: 'script', children: []}),
+    'yes - for script w/o properties'
   )
 
   t.end()
