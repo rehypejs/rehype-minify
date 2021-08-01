@@ -1,6 +1,6 @@
-import fs from 'fs'
-import path from 'path'
-import {exec} from 'child_process'
+import fs from 'node:fs'
+import path from 'node:path'
+import {exec} from 'node:child_process'
 import test from 'tape'
 import {trimTrailingLines} from 'trim-trailing-lines'
 

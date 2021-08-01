@@ -9,9 +9,9 @@
  * @typedef {import('mdast').Root} Root
  */
 
-import fs from 'fs'
-import path from 'path'
-import {inspect} from 'util'
+import fs from 'node:fs'
+import path from 'node:path'
+import {inspect} from 'node:util'
 import {parse} from 'comment-parser'
 import remark from 'remark'
 import {rehype} from 'rehype'

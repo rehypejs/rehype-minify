@@ -35,12 +35,11 @@ import {isConditionalComment} from 'hast-util-is-conditional-comment'
 export default function rehypeRemoveComments(options = {}) {
   const force = options.removeConditional
 
-  return (tree) => {
+  return (tree) =>
     // `undefined` is never returned because we don’t remove nodes (but TS
     // doesn’t know it.)
     /* c8 ignore next */
-    return filter(tree, {cascade: false}, force ? hard : soft) || undefined
-  }
+    filter(tree, {cascade: false}, force ? hard : soft) || undefined
 }
 
 /**

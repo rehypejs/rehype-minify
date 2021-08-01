@@ -41,9 +41,9 @@
  * @property {string} name
  */
 
-import fs from 'fs'
-import path from 'path'
-import zlib from 'zlib'
+import fs from 'node:fs'
+import path from 'node:path'
+import zlib from 'node:zlib'
 import fetch from 'node-fetch'
 import {bail} from 'bail'
 import {unified} from 'unified'

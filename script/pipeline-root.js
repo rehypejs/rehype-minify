@@ -12,8 +12,8 @@
  * @typedef {Element['children'][number]} ElementChild
  */
 
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import bytes from 'bytes'
 import {u} from 'unist-builder'
 import {h} from 'hastscript'
@@ -102,32 +102,30 @@ export const pipelineRoot = trough()
         /** @type {import('unified').Plugin<[], Root>} */
         function attacher() {
           return (tree) => {
-            zone(tree, name, (start, _, end) => {
-              return [
-                start,
-                {
-                  type: 'list',
-                  spread: false,
-                  ordered: false,
-                  children: list.map((name) => ({
-                    type: 'listItem',
-                    children: [
-                      {
-                        type: 'paragraph',
-                        children: [
-                          {
-                            type: 'link',
-                            url: './packages/' + name,
-                            children: [{type: 'inlineCode', value: name}]
-                          }
-                        ]
-                      }
-                    ]
-                  }))
-                },
-                end
-              ]
-            })
+            zone(tree, name, (start, _, end) => [
+              start,
+              {
+                type: 'list',
+                spread: false,
+                ordered: false,
+                children: list.map((name) => ({
+                  type: 'listItem',
+                  children: [
+                    {
+                      type: 'paragraph',
+                      children: [
+                        {
+                          type: 'link',
+                          url: './packages/' + name,
+                          children: [{type: 'inlineCode', value: name}]
+                        }
+                      ]
+                    }
+                  ]
+                }))
+              },
+              end
+            ])
           }
         }
       }

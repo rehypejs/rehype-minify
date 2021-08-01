@@ -4,8 +4,8 @@
  * @typedef {import('type-fest').PackageJson} PackageJson
  */
 
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import {toVFile} from 'to-vfile'
 import {trough} from 'trough'
 
