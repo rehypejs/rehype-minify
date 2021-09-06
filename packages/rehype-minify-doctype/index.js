@@ -20,13 +20,11 @@ import {visit} from 'unist-util-visit'
 export default function rehypeMinifyDoctype() {
   return (tree) => {
     visit(tree, 'doctype', (node) => {
-      if (node.public) {
-        node.public = undefined
-      }
+      // @ts-expect-error: removed from `hast`.
+      if (node.public) node.public = undefined
 
-      if (node.system) {
-        node.system = undefined
-      }
+      // @ts-expect-error: removed from `hast`.
+      if (node.system) node.system = undefined
 
       return false
     })
