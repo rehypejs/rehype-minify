@@ -40,16 +40,27 @@ const own = {}.hasOwnProperty
  */
 export default function rehypeMinifyUrl(options) {
   const {from, ...rest} = options || {}
-  // @ts-expect-error: checked next.
-  const relate = new Relate(from, rest)
 
-  try {
-    relate.relate('/')
-  } catch {
-    throw new Error('Missing absolute `from` in options')
-  }
+  return (tree, file) => {
+    const meta = /** @type {Record<string, unknown>} */ (file.data.meta || {})
 
-  return (tree) => {
+    /** @type {string|undefined} */
+    const href =
+      from ||
+      (meta.origin && meta.pathname
+        ? // @ts-expect-error: `URL` exists.
+          new URL(meta.pathname, meta.origin).href
+        : undefined)
+
+    // @ts-expect-error: checked next.
+    const relate = new Relate(href, rest)
+
+    try {
+      relate.relate('/')
+    } catch {
+      throw new Error('Missing absolute `from` in options')
+    }
+
     visit(tree, 'element', (node) => {
       const props = node.properties || {}
       /** @type {string} */

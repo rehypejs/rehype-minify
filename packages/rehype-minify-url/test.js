@@ -1,3 +1,4 @@
+import {URL} from 'node:url'
 import test from 'tape'
 import {rehype} from 'rehype'
 import {u} from 'unist-builder'
@@ -6,15 +7,11 @@ import min from './index.js'
 
 test('rehype-minify-url', (t) => {
   t.throws(() => {
-    rehype().use(min).freeze()
+    rehype().use(min).processSync('')
   }, /^Error: Missing absolute `from` in options$/)
 
   t.throws(() => {
-    rehype().use(min, {from: '/'}).freeze()
-  }, /^Error: Missing absolute `from` in options$/)
-
-  t.throws(() => {
-    rehype().use(min, {from: '/'}).freeze()
+    rehype().use(min, {from: '/'}).processSync('')
   }, /^Error: Missing absolute `from` in options$/)
 
   const options = {from: 'http://example.com/one/alpha/'}
@@ -88,6 +85,20 @@ test('rehype-minify-url', (t) => {
       .use(min, options)
       .runSync(u('root', [{type: 'element', tagName: 'a', children: []}])),
     u('root', [{type: 'element', tagName: 'a', children: []}])
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(() => (_, file) => {
+        const url = new URL(options.from)
+        file.data.meta = {origin: url.origin, pathname: url.pathname}
+      })
+      .use(min)
+      .runSync(
+        u('root', [h('a', {href: 'http://example.com/one/bravo/index.html'})])
+      ),
+    u('root', [h('a', {href: '../bravo/'})]),
+    'should support `data.meta.{origin,pathname}`'
   )
 
   t.end()
