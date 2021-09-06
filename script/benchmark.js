@@ -366,10 +366,11 @@ function test(ctx, next) {
         try {
           return Buffer.from(htmlMinifier.minify(String(buf), options), 'utf8')
         } catch (error) {
+          const exception = /** @type {Error} */ (error)
           console.warn(
             'html-minifier error (%s)',
             ctx.name,
-            error.stack.slice(0, 2 ** 10)
+            String(exception.stack || '').slice(0, 2 ** 10)
           )
           return buf
         }
