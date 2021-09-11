@@ -70,7 +70,13 @@ export default function rehypeMinifyUrl(options) {
         if (
           hasProperty(node, prop) &&
           own.call(urlAttributes, prop) &&
-          isElement(node, urlAttributes[prop])
+          isElement(node, urlAttributes[prop]) &&
+          !(
+            node.tagName === 'link' &&
+            prop === 'href' &&
+            Array.isArray(props.rel) &&
+            props.rel.includes('canonical')
+          )
         ) {
           props[prop] = minify(props[prop], relate)
         }

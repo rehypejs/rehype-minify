@@ -89,6 +89,29 @@ test('rehype-minify-url', (t) => {
 
   t.deepEqual(
     rehype()
+      .use(min, options)
+      .runSync(
+        u('root', [
+          {
+            type: 'element',
+            tagName: 'link',
+            properties: {href: options.from, rel: ['canonical']},
+            children: []
+          }
+        ])
+      ),
+    u('root', [
+      {
+        type: 'element',
+        tagName: 'link',
+        properties: {href: options.from, rel: ['canonical']},
+        children: []
+      }
+    ])
+  )
+
+  t.deepEqual(
+    rehype()
       .use(() => (_, file) => {
         const url = new URL(options.from)
         file.data.meta = {origin: url.origin, pathname: url.pathname}
