@@ -1,0 +1,42 @@
+{
+  "name": "html-enumerated-attributes",
+  "version": "0.0.0",
+  "description": "Map of info on enumerated attributes in HTML",
+  "license": "MIT",
+  "keywords": [
+    "html",
+    "attribute",
+    "property",
+    "enumerated",
+    "attribute"
+  ],
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/html-enumerated-attributes",
+  "bugs": "https://github.com/rehypejs/rehype-minify/issues",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/unified"
+  },
+  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
+  ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "index.js"
+  ],
+  "scripts": {
+    "build": "rimraf \"*.d.ts\" && tsc && type-coverage",
+    "test": "node --conditions development test.js"
+  },
+  "xo": false,
+  "typeCoverage": {
+    "atLeast": 100,
+    "detail": true,
+    "strict": true,
+    "ignoreCatch": true
+  }
+}

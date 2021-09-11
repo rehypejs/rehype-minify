@@ -15,6 +15,7 @@
   "sideEffects": false,
   "type": "module",
   "workspaces": [
+    "packages/html-enumerated-attributes",
     "packages/html-url-attributes",
     "packages/html-whitespace-sensitive-tag-names",
     "packages/hast-util-from-string",
@@ -76,6 +77,7 @@
     "node-fetch": "^2.0.0",
     "parse-author": "^2.0.0",
     "prettier": "^2.0.0",
+    "property-information": "^6.0.0",
     "rehype": "^12.0.0",
     "rehype-cli": "^11.0.0",
     "rehype-format": "^3.0.0",

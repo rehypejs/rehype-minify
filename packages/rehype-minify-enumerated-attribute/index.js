@@ -12,17 +12,18 @@
  */
 
 import {visit} from 'unist-util-visit'
+import {html, find} from 'property-information'
 import {matches} from 'hast-util-select'
 import {hasProperty} from 'hast-util-has-property'
 import {stringify} from 'space-separated-tokens'
-import {schema} from './schema.js'
-
-const own = {}.hasOwnProperty
+import {enumeratedAttributes} from 'html-enumerated-attributes'
 
 /**
  * @typedef {import('hast').Root} Root
- * @typedef {import('./schema.js').Info} Info
+ * @typedef {import('html-enumerated-attributes').Definition} Definition
  */
+
+const own = {}.hasOwnProperty
 
 /**
  * Minify enumerated attributes.
@@ -40,26 +41,36 @@ export default function rehypeMinifyEnumeratedAttribute() {
       let prop
 
       for (prop in props) {
-        if (own.call(schema, prop) && hasProperty(node, prop)) {
-          let value = props[prop]
+        if (own.call(props, prop) && hasProperty(node, prop)) {
+          const attribute = find(html, prop).attribute
 
-          // Note: we don’t really handle enumerated as lists, so instead
-          // we cast them to a string (assuming they are space-separated).
-          if (Array.isArray(value)) {
-            value = stringify(value)
-          }
+          if (own.call(enumeratedAttributes, attribute)) {
+            let value = props[prop]
 
-          if (typeof value === 'string') {
-            const info = schema[prop]
-            const definitions = Array.isArray(info) ? info : [info]
-            let index = -1
+            // Note: we don’t really handle enumerated as lists, so instead
+            // we cast them to a string (assuming they are space-separated).
+            if (Array.isArray(value)) {
+              value = stringify(value)
+            }
 
-            while (++index < definitions.length) {
-              const definition = definitions[index]
+            if (typeof value === 'string') {
+              const definition = enumeratedAttributes[attribute]
+              const definitions = Array.isArray(definition)
+                ? definition
+                : [definition]
+              let index = -1
 
               // eslint-disable-next-line max-depth
-              if (!definition.selector || matches(definition.selector, node)) {
-                props[prop] = minify(value, definition)
+              while (++index < definitions.length) {
+                const definition = definitions[index]
+
+                // eslint-disable-next-line max-depth
+                if (
+                  !definition.selector ||
+                  matches(definition.selector, node)
+                ) {
+                  props[prop] = minify(value, definition)
+                }
               }
             }
           }
@@ -71,7 +82,7 @@ export default function rehypeMinifyEnumeratedAttribute() {
 
 /**
  * @param {string} value
- * @param {Info} info
+ * @param {Definition} info
  * @returns {string|null}
  */
 function minify(value, info) {
