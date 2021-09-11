@@ -1,6 +1,6 @@
 /**
  * @typedef Info
- * @property {string|string[]|null} tagNames
+ * @property {string} [selector]
  * @property {string|null} [missing]
  * @property {string|null} [invalid]
  * @property {Array.<null|string|string[]>} states
@@ -16,18 +16,18 @@
  */
 export const schema = {
   autoComplete: {
-    tagNames: 'form',
+    selector: 'form',
     missing: '',
     invalid: '',
     states: [['', 'on'], 'off']
   },
   behavior: {
-    tagNames: 'marquee',
+    selector: 'marquee',
     missing: 'scroll',
     states: ['alternate', 'scroll', 'slide']
   },
   charSet: {
-    tagNames: ['meta', 'script'],
+    selector: 'meta, script',
     // In HTML5, utf8 is implied.
     // But we let it be here for older versions.
     states: [
@@ -242,42 +242,39 @@ export const schema = {
     ]
   },
   contentEditable: {
-    tagNames: null,
     missing: null,
     invalid: null,
     states: [null, ['', 'true'], 'false']
   },
   crossOrigin: {
-    tagNames: ['link', 'img', 'audio', 'video', 'script'],
+    selector: 'link, img, audio, video, script',
     missing: null,
     invalid: '',
     states: [['', 'anonymous'], 'use-credentials']
   },
   decoding: {
-    tagNames: 'img',
+    selector: 'img',
     missing: '',
     invalid: '',
     states: ['sync', 'async', ['', 'auto']]
   },
   dir: {
-    tagNames: null,
     missing: '',
     invalid: '',
     states: ['', 'ltr', 'rtl', 'auto']
   },
   direction: {
-    tagNames: 'marquee',
+    selector: 'marquee',
     missing: 'left',
     states: ['left', 'right', 'up', 'down']
   },
   draggable: {
-    tagNames: null,
     missing: null,
     states: [null, 'true', 'false']
   },
   // When changing `encType`, please also change `formEncType`.
   encType: {
-    tagNames: 'form',
+    selector: 'form',
     invalid: 'application/x-www-form-urlencoded',
     missing: 'application/x-www-form-urlencoded',
     states: [
@@ -288,7 +285,7 @@ export const schema = {
   },
   // When changing `formEncType`, please also change `encType`.
   formEncType: {
-    tagNames: ['button', 'input'],
+    selector: 'button, input',
     invalid: 'application/x-www-form-urlencoded',
     // Note that `missing: null` here is intentionally different from `encType`.
     missing: null,
@@ -300,7 +297,7 @@ export const schema = {
   },
   // When changing `formMethod`, please also change `method`.
   formMethod: {
-    tagNames: ['button', 'input'],
+    selector: 'button, input',
     invalid: 'get',
     // Note that `missing: null` here is intentionally different from `formMethod`.
     missing: null,
@@ -308,7 +305,7 @@ export const schema = {
   },
   // When changing `formTarget`, please also change `target`.
   formTarget: {
-    tagNames: ['button', 'input'],
+    selector: 'button, input',
     // Note that `missing: null` here is intentionally different from `target`.
     missing: null,
     allowUnknown: true,
@@ -318,7 +315,7 @@ export const schema = {
   },
   inputMode: {
     // In fact only applies to `text`, `search`, and `password`.
-    tagNames: 'input',
+    selector: 'input',
     invalid: '',
     missing: '',
     states: [
@@ -338,37 +335,37 @@ export const schema = {
     ]
   },
   keytype: {
-    tagNames: 'keygen',
+    selector: 'keygen',
     missing: 'rsa',
     states: ['', 'rsa']
   },
   kind: {
-    tagNames: 'track',
+    selector: 'track',
     missing: 'subtitles',
     invalid: 'metadata',
     states: ['captions', 'chapters', 'descriptions', 'metadata', 'subtitles']
   },
   loading: {
-    tagNames: ['iframe', 'img'],
+    selector: 'iframe, img',
     invalid: 'eager',
     missing: 'eager',
     states: ['eager', 'lazy']
   },
   // When changing `method`, please also change `formMethod`.
   method: {
-    tagNames: 'form',
+    selector: 'form',
     invalid: 'get',
     missing: 'get',
     states: ['dialog', 'get', 'post']
   },
   preload: {
-    tagNames: ['audio', 'video'],
+    selector: 'audio, video',
     // Note: https://html.spec.whatwg.org/#attr-media-preload
     states: [['', 'auto'], 'metadata', 'none']
   },
   // Should also apply to `content` on `meta[name=referrer]`.
   referrerPolicy: {
-    tagNames: ['a', 'area', 'iframe', 'img', 'link'],
+    selector: 'a, area, iframe, img, link',
     missing: '',
     invalid: '',
     states: [
@@ -381,12 +378,12 @@ export const schema = {
     ]
   },
   scope: {
-    tagNames: 'th',
+    selector: 'th',
     missing: '',
     states: ['', 'col', 'colgroup', 'row', 'rowgroup']
   },
   shape: {
-    tagNames: 'area',
+    selector: 'area',
     missing: 'rect',
     states: [
       // The latter are non-conforming.
@@ -397,32 +394,30 @@ export const schema = {
     ]
   },
   spellCheck: {
-    tagNames: null,
     missing: null,
     invalid: null,
     states: [null, ['', 'true'], 'false']
   },
   // When changing `target`, please also change `formTarget`.
   target: {
-    tagNames: ['a', 'area', 'base', 'form'],
+    selector: 'a, area, base, form',
     missing: '',
     allowUnknown: true,
     states: ['_blank', '_parent', ['', '_self'], '_top']
   },
   translate: {
-    tagNames: null,
     missing: null,
     invalid: null,
     states: [['', 'yes'], 'no']
   },
   type: [
     {
-      tagNames: 'button',
+      selector: 'button',
       missing: 'submit',
       states: ['button', 'menu', 'reset', 'submit']
     },
     {
-      tagNames: 'input',
+      selector: 'input',
       missing: 'text',
       states: [
         'button',
@@ -451,37 +446,37 @@ export const schema = {
     },
     {
       caseSensitive: true,
-      tagNames: 'li',
+      selector: 'li',
       missing: '',
       invalid: '',
       states: ['1', 'a', 'A', 'i', 'I', 'circle', 'disc', 'square']
     },
     {
-      tagNames: 'menu',
+      selector: 'menu',
       missing: '',
       states: ['', 'context', 'toolbar']
     },
     {
-      tagNames: 'menuitem',
+      selector: 'menuitem',
       missing: 'command',
       states: ['checkbox', 'command', 'radio']
     },
     {
       caseSensitive: true,
-      tagNames: 'ol',
+      selector: 'ol',
       missing: '1',
       invalid: '1',
       states: ['1', 'a', 'A', 'i', 'I']
     },
     {
-      tagNames: 'ul',
+      selector: 'ul',
       missing: '',
       invalid: '',
       states: ['circle', 'disc', 'square']
     }
   ],
   wrap: {
-    tagNames: 'textarea',
+    selector: 'textarea',
     missing: 'soft',
     states: ['hard', 'soft']
   }

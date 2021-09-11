@@ -12,8 +12,8 @@
  */
 
 import {visit} from 'unist-util-visit'
+import {matches} from 'hast-util-select'
 import {hasProperty} from 'hast-util-has-property'
-import {isElement} from 'hast-util-is-element'
 import {stringify} from 'space-separated-tokens'
 import {schema} from './schema.js'
 
@@ -55,9 +55,11 @@ export default function rehypeMinifyEnumeratedAttribute() {
             let index = -1
 
             while (++index < definitions.length) {
+              const definition = definitions[index]
+
               // eslint-disable-next-line max-depth
-              if (isElement(node, definitions[index].tagNames)) {
-                props[prop] = minify(value, definitions[index])
+              if (!definition.selector || matches(definition.selector, node)) {
+                props[prop] = minify(value, definition)
               }
             }
           }
