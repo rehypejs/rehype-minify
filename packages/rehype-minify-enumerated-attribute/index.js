@@ -14,6 +14,7 @@
 import {visit} from 'unist-util-visit'
 import {hasProperty} from 'hast-util-has-property'
 import {isElement} from 'hast-util-is-element'
+import {stringify} from 'space-separated-tokens'
 import {schema} from './schema.js'
 
 const own = {}.hasOwnProperty
@@ -39,10 +40,16 @@ export default function rehypeMinifyEnumeratedAttribute() {
       let prop
 
       for (prop in props) {
-        if (own.call(schema, prop)) {
-          const value = props[prop]
+        if (own.call(schema, prop) && hasProperty(node, prop)) {
+          let value = props[prop]
 
-          if (hasProperty(node, prop) && typeof value === 'string') {
+          // Note: we don’t really handle enumerated as lists, so instead
+          // we cast them to a string (assuming they are space-separated).
+          if (Array.isArray(value)) {
+            value = stringify(value)
+          }
+
+          if (typeof value === 'string') {
             const info = schema[prop]
             const definitions = Array.isArray(info) ? info : [info]
             let index = -1
@@ -66,7 +73,7 @@ export default function rehypeMinifyEnumeratedAttribute() {
  * @returns {string|null}
  */
 function minify(value, info) {
-  const insensitive = value.toLowerCase()
+  const insensitive = info.caseSensitive ? value : value.toLowerCase()
   const states = info.states
   let index = -1
   let known = false

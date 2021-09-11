@@ -5,18 +5,20 @@
  * @property {string|null} [invalid]
  * @property {Array.<null|string|string[]>} states
  * @property {true} [allowUnknown]
+ * @property {true} [caseSensitive]
  */
 
 /**
  * This schema exposes a map of property names to (one or more) definitions.
- * Each definition defined how that attribute is enumerated.
+ * Each definition defines how that attribute is enumerated.
  *
  * @type {Record<string, Info|Info[]>}
  */
 export const schema = {
   autoComplete: {
-    tagNames: null,
+    tagNames: 'form',
     missing: '',
+    invalid: '',
     states: [['', 'on'], 'off']
   },
   behavior: {
@@ -251,6 +253,12 @@ export const schema = {
     invalid: '',
     states: [['', 'anonymous'], 'use-credentials']
   },
+  decoding: {
+    tagNames: 'img',
+    missing: '',
+    invalid: '',
+    states: ['sync', 'async', ['', 'auto']]
+  },
   dir: {
     tagNames: null,
     missing: '',
@@ -282,7 +290,8 @@ export const schema = {
   formEncType: {
     tagNames: ['button', 'input'],
     invalid: 'application/x-www-form-urlencoded',
-    missing: 'application/x-www-form-urlencoded',
+    // Note that `missing: null` here is intentionally different from `encType`.
+    missing: null,
     states: [
       'application/x-www-form-urlencoded',
       'multipart/form-data',
@@ -293,15 +302,19 @@ export const schema = {
   formMethod: {
     tagNames: ['button', 'input'],
     invalid: 'get',
-    missing: 'get',
+    // Note that `missing: null` here is intentionally different from `formMethod`.
+    missing: null,
     states: ['dialog', 'get', 'post']
   },
   // When changing `formTarget`, please also change `target`.
   formTarget: {
     tagNames: ['button', 'input'],
-    missing: '',
+    // Note that `missing: null` here is intentionally different from `target`.
+    missing: null,
     allowUnknown: true,
-    states: ['_blank', '_parent', ['', '_self'], '_top']
+    // Note that `formTarget` uses `_self` and `target` uses `['', '_self']`,
+    // which is intentional.
+    states: ['_blank', '_parent', '_self', '_top']
   },
   inputMode: {
     // In fact only applies to `text`, `search`, and `password`.
@@ -324,12 +337,6 @@ export const schema = {
       'verbatim'
     ]
   },
-  loading: {
-    tagNames: ['iframe', 'img'],
-    invalid: 'eager',
-    missing: 'eager',
-    states: ['eager', 'lazy']
-  },
   keytype: {
     tagNames: 'keygen',
     missing: 'rsa',
@@ -340,6 +347,12 @@ export const schema = {
     missing: 'subtitles',
     invalid: 'metadata',
     states: ['captions', 'chapters', 'descriptions', 'metadata', 'subtitles']
+  },
+  loading: {
+    tagNames: ['iframe', 'img'],
+    invalid: 'eager',
+    missing: 'eager',
+    states: ['eager', 'lazy']
   },
   // When changing `method`, please also change `formMethod`.
   method: {
@@ -437,10 +450,11 @@ export const schema = {
       ]
     },
     {
+      caseSensitive: true,
       tagNames: 'li',
       missing: '',
       invalid: '',
-      states: ['1', 'a', 'A', 'i', 'I', 'circle', 'disc', 'none', 'square']
+      states: ['1', 'a', 'A', 'i', 'I', 'circle', 'disc', 'square']
     },
     {
       tagNames: 'menu',
@@ -453,16 +467,17 @@ export const schema = {
       states: ['checkbox', 'command', 'radio']
     },
     {
+      caseSensitive: true,
       tagNames: 'ol',
-      missing: '',
-      invalid: '',
+      missing: '1',
+      invalid: '1',
       states: ['1', 'a', 'A', 'i', 'I']
     },
     {
       tagNames: 'ul',
       missing: '',
       invalid: '',
-      states: ['circle', 'disc', 'none', 'square']
+      states: ['circle', 'disc', 'square']
     }
   ],
   wrap: {
