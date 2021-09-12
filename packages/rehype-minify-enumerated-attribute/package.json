@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-enumerated-attribute",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "rehype plugin to minify enumerated attributes",
   "license": "MIT",
   "keywords": [
