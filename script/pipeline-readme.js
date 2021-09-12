@@ -1,7 +1,6 @@
 /**
  * @typedef {import('trough').Callback} Next
  * @typedef {import('vfile').VFile} VFile
- * @typedef {import('unified').Preset} Preset
  * @typedef {import('type-fest').PackageJson} PackageJson
  * @typedef {import('mdast').BlockContent} BlockContent
  * @typedef {import('mdast').DefinitionContent} DefinitionContent
@@ -13,20 +12,18 @@ import fs from 'node:fs'
 import path from 'node:path'
 import {inspect} from 'node:util'
 import {parse} from 'comment-parser'
-import remark from 'remark'
+import {remark} from 'remark'
 import {rehype} from 'rehype'
 import {toVFile} from 'to-vfile'
 import {trough} from 'trough'
 import author from 'parse-author'
 import strip from 'strip-indent'
-/** @type {Preset} */
-// @ts-expect-error: to do type.
-import preset from 'remark-preset-wooorm'
+import remarkPresetWooorm from 'remark-preset-wooorm'
 
 /** @type {PackageJson} */
 const pkg = JSON.parse(String(fs.readFileSync('package.json')))
 
-const proc = remark().use({settings: preset.settings})
+const proc = remark().use({settings: remarkPresetWooorm.settings})
 
 export const pipelineReadme = trough()
   .use(

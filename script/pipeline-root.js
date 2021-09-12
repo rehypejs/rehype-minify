@@ -2,8 +2,6 @@
  * @typedef {import('trough').Callback} Next
  * @typedef {import('vfile').VFile} VFile
  * @typedef {import('type-fest').PackageJson} PackageJson
- * @typedef {import('unified').Plugin} Plugin
- * @typedef {import('unified').Preset} Preset
  * @typedef {import('./benchmark-results.json')} BenchmarkResult
  * @typedef {import('mdast').Root} Root
  * @typedef {import('mdast').List} List
@@ -19,15 +17,11 @@ import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {trough} from 'trough'
 import {unified} from 'unified'
-/** @type {Plugin} */
-// @ts-expect-error: to do type.
-import format from 'rehype-format'
-import stringify from 'rehype-stringify'
-import remark from 'remark'
+import rehypeFormat from 'rehype-format'
+import rehypeStringify from 'rehype-stringify'
+import {remark} from 'remark'
 import {zone} from 'mdast-zone'
 import {toVFile} from 'to-vfile'
-/** @type {Preset} */
-// @ts-expect-error: to do type.
 import remarkPresetWooorm from 'remark-preset-wooorm'
 
 export const pipelineRoot = trough()
@@ -82,11 +76,8 @@ export const pipelineRoot = trough()
 
       remark()
         .data('settings', remarkPresetWooorm.settings)
-        // @ts-expect-error: remove when remark is updated to unified@10.
         .use(plugin('plugins-core', core))
-        // @ts-expect-error: remove when remark is updated to unified@10.
         .use(plugin('plugins-other', others))
-        // @ts-expect-error: remove when remark is updated to unified@10.
         .use(benchmark)
         .process(ctx.readme, (error) => {
           next(error)
@@ -229,8 +220,9 @@ export const pipelineRoot = trough()
 
             const tree = /** @type {HastRoot} */ (
               unified()
-                .use(format)
+                .use(rehypeFormat)
                 .runSync(
+                  // @ts-expect-error: works fine.
                   h('table', [
                     h('thead', h('tr', h1), h('tr', h2)),
                     h('tbody', body),
@@ -239,7 +231,7 @@ export const pipelineRoot = trough()
                 )
             )
 
-            const fragment = unified().use(stringify).stringify(tree)
+            const fragment = unified().use(rehypeStringify).stringify(tree)
 
             return [start, u('html', fragment), end]
           })
