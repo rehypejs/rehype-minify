@@ -37,7 +37,7 @@
   ],
   "dependencies": {
     "@types/hast": "^2.0.0",
-    "html-enumerated-attributes": "^0.0.0",
+    "html-enumerated-attributes": "^0.1.0",
     "hast-util-select": "^5.0.0",
     "hast-util-has-property": "^2.0.0",
     "property-information": "^6.0.0",

@@ -1,6 +1,6 @@
 {
   "name": "html-enumerated-attributes",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Map of info on enumerated attributes in HTML",
   "license": "MIT",
   "keywords": [
