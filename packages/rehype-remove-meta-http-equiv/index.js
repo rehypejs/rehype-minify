@@ -72,11 +72,9 @@ export default function rehypeRemoveMetaHttpEquiv() {
 
           if (value === 'content-language') {
             contentLanguage = node
-            // @ts-expect-error: fine parent.
             contentLanguageParent = parent
           } else if (value === 'content-type') {
             contentType = node
-            // @ts-expect-error: fine parent.
             contentTypeParent = parent
           }
         }

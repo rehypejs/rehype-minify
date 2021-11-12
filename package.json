@@ -98,7 +98,7 @@
     "unist-builder": "^3.0.0",
     "vfile": "^5.0.0",
     "vfile-find-down": "^6.0.0",
-    "xo": "^0.44.0"
+    "xo": "^0.46.0"
   },
   "scripts": {
     "build-workspace": "npm run build --workspaces",
