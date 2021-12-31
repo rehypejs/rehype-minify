@@ -47,5 +47,12 @@ test('rehype-remove-script-type-javascript', (t) => {
     u('root', [h('script', {language: 'fooscript'})])
   )
 
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(u('root', [h('script', {type: 'module'})])),
+    u('root', [h('script', {type: 'module'})])
+  )
+
   t.end()
 })

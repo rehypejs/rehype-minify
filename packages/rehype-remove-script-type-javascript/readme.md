@@ -58,6 +58,7 @@ rehype input.html --use remove-script-type-javascript --output output.html
 
 ```html
 <script type="text/javascript"></script>
+<script type="module"></script>
 <script language="javascript1.5"></script>
 ```
 
@@ -65,6 +66,7 @@ rehype input.html --use remove-script-type-javascript --output output.html
 
 ```html
 <script></script>
+<script type="module"></script>
 <script></script>
 ```
 
