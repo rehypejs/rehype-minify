@@ -22,18 +22,18 @@
  * @property {CleanResult[]} results
  *
  * @callback ProcessFn
- * @param {Uint8Array} buf
+ * @param {Buffer} buf
  * @param {{name: string}} ctx
- * @returns {Uint8Array}
+ * @returns {Buffer}
  *
  * @typedef Raw
  * @property {ProcessFn} processFn
  * @property {'original'|'html-minifier'|'rehype-minify'} type
- * @property {Uint8Array} [input]
+ * @property {Buffer} [input]
  * @property {number} [inputSize]
- * @property {Uint8Array} [output]
+ * @property {Buffer} [output]
  * @property {number} [outputSize]
- * @property {Uint8Array} [gzipped]
+ * @property {Buffer} [gzipped]
  * @property {number} [gzipSize]
  * @property {Raw} [original]
  * @property {string} [rawWin]
