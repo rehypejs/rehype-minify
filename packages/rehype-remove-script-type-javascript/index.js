@@ -4,6 +4,7 @@
  * @example
  *   <script type="text/javascript"></script>
  *   <script language="javascript1.5"></script>
+ *   <script type="module"></script>
  */
 
 /**
