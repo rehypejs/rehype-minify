@@ -58,16 +58,16 @@ rehype input.html --use remove-script-type-javascript --output output.html
 
 ```html
 <script type="text/javascript"></script>
-<script type="module"></script>
 <script language="javascript1.5"></script>
+<script type="module"></script>
 ```
 
 ##### Out
 
 ```html
 <script></script>
-<script type="module"></script>
 <script></script>
+<script type="module"></script>
 ```
 
 ## Contribute

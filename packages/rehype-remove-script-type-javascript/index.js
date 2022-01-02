@@ -3,8 +3,8 @@
  *   Remove `type` and `language` on JavaScript scripts.
  * @example
  *   <script type="text/javascript"></script>
- *   <script type="module"></script>
  *   <script language="javascript1.5"></script>
+ *   <script type="module"></script>
  */
 
 /**
