@@ -16,7 +16,7 @@ import {hasProperty} from 'hast-util-has-property'
 /**
  * Remove content of external JavaScript `script` elements.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeRemoveExternalScriptContent() {
   return (tree) => {

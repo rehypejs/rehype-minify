@@ -17,7 +17,7 @@ import {isCssStyle} from 'hast-util-is-css-style'
 /**
  * Remove `type` on CSS `style` and `link`s.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeRemoveStyleTypeCss() {
   return (tree) => {

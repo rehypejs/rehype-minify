@@ -17,7 +17,7 @@ import {isJavaScript} from 'hast-util-is-javascript'
 /**
  * Remove `type` and `language` on JavaScript scripts.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeRemoveScriptTypeJavaScript() {
   return (tree) => {

@@ -27,7 +27,7 @@ import {isElement} from 'hast-util-is-element'
 /**
  * Minify `script` elements with a JSON body.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeMinifyJsonScript() {
   return (tree) => {

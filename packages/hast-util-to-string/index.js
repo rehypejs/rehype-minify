@@ -62,7 +62,7 @@ function one(node) {
  */
 function all(node) {
   let index = -1
-  /** @type {string[]} */
+  /** @type {Array<string>} */
   const result = []
 
   while (++index < node.children.length) {

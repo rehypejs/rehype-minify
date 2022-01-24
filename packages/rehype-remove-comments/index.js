@@ -30,7 +30,7 @@ import {isConditionalComment} from 'hast-util-is-conditional-comment'
  * When configured with `force: true` (default: `false`), conditional comments
  * are also removed.
  *
- * @type {import('unified').Plugin<[Options?] | void[], Root>}
+ * @type {import('unified').Plugin<[Options?]|Array<void>, Root>}
  */
 export default function rehypeRemoveComments(options = {}) {
   const force = options.removeConditional

@@ -40,7 +40,7 @@ enumeratedAttributes.loading
 
 ### `enumeratedAttributes`
 
-Map of enumerated attributes in HTML (`Record<string, Definition|Array.<Definition>>`).
+Map of enumerated attributes in HTML (`Record<string, Definition|Array<Definition>>`).
 
 ## Contribute
 

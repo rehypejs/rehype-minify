@@ -23,11 +23,11 @@ import {isCssLink} from 'hast-util-is-css-link'
  * This can *decrease* the time to
  * [first render](https://developer.yahoo.com/performance/rules.html#css_top)
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeCssToTop() {
   return (tree) => {
-    /** @type {Array.<[Root|Element, Element]>} */
+    /** @type {Array<[Root|Element, Element]>} */
     const matches = []
     /** @type {Element|undefined} */
     let head

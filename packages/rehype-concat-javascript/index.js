@@ -26,11 +26,11 @@ import {toString} from 'hast-util-to-string'
  * This plugin can be dangerous if a) JS is invalid, or b) values are expected
  * to be undefined in one script and defined in another.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeConcatJavaScript() {
   return (tree) => {
-    /** @type {Array.<[Root|Element, Element]>} */
+    /** @type {Array<[Root|Element, Element]>} */
     const matches = []
 
     visit(tree, 'element', (node, _, parent) => {
@@ -46,7 +46,7 @@ export default function rehypeConcatJavaScript() {
 
     function concat() {
       let index = -1
-      /** @type {string[]} */
+      /** @type {Array<string>} */
       const contents = []
 
       while (++index < matches.length) {

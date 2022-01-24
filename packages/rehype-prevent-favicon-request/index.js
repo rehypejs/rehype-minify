@@ -28,7 +28,7 @@ import {visit} from 'unist-util-visit'
  * This plugin increases the size of the HTML, but prevents a round trip to
  * the server by inserting an empty favicon.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypePreventFaviconRequest() {
   return (tree) => {

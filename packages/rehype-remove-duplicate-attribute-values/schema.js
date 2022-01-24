@@ -1,4 +1,4 @@
-/** @type {Record<string, string[]|string|null>} */
+/** @type {Record<string, Array<string>|string|null>} */
 export const schema = {
   acceptCharset: 'form',
   accessKey: null,

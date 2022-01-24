@@ -3,7 +3,7 @@
  * @property {string} [selector]
  * @property {string|null} [missing]
  * @property {string|null} [invalid]
- * @property {Array.<null|string|string[]>} states
+ * @property {Array<null|string|Array<string>>} states
  * @property {true} [allowUnknown]
  * @property {true} [caseSensitive]
  */
@@ -12,7 +12,7 @@
  * This schema exposes a map of property names to (one or more) definitions.
  * Each definition defines how that attribute is enumerated.
  *
- * @type {Record<string, Info|Info[]>}
+ * @type {Record<string, Info|Array<Info>>}
  */
 export const schema = {
   autoComplete: {

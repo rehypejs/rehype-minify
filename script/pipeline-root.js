@@ -27,7 +27,7 @@ import remarkPresetWooorm from 'remark-preset-wooorm'
 export const pipelineRoot = trough()
   .use(
     /**
-     * @param {{root: string, plugins: string[], readme?: VFile}} ctx
+     * @param {{root: string, plugins: Array<string>, readme?: VFile}} ctx
      * @param {Next} next
      */
     (ctx, next) => {
@@ -42,13 +42,13 @@ export const pipelineRoot = trough()
   )
   .use(
     /**
-     * @param {{root: string, plugins: string[], readme: VFile}} ctx
+     * @param {{root: string, plugins: Array<string>, readme: VFile}} ctx
      * @param {Next} next
      */
     (ctx, next) => {
-      /** @type {string[]} */
+      /** @type {Array<string>} */
       const others = []
-      /** @type {string[]} */
+      /** @type {Array<string>} */
       const core = []
       let index = -1
 
@@ -85,12 +85,12 @@ export const pipelineRoot = trough()
 
       /**
        * @param {string} name
-       * @param {string[]} list
+       * @param {Array<string>} list
        */
       function plugin(name, list) {
         return attacher
 
-        /** @type {import('unified').Plugin<[], Root>} */
+        /** @type {import('unified').Plugin<Array<void>, Root>} */
         function attacher() {
           return (tree) => {
             zone(tree, name, (start, _, end) => [
@@ -121,7 +121,7 @@ export const pipelineRoot = trough()
         }
       }
 
-      /** @type {import('unified').Plugin<[], Root>} */
+      /** @type {import('unified').Plugin<Array<void>, Root>} */
       function benchmark() {
         /** @type {BenchmarkResult} */
         let data
@@ -143,11 +143,11 @@ export const pipelineRoot = trough()
           zone(tree, 'benchmark', (start, _, end) => {
             /** @type {['raw', 'gzip']} */
             const types = ['raw', 'gzip']
-            /** @type {ElementChild[]} */
+            /** @type {Array<ElementChild>} */
             const h1 = [h('th', {rowSpan: 2}, 'name')]
-            /** @type {ElementChild[]} */
+            /** @type {Array<ElementChild>} */
             let h2 = []
-            /** @type {ElementChild[]} */
+            /** @type {Array<ElementChild>} */
             let foot = [h('th', {scope: 'row'}, 'total')]
             /** @type {Record<string, number>} */
             const sum = {}
@@ -241,7 +241,7 @@ export const pipelineRoot = trough()
   )
   .use(
     /**
-     * @param {{root: string, plugins: string[], readme: VFile}} ctx
+     * @param {{root: string, plugins: Array<string>, readme: VFile}} ctx
      * @param {Next} next
      */
     (ctx, next) => {
@@ -252,7 +252,7 @@ export const pipelineRoot = trough()
   )
   .use(
     /**
-     * @param {{root: string, plugins: string[], readme: VFile}} ctx
+     * @param {{root: string, plugins: Array<string>, readme: VFile}} ctx
      * @param {Next} next
      */
     (ctx) => {

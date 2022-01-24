@@ -28,7 +28,7 @@ const proc = remark().use({settings: remarkPresetWooorm.settings})
 export const pipelineReadme = trough()
   .use(
     /**
-     * @param {{root: string, ancestor: string, plugins: string[], package: VFile, contributors: string[], files: string[], tests: boolean, packageValue?: PackageJson}} ctx
+     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors: Array<string>, files: Array<string>, tests: boolean, packageValue?: PackageJson}} ctx
      * @param {Next} next
      */
     (ctx) => {
@@ -37,7 +37,7 @@ export const pipelineReadme = trough()
   )
   .use(
     /**
-     * @param {{root: string, ancestor: string, plugins: string[], package: VFile, contributors: string[], files: string[], tests: boolean, packageValue: PackageJson, config?: Record<string, string>, script?: VFile}} ctx
+     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors: Array<string>, files: Array<string>, tests: boolean, packageValue: PackageJson, config?: Record<string, string>, script?: VFile}} ctx
      * @param {Next} next
      */
     (ctx, next) => {
@@ -67,7 +67,7 @@ export const pipelineReadme = trough()
   )
   .use(
     /**
-     * @param {{root: string, ancestor: string, plugins: string[], package: VFile, contributors: string[], files: string[], tests: boolean, packageValue: PackageJson, config: Record<string, string>, script: VFile, readme?: VFile}} ctx
+     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors: Array<string>, files: Array<string>, tests: boolean, packageValue: PackageJson, config: Record<string, string>, script: VFile, readme?: VFile}} ctx
      * @param {Next} next
      */
     // eslint-disable-next-line complexity
@@ -103,7 +103,7 @@ export const pipelineReadme = trough()
       const hBranchBase = health + '/blob/main'
       const slug = repo.split('/').slice(-2).join('/')
 
-      /** @type {Array.<BlockContent | DefinitionContent>} */
+      /** @type {Array<BlockContent|DefinitionContent>} */
       const tree = [
         {
           type: 'html',
@@ -238,7 +238,7 @@ export const pipelineReadme = trough()
       const mod = await import(ctx.script.path)
       const specifiers = Object.keys(mod).filter((d) => d !== 'default')
 
-      /** @type {PhrasingContent[]} */
+      /** @type {Array<PhrasingContent>} */
       const info = []
 
       if (specifiers.length > 0) {

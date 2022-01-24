@@ -19,7 +19,7 @@
  * @typedef Datum
  * @property {string} name
  * @property {string} url
- * @property {CleanResult[]} results
+ * @property {Array<CleanResult>} results
  *
  * @callback ProcessFn
  * @param {Buffer} buf
@@ -69,7 +69,7 @@ const benchmarks = trough()
      * @param {Next} next
      */
     (ctx, next) => {
-      /** @type {Datum[]} */
+      /** @type {Array<Datum>} */
       const data = []
       const keys = Object.keys(ctx)
       let count = 0
@@ -82,7 +82,7 @@ const benchmarks = trough()
           {name, url: ctx[name]},
           /**
            * @param {Error?} error
-           * @param {{name: string, url: string, file: VFile, original: Result, results: Result[]}} results
+           * @param {{name: string, url: string, file: VFile, original: Result, results: Array<Result>}} results
            */
           (error, results) => {
             count++
@@ -115,7 +115,7 @@ const benchmarks = trough()
   )
   .use(
     /**
-     * @param {Datum[]} data
+     * @param {Array<Datum>} data
      * @param {Next} next
      */
     (data, next) => {
@@ -294,7 +294,7 @@ benchmarks.run(
 )
 
 /**
- * @param {{name: string, url: string, file: VFile, original?: Raw, results?: Raw[]}} ctx
+ * @param {{name: string, url: string, file: VFile, original?: Raw, results?: Array<Raw>}} ctx
  * @param {Next} next
  */
 function test(ctx, next) {
@@ -307,7 +307,7 @@ function test(ctx, next) {
     },
     type: 'original'
   }
-  /** @type {Raw[]} */
+  /** @type {Array<Raw>} */
   const results = [
     {
       name: ctx.name,

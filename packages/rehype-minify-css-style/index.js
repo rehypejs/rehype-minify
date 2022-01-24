@@ -22,7 +22,7 @@ const clean = new CleanCSS()
 /**
  * Minify CSS style elements.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeMinifyCssStyle() {
   return (tree) => {

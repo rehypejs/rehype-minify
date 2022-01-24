@@ -42,7 +42,7 @@ urlAttributes.href
 
 ### `urlAttributes`
 
-Map of URL attributes in HTML (`Record<string, string[]>`).
+Map of URL attributes in HTML (`Record<string, Array<string>>`).
 
 ## Contribute
 

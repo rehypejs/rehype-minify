@@ -23,7 +23,7 @@ const suffix = '}'
 /**
  * Minify theme color attributes.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeMinifyMetaColor() {
   return (tree) => {

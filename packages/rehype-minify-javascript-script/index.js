@@ -22,7 +22,7 @@ import {hasProperty} from 'hast-util-has-property'
 /**
  * Minify `script` elements with a JavaScript body.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeMinifyJavaScriptScript() {
   return (tree) => {

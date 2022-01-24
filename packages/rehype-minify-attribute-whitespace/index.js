@@ -24,7 +24,7 @@ const own = {}.hasOwnProperty
 /**
  * Minify whitespace in attributes.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeMinifyAttributeWhitespace() {
   return (tree) => {

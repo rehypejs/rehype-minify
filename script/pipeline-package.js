@@ -14,7 +14,7 @@ import {trough} from 'trough'
 export const pipelinePackage = trough()
   .use(
     /**
-     * @param {{root: string, ancestor: string, plugins: string[], package?: VFile}} ctx
+     * @param {{root: string, ancestor: string, plugins: Array<string>, package?: VFile}} ctx
      * @param {Next} next
      */
     (ctx, next) => {
@@ -29,7 +29,7 @@ export const pipelinePackage = trough()
   )
   .use(
     /**
-     * @param {{root: string, ancestor: string, plugins: string[], package: VFile, contributors?: string[]}} ctx
+     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors?: Array<string>}} ctx
      * @param {Next} next
      */
     (ctx, next) => {
@@ -54,7 +54,7 @@ export const pipelinePackage = trough()
   )
   .use(
     /**
-     * @param {{root: string, ancestor: string, plugins: string[], package: VFile, contributors: string[], files?: string[], tests?: boolean}} ctx
+     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors: Array<string>, files?: Array<string>, tests?: boolean}} ctx
      * @param {Next} next
      */
     (ctx, next) => {
@@ -85,7 +85,7 @@ export const pipelinePackage = trough()
   )
   .use(
     /**
-     * @param {{root: string, ancestor: string, plugins: string[], package: VFile, contributors: string[], files?: string[], tests?: boolean}} ctx
+     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors: Array<string>, files?: Array<string>, tests?: boolean}} ctx
      */
     (ctx) => {
       /** @type {PackageJson} */
@@ -136,7 +136,7 @@ export const pipelinePackage = trough()
   )
   .use(
     /**
-     * @param {{root: string, ancestor: string, plugins: string[], package: VFile, contributors: string[], files?: string[], tests?: boolean}} ctx
+     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors: Array<string>, files?: Array<string>, tests?: boolean}} ctx
      * @param {Next} next
      */
     (ctx, next) => {
@@ -145,7 +145,7 @@ export const pipelinePackage = trough()
   )
   .use(
     /**
-     * @param {{root: string, ancestor: string, plugins: string[], package: VFile, contributors: string[], files?: string[], tests?: boolean}} ctx
+     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors: Array<string>, files?: Array<string>, tests?: boolean}} ctx
      */
     (ctx) => {
       ctx.package.stored = true

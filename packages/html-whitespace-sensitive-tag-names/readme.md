@@ -40,7 +40,7 @@ whitespaceSensitiveTagNames
 
 ### `whitespaceSensitiveTagNames`
 
-List of whitespace sensitive HTML tag names (`string[]`).
+List of whitespace sensitive HTML tag names (`Array<string>`).
 
 ## Contribute
 

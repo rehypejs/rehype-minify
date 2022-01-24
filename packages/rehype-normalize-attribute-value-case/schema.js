@@ -1,5 +1,5 @@
 /**
- * @type {Record<string, string[]|null>}
+ * @type {Record<string, Array<string>|null>}
  */
 export const schema = {
   acceptCharset: ['form'],

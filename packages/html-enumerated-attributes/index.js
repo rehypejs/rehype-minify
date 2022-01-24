@@ -15,7 +15,7 @@
  *
  *   ### `enumeratedAttributes`
  *
- *   Map of enumerated attributes in HTML (`Record<string, Definition|Array.<Definition>>`).
+ *   Map of enumerated attributes in HTML (`Record<string, Definition|Array<Definition>>`).
  */
 
 /**
@@ -23,7 +23,7 @@
  * @property {string} [selector]
  * @property {string|null} [missing]
  * @property {string|null} [invalid]
- * @property {Array.<null|string|string[]>} states
+ * @property {Array<null|string|Array<string>>} states
  * @property {true} [allowUnknown]
  * @property {true} [caseSensitive]
  */
@@ -32,7 +32,7 @@
  * This map exposes a map of property names to one or more definitions.
  * Each definition defines how that attribute is enumerated.
  *
- * @type {Record<string, Definition|Definition[]>}
+ * @type {Record<string, Definition|Array<Definition>>}
  */
 export const enumeratedAttributes = {
   autocomplete: {

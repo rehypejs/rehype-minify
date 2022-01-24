@@ -12,7 +12,7 @@ import {trough} from 'trough'
 const filePipeline = trough()
   .use(
     /**
-     * @param {{root: string, ancestor: string, plugins: string[], package: VFile, contributors: string[], files: string[], tests: boolean, file?: VFile}} ctx
+     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors: Array<string>, files: Array<string>, tests: boolean, file?: VFile}} ctx
      * @param {Next} next
      */
     (ctx, next) => {
@@ -27,7 +27,7 @@ const filePipeline = trough()
   )
   .use(
     /**
-     * @param {{root: string, ancestor: string, plugins: string[], package: VFile, contributors: string[], files: string[], tests: boolean, file: VFile}} ctx
+     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors: Array<string>, files: Array<string>, tests: boolean, file: VFile}} ctx
      */
     (ctx) => {
       const doc = String(ctx.file)
@@ -63,7 +63,7 @@ const filePipeline = trough()
 
 export const pipelinePresets = trough().use(
   /**
-   * @param {{root: string, ancestor: string, plugins: string[], package: VFile, contributors: string[], files: string[], tests: boolean, file?: VFile}} ctx
+   * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors: Array<string>, files: Array<string>, tests: boolean, file?: VFile}} ctx
    * @param {Next} next
    */
   (ctx, next) => {

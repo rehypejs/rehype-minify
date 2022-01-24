@@ -32,7 +32,7 @@ const lists = new Set([
  * Note: `meta[name=theme-color]` and `meta[name=msapplication-TileColor]`
  * are handled by `rehype-minify-meta-color`.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeMinifyMetaContent() {
   return (tree) => {

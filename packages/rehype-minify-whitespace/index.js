@@ -53,7 +53,7 @@ const ignorableNode = convert(['doctype', 'comment'])
  * If `newlines: true`, collapses whitespace containing newlines to `'\n'`
  * instead of `' '`.
  *
- * @type {import('unified').Plugin<[Options?] | void[], Root>}
+ * @type {import('unified').Plugin<[Options?]|Array<void>, Root>}
  */
 export default function rehypeMinifyWhitespace(options = {}) {
   const collapse = collapseFactory(
@@ -173,7 +173,7 @@ function all(parent, context) {
 }
 
 /**
- * @param {Node[]} nodes
+ * @param {Array<Node>} nodes
  * @param {number} index
  * @param {boolean|undefined} [after]
  * @returns {boolean|undefined}

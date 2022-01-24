@@ -36,7 +36,7 @@ const own = {}.hasOwnProperty
  * All other [options](https://www.npmjs.com/package/relateurl#options) are
  * passed through.
  *
- * @type {import('unified').Plugin<[Options?] | void[], Root>}
+ * @type {import('unified').Plugin<[Options?]|Array<void>, Root>}
  */
 export default function rehypeMinifyUrl(options) {
   const {from, ...rest} = options || {}
@@ -86,7 +86,7 @@ export default function rehypeMinifyUrl(options) {
 }
 
 /**
- * @param {null|undefined|string|number|boolean|Array.<string|number>} value
+ * @param {null|undefined|string|number|boolean|Array<string|number>} value
  * @param {RelateUrl} relate
  */
 function minify(value, relate) {
@@ -94,13 +94,13 @@ function minify(value, relate) {
 }
 
 /**
- * @param {Array.<string|number>} value
+ * @param {Array<string|number>} value
  * @param {RelateUrl} relate
- * @returns {Array.<string|number>}
+ * @returns {Array<string|number>}
  */
 function all(value, relate) {
   let index = -1
-  /** @type {Array.<string|number>} */
+  /** @type {Array<string|number>} */
   const result = []
 
   while (++index < value.length) {

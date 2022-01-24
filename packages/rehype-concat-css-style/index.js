@@ -27,11 +27,11 @@ import {toString} from 'hast-util-to-string'
  * Additionally, this plugin does not handle `scoped` styles.
  * Those are [deprecated](https://github.com/whatwg/html/issues/552) anyway.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeConcatCssStyle() {
   return (tree) => {
-    /** @type {Array.<[Root|Element, Element]>} */
+    /** @type {Array<[Root|Element, Element]>} */
     const matches = []
 
     visit(tree, 'element', (node, _, parent) => {
@@ -47,7 +47,7 @@ export default function rehypeConcatCssStyle() {
 
     function concat() {
       let index = -1
-      /** @type {string[]} */
+      /** @type {Array<string>} */
       const contents = []
 
       while (++index < matches.length) {

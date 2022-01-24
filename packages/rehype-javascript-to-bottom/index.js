@@ -32,13 +32,13 @@ import {isJavaScript} from 'hast-util-is-javascript'
  * This can *decrease* the time to
  * [first render](https://developer.yahoo.com/performance/rules.html#js_bottom).
  *
- * @type {import('unified').Plugin<[Options?] | void[], Root>}
+ * @type {import('unified').Plugin<[Options?]|Array<void>, Root>}
  */
 export default function rehypeJavaScriptToBottom(options = {}) {
   const filter = options.filter || (() => true)
 
   return (tree) => {
-    /** @type {Array.<[Root|Element, Element]>} */
+    /** @type {Array<[Root|Element, Element]>} */
     const matches = []
     /** @type {Element|undefined} */
     let body

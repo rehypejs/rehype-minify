@@ -20,7 +20,7 @@ const suffix = '}a();'
 /**
  * Minify event handler attributes.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeMinifyEventHandler() {
   return (tree) => {
@@ -39,8 +39,8 @@ export default function rehypeMinifyEventHandler() {
 }
 
 /**
- * @param {null|undefined|string|number|boolean|Array.<string|number>} value
- * @returns {null|undefined|string|number|boolean|Array.<string|number>}
+ * @param {null|undefined|string|number|boolean|Array<string|number>} value
+ * @returns {null|undefined|string|number|boolean|Array<string|number>}
  */
 function minify(value) {
   let result = value

@@ -22,7 +22,7 @@ const suffix = '{i{color:red}}'
 /**
  * Minify media attributes.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeMinifyMediaAttribute() {
   return (tree) => {

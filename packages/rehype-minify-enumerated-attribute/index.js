@@ -31,7 +31,7 @@ const own = {}.hasOwnProperty
  * Sometimes attributes or their values can be dropped entirely, or a shorter
  * value can be used.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeMinifyEnumeratedAttribute() {
   return (tree) => {
@@ -92,7 +92,7 @@ function minify(value, info) {
   let known = false
   /** @type {string|null} */
   let result = null
-  /** @type {string|string[]|null} */
+  /** @type {string|Array<string>|null} */
   let state = null
 
   while (++index < states.length) {

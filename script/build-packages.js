@@ -5,7 +5,7 @@
  * @typedef Context
  * @property {string} root
  * @property {string} [ancestor]
- * @property {string[]} [plugins]
+ * @property {Array<string>} [plugins]
  */
 
 import fs from 'node:fs'

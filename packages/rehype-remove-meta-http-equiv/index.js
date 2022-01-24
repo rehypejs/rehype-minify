@@ -32,7 +32,7 @@ import {hasProperty} from 'hast-util-has-property'
  * Remove `meta[http-equiv=content-language]` and
  * `meta[http-equiv=content-type]` elements for shorter output.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeRemoveMetaHttpEquiv() {
   return (tree) => {

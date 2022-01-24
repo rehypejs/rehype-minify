@@ -21,7 +21,7 @@ const fields = ['hrefLang', 'lang', 'srcLang', 'xmlLang']
 /**
  * Minify language attributes.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeMinifyLanguage() {
   return (tree) => {

@@ -22,13 +22,13 @@ const own = {}.hasOwnProperty
  *
  * This optimizes for repetition-based compression (such as GZip).
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeSortAttributeValues() {
   return (tree) => {
-    /** @type {Record<string, {known: string[], counts: Record<string, number>}>} */
+    /** @type {Record<string, {known: Array<string>, counts: Record<string, number>}>} */
     const counts = {}
-    /** @type {Array.<[Array.<string|number>, string]>} */
+    /** @type {Array<[Array<string|number>, string]>} */
     const queues = []
 
     visit(tree, 'element', (node) => {
@@ -55,7 +55,7 @@ export default function rehypeSortAttributeValues() {
 
     /**
      * @param {string} prop
-     * @param {Array.<string|number>} values
+     * @param {Array<string|number>} values
      */
     function add(prop, values) {
       const cache = counts[prop] || (counts[prop] = {known: [], counts: {}})
@@ -76,7 +76,7 @@ export default function rehypeSortAttributeValues() {
     }
 
     function flush() {
-      /** @type {Record<string, Array.<string|number>>} */
+      /** @type {Record<string, Array<string|number>>} */
       const caches = {}
       /** @type {string} */
       let prop

@@ -19,7 +19,7 @@ const own = {}.hasOwnProperty
 /**
  * Remove empty attributes, if possible.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeRemoveEmptyAttribute() {
   return (tree) => {

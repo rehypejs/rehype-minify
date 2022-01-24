@@ -22,7 +22,7 @@ const own = {}.hasOwnProperty
  * Normalize casing of attribute values.
  * This optimizes for repetition-based compression (such as GZip).
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeNormalizeAttributeValueCase() {
   return (tree) => {
@@ -45,20 +45,20 @@ export default function rehypeNormalizeAttributeValueCase() {
 }
 
 /**
- * @param {null|undefined|string|number|boolean|Array.<string|number>} value
- * @returns {null|undefined|string|number|boolean|Array.<string|number>}
+ * @param {null|undefined|string|number|boolean|Array<string|number>} value
+ * @returns {null|undefined|string|number|boolean|Array<string|number>}
  */
 function minify(value) {
   return Array.isArray(value) ? all(value) : one(value)
 }
 
 /**
- * @param {Array.<string|number>} value
- * @returns {Array.<string|number>}
+ * @param {Array<string|number>} value
+ * @returns {Array<string|number>}
  */
 function all(value) {
   let index = -1
-  /** @type {Array.<string|number>} */
+  /** @type {Array<string|number>} */
   const result = []
 
   while (++index < value.length) {

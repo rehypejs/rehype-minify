@@ -21,11 +21,11 @@ const own = {}.hasOwnProperty
  *
  * This optimizes for repetition-based compression (such as GZip).
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeSortAttributes() {
   return (tree) => {
-    /** @type {Record<string, {known: string[], counts: Record<string, number>}>} */
+    /** @type {Record<string, {known: Array<string>, counts: Record<string, number>}>} */
     const counts = {}
 
     visit(tree, 'element', (node) => {
@@ -54,7 +54,7 @@ export default function rehypeSortAttributes() {
     visit(tree, 'element', (node) => {
       const cache = caches[node.tagName]
       const props = node.properties || {}
-      /** @type {string[]} */
+      /** @type {Array<string>} */
       const keys = []
       /** @type {Required<Element['properties']>} */
       const result = {}
@@ -78,7 +78,7 @@ export default function rehypeSortAttributes() {
     })
 
     function optimize() {
-      /** @type {Record<string, Array.<string>>} */
+      /** @type {Record<string, Array<string>>} */
       const caches = {}
       /** @type {string} */
       let name

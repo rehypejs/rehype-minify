@@ -17,11 +17,11 @@
  *
  *   ### `urlAttributes`
  *
- *   Map of URL attributes in HTML (`Record<string, string[]>`).
+ *   Map of URL attributes in HTML (`Record<string, Array<string>>`).
  */
 
 /**
- * @type {Record<string, string[]|null>}
+ * @type {Record<string, Array<string>|null>}
  */
 export const urlAttributes = {
   action: ['form'],

@@ -18,7 +18,7 @@ const own = {}.hasOwnProperty
 /**
  * Remove duplicates in attribute values with unique tokens.
  *
- * @type {import('unified').Plugin<[], Root>}
+ * @type {import('unified').Plugin<Array<void>, Root>}
  */
 export default function rehypeRemoveDuplicateAttributeValues() {
   return (tree) => {
