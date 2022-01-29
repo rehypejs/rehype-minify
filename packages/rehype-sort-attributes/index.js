@@ -1,10 +1,26 @@
 /**
- * @fileoverview
- *   Reorder attributes based on how often they occur.
+ * rehype plugin to sort attributes.
  *
- *   This optimizes for repetition-based compression (such as GZip).
+ * ## What is this?
+ *
+ * This package is a plugin that sorts attributes based on how frequent they
+ * occur, which optimizes for repetition-based compression (such as GZip).
+ *
+ * ## When should I use this?
+ *
+ * You can use this plugin when you want to improve the transfer size of HTML
+ * documents.
+ *
+ * ## API
+ *
+ * ### `unified().use(rehypeSortAttributeValues)`
+ *
+ * Sort attributes.
+ * There are no options.
+ *
  * @example
- *   <div id="foo"><strong class="bar" id="baz">qux</strong></div>
+ *   <div id="foo">bar</div>
+ *   <div class="baz" id="qux">quux</div>
  */
 
 /**
@@ -17,9 +33,7 @@ import {visit} from 'unist-util-visit'
 const own = {}.hasOwnProperty
 
 /**
- * Reorder attributes based on how often they occur.
- *
- * This optimizes for repetition-based compression (such as GZip).
+ * Sort attributes.
  *
  * @type {import('unified').Plugin<Array<void>, Root>}
  */

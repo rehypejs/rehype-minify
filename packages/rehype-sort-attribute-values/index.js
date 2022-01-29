@@ -1,8 +1,23 @@
 /**
- * @fileoverview
- *   Sort attribute values.
+ * rehype plugin to sort attribute values.
  *
- *   This optimizes for repetition-based compression (such as GZip).
+ * ## What is this?
+ *
+ * This package is a plugin that sorts attribute values, which optimizes for
+ * repetition-based compression (such as GZip).
+ *
+ * ## When should I use this?
+ *
+ * You can use this plugin when you want to improve the transfer size of HTML
+ * documents.
+ *
+ * ## API
+ *
+ * ### `unified().use(rehypeSortAttributeValues)`
+ *
+ * Sort attribute values.
+ * There are no options.
+ *
  * @example
  *   <div class="qux quux foo bar"></div>
  */
@@ -19,8 +34,6 @@ const own = {}.hasOwnProperty
 
 /**
  * Sort attribute values.
- *
- * This optimizes for repetition-based compression (such as GZip).
  *
  * @type {import('unified').Plugin<Array<void>, Root>}
  */

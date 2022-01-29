@@ -1,24 +1,46 @@
 /**
- * @fileoverview
- *   Get the plain-text value of a hast node.
- * @longdescription
- *   ## Use
+ * hast utility to get the plain-text value of a node.
  *
- *   ```js
- *   import {h} from 'hastscript'
- *   import {toString} from 'hast-util-to-string'
+ * ## What is this?
  *
- *   toString(h('p', 'Alpha'))
- *   //=> 'Alpha'
- *   toString(h('div', [h('b', 'Bold'), ' and ', h('i', 'italic'), '.']))
- *   //=> 'Bold and italic.'
- *   ```
+ * This package is a utility to get the plain-text value of a node.
  *
- *   ## API
+ * ## When should I use this?
  *
- *   ### `toString(node)`
+ * You can use this package when you want to get the plain text value of a node.
+ * The algorithm used by this package is like the DOMs `Node#textContent`
+ * getter.
  *
- *   Transform a node to a string.
+ * To use the DOMs `Node#innerText` algorithm instead, use
+ * [`hast-util-to-text`](https://github.com/syntax-tree/hast-util-to-text).
+ * `innerText` is aware of how things are displayed, for example turning hard
+ * breaks (`<br>`) into line endings.
+ *
+ * ## Use
+ *
+ * ```js
+ * import {h} from 'hastscript'
+ * import {toString} from 'hast-util-to-string'
+ *
+ * toString(h('p', 'Alpha'))
+ * //=> 'Alpha'
+ * toString(h('div', [h('b', 'Bold'), ' and ', h('i', 'italic'), '.']))
+ * //=> 'Bold and italic.'
+ * ```
+ *
+ * ## API
+ *
+ * ### `toString(node)`
+ *
+ * Get the plain-text value of a node.
+ *
+ * ###### Parameters
+ *
+ * *   `node` (`Node`) — hast node
+ *
+ * ###### Returns
+ *
+ * Serialized node (`string`).
  */
 
 /**

@@ -8,9 +8,115 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-[**rehype**][rehype] preset to minify HTML.
+**[rehype][]** preset to minify HTML.
 
-##### In
+## Contents
+
+*   [What is this?](#what-is-this)
+*   [When should I use this?](#when-should-i-use-this)
+*   [Install](#install)
+*   [Use](#use)
+*   [API](#api)
+    *   [`unified().use(rehypePresetMinify)`](#unifieduserehypepresetminify)
+*   [Example](#example)
+*   [Syntax](#syntax)
+*   [Syntax tree](#syntax-tree)
+*   [Types](#types)
+*   [Compatibility](#compatibility)
+*   [Security](#security)
+*   [Contribute](#contribute)
+*   [License](#license)
+
+## What is this?
+
+This package is a [unified][] ([rehype][]) preset to minify HTML.
+
+## When should I use this?
+
+You can use this plugin when you want to improve the size of HTML documents.
+
+## Install
+
+This package is [ESM only][esm].
+In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
+
+```sh
+npm install rehype-preset-minify
+```
+
+In Deno with [Skypack][]:
+
+```js
+import rehypePresetMinify from 'https://cdn.skypack.dev/rehype-preset-minify@6?dts'
+```
+
+In browsers with [Skypack][]:
+
+```html
+<script type="module">
+  import rehypePresetMinify from 'https://cdn.skypack.dev/rehype-preset-minify@6?min'
+</script>
+```
+
+## Use
+
+On the API:
+
+```js
+import {read} from 'to-vfile'
+import {unified} from 'unified'
+import rehypeParse from 'rehype-parse'
+import rehypeStringify from 'rehype-stringify'
+import rehypePresetMinify from 'rehype-preset-minify'
+
+main()
+
+async function main() {
+  const file = await unified()
+    .use(rehypeParse)
+    .use(rehypePresetMinify)
+    .use(rehypeStringify)
+    .process(await read('index.html'))
+
+  console.log(String(file))
+}
+```
+
+On the CLI:
+
+```sh
+rehype input.html --use rehype-preset-minify --output output.html
+```
+
+On the CLI in a config file (here a `package.json`):
+
+```diff
+ …
+ "rehype": {
+   "plugins": [
+     …
++    "rehype-preset-minify",
+     …
+   ]
+ }
+ …
+```
+
+## API
+
+This package exports no identifiers.
+The default export is `rehypePresetMinify`.
+
+### `unified().use(rehypePresetMinify)`
+
+Use the preset.
+Presets don’t have options.
+You can reconfigure plugins in presets by using them afterwards with different
+options.
+
+## Example
+
+###### In
 
 ```html
 <!doctype html>
@@ -32,77 +138,37 @@
 </html>
 ```
 
-##### Out
+###### Out
 
 ```html
 <!doctypehtml><html lang=en-US><meta charset=utf8><script src=index.js></script><link rel=stylesheet href=index.css><title>Foo &amp bar</title><h1 class=foo>bar bar</h1><p id=alfred><strong>foo</strong> <em>bar</em></p><button type=button onclick=return!1>Alpha</button>
 ```
 
-## Install
+## Syntax
 
-This package is [ESM only][esm]:
-Node 12+ is needed to use it and it must be `imported`ed instead of `required`d.
+HTML is handled according to WHATWG HTML (the living standard), which is also
+followed by browsers such as Chrome and Firefox.
 
-[npm][]:
+## Syntax tree
 
-```sh
-npm install rehype-preset-minify
-```
+The syntax tree format used is [`hast`][hast].
 
-This package exports no identifiers.
-The default export is `rehypePresetMinify`
+## Types
 
-## CLI
+This package is fully typed with [TypeScript][].
 
-After installing, add the following to `.rehyperc` (or `package.json` under
-`"rehype"`):
+## Compatibility
 
-```js
-{
-  "plugins": [
-    "preset-minify"
-  ]
-}
-```
+Projects maintained by the unified collective are compatible with all maintained
+versions of Node.js.
+As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
+Our projects sometimes work with older versions, but this is not guaranteed.
 
-Then use [**rehype-cli**][cli]:
+## Security
 
-```sh
-rehype src/ --output dist/
-```
-
-## API
-
-Use:
-
-```js
-import {rehype} from 'rehype'
-import rehypePresetMinify from 'rehype-preset-minify'
-
-const doc = `<!doctype html>
-<html>
-  <head>
-    <title>Hello</title>
-  </head>
-  <body>
-    <h1>World!</h1>
-  </body>
-</html>
-`
-
-rehype()
-  .use(rehypePresetMinify)
-  .process(doc)
-  .then((file) => {
-    console.log(String(file))
-  })
-```
-
-Yields:
-
-```html
-<!doctypehtml><title>Hello</title><h1>World!</h1>
-```
+As **rehype** works on HTML, and improper use of HTML can open you up to a
+[cross-site scripting (XSS)][xss] attack, use of rehype can also be unsafe.
+Use [`rehype-sanitize`][rehype-sanitize] to make the tree safe.
 
 ## Contribute
 
@@ -150,18 +216,28 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
+[skypack]: https://www.skypack.dev
+
+[typescript]: https://www.typescriptlang.org
+
+[unified]: https://github.com/unifiedjs/unified
+
+[rehype]: https://github.com/rehypejs/rehype
+
+[rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
+
+[hast]: https://github.com/syntax-tree/hast
+
+[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
+
 [license]: https://github.com/rehypejs/rehype-minify/blob/main/license
 
 [author]: https://wooorm.com
 
 [health]: https://github.com/rehypejs/.github
 
-[contributing]: https://github.com/rehypejs/.github/blob/HEAD/contributing.md
+[contributing]: https://github.com/rehypejs/.github/blob/main/contributing.md
 
-[support]: https://github.com/rehypejs/.github/blob/HEAD/support.md
+[support]: https://github.com/rehypejs/.github/blob/main/support.md
 
-[coc]: https://github.com/rehypejs/.github/blob/HEAD/code-of-conduct.md
-
-[rehype]: https://github.com/rehypejs/rehype
-
-[cli]: https://github.com/rehypejs/rehype/tree/HEAD/packages/rehype-cli
+[coc]: https://github.com/rehypejs/.github/blob/main/code-of-conduct.md

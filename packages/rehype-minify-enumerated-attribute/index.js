@@ -1,14 +1,32 @@
 /**
- * @fileoverview
- *   Minify enumerated attributes.
+ * rehype plugin to minify enumerated attributes.
  *
- *   Sometimes attributes or their values can be dropped entirely, or a shorter
- *   value can be used.
+ * ## What is this?
+ *
+ * This package is a plugin that can remove certain attributes entirely or
+ * replace their values with shorter equivalents.
+ *
+ * ## When should I use this?
+ *
+ * You can use this plugin when you want to improve the size of HTML documents.
+ *
+ * ## API
+ *
+ * ### `unified().use(rehypeMinifyEnumeratedAttribute)`
+ *
+ * Minify enumerated attributes.
+ * There are no options.
+ *
  * @example
  *   <meta charset="utf-8">
  *   <video preload="auto">
  *     <track kind="subtitles" src="abc.xyz">
  *   </video>
+ */
+
+/**
+ * @typedef {import('hast').Root} Root
+ * @typedef {import('html-enumerated-attributes').Definition} Definition
  */
 
 import {visit} from 'unist-util-visit'
@@ -17,11 +35,6 @@ import {matches} from 'hast-util-select'
 import {hasProperty} from 'hast-util-has-property'
 import {stringify} from 'space-separated-tokens'
 import {enumeratedAttributes} from 'html-enumerated-attributes'
-
-/**
- * @typedef {import('hast').Root} Root
- * @typedef {import('html-enumerated-attributes').Definition} Definition
- */
 
 const own = {}.hasOwnProperty
 

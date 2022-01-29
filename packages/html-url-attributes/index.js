@@ -1,23 +1,30 @@
 /**
- * @fileoverview
- *   Map of URL attributes in HTML
- * @longdescription
- *   ## Use
+ * Utility with info on URL attributes.
  *
- *   ```js
- *   import {urlAttributes} from 'html-url-attributes'
+ * ## What is this?
  *
- *   urlAttributes.formAction
- *   //=> ['button', 'input']
- *   urlAttributes.href
- *   //=> ['a', 'area', 'base', 'link']
- *   ```
+ * This package contains info on attributes that have URLs as values.
  *
- *   ## API
+ * ## When should I use this?
  *
- *   ### `urlAttributes`
+ * You can use this package any time you’re rewriting URLs.
  *
- *   Map of URL attributes in HTML (`Record<string, Array<string>>`).
+ * ## Use
+ *
+ * ```js
+ * import {urlAttributes} from 'html-url-attributes'
+ *
+ * console.log(urlAttributes.formAction)
+ * //=> ['button', 'input']
+ * console.log(urlAttributes.href)
+ * //=> ['a', 'area', 'base', 'link']
+ * ```
+ *
+ * ## API
+ *
+ * ### `urlAttributes`
+ *
+ * Map of URL attributes in HTML (`Record<string, Array<string>>`).
  */
 
 /**

@@ -1,21 +1,28 @@
 /**
- * @fileoverview
- *   List of whitespace sensitive HTML tag names
- * @longdescription
- *   ## Use
+ * Utility with info on whitespace sensitive elements.
  *
- *   ```js
- *   import {whitespaceSensitiveTagNames} from 'html-whitespace-sensitive-tag-names'
+ * ## What is this?
  *
- *   whitespaceSensitiveTagNames
- *   //=> ['pre', 'script', 'style', 'textarea']
- *   ```
+ * This package contains info on which HTML elements are whitespace sensitive.
  *
- *   ## API
+ * ## When should I use this?
  *
- *   ### `whitespaceSensitiveTagNames`
+ * This is only really needed when minifying HTML.
  *
- *   List of whitespace sensitive HTML tag names (`Array<string>`).
+ * ## Use
+ *
+ * ```js
+ * import {whitespaceSensitiveTagNames} from 'html-whitespace-sensitive-tag-names'
+ *
+ * whitespaceSensitiveTagNames
+ * //=> ['pre', 'script', 'style', 'textarea']
+ * ```
+ *
+ * ## API
+ *
+ * ### `whitespaceSensitiveTagNames`
+ *
+ * List of whitespace sensitive HTML tag names (`Array<string>`).
  */
 
 export const whitespaceSensitiveTagNames = [

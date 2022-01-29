@@ -1,21 +1,41 @@
 /**
- * @fileoverview
- *   Map of enumerated attributes in HTML
- * @longdescription
- *   ## Use
+ * Utility with info on enumerated attributes.
  *
- *   ```js
- *   import {enumeratedAttributes} from 'html-enumerated-attributes'
+ * ## What is this?
  *
- *   enumeratedAttributes.loading
- *   //=> {selector: 'iframe, img', invalid: 'eager', missing: 'eager', states: ['eager', 'lazy']}
- *   ```
+ * This package contains info on enumerated attributes (attributes that have
+ * a limited list of acceptable values).
  *
- *   ## API
+ * ## When should I use this?
  *
- *   ### `enumeratedAttributes`
+ * You can use this package for linting and minification purposes.
  *
- *   Map of enumerated attributes in HTML (`Record<string, Definition|Array<Definition>>`).
+ * ## Use
+ *
+ * ```js
+ * import {enumeratedAttributes} from 'html-enumerated-attributes'
+ *
+ * console.log(enumeratedAttributes.loading)
+ * //=> {selector: 'iframe, img', invalid: 'eager', missing: 'eager', states: ['eager', 'lazy']}
+ * ```
+ *
+ * ## API
+ *
+ * ### `enumeratedAttributes`
+ *
+ * Map of enumerated attributes in HTML (`Record<string, Definition|Array<Definition>>`).
+ *
+ * Each `Definition` is an object with the following fields:
+ *
+ * *   `selector` (`string`, optional, example: `'meta, script'`) — a simple CSS
+ *     selector
+ * *   `missing` (`string`, `null`, optional) — missing value default
+ * *   `invalid` (`string`, `null`, optional) — invalid value default
+ * *   `states` (`Array<string|null|Array<string>>`) — possible states
+ * *   `allowUnknown` (`boolean`, optional) — whether arbitrary values are
+ *     allowed
+ * *   `caseSensitive` (`boolean`, optional) — enumerated values are often
+ *     treated case-insensitive, except when this field is on
  */
 
 /**

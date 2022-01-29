@@ -1,8 +1,28 @@
 /**
- * @fileoverview
- *   Minify event handler attributes.
+ * rehype plugin to minify event handlers.
+ *
+ * ## What is this?
+ *
+ * This package is a plugin that can minify the JavaScript used as the values of
+ * event handler attributes.
+ *
+ * ## When should I use this?
+ *
+ * You can use this plugin when you want to improve the size of HTML documents.
+ *
+ * ## API
+ *
+ * ### `unified().use(rehypeMinifyEventHandler)`
+ *
+ * Minify whitespace in attributes.
+ * There are no options.
+ *
  * @example
  *   <h1 onclick="javascript:alert(false)">Hello</h1>
+ */
+
+/**
+ * @typedef {import('hast').Root} Root
  */
 
 import Uglify from 'uglify-js'
@@ -12,10 +32,6 @@ import {isEventHandler} from 'hast-util-is-event-handler'
 
 const prefix = 'function a(){'
 const suffix = '}a();'
-
-/**
- * @typedef {import('hast').Root} Root
- */
 
 /**
  * Minify event handler attributes.
