@@ -1,3 +1,6 @@
+// Note: Don’t include non-strings (such as `boolean`s) here, they are handled
+// by `rehype-stringify`.
+
 /**
  * @type {Record<string, Array<string>|null>}
  */

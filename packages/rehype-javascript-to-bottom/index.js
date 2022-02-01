@@ -1,12 +1,31 @@
 /**
- * @fileoverview
- *   Move JS `<script>` elements to the end of `<body>`.
+ * rehype plugin to move JavaScript `<script>`s to the end of the body.
  *
- *   This can *decrease* the time to
- *   [first render](https://developer.yahoo.com/performance/rules.html#js_bottom).
+ * ## What is this?
  *
- *   You can pass `filter`, a function called with each checked node, returning
- *   `true` if the script should be moved, and `false` if not.
+ * This package is a plugin that can improve performance by *decreasing* the
+ * time to
+ * [first render](https://developer.yahoo.com/performance/rules.html#js_bottom).
+ *
+ * ## When should I use this?
+ *
+ * You can use this plugin when you want to improve the speed of HTML documents.
+ *
+ * ## API
+ *
+ * ### `unified().use(rehypeJavaScriptToBottom[, options])`
+ *
+ * Move JavaScript `<script>`s to the end of `<body>`.
+ *
+ * ##### `options`
+ *
+ * Configuration (optional).
+ *
+ * ###### `options.filter`
+ *
+ * Function called with each checked script that can return `true` to move the
+ * script or `false` if not.
+ *
  * @example
  *   {"processor": {"fragment": false}}
  *   <!doctype html><html><head><script src="index.js"></script></head><body></body></html>
@@ -48,8 +67,7 @@ export default function rehypeJavaScriptToBottom(options = {}) {
         body = node
       }
 
-      if (isJavaScript(node) && filter(node)) {
-        // @ts-expect-error: to do narrow parents.
+      if (parent && isJavaScript(node) && filter(node)) {
         matches.push([parent, node])
       }
     })

@@ -1,26 +1,51 @@
 /**
- * @fileoverview
- *   Check if an element is a JavaScript script.
- * @longdescription
- *   ## Use
+ * hast utility to check if an element is a JavaScript script.
  *
- *   ```js
- *   import {h} from 'hastscript'
- *   import {isJavaScript} from 'hast-util-is-javascript'
+ * ## What is this?
  *
- *   isJavaScript(h('script')) //=> true
- *   isJavaScript(h('script', {type: 'text/ecmascript'})) //=> true
- *   isJavaScript(h('script', {language: 'ecmascript'})) //=> true
- *   isJavaScript(h('script', {type: 'text/fooscript'})) //=> false
- *   isJavaScript(h('script', {language: 'fooscript'})) //=> false
- *   ```
+ * This package is a utility to check whether a hast node is a `<script>` that
+ * contains or references JavaScript.
  *
- *   ## API
+ * ## When should I use this?
  *
- *   ### `isJavaScript(node)`
+ * You can use this package to check whether `<script>` elements contain or
+ * reference JavaScript or something else.
  *
- *   Return `true` if `node` is a `<script>` element that has a valid JavaScript
- *   `type`, has no `type` and a valid JavaScript `language`, or has neither.
+ * ## Use
+ *
+ * ```js
+ * import {h} from 'hastscript'
+ * import {isJavaScript} from 'hast-util-is-javascript'
+ *
+ * isJavaScript(h('script')) //=> true
+ * isJavaScript(h('script', {type: 'text/ecmascript'})) //=> true
+ * isJavaScript(h('script', {language: 'ecmascript'})) //=> true
+ * isJavaScript(h('script', {type: 'text/fooscript'})) //=> false
+ * isJavaScript(h('script', {language: 'fooscript'})) //=> false
+ * ```
+ *
+ * ## API
+ *
+ * ### `isJavaScript(node)`
+ *
+ * Check if a hast node is a `<script>` that contains or references JavaScript.
+ *
+ * Returns `true` if `node` is a `<script>` element that has a valid JavaScript
+ * `type`, has no `type` and a valid JavaScript `language`, or has neither.
+ *
+ * ###### Parameters
+ *
+ * *   `node` (`Node`) — hast node
+ *
+ * ###### Returns
+ *
+ * Whether a node is a `<script>` that contains or references JavaScript
+ * (`boolean`).
+ */
+
+/**
+ * @typedef {import('hast').Root} Root
+ * @typedef {Root|Root['children'][number]} Node
  */
 
 import {hasProperty} from 'hast-util-has-property'
@@ -44,11 +69,6 @@ const mime = new Set([
   'text/x-ecmascript',
   'text/x-javascript'
 ])
-
-/**
- * @typedef {import('hast').Root} Root
- * @typedef {Root|Root['children'][number]} Node
- */
 
 /**
  * Check if an element is a JavaScript script.

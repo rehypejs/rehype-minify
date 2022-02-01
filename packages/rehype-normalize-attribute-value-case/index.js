@@ -1,8 +1,23 @@
 /**
- * @fileoverview
- *   Normalize casing of attribute values.
+ * rehype plugin to normalize casing of attribute values.
  *
- *   This optimizes for repetition-based compression (such as GZip).
+ * ## What is this?
+ *
+ * This package is a plugin that normalizes the casing of certain attribute
+ * values, which optimizes for repetition-based compression (such as GZip).
+ *
+ * ## When should I use this?
+ *
+ * You can use this plugin when you want to improve the transfer size of HTML
+ * documents.
+ *
+ * ## API
+ *
+ * ### `unified().use(rehypeNormalizeAttributeValueCase)`
+ *
+ * Normalize casing of attributes.
+ * There are no options.
+ *
  * @example
  *   <form method="GET"></form>
  */
@@ -19,8 +34,7 @@ import {schema} from './schema.js'
 const own = {}.hasOwnProperty
 
 /**
- * Normalize casing of attribute values.
- * This optimizes for repetition-based compression (such as GZip).
+ * Normalize casing of attributes.
  *
  * @type {import('unified').Plugin<Array<void>, Root>}
  */

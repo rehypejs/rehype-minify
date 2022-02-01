@@ -1,12 +1,30 @@
 /**
- * @fileoverview
- *   Minify whitespace in attributes.
+ * rehype plugin to minify whitespace in attributes.
+ *
+ * ## What is this?
+ *
+ * This package is a plugin that can remove unneeded whitespace around the
+ * values of certain attributes.
+ *
+ * ## When should I use this?
+ *
+ * You can use this plugin when you want to improve the size of HTML documents.
+ *
+ * ## API
+ *
+ * ### `unified().use(rehypeMinifyAttributeWhitespace)`
+ *
+ * Minify whitespace in attributes.
+ * There are no options.
+ *
  * @example
  *   <a href="  http://example.com "></a>
  */
 
-// Note: Don’t include non-strings (such as `boolean`s) here, they’re already
-// handled in the generator.
+/**
+ * @typedef {import('hast').Root} Root
+ * @typedef {import('hast').Element} Element
+ */
 
 import {visit} from 'unist-util-visit'
 import {hasProperty} from 'hast-util-has-property'
@@ -15,11 +33,6 @@ import {isEventHandler} from 'hast-util-is-event-handler'
 import {schema} from './schema.js'
 
 const own = {}.hasOwnProperty
-
-/**
- * @typedef {import('hast').Root} Root
- * @typedef {import('hast').Element} Element
- */
 
 /**
  * Minify whitespace in attributes.

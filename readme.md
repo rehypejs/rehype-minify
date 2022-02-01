@@ -1,5 +1,3 @@
-<!--lint disable no-html-->
-
 # ![rehype-minify][logo]
 
 [![Build][build-badge]][build]
@@ -8,9 +6,26 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-[**rehype**][rehype] preset to minify HTML.
+**[rehype][]** plugins to minify HTML.
 
-##### In
+## Contents
+
+*   [What is this?](#what-is-this)
+*   [When should I use this?](#when-should-i-use-this)
+*   [Presets](#presets)
+*   [Plugins](#plugins)
+*   [Benchmark](#benchmark)
+*   [Security](#security)
+*   [Related](#related)
+*   [Contribute](#contribute)
+*   [License](#license)
+
+## What is this?
+
+This GitHub repository is a monorepo that contains a couple utilities, ±30
+plugins, and 1 preset to minify HTML:
+
+###### In
 
 ```html
 <!doctype html>
@@ -32,35 +47,33 @@
 </html>
 ```
 
-##### Out
+###### Out
 
 ```html
 <!doctypehtml><html lang=en><meta charset=utf8><script src=index.js></script><link href=index.css rel=stylesheet><title>Foo &amp bar</title><h1 class=foo>bar bar</h1><p id=alfred><strong>foo</strong> <em>bar</em></p><button onclick=return!1 type=button>Alpha</button>
 ```
 
-## Install
+## When should I use this?
 
-This package is [ESM only][esm]:
-Node 12+ is needed to use it and it must be `imported`ed instead of `required`d.
+This project is useful when you want to improve the size of HTML documents.
+It’s particularly useful when you’re already using rehype (and remark?) to
+process HTML.
 
-[npm][]:
+## Presets
 
-```sh
-npm install rehype-preset-minify
-```
+Presets are combinations of plugins.
+One preset is maintained here:
 
-This package exports no identifiers.
-The default export is `rehypePresetMinify`
-
-## Use
-
-*   [Use on the API »][api]
-*   [Use on the CLI »][cli]
+*   [`rehype-preset-minify`][rehype-preset-minify]
+    — preset to minify and mangle HTML
 
 ## Plugins
 
-The following plugins are included in the preset.
-They are mostly harmless (disclaimer: **rehype-minify** is quite young).
+The following plugins maintained here are included in the above preset.
+
+<!--
+  👉 **Note**: the following list is automatically generated.
+-->
 
 <!--plugins-core start-->
 
@@ -90,11 +103,14 @@ They are mostly harmless (disclaimer: **rehype-minify** is quite young).
 
 <!--plugins-core end-->
 
-## Other plugins
-
 The following plugins are not included because they are potentially
-**dangerous**, can make sites slower in some cases, or need extra configuration.
-Read their readmes carefully before using!
+**dangerous**, can make sites slower in certain cases, or need extra
+configuration.
+Read their readmes carefully before using:
+
+<!--
+  👉 **Note**: the following list is automatically generated.
+-->
 
 <!--plugins-other start-->
 
@@ -108,8 +124,8 @@ Read their readmes carefully before using!
 
 <!--plugins-other end-->
 
-Also: pass [`allowDangerousCharacters`][stringify] to `rehype-stringify` if you
-trust your content.
+Also: pass [`allowDangerousCharacters` to `rehype-stringify`][rehype-stringify]
+if you trust your content.
 
 ## Benchmark
 
@@ -351,16 +367,18 @@ Huge differences in results are suspicious and may point to bugs.
 ## Security
 
 Use of `rehype-preset-minify` is *safe* by default, if the tree is already safe.
-Other plugins can open you up to a [cross-site scripting (XSS)][xss] attack.
-Use [`rehype-sanitize`][sanitize] to make the tree safe.
+As **rehype** works on HTML, and improper use of HTML can open you up to a
+[cross-site scripting (XSS)][xss] attack, use of rehype can also be unsafe.
+Use [`rehype-sanitize`][rehype-sanitize] to make the tree safe.
 
 To further optimize the result disregarding security, use the extra plugins
-above and pass [`allowDangerousCharacters` to `rehype-stringify`][stringify].
+listed above and pass [`allowDangerousCharacters` to
+`rehype-stringify`][rehype-stringify].
 
 ## Related
 
-*   [`rehype-format`](https://github.com/wooorm/rehype-format)
-    — Format HTML
+*   [`rehype-format`](https://github.com/rehypejs/rehype-format)
+    — format HTML
 
 ## Contribute
 
@@ -396,17 +414,13 @@ abide by its terms.
 
 [chat]: https://github.com/rehypejs/rehype/discussions
 
-[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
-
-[npm]: https://docs.npmjs.com/cli/install
-
 [health]: https://github.com/rehypejs/.github
 
-[contributing]: https://github.com/rehypejs/.github/blob/HEAD/contributing.md
+[contributing]: https://github.com/rehypejs/.github/blob/main/contributing.md
 
-[support]: https://github.com/rehypejs/.github/blob/HEAD/support.md
+[support]: https://github.com/rehypejs/.github/blob/main/support.md
 
-[coc]: https://github.com/rehypejs/.github/blob/HEAD/code-of-conduct.md
+[coc]: https://github.com/rehypejs/.github/blob/main/code-of-conduct.md
 
 [license]: license
 
@@ -414,16 +428,14 @@ abide by its terms.
 
 [logo]: https://raw.githubusercontent.com/rehypejs/rehype-minify/942349c/logo.svg?sanitize=true
 
-[cli]: ./packages/rehype-preset-minify/readme.md#cli
-
-[api]: ./packages/rehype-preset-minify/readme.md#api
-
 [rehype]: https://github.com/rehypejs/rehype
 
 [xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
 
-[sanitize]: https://github.com/rehypejs/rehype-sanitize
+[rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
 
-[stringify]: https://github.com/rehypejs/rehype/tree/HEAD/packages/rehype-stringify#api
+[rehype-preset-minify]: https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-preset-minify
+
+[rehype-stringify]: https://github.com/rehypejs/rehype/tree/main/packages/rehype-stringify#api
 
 [html-minifier]: https://github.com/kangax/html-minifier

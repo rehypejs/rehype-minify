@@ -1,25 +1,44 @@
 /**
- * @fileoverview
- *   Check if an element is a CSS link.
- * @longdescription
- *   ## Use
+ * hast utility to check if an element is a CSS link.
  *
- *   ```js
- *   import {h} from 'hastscript'
- *   import {isCssLink} from 'hast-util-is-css-link'
+ * ## What is this?
  *
- *   isCssLink(h('link', {rel: ['stylesheet', 'author']})) //=> true
- *   isCssLink(h('link', {rel: ['stylesheet'], type: 'text/css'})) //=> true
- *   isCssLink(h('link', {rel: ['stylesheet'], type: 'text/foo'})) //=> false
- *   ```
+ * This package is a utility to check whether a hast node is a `<link>` that
+ * references CSS.
  *
- *   ## API
+ * ## When should I use this?
  *
- *   ### `isCssLink(node)`
+ * You can use this package to check whether links reference CSS or something
+ * else.
  *
- *   Return `true` if `node` is a `<link>` element with a `rel` list that
- *   contains `'stylesheet'` and has no `type`, an empty `type`, or `'text/css'`
- *   as its `type`.
+ * ## Use
+ *
+ * ```js
+ * import {h} from 'hastscript'
+ * import {isCssLink} from 'hast-util-is-css-link'
+ *
+ * isCssLink(h('link', {rel: ['stylesheet', 'author']})) //=> true
+ * isCssLink(h('link', {rel: ['stylesheet'], type: 'text/css'})) //=> true
+ * isCssLink(h('link', {rel: ['stylesheet'], type: 'text/foo'})) //=> false
+ * ```
+ *
+ * ## API
+ *
+ * ### `isCssLink(node)`
+ *
+ * Check whether a hast node is a `<link>` that references CSS.
+ *
+ * Returns `true` if `node` is a `<link>` element with a `rel` list that
+ * contains `'stylesheet'` and has no `type`, an empty `type`, or `'text/css'`
+ * as its `type`.
+ *
+ * ###### Parameters
+ *
+ * *   `node` (`Node`) — hast node
+ *
+ * ###### Returns
+ *
+ * Whether a node is a `<link>` that references CSS (`boolean`).
  */
 
 /**
@@ -28,7 +47,7 @@
  */
 
 /**
- * Check if an element is a CSS link.
+ * Check whether a hast node is a `<link>` that references CSS.
  *
  * @param {Node} node
  * @returns {boolean}

@@ -1,6 +1,25 @@
 /**
- * @fileoverview
- *   Remove `type` on CSS `style` and `link`s.
+ * rehype plugin to remove `type` attributes on CSS `<style>`s and `<link>`s.
+ *
+ * ## What is this?
+ *
+ * This package is a plugin that removes `type` attributes on CSS `<style>`s
+ * and `<link>`s, as they are unneeded.
+ * This plugin does not touch other `<style>`s and `<link>`s (such as non-CSS
+ * styles).
+ *
+ * ## When should I use this?
+ *
+ * You can use this plugin when you want to improve the transfer size of HTML
+ * documents.
+ *
+ * ## API
+ *
+ * ### `unified().use(rehypeRemoveStyleTypeCss)`
+ *
+ * Remove `type` attributes on CSS `<style>`s and `<link>`s.
+ * There are no options.
+ *
  * @example
  *   <link rel="stylesheet alternate" type="text/css" href="index.css">
  *   <style type="text/css"></style>
@@ -15,7 +34,7 @@ import {isCssLink} from 'hast-util-is-css-link'
 import {isCssStyle} from 'hast-util-is-css-style'
 
 /**
- * Remove `type` on CSS `style` and `link`s.
+ * Remove `type` attributes on CSS `<style>`s and `<link>`s.
  *
  * @type {import('unified').Plugin<Array<void>, Root>}
  */

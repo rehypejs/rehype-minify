@@ -6,17 +6,24 @@
  * @typedef {import('mdast').DefinitionContent} DefinitionContent
  * @typedef {import('mdast').PhrasingContent} PhrasingContent
  * @typedef {import('mdast').Root} Root
+ * @typedef {import('mdast-util-find-and-replace').ReplaceFunction} ReplaceFunction
  */
 
 import fs from 'node:fs'
 import path from 'node:path'
 import {inspect} from 'node:util'
 import {parse} from 'comment-parser'
+import GitHubSlugger from 'github-slugger'
+import {findAndReplace} from 'mdast-util-find-and-replace'
+import {toString} from 'mdast-util-to-string'
+import {unified} from 'unified'
+import remarkParse from 'remark-parse'
 import {remark} from 'remark'
 import {rehype} from 'rehype'
+import rehypeFormat from 'rehype-format'
 import {toVFile} from 'to-vfile'
 import {trough} from 'trough'
-import author from 'parse-author'
+import parseAuthor from 'parse-author'
 import strip from 'strip-indent'
 import remarkPresetWooorm from 'remark-preset-wooorm'
 
@@ -29,7 +36,6 @@ export const pipelineReadme = trough()
   .use(
     /**
      * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors: Array<string>, files: Array<string>, tests: boolean, packageValue?: PackageJson}} ctx
-     * @param {Next} next
      */
     (ctx) => {
       ctx.packageValue = JSON.parse(String(ctx.package))
@@ -37,49 +43,23 @@ export const pipelineReadme = trough()
   )
   .use(
     /**
-     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors: Array<string>, files: Array<string>, tests: boolean, packageValue: PackageJson, config?: Record<string, string>, script?: VFile}} ctx
-     * @param {Next} next
-     */
-    (ctx, next) => {
-      toVFile.read(path.join(ctx.root, 'index.js'), (error, script) => {
-        if (error) {
-          next(error)
-        } else if (script) {
-          ctx.script = script
-          /** @type {Record<string, string>} */
-          ctx.config = {}
-
-          const tags = parse(String(script), {
-            spacing: 'preserve'
-          })[0].tags
-          let index = -1
-          while (++index < tags.length) {
-            const tag = tags[index]
-            ctx.config[tag.tag] = strip(
-              tag.description.replace(/^\r?\n|\r?\n$/g, '')
-            )
-          }
-
-          next()
-        }
-      })
-    }
-  )
-  .use(
-    /**
-     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors: Array<string>, files: Array<string>, tests: boolean, packageValue: PackageJson, config: Record<string, string>, script: VFile, readme?: VFile}} ctx
-     * @param {Next} next
+     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors: Array<string>, files: Array<string>, tests: boolean, packageValue: PackageJson, readme?: VFile}} ctx
      */
     // eslint-disable-next-line complexity
     async (ctx) => {
-      const packageValue = ctx.packageValue
-      const config = ctx.config
+      const script = await toVFile.read(path.join(ctx.root, 'index.js'))
+      const fileInfo = parse(String(script), {spacing: 'preserve'})[0]
+      const tags = fileInfo.tags
+      const exampleTag = tags.find((d) => d.tag === 'example')
+      const description = strip(fileInfo.description).trim()
 
       if (typeof pkg.repository !== 'string') {
         throw new TypeError(
           'Expected `repository` in root `package.json` as a string'
         )
       }
+
+      const packageValue = ctx.packageValue
 
       if (typeof packageValue.author !== 'string') {
         throw new TypeError(
@@ -91,31 +71,311 @@ export const pipelineReadme = trough()
         throw new Error('Expected `name` in local `package.json`')
       }
 
-      const overview = String(
-        config.fileoverview || packageValue.description || ''
-      )
-      const licensee = author(packageValue.author)
-      const example = config.example
-      const repo = pkg.repository
-      const org = repo.split('/').slice(0, -1).join('/')
-      const branchBase = repo + '/blob/main'
+      const basename = packageValue.name
+      const version = (packageValue.version || '0').split('.')[0]
+      const author = parseAuthor(packageValue.author)
+      const id = basename
+        .replace(/-([a-z])/g, (_, /** @type {string} */ $1) => $1.toUpperCase())
+        .replace(/Javascript/g, 'JavaScript')
+      const remote = pkg.repository
+      const org = remote.split('/').slice(0, -1).join('/')
+      const main = remote + '/blob/main'
       const health = org + '/.github'
-      const hBranchBase = health + '/blob/main'
-      const slug = repo.split('/').slice(-2).join('/')
+      const hMain = health + '/blob/main'
+      const slug = remote.split('/').slice(-2).join('/')
+      const descriptionTree = unified().use(remarkParse).parse(description)
+      /** @type {Record<string, unknown> & {default?: Function}} */
+      const mod = await import(script.path)
+      const specifiers = Object.keys(mod).filter((d) => d !== 'default')
+      /** @type {Array<PhrasingContent>} */
+      const info = []
+      let importable = id
+      let referencesRehype = false
+      let referencesRehypeFormat = false
+      let referencesHast = false
+
+      if (specifiers.length > 0) {
+        info.push({
+          type: 'text',
+          value: 'This package exports the following identifiers:\n'
+        })
+
+        let index = -1
+        while (++index < specifiers.length) {
+          if (index !== 0) {
+            info.push({type: 'text', value: ', '})
+          }
+
+          info.push({type: 'inlineCode', value: specifiers[index]})
+        }
+
+        info.push({type: 'text', value: '.'})
+      } else {
+        info.push({
+          type: 'text',
+          value: 'This package exports no identifiers.'
+        })
+      }
+
+      if (mod.default) {
+        if (!('name' in mod.default)) {
+          throw new Error('Expected `name` in default export')
+        }
+
+        info.push(
+          {type: 'text', value: '\nThe default export is '},
+          {type: 'inlineCode', value: mod.default.name},
+          {type: 'text', value: '.'}
+        )
+      } else {
+        if (specifiers.length > 2) {
+          importable = '* as ' + id
+        } else if (specifiers.length > 0) {
+          importable = '{' + specifiers.join(', ') + '}'
+        }
+
+        info.push({type: 'text', value: '\nThere is no default export.'})
+      }
+
+      const descriptionContent = /** @type {Array<BlockContent>} */ (
+        descriptionTree.children
+      )
+
+      /** @type {Record<string, Array<BlockContent>>} */
+      const categories = {}
+      let category = 'intro'
+      let contentIndex = -1
+
+      while (++contentIndex < descriptionContent.length) {
+        const node = descriptionContent[contentIndex]
+
+        if (node.type === 'heading' && node.depth === 2) {
+          category = GitHubSlugger.slug(toString(node))
+        }
+
+        if (!(category in categories)) {
+          categories[category] = []
+        }
+
+        categories[category].push(node)
+      }
+
+      /** @type {Root} */
+      const introRoot = {type: 'root', children: categories.intro || []}
+
+      // Autolink `rehype` / `hast`.
+      unified()
+        .use(
+          /** @type {import('unified').Plugin<Array<void>, import('mdast').Root>} */
+          () => (tree) => {
+            findAndReplace(tree, [
+              [
+                /rehype/g,
+                /** @type {ReplaceFunction} */
+                () => {
+                  referencesRehype = true
+                  return {
+                    type: 'strong',
+                    children: [
+                      {
+                        type: 'linkReference',
+                        identifier: 'rehype',
+                        referenceType: 'collapsed',
+                        children: [{type: 'text', value: 'rehype'}]
+                      }
+                    ]
+                  }
+                }
+              ],
+              [
+                /hast/g,
+                /** @type {ReplaceFunction} */
+                () => {
+                  referencesHast = true
+                  return {
+                    type: 'linkReference',
+                    identifier: 'hast',
+                    referenceType: 'full',
+                    children: [{type: 'inlineCode', value: 'hast'}]
+                  }
+                }
+              ]
+            ])
+          }
+        )
+        .runSync(introRoot)
+
+      if (!categories.use && ctx.plugins.includes(basename)) {
+        if (!('default' in mod) || !mod.default || mod.default.name !== id) {
+          throw new Error(
+            'Expected default export called `' +
+              id +
+              '`' +
+              (mod.default ? ', not `' + mod.default.name + '`' : '')
+          )
+        }
+
+        categories.use = [
+          {type: 'heading', depth: 2, children: [{type: 'text', value: 'Use'}]},
+          {
+            type: 'paragraph',
+            children: [{type: 'text', value: 'On the API:'}]
+          },
+          {
+            type: 'code',
+            lang: 'js',
+            value: [
+              "import {read} from 'to-vfile'",
+              "import {unified} from 'unified'",
+              "import rehypeParse from 'rehype-parse'",
+              "import rehypeStringify from 'rehype-stringify'",
+              'import ' + id + " from '" + basename + "'",
+              '',
+              'main()',
+              '',
+              'async function main() {',
+              '  const file = await unified()',
+              '    .use(rehypeParse)',
+              '    .use(' + id + ')',
+              '    .use(rehypeStringify)',
+              "    .process(await read('index.html'))",
+              '',
+              '  console.log(String(file))',
+              '}'
+            ].join('\n')
+          },
+          {type: 'paragraph', children: [{type: 'text', value: 'On the CLI:'}]},
+          {
+            type: 'code',
+            lang: 'sh',
+            value:
+              'rehype input.html --use ' + basename + ' --output output.html'
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                value: 'On the CLI in a config file (here a '
+              },
+              {
+                type: 'inlineCode',
+                value: 'package.json'
+              },
+              {
+                type: 'text',
+                value: '):'
+              }
+            ]
+          },
+          {
+            type: 'code',
+            lang: 'diff',
+            value: [
+              ' …',
+              ' "rehype": {',
+              '   "plugins": [',
+              '     …',
+              '+    "' + basename + '",',
+              '     …',
+              '   ]',
+              ' }',
+              ' …'
+            ].join('\n')
+          }
+        ]
+      }
+
+      if (!categories.api) {
+        categories.api = [
+          {type: 'heading', depth: 2, children: [{type: 'text', value: 'API'}]}
+        ]
+      }
+
+      if (ctx.plugins.includes(basename) && exampleTag) {
+        /** @type {Record<string, unknown>} */
+        let options = {}
+        const lines = exampleTag.description
+          .replace(/^\r?\n|\r?\n$/g, '')
+          .split('\n')
+        const [headLine, ...restLines] = lines
+
+        try {
+          options = JSON.parse(headLine)
+        } catch {
+          restLines.unshift(headLine)
+        }
+
+        const exampleValue = strip(restLines.join('\n').replace(/^\r?\n/g, ''))
+
+        categories.api.push(
+          {
+            type: 'heading',
+            depth: 2,
+            children: [{type: 'text', value: 'Example'}]
+          },
+          {type: 'heading', depth: 6, children: [{type: 'text', value: 'In'}]},
+          {type: 'code', lang: 'html', value: exampleValue},
+          {type: 'heading', depth: 6, children: [{type: 'text', value: 'Out'}]}
+        )
+
+        if (options.plugin || options.format) {
+          /** @type {Array<PhrasingContent>} */
+          const phrase = [{type: 'text', value: '(with '}]
+
+          if (options.plugin) {
+            phrase.push(
+              {type: 'inlineCode', value: inspect(options.plugin)},
+              {type: 'text', value: ' as options'}
+            )
+          }
+
+          if (options.plugin && options.format) {
+            phrase.push({type: 'text', value: ' and with '})
+          }
+
+          if (options.format) {
+            referencesRehypeFormat = true
+            phrase.push({
+              type: 'linkReference',
+              identifier: 'rehype-format',
+              referenceType: 'full',
+              children: [{type: 'inlineCode', value: 'rehype-format'}]
+            })
+          }
+
+          phrase.push({type: 'text', value: ')'})
+
+          categories.api.push({type: 'paragraph', children: phrase})
+        }
+
+        categories.api.push({
+          type: 'code',
+          lang: 'html',
+          value: rehype()
+            // Assume `fragment` as default.
+            .data('settings', options.processor || {fragment: true})
+            // @ts-expect-error: Assume `default` is usable.
+            .use(mod.default, options.plugin || undefined)
+            // @ts-expect-error: `undefined` is fine to pass.
+            .use(options.format ? rehypeFormat : undefined)
+            .processSync(exampleValue)
+            .toString()
+            .trim()
+        })
+      }
+
+      const [apiHeading, ...apiRest] = categories.api
+
+      referencesHast = true
 
       /** @type {Array<BlockContent|DefinitionContent>} */
-      const tree = [
-        {
-          type: 'html',
-          value: '<!--This file is generated by `build-packages.js`-->'
-        }
-      ]
-
-      tree.push(
+      const children = [
+        {type: 'html', value: '<!--This file is generated-->'},
         {
           type: 'heading',
           depth: 1,
-          children: [{type: 'text', value: packageValue.name}]
+          children: [{type: 'text', value: basename}]
         },
         {
           type: 'paragraph',
@@ -218,62 +478,15 @@ export const pipelineReadme = trough()
               ]
             }
           ]
-        }
-      )
-
-      const desc = /** @type {Root} */ (
-        proc.parse(
-          strip(
-            overview + (overview.charAt(overview.length - 1) === '.' ? '' : '.')
-          )
-        )
-      )
-
-      // @ts-expect-error: Assume block content.
-      tree.push(...desc.children)
-
-      /**
-       * @type {Record<string, unknown> & {default?: Function}}
-       */
-      const mod = await import(ctx.script.path)
-      const specifiers = Object.keys(mod).filter((d) => d !== 'default')
-
-      /** @type {Array<PhrasingContent>} */
-      const info = []
-
-      if (specifiers.length > 0) {
-        info.push({
-          type: 'text',
-          value: 'This package exports the following identifiers:\n'
-        })
-
-        let index = -1
-        while (++index < specifiers.length) {
-          if (index !== 0) {
-            info.push({type: 'text', value: ', '})
-          }
-
-          info.push({type: 'inlineCode', value: specifiers[index]})
-        }
-
-        info.push({type: 'text', value: '.'})
-      } else {
-        info.push({
-          type: 'text',
-          value: 'This package exports no identifiers.'
-        })
-      }
-
-      if ('default' in mod && mod.default && 'name' in mod.default) {
-        info.push(
-          {type: 'text', value: '\nThe default export is '},
-          {type: 'inlineCode', value: mod.default.name}
-        )
-      } else {
-        info.push({type: 'text', value: '\nThere is no default export.'})
-      }
-
-      tree.push(
+        },
+        ...(categories.intro || []),
+        {
+          type: 'heading',
+          depth: 2,
+          children: [{type: 'text', value: 'Contents'}]
+        },
+        ...(categories['what-is-this'] || []),
+        ...(categories['when-should-i-use-this'] || []),
         {
           type: 'heading',
           depth: 2,
@@ -291,17 +504,10 @@ export const pipelineReadme = trough()
             },
             {
               type: 'text',
-              value: ':\nNode 12+ is needed to use it and it must be '
+              value:
+                '.\nIn Node.js (version 12.20+, 14.14+, or 16.0+), ' +
+                'install with '
             },
-            {type: 'inlineCode', value: 'imported'},
-            {type: 'text', value: 'ed instead of '},
-            {type: 'inlineCode', value: 'required'},
-            {type: 'text', value: 'd.'}
-          ]
-        },
-        {
-          type: 'paragraph',
-          children: [
             {
               type: 'linkReference',
               identifier: 'npm',
@@ -311,122 +517,163 @@ export const pipelineReadme = trough()
             {type: 'text', value: ':'}
           ]
         },
-        {type: 'code', lang: 'sh', value: 'npm install ' + packageValue.name},
-        {type: 'paragraph', children: info}
-      )
-
-      if (ctx.plugins.includes(packageValue.name)) {
-        const id = packageValue.name
-          .replace(/-([a-z])/g, (_, /** @type {string} */ $1) =>
-            $1.toUpperCase()
-          )
-          .replace(/Javascript/g, 'JavaScript')
-
-        if (!('default' in mod) || !mod.default || mod.default.name !== id) {
-          throw new Error(
-            'Expected default export called `' +
-              id +
-              '`' +
-              (mod.default ? ', not `' + mod.default.name + '`' : '')
-          )
-        }
-
-        tree.push(
-          {type: 'heading', depth: 2, children: [{type: 'text', value: 'Use'}]},
-          {
-            type: 'paragraph',
-            children: [{type: 'text', value: 'On the API:'}]
-          },
-          {
-            type: 'code',
-            lang: 'diff',
-            value: [
-              " import {unified} from 'unified'",
-              " import rehypeParse from 'rehype-parse'",
-              '+import ' + id + " from '" + packageValue.name + "'",
-              " import rehypeStringify from 'rehype-stringify'",
-              '',
-              ' unified()',
-              '   .use(rehypeParse)',
-              '+  .use(' + id + ')',
-              '   .use(rehypeStringify)',
-              "   .process('<span>some html</span>', function (err, file) {",
-              '     console.error(report(err || file))',
-              '     console.log(String(file))',
-              '   })'
-            ].join('\n')
-          },
-          {type: 'paragraph', children: [{type: 'text', value: 'On the CLI:'}]},
-          {
-            type: 'code',
-            lang: 'sh',
-            value:
-              'rehype input.html --use ' +
-              packageValue.name.replace(/^rehype-/, '') +
-              ' --output output.html'
-          }
-        )
-      }
-
-      if (config.longdescription) {
-        const desc = /** @type {Root} */ (
-          proc.parse(strip(config.longdescription))
-        )
-
-        // @ts-expect-error: assume block content.
-        tree.push(...desc.children)
-      }
-
-      if (typeof example === 'string' && ctx.script) {
-        /** @type {Record<string, unknown>} */
-        let options = {}
-        const lines = example.split('\n')
-
-        if (lines[0].trim()) {
-          try {
-            options = JSON.parse(lines[0])
-            lines.splice(0, 1)
-          } catch {}
-        }
-
-        const exampleValue = strip(lines.join('\n'))
-
-        tree.push({
+        {type: 'code', lang: 'sh', value: 'npm install ' + basename},
+        {
+          type: 'paragraph',
+          children: [
+            {type: 'text', value: 'In Deno with '},
+            {
+              type: 'linkReference',
+              identifier: 'skypack',
+              label: 'Skypack',
+              referenceType: 'collapsed',
+              children: [{type: 'text', value: 'Skypack'}]
+            },
+            {type: 'text', value: ':'}
+          ]
+        },
+        {
+          type: 'code',
+          lang: 'js',
+          value:
+            'import ' +
+            importable +
+            " from 'https://cdn.skypack.dev/" +
+            basename +
+            '@' +
+            version +
+            "?dts'"
+        },
+        {
+          type: 'paragraph',
+          children: [
+            {type: 'text', value: 'In browsers with '},
+            {
+              type: 'linkReference',
+              identifier: 'skypack',
+              label: 'Skypack',
+              referenceType: 'collapsed',
+              children: [{type: 'text', value: 'Skypack'}]
+            },
+            {type: 'text', value: ':'}
+          ]
+        },
+        {
+          type: 'code',
+          lang: 'html',
+          value:
+            '<script type="module">\n  import ' +
+            importable +
+            " from 'https://cdn.skypack.dev/" +
+            basename +
+            '@' +
+            version +
+            "?min'\n</script>"
+        },
+        ...(categories.use || []),
+        apiHeading,
+        {type: 'paragraph', children: info},
+        ...apiRest,
+        {
           type: 'heading',
           depth: 2,
-          children: [{type: 'text', value: 'Example'}]
-        })
-
-        if (options.plugin) {
-          tree.push({
-            type: 'paragraph',
-            children: [
-              {type: 'text', value: 'With '},
-              {type: 'inlineCode', value: inspect(options.plugin)},
-              {type: 'text', value: ' as options.'}
-            ]
-          })
-        }
-
-        tree.push(
-          {type: 'heading', depth: 5, children: [{type: 'text', value: 'In'}]},
-          {type: 'code', lang: 'html', value: exampleValue},
-          {type: 'heading', depth: 5, children: [{type: 'text', value: 'Out'}]},
-          {
-            type: 'code',
-            lang: 'html',
-            value: rehype()
-              .data('settings', options.processor || {fragment: true})
-              // @ts-expect-error: Assume `default` is usable.
-              .use(mod.default, options.plugin || undefined)
-              .processSync(exampleValue)
-              .toString()
-              .trim()
-          }
-        )
-      }
-
-      tree.push(
+          children: [{type: 'text', value: 'Syntax'}]
+        },
+        {
+          type: 'paragraph',
+          children: [
+            {
+              type: 'text',
+              value:
+                'HTML is handled according to WHATWG HTML (the living standard), which is also\nfollowed by browsers such as Chrome and Firefox.'
+            }
+          ]
+        },
+        {
+          type: 'heading',
+          depth: 2,
+          children: [{type: 'text', value: 'Syntax tree'}]
+        },
+        {
+          type: 'paragraph',
+          children: [
+            {type: 'text', value: 'The syntax tree format used is '},
+            {
+              type: 'linkReference',
+              identifier: 'hast',
+              referenceType: 'full',
+              children: [{type: 'inlineCode', value: 'hast'}]
+            },
+            {type: 'text', value: '.'}
+          ]
+        },
+        {
+          type: 'heading',
+          depth: 2,
+          children: [{type: 'text', value: 'Types'}]
+        },
+        {
+          type: 'paragraph',
+          children: [
+            {type: 'text', value: 'This package is fully typed with '},
+            {
+              type: 'linkReference',
+              identifier: 'TypeScript',
+              referenceType: 'collapsed',
+              children: [{type: 'text', value: 'TypeScript'}]
+            },
+            {type: 'text', value: '.'}
+          ]
+        },
+        {
+          type: 'heading',
+          depth: 2,
+          children: [{type: 'text', value: 'Compatibility'}]
+        },
+        {
+          type: 'paragraph',
+          children: [
+            {
+              type: 'text',
+              value:
+                'Projects maintained by the unified collective are compatible with all maintained\nversions of Node.js.\nAs of now, that is Node.js 12.20+, 14.14+, and 16.0+.\nOur projects sometimes work with older versions, but this is not guaranteed.'
+            }
+          ]
+        },
+        {
+          type: 'heading',
+          depth: 2,
+          children: [{type: 'text', value: 'Security'}]
+        },
+        {
+          type: 'paragraph',
+          children: [
+            {type: 'text', value: 'As '},
+            {type: 'strong', children: [{type: 'text', value: 'rehype'}]},
+            {
+              type: 'text',
+              value:
+                ' works on HTML, and improper use of HTML can open you up to a\n'
+            },
+            {
+              type: 'linkReference',
+              identifier: 'xss',
+              referenceType: 'full',
+              children: [{type: 'text', value: 'cross-site scripting (XSS)'}]
+            },
+            {
+              type: 'text',
+              value: ' attack, use of rehype can also be unsafe.\nUse '
+            },
+            {
+              type: 'linkReference',
+              identifier: 'rehype-sanitize',
+              referenceType: 'full',
+              children: [{type: 'inlineCode', value: 'rehype-sanitize'}]
+            },
+            {type: 'text', value: ' to make the tree safe.'}
+          ]
+        },
         {
           type: 'heading',
           depth: 2,
@@ -497,7 +744,7 @@ export const pipelineReadme = trough()
               type: 'linkReference',
               referenceType: 'full',
               identifier: 'author',
-              children: [{type: 'text', value: String(licensee.name || '')}]
+              children: [{type: 'text', value: String(author.name || '')}]
             }
           ]
         },
@@ -524,25 +771,22 @@ export const pipelineReadme = trough()
         {
           type: 'definition',
           identifier: 'downloads-badge',
-          url: 'https://img.shields.io/npm/dm/' + packageValue.name + '.svg'
+          url: 'https://img.shields.io/npm/dm/' + basename + '.svg'
         },
         {
           type: 'definition',
           identifier: 'downloads',
-          url: 'https://www.npmjs.com/package/' + packageValue.name
+          url: 'https://www.npmjs.com/package/' + basename
         },
         {
           type: 'definition',
           identifier: 'size-badge',
-          url:
-            'https://img.shields.io/bundlephobia/minzip/' +
-            packageValue.name +
-            '.svg'
+          url: 'https://img.shields.io/bundlephobia/minzip/' + basename + '.svg'
         },
         {
           type: 'definition',
           identifier: 'size',
-          url: 'https://bundlephobia.com/result?p=' + packageValue.name
+          url: 'https://bundlephobia.com/result?p=' + basename
         },
         {
           type: 'definition',
@@ -581,39 +825,83 @@ export const pipelineReadme = trough()
         },
         {
           type: 'definition',
+          identifier: 'skypack',
+          url: 'https://www.skypack.dev'
+        },
+        {
+          type: 'definition',
+          identifier: 'typescript',
+          url: 'https://www.typescriptlang.org'
+        },
+        {
+          type: 'definition',
+          identifier: 'rehype-sanitize',
+          url: 'https://github.com/rehypejs/rehype-sanitize'
+        },
+        {
+          type: 'definition',
+          identifier: 'xss',
+          url: 'https://en.wikipedia.org/wiki/Cross-site_scripting'
+        },
+        {
+          type: 'definition',
           identifier: 'health',
           url: health
         },
         {
           type: 'definition',
           identifier: 'contributing',
-          url: hBranchBase + '/contributing.md'
+          url: hMain + '/contributing.md'
         },
         {
           type: 'definition',
           identifier: 'support',
-          url: hBranchBase + '/support.md'
+          url: hMain + '/support.md'
         },
         {
           type: 'definition',
           identifier: 'coc',
-          url: hBranchBase + '/code-of-conduct.md'
+          url: hMain + '/code-of-conduct.md'
         },
         {
           type: 'definition',
           identifier: 'license',
-          url: branchBase + '/license'
+          url: main + '/license'
         },
         {
           type: 'definition',
           identifier: 'author',
-          url: String(licensee.url || '')
+          url: String(author.url || '')
         }
-      )
+      ]
+
+      if (referencesHast) {
+        children.push({
+          type: 'definition',
+          identifier: 'hast',
+          url: 'https://github.com/syntax-tree/hast'
+        })
+      }
+
+      if (referencesRehype) {
+        children.push({
+          type: 'definition',
+          identifier: 'rehype',
+          url: 'https://github.com/rehypejs/rehype'
+        })
+      }
+
+      if (referencesRehypeFormat) {
+        children.push({
+          type: 'definition',
+          identifier: 'rehype-format',
+          url: 'https://github.com/rehypejs/rehype-format'
+        })
+      }
 
       ctx.readme = toVFile(path.join(ctx.root, 'readme.md'))
       /** @type {Root} */
-      const root = {type: 'root', children: tree}
+      const root = {type: 'root', children}
       ctx.readme.value = proc.stringify(root, ctx.readme)
     }
   )

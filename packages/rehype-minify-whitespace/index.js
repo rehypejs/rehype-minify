@@ -1,10 +1,30 @@
 /**
- * @fileoverview
- *   Collapse whitespace.
+ * rehype plugin to minify whitespace between elements.
  *
- *   Normally, collapses to a single space.
- *   If `newlines: true`, collapses whitespace containing newlines to `'\n'`
- *   instead of `' '`.
+ * ## What is this?
+ *
+ * This package is a plugin that can minify the whitespace between elements.
+ *
+ * ## When should I use this?
+ *
+ * You can use this plugin when you want to improve the size of HTML documents.
+ *
+ * ## API
+ *
+ * ### `unified().use(rehypeMinifyWhitespace[, options])`
+ *
+ * Minify whitespace.
+ *
+ * ##### `options`
+ *
+ * Configuration (optional).
+ *
+ * ##### `options.newlines`
+ *
+ * Whether to collapse runs of whitespace that include line endings to one
+ * line ending (`boolean`, default: `false`).
+ * The default is to collapse everything to one space.
+ *
  * @example
  *   <h1>Heading</h1>
  *   <p><strong>This</strong> and <em>that</em></p>
@@ -47,11 +67,7 @@ import {skippable as skippables} from './skippable.js'
 const ignorableNode = convert(['doctype', 'comment'])
 
 /**
- * Collapse whitespace.
- *
- * Normally, collapses to a single space.
- * If `newlines: true`, collapses whitespace containing newlines to `'\n'`
- * instead of `' '`.
+ * Minify whitespace.
  *
  * @type {import('unified').Plugin<[Options?]|Array<void>, Root>}
  */

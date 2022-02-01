@@ -1,24 +1,43 @@
 /**
- * @fileoverview
- *   Check if an element is a CSS `<style>` element.
- * @longdescription
- *   ## Use
+ * hast utility to check if an element is a CSS `<style>` element.
  *
- *   ```js
- *   import {h} from 'hastscript'
- *   import {isCssStyle} from 'hast-util-is-css-style'
+ * ## What is this?
  *
- *   isCssStyle(h('style')) //=> true
- *   isCssStyle(h('style', {type: ' TEXT/CSS '})) //=> true
- *   isCssStyle(h('style', {type: 'text/foo'})) //=> false
- *   ```
+ * This package is a utility to check whether a hast node is a `<style>` that
+ * contains CSS.
  *
- *   ## API
+ * ## When should I use this?
  *
- *   ### `isCssStyle(node)`
+ * You can use this package to check whether `<style>` elements contain CSS or
+ * something else.
  *
- *   Return `true` if `node` is a `<style>` element that has no `type`, an empty
- *   `type`, or `'text/css'` as its `type`.
+ * ## Use
+ *
+ * ```js
+ * import {h} from 'hastscript'
+ * import {isCssStyle} from 'hast-util-is-css-style'
+ *
+ * isCssStyle(h('style')) //=> true
+ * isCssStyle(h('style', {type: ' TEXT/CSS '})) //=> true
+ * isCssStyle(h('style', {type: 'text/foo'})) //=> false
+ * ```
+ *
+ * ## API
+ *
+ * ### `isCssStyle(node)`
+ *
+ * Check whether a hast node is a `<style>` that contains CSS.
+ *
+ * Returns `true` if `node` is a `<style>` element that has no `type`, an empty
+ * `type`, or `'text/css'` as its `type`.
+ *
+ * ###### Parameters
+ *
+ * *   `node` (`Node`) — hast node
+ *
+ * ###### Returns
+ *
+ * Whether a node is a `<style>` that references CSS (`boolean`).
  */
 
 /**
@@ -27,7 +46,7 @@
  */
 
 /**
- * Check if an element is a CSS `<style>` element.
+ * Check whether a hast node is a `<style>` that contains CSS.
  *
  * @param {Node} node
  * @returns {boolean}
