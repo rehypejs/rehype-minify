@@ -426,7 +426,7 @@ abide by its terms.
 
 [author]: https://wooorm.com
 
-[logo]: https://raw.githubusercontent.com/rehypejs/rehype-minify/942349c/logo.svg?sanitize=true
+[logo]: https://raw.githubusercontent.com/rehypejs/rehype-minify/6f0f096/logo.svg?sanitize=true
 
 [rehype]: https://github.com/rehypejs/rehype
 
