@@ -318,7 +318,8 @@ function collapseFactory(replace) {
 }
 
 /**
- * We don’t support void elements here (so `nobr wbr` -> `normal` is ignored).
+ * We don’t need to support void elements here (so `nobr wbr` -> `normal` is
+ * ignored).
  *
  * @param {Root|Element} node
  * @param {Context} context
@@ -327,8 +328,12 @@ function collapseFactory(replace) {
 function inferWhiteSpace(node, context) {
   if ('tagName' in node && node.properties) {
     switch (node.tagName) {
+      // Whitespace in script/style, while not displayed by CSS as significant,
+      // could have some meaning in JS/CSS, so we can’t touch them.
       case 'listing':
       case 'plaintext':
+      case 'script':
+      case 'style':
       case 'xmp':
         return 'pre'
       case 'nobr':

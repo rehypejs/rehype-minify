@@ -419,10 +419,10 @@ test('rehype-minify-whitespace', (t) => {
         h('meta', {charSet: 'utf8'}),
         h('title', 'a'),
         h('link'),
-        h('script', 'b'),
+        h('script', '  b  '),
         h('meta'),
-        h('script', 'c'),
-        h('style', 'd')
+        h('script', '  c  '),
+        h('style', '  d  ')
       ])
     ]),
     'should trim whitespace in head'
@@ -825,6 +825,14 @@ test('rehype-minify-whitespace', (t) => {
       ),
     u('root', [h('main', ['\u00A0', h('p', 'a \u00A0'), '\u00A0'])]),
     'should collapse and trim whitespace in tables'
+  )
+
+  t.deepEqual(
+    rehype()
+      .use(min)
+      .runSync(u('root', [h('script', ' // a \n b ')])),
+    u('root', [h('script', ' // a \n b ')]),
+    'should not collapse whitespace in scripts'
   )
 
   t.end()
