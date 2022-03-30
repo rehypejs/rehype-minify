@@ -253,7 +253,6 @@ export const pipelineRoot = trough()
   .use(
     /**
      * @param {{root: string, plugins: Array<string>, readme: VFile}} ctx
-     * @param {Next} next
      */
     (ctx) => {
       ctx.readme.stored = true
