@@ -23,7 +23,8 @@ test('plugin', (t) => {
     let config
 
     try {
-      config = JSON.parse(fs.readFileSync(path.join(fp, 'config.json'), 'utf8'))
+      // @ts-expect-error: TypeScript is wrong.
+      config = JSON.parse(fs.readFileSync(path.join(fp, 'config.json')))
     } catch {}
 
     rehype()
