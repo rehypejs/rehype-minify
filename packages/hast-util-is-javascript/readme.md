@@ -47,17 +47,17 @@ In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 npm install hast-util-is-javascript
 ```
 
-In Deno with [Skypack][]:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import {isJavaScript} from 'https://cdn.skypack.dev/hast-util-is-javascript@2?dts'
+import {isJavaScript} from 'https://esm.sh/hast-util-is-javascript@2'
 ```
 
-In browsers with [Skypack][]:
+In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import {isJavaScript} from 'https://cdn.skypack.dev/hast-util-is-javascript@2?min'
+  import {isJavaScript} from 'https://esm.sh/hast-util-is-javascript@2?bundle'
 </script>
 ```
 
@@ -166,7 +166,7 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[skypack]: https://www.skypack.dev
+[esmsh]: https://esm.sh
 
 [typescript]: https://www.typescriptlang.org
 

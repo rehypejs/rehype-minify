@@ -47,17 +47,17 @@ In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 npm install rehype-minify-language
 ```
 
-In Deno with [Skypack][]:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import rehypeMinifyLanguage from 'https://cdn.skypack.dev/rehype-minify-language@2?dts'
+import rehypeMinifyLanguage from 'https://esm.sh/rehype-minify-language@2'
 ```
 
-In browsers with [Skypack][]:
+In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import rehypeMinifyLanguage from 'https://cdn.skypack.dev/rehype-minify-language@2?min'
+  import rehypeMinifyLanguage from 'https://esm.sh/rehype-minify-language@2?bundle'
 </script>
 ```
 
@@ -205,7 +205,7 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[skypack]: https://www.skypack.dev
+[esmsh]: https://esm.sh
 
 [typescript]: https://www.typescriptlang.org
 

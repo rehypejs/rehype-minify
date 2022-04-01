@@ -47,17 +47,17 @@ In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 npm install rehype-minify-media-attribute
 ```
 
-In Deno with [Skypack][]:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import rehypeMinifyMediaAttribute from 'https://cdn.skypack.dev/rehype-minify-media-attribute@3?dts'
+import rehypeMinifyMediaAttribute from 'https://esm.sh/rehype-minify-media-attribute@3'
 ```
 
-In browsers with [Skypack][]:
+In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import rehypeMinifyMediaAttribute from 'https://cdn.skypack.dev/rehype-minify-media-attribute@3?min'
+  import rehypeMinifyMediaAttribute from 'https://esm.sh/rehype-minify-media-attribute@3?bundle'
 </script>
 ```
 
@@ -201,7 +201,7 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[skypack]: https://www.skypack.dev
+[esmsh]: https://esm.sh
 
 [typescript]: https://www.typescriptlang.org
 

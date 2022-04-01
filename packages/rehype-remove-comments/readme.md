@@ -48,17 +48,17 @@ In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 npm install rehype-remove-comments
 ```
 
-In Deno with [Skypack][]:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import rehypeRemoveComments from 'https://cdn.skypack.dev/rehype-remove-comments@5?dts'
+import rehypeRemoveComments from 'https://esm.sh/rehype-remove-comments@5'
 ```
 
-In browsers with [Skypack][]:
+In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import rehypeRemoveComments from 'https://cdn.skypack.dev/rehype-remove-comments@5?min'
+  import rehypeRemoveComments from 'https://esm.sh/rehype-remove-comments@5?bundle'
 </script>
 ```
 
@@ -212,7 +212,7 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[skypack]: https://www.skypack.dev
+[esmsh]: https://esm.sh
 
 [typescript]: https://www.typescriptlang.org
 

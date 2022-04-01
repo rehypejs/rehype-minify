@@ -524,10 +524,10 @@ export const pipelineReadme = trough()
             {type: 'text', value: 'In Deno with '},
             {
               type: 'linkReference',
-              identifier: 'skypack',
-              label: 'Skypack',
-              referenceType: 'collapsed',
-              children: [{type: 'text', value: 'Skypack'}]
+              identifier: 'esmsh',
+              label: 'esmsh',
+              referenceType: 'full',
+              children: [{type: 'inlineCode', value: 'esm.sh'}]
             },
             {type: 'text', value: ':'}
           ]
@@ -538,11 +538,11 @@ export const pipelineReadme = trough()
           value:
             'import ' +
             importable +
-            " from 'https://cdn.skypack.dev/" +
+            " from 'https://esm.sh/" +
             basename +
             '@' +
             version +
-            "?dts'"
+            "'"
         },
         {
           type: 'paragraph',
@@ -550,10 +550,10 @@ export const pipelineReadme = trough()
             {type: 'text', value: 'In browsers with '},
             {
               type: 'linkReference',
-              identifier: 'skypack',
-              label: 'Skypack',
-              referenceType: 'collapsed',
-              children: [{type: 'text', value: 'Skypack'}]
+              identifier: 'esmsh',
+              label: 'esmsh',
+              referenceType: 'full',
+              children: [{type: 'inlineCode', value: 'esm.sh'}]
             },
             {type: 'text', value: ':'}
           ]
@@ -564,11 +564,11 @@ export const pipelineReadme = trough()
           value:
             '<script type="module">\n  import ' +
             importable +
-            " from 'https://cdn.skypack.dev/" +
+            " from 'https://esm.sh/" +
             basename +
             '@' +
             version +
-            "?min'\n</script>"
+            "?bundle'\n</script>"
         },
         ...(categories.use || []),
         apiHeading,
@@ -825,8 +825,8 @@ export const pipelineReadme = trough()
         },
         {
           type: 'definition',
-          identifier: 'skypack',
-          url: 'https://www.skypack.dev'
+          identifier: 'esmsh',
+          url: 'https://esm.sh'
         },
         {
           type: 'definition',

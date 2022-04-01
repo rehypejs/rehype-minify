@@ -47,17 +47,17 @@ In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 npm install hast-util-is-body-ok-link
 ```
 
-In Deno with [Skypack][]:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import {isBodyOkLink} from 'https://cdn.skypack.dev/hast-util-is-body-ok-link@2?dts'
+import {isBodyOkLink} from 'https://esm.sh/hast-util-is-body-ok-link@2'
 ```
 
-In browsers with [Skypack][]:
+In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import {isBodyOkLink} from 'https://cdn.skypack.dev/hast-util-is-body-ok-link@2?min'
+  import {isBodyOkLink} from 'https://esm.sh/hast-util-is-body-ok-link@2?bundle'
 </script>
 ```
 
@@ -164,7 +164,7 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[skypack]: https://www.skypack.dev
+[esmsh]: https://esm.sh
 
 [typescript]: https://www.typescriptlang.org
 

@@ -46,17 +46,17 @@ In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 npm install rehype-minify-whitespace
 ```
 
-In Deno with [Skypack][]:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import rehypeMinifyWhitespace from 'https://cdn.skypack.dev/rehype-minify-whitespace@5?dts'
+import rehypeMinifyWhitespace from 'https://esm.sh/rehype-minify-whitespace@5'
 ```
 
-In browsers with [Skypack][]:
+In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import rehypeMinifyWhitespace from 'https://cdn.skypack.dev/rehype-minify-whitespace@5?min'
+  import rehypeMinifyWhitespace from 'https://esm.sh/rehype-minify-whitespace@5?bundle'
 </script>
 ```
 
@@ -208,7 +208,7 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[skypack]: https://www.skypack.dev
+[esmsh]: https://esm.sh
 
 [typescript]: https://www.typescriptlang.org
 

@@ -46,17 +46,17 @@ In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 npm install html-enumerated-attributes
 ```
 
-In Deno with [Skypack][]:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import {enumeratedAttributes} from 'https://cdn.skypack.dev/html-enumerated-attributes@0?dts'
+import {enumeratedAttributes} from 'https://esm.sh/html-enumerated-attributes@0'
 ```
 
-In browsers with [Skypack][]:
+In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import {enumeratedAttributes} from 'https://cdn.skypack.dev/html-enumerated-attributes@0?min'
+  import {enumeratedAttributes} from 'https://esm.sh/html-enumerated-attributes@0?bundle'
 </script>
 ```
 
@@ -161,7 +161,7 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[skypack]: https://www.skypack.dev
+[esmsh]: https://esm.sh
 
 [typescript]: https://www.typescriptlang.org
 

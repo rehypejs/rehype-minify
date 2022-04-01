@@ -48,17 +48,17 @@ In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 npm install rehype-css-to-top
 ```
 
-In Deno with [Skypack][]:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import rehypeCssToTop from 'https://cdn.skypack.dev/rehype-css-to-top@3?dts'
+import rehypeCssToTop from 'https://esm.sh/rehype-css-to-top@3'
 ```
 
-In browsers with [Skypack][]:
+In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import rehypeCssToTop from 'https://cdn.skypack.dev/rehype-css-to-top@3?min'
+  import rehypeCssToTop from 'https://esm.sh/rehype-css-to-top@3?bundle'
 </script>
 ```
 
@@ -200,7 +200,7 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[skypack]: https://www.skypack.dev
+[esmsh]: https://esm.sh
 
 [typescript]: https://www.typescriptlang.org
 

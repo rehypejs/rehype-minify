@@ -47,17 +47,17 @@ In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 npm install hast-util-is-css-style
 ```
 
-In Deno with [Skypack][]:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import {isCssStyle} from 'https://cdn.skypack.dev/hast-util-is-css-style@2?dts'
+import {isCssStyle} from 'https://esm.sh/hast-util-is-css-style@2'
 ```
 
-In browsers with [Skypack][]:
+In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import {isCssStyle} from 'https://cdn.skypack.dev/hast-util-is-css-style@2?min'
+  import {isCssStyle} from 'https://esm.sh/hast-util-is-css-style@2?bundle'
 </script>
 ```
 
@@ -163,7 +163,7 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[skypack]: https://www.skypack.dev
+[esmsh]: https://esm.sh
 
 [typescript]: https://www.typescriptlang.org
 

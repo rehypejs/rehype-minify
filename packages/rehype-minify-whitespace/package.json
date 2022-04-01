@@ -31,13 +31,9 @@
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
-    "block.d.ts",
     "block.js",
-    "content.d.ts",
     "content.js",
-    "index.d.ts",
     "index.js",
-    "skippable.d.ts",
     "skippable.js"
   ],
   "dependencies": {

@@ -31,9 +31,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
-    "index.d.ts",
     "index.js",
-    "schema.d.ts",
     "schema.js"
   ],
   "dependencies": {

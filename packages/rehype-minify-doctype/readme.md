@@ -49,17 +49,17 @@ In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 npm install rehype-minify-doctype
 ```
 
-In Deno with [Skypack][]:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import rehypeMinifyDoctype from 'https://cdn.skypack.dev/rehype-minify-doctype@3?dts'
+import rehypeMinifyDoctype from 'https://esm.sh/rehype-minify-doctype@3'
 ```
 
-In browsers with [Skypack][]:
+In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import rehypeMinifyDoctype from 'https://cdn.skypack.dev/rehype-minify-doctype@3?min'
+  import rehypeMinifyDoctype from 'https://esm.sh/rehype-minify-doctype@3?bundle'
 </script>
 ```
 
@@ -201,7 +201,7 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[skypack]: https://www.skypack.dev
+[esmsh]: https://esm.sh
 
 [typescript]: https://www.typescriptlang.org
 
