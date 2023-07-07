@@ -1,0 +1,49 @@
+{
+  "name": "rehype-remove-images",
+  "version": "1.0.0",
+  "description": "rehype plugin to remove images",
+  "license": "MIT",
+  "keywords": [
+    "unified",
+    "rehype",
+    "rehype-plugin",
+    "plugin",
+    "html",
+    "minify",
+    "mangle",
+    "comment"
+  ],
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-remove-images",
+  "bugs": "https://github.com/rehypejs/rehype-minify/issues",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/unified"
+  },
+  "author": "Michael Bianco <mike@mikebian.co> (http://mikebian.co)",
+  "contributors": [
+    "Michael Bianco <mike@mikebian.co>"
+  ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "@types/hast": "^2.0.0",
+    "unist-util-remove": "^4.0.0",
+    "hast-util-is-element": "^2.1.3"
+  },
+  "scripts": {
+    "build": "rimraf \"*.d.ts\" && tsc && type-coverage",
+    "test": "node --conditions development test.js"
+  },
+  "xo": false,
+  "typeCoverage": {
+    "atLeast": 100,
+    "detail": true,
+    "strict": true,
+    "ignoreCatch": true
+  }
+}
