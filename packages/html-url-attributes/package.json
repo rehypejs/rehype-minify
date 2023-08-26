@@ -28,9 +28,7 @@
     "index.d.ts",
     "index.js"
   ],
-  "scripts": {
-    "build": "rimraf \"*.d.ts\" && tsc && type-coverage"
-  },
+  "scripts": {},
   "xo": false,
   "typeCoverage": {
     "atLeast": 100,

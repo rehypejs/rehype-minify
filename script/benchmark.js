@@ -22,18 +22,18 @@
  * @property {Array<CleanResult>} results
  *
  * @callback ProcessFn
- * @param {Uint8Array} buf
+ * @param {string} buf
  * @param {{name: string}} ctx
- * @returns {Uint8Array}
+ * @returns {string}
  *
  * @typedef Raw
  * @property {ProcessFn} processFn
  * @property {'original'|'html-minifier'|'rehype-minify'} type
- * @property {Uint8Array} [input]
+ * @property {string} [input]
  * @property {number} [inputSize]
- * @property {Uint8Array} [output]
+ * @property {string} [output]
  * @property {number} [outputSize]
- * @property {Uint8Array} [gzipped]
+ * @property {Buffer} [gzipped]
  * @property {number} [gzipSize]
  * @property {Raw} [original]
  * @property {string} [rawWin]
@@ -41,11 +41,10 @@
  * @property {string} name
  */
 
-import {Buffer} from 'node:buffer'
 import fs from 'node:fs'
 import path from 'node:path'
 import zlib from 'node:zlib'
-import fetch from 'node-fetch'
+import {fetch} from 'undici'
 import {bail} from 'bail'
 import {unified} from 'unified'
 import rehypeParse from 'rehype-parse'
@@ -176,15 +175,15 @@ const benchmark = trough()
               )
             }
 
-            return response.buffer()
+            return response.text()
           })
-          .then((buf) => {
+          .then((value) => {
             const fp = path.join(cache, ctx.name, 'index.html')
 
-            if (buf.length < 1024) {
+            if (value.length < 1024) {
               next(new Error('Empty response from ' + url))
             } else {
-              ctx.file = toVFile({path: fp, value: buf})
+              ctx.file = toVFile({path: fp, value})
               write(ctx.file, (error) => {
                 next(error)
               })
@@ -320,8 +319,7 @@ function test(ctx, next) {
           .use(rehypeMinifyDoctype)
           .use(rehypeStringify)
 
-        // @ts-expect-error: `value` is a string.
-        return Buffer.from(processor.processSync(buf).value, 'utf8')
+        return String(processor.processSync(buf))
       },
       type: 'rehype-minify'
     },
@@ -365,7 +363,7 @@ function test(ctx, next) {
         }
 
         try {
-          return Buffer.from(htmlMinifier.minify(String(buf), options), 'utf8')
+          return htmlMinifier.minify(String(buf), options)
         } catch (error) {
           const exception = /** @type {Error} */ (error)
           console.warn(
@@ -387,7 +385,7 @@ function test(ctx, next) {
     throw new Error('Expected buffer in file')
   }
 
-  original.input = ctx.file.value
+  original.input = String(ctx.file)
 
   processorPipeline.run(
     original,
@@ -410,7 +408,7 @@ function test(ctx, next) {
         }
 
         result.original = original
-        result.input = ctx.file.value
+        result.input = String(ctx.file)
         result.name = ctx.name
 
         processorPipeline.run(

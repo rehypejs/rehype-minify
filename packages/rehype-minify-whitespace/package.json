@@ -49,7 +49,6 @@
     "unist-util-is": "^6.0.0"
   },
   "scripts": {
-    "build": "rimraf \"*.d.ts\" && tsc && type-coverage",
     "test": "node --conditions development test.js"
   },
   "xo": false,

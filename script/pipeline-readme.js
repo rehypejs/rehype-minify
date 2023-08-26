@@ -30,7 +30,7 @@ import remarkPresetWooorm from 'remark-preset-wooorm'
 /** @type {PackageJson} */
 const pkg = JSON.parse(String(fs.readFileSync('package.json')))
 
-const proc = remark().use({settings: remarkPresetWooorm.settings})
+const proc = remark().data('settings', remarkPresetWooorm.settings)
 
 export const pipelineReadme = trough()
   .use(

@@ -2,11 +2,12 @@
  * @typedef {import('trough').Callback} Next
  * @typedef {import('vfile').VFile} VFile
  * @typedef {import('type-fest').PackageJson} PackageJson
- * @typedef {import('./benchmark-results.json')} BenchmarkResult
  * @typedef {import('mdast').Root} Root
  * @typedef {import('hast').Root} HastRoot
  * @typedef {import('hast').Element} Element
  * @typedef {Element['children'][number]} ElementChild
+ * @typedef {import('./benchmark.js').CleanResult} CleanResult
+ * @typedef {import('./benchmark.js').Datum} Datum
  */
 
 import fs from 'node:fs'
@@ -129,7 +130,7 @@ export const pipelineRoot = trough()
 
       /** @type {import('unified').Plugin<[], Root>} */
       function benchmark() {
-        /** @type {BenchmarkResult} */
+        /** @type {Array<Datum>} */
         let data
 
         try {
@@ -172,7 +173,7 @@ export const pipelineRoot = trough()
               while (++index < types.length) {
                 const type = types[index]
                 let offset = 0 // Skip first.
-                /** @type {BenchmarkResult[number]['results'][number]|undefined}} */
+                /** @type {CleanResult | undefined}} */
                 let best
 
                 while (++offset < d.results.length) {

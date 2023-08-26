@@ -77,7 +77,6 @@
     "mdast-util-find-and-replace": "^3.0.0",
     "mdast-util-to-string": "^4.0.0",
     "mdast-zone": "^6.0.0",
-    "node-fetch": "^3.0.0",
     "parse-author": "^2.0.0",
     "prettier": "^3.0.0",
     "property-information": "^6.0.0",
@@ -90,7 +89,6 @@
     "remark-cli": "^11.0.0",
     "remark-parse": "^10.0.0",
     "remark-preset-wooorm": "^9.0.0",
-    "rimraf": "^3.0.0",
     "strip-indent": "^4.0.0",
     "tape": "^5.0.0",
     "to-vfile": "^8.0.0",
@@ -99,6 +97,7 @@
     "type-coverage": "^2.0.0",
     "type-fest": "^4.0.0",
     "typescript": "^5.0.0",
+    "undici": "^5.0.0",
     "unified": "^11.0.0",
     "unist-builder": "^4.0.0",
     "vfile": "^6.0.0",
@@ -106,14 +105,12 @@
     "xo": "^0.56.0"
   },
   "scripts": {
-    "build-workspace": "npm run build --workspaces",
-    "build-monorepo": "rimraf \"/*.d.ts\" \"{test,script}/**/*.d.ts\" && tsc && type-coverage",
-    "build-packages": "node script/build-packages",
-    "build": "npm run build-packages && npm run build-workspace && npm run build-monorepo",
+    "generate": "node script/build-packages.js",
+    "build": "tsc --build --clean && tsc --build && type-coverage",
     "format": "remark . -qfo && prettier . -w --log-level warn && xo --fix",
     "test-api": "node --conditions development test/index.js && npm run test --workspaces --if-present",
     "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
-    "test": "npm run build && npm run format && npm run test-coverage"
+    "test": "npm run generate && npm run build && npm run format && npm run test-coverage"
   },
   "prettier": {
     "tabWidth": 2,

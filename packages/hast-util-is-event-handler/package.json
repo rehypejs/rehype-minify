@@ -33,7 +33,6 @@
     "index.js"
   ],
   "scripts": {
-    "build": "rimraf \"*.d.ts\" && tsc && type-coverage",
     "test": "node --conditions development test.js"
   },
   "xo": false,

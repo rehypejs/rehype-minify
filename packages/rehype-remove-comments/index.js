@@ -37,6 +37,7 @@
 /**
  * @typedef {import('hast').Nodes} Nodes
  * @typedef {import('hast').Root} Root
+ * @typedef {import('unist').Node} Node
  *
  * @typedef Options
  *   Configuration.
@@ -65,17 +66,19 @@ export default function rehypeRemoveComments(options = {}) {
 }
 
 /**
- * @param {Nodes} node
+ * @param {Node} value
  * @returns {boolean}
  */
-function soft(node) {
+function soft(value) {
+  const node = /** @type {Nodes} */ (value)
   return hard(node) || isConditionalComment(node)
 }
 
 /**
- * @param {Nodes} node
+ * @param {Node} value
  * @returns {boolean}
  */
-function hard(node) {
+function hard(value) {
+  const node = /** @type {Nodes} */ (value)
   return node.type !== 'comment'
 }

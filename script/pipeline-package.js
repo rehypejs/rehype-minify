@@ -29,7 +29,7 @@ export const pipelinePackage = trough()
   )
   .use(
     /**
-     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors?: Array<string>}} ctx
+     * @param {{root: string, ancestor: string, plugins: Array<string>, package: VFile, contributors?: Array<string> | undefined}} ctx
      * @param {Next} next
      */
     (ctx, next) => {
@@ -118,7 +118,6 @@ export const pipelinePackage = trough()
         files: ctx.files || previous.files,
         dependencies: previous.dependencies,
         scripts: {
-          build: 'rimraf "*.d.ts" && tsc && type-coverage',
           test: ctx.tests ? 'node --conditions development test.js' : undefined
         },
         excludeFromPreset: exclude,
