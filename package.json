@@ -63,10 +63,10 @@
     "@types/html-minifier": "^4.0.0",
     "@types/mdast": "^3.0.0",
     "@types/parse-author": "^2.0.0",
-    "@types/tape": "^4.0.0",
+    "@types/tape": "^5.0.0",
     "bail": "^2.0.0",
     "bytes": "^3.0.0",
-    "c8": "^7.0.0",
+    "c8": "^8.0.0",
     "chalk": "^5.0.0",
     "comment-parser": "^1.0.0",
     "github-slugger": "^1.0.0",
@@ -78,7 +78,7 @@
     "mdast-zone": "^5.0.0",
     "node-fetch": "^3.0.0",
     "parse-author": "^2.0.0",
-    "prettier": "^2.0.0",
+    "prettier": "^3.0.0",
     "property-information": "^6.0.0",
     "rehype": "^12.0.0",
     "rehype-cli": "^11.0.0",
@@ -86,7 +86,7 @@
     "rehype-parse": "^8.0.0",
     "rehype-stringify": "^9.0.0",
     "remark": "^14.0.0",
-    "remark-cli": "^10.0.0",
+    "remark-cli": "^11.0.0",
     "remark-parse": "^10.0.0",
     "remark-preset-wooorm": "^9.0.0",
     "rimraf": "^3.0.0",
@@ -96,20 +96,20 @@
     "trim-trailing-lines": "^2.0.0",
     "trough": "^2.0.0",
     "type-coverage": "^2.0.0",
-    "type-fest": "^2.0.0",
-    "typescript": "^4.0.0",
+    "type-fest": "^4.0.0",
+    "typescript": "^5.0.0",
     "unified": "^10.0.0",
     "unist-builder": "^3.0.0",
     "vfile": "^5.0.0",
     "vfile-find-down": "^6.0.0",
-    "xo": "^0.48.0"
+    "xo": "^0.56.0"
   },
   "scripts": {
     "build-workspace": "npm run build --workspaces",
     "build-monorepo": "rimraf \"/*.d.ts\" \"{test,script}/**/*.d.ts\" && tsc && type-coverage",
     "build-packages": "node script/build-packages",
     "build": "npm run build-packages && npm run build-workspace && npm run build-monorepo",
-    "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
+    "format": "remark . -qfo && prettier . -w --log-level warn && xo --fix",
     "test-api": "node --conditions development test/index.js && npm run test --workspaces --if-present",
     "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
     "test": "npm run build && npm run format && npm run test-coverage"
@@ -126,7 +126,10 @@
     "prettier": true,
     "rules": {
       "capitalized-comments": "off",
-      "unicorn/prefer-code-point": "off"
+      "unicorn/prefer-at": "off",
+      "unicorn/prefer-code-point": "off",
+      "unicorn/prefer-string-replace-all": "off",
+      "unicorn/text-encoding-identifier-case": "off"
     }
   },
   "remarkConfig": {

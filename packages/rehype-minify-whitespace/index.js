@@ -334,17 +334,27 @@ function inferWhiteSpace(node, context) {
       case 'plaintext':
       case 'script':
       case 'style':
-      case 'xmp':
+      case 'xmp': {
         return 'pre'
-      case 'nobr':
+      }
+
+      case 'nobr': {
         return 'nowrap'
-      case 'pre':
+      }
+
+      case 'pre': {
         return node.properties.wrap ? 'pre-wrap' : 'pre'
+      }
+
       case 'td':
-      case 'th':
+      case 'th': {
         return node.properties.noWrap ? 'nowrap' : context.whitespace
-      case 'textarea':
+      }
+
+      case 'textarea': {
         return 'pre-wrap'
+      }
+
       default:
     }
   }
