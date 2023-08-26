@@ -12,51 +12,50 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
   ],
-  "sideEffects": false,
   "type": "module",
   "workspaces": [
-    "packages/html-enumerated-attributes",
-    "packages/html-url-attributes",
-    "packages/html-whitespace-sensitive-tag-names",
-    "packages/hast-util-from-string",
-    "packages/hast-util-is-body-ok-link",
-    "packages/hast-util-is-conditional-comment",
-    "packages/hast-util-is-css-link",
-    "packages/hast-util-is-css-style",
-    "packages/hast-util-is-event-handler",
-    "packages/hast-util-is-javascript",
-    "packages/hast-util-to-string",
-    "packages/rehype-concat-css-style",
-    "packages/rehype-concat-javascript",
-    "packages/rehype-css-to-top",
-    "packages/rehype-javascript-to-bottom",
-    "packages/rehype-minify-attribute-whitespace",
-    "packages/rehype-minify-css-style",
-    "packages/rehype-minify-doctype",
-    "packages/rehype-minify-enumerated-attribute",
-    "packages/rehype-minify-event-handler",
-    "packages/rehype-minify-javascript-script",
-    "packages/rehype-minify-javascript-url",
-    "packages/rehype-minify-json-script",
-    "packages/rehype-minify-language",
-    "packages/rehype-minify-media-attribute",
-    "packages/rehype-minify-meta-color",
-    "packages/rehype-minify-meta-content",
-    "packages/rehype-minify-style-attribute",
-    "packages/rehype-minify-url",
-    "packages/rehype-minify-whitespace",
-    "packages/rehype-normalize-attribute-value-case",
-    "packages/rehype-prevent-favicon-request",
-    "packages/rehype-remove-comments",
-    "packages/rehype-remove-duplicate-attribute-values",
-    "packages/rehype-remove-empty-attribute",
-    "packages/rehype-remove-external-script-content",
-    "packages/rehype-remove-meta-http-equiv",
-    "packages/rehype-remove-script-type-javascript",
-    "packages/rehype-remove-style-type-css",
-    "packages/rehype-sort-attribute-values",
-    "packages/rehype-sort-attributes",
-    "packages/rehype-preset-minify"
+    "packages/html-enumerated-attributes/",
+    "packages/html-url-attributes/",
+    "packages/html-whitespace-sensitive-tag-names/",
+    "packages/hast-util-from-string/",
+    "packages/hast-util-is-body-ok-link/",
+    "packages/hast-util-is-conditional-comment/",
+    "packages/hast-util-is-css-link/",
+    "packages/hast-util-is-css-style/",
+    "packages/hast-util-is-event-handler/",
+    "packages/hast-util-is-javascript/",
+    "packages/hast-util-to-string/",
+    "packages/rehype-concat-css-style/",
+    "packages/rehype-concat-javascript/",
+    "packages/rehype-css-to-top/",
+    "packages/rehype-javascript-to-bottom/",
+    "packages/rehype-minify-attribute-whitespace/",
+    "packages/rehype-minify-css-style/",
+    "packages/rehype-minify-doctype/",
+    "packages/rehype-minify-enumerated-attribute/",
+    "packages/rehype-minify-event-handler/",
+    "packages/rehype-minify-javascript-script/",
+    "packages/rehype-minify-javascript-url/",
+    "packages/rehype-minify-json-script/",
+    "packages/rehype-minify-language/",
+    "packages/rehype-minify-media-attribute/",
+    "packages/rehype-minify-meta-color/",
+    "packages/rehype-minify-meta-content/",
+    "packages/rehype-minify-style-attribute/",
+    "packages/rehype-minify-url/",
+    "packages/rehype-minify-whitespace/",
+    "packages/rehype-normalize-attribute-value-case/",
+    "packages/rehype-prevent-favicon-request/",
+    "packages/rehype-remove-comments/",
+    "packages/rehype-remove-duplicate-attribute-values/",
+    "packages/rehype-remove-empty-attribute/",
+    "packages/rehype-remove-external-script-content/",
+    "packages/rehype-remove-meta-http-equiv/",
+    "packages/rehype-remove-script-type-javascript/",
+    "packages/rehype-remove-style-type-css/",
+    "packages/rehype-sort-attribute-values/",
+    "packages/rehype-sort-attributes/",
+    "packages/rehype-preset-minify/"
   ],
   "devDependencies": {
     "@types/bytes": "^3.0.0",
@@ -107,18 +106,34 @@
   "scripts": {
     "generate": "node script/build-packages.js",
     "build": "tsc --build --clean && tsc --build && type-coverage",
-    "format": "remark . -qfo && prettier . -w --log-level warn && xo --fix",
+    "format": "remark . --frail --output --quiet && prettier . --log-level warn --write && xo --fix",
+    "prepack": "npm run build && npm run format",
+    "test": "npm run generate && npm run build && npm run format && npm run test-coverage",
     "test-api": "node --conditions development test/index.js && npm run test --workspaces --if-present",
-    "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
-    "test": "npm run generate && npm run build && npm run format && npm run test-coverage"
+    "test-coverage": "c8 --100 --check-coverage --reporter lcov npm run test-api"
   },
   "prettier": {
-    "tabWidth": 2,
-    "useTabs": false,
-    "singleQuote": true,
     "bracketSpacing": false,
+    "singleQuote": true,
     "semi": false,
-    "trailingComma": "none"
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "useTabs": false
+  },
+  "remarkConfig": {
+    "plugins": [
+      "remark-preset-wooorm",
+      [
+        "remark-lint-no-html",
+        false
+      ]
+    ]
+  },
+  "typeCoverage": {
+    "atLeast": 100,
+    "detail": true,
+    "ignoreCatch": true,
+    "strict": true
   },
   "xo": {
     "prettier": true,
@@ -129,20 +144,5 @@
       "unicorn/prefer-string-replace-all": "off",
       "unicorn/text-encoding-identifier-case": "off"
     }
-  },
-  "remarkConfig": {
-    "plugins": [
-      "preset-wooorm",
-      [
-        "lint-no-html",
-        false
-      ]
-    ]
-  },
-  "typeCoverage": {
-    "atLeast": 100,
-    "detail": true,
-    "strict": true,
-    "ignoreCatch": true
   }
 }

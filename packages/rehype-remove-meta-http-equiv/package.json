@@ -4,15 +4,15 @@
   "description": "rehype plugin to remove `http-equiv` `meta` elements for shorter output",
   "license": "MIT",
   "keywords": [
-    "unified",
-    "rehype",
-    "rehype-plugin",
-    "plugin",
     "html",
-    "minify",
+    "http-equiv",
     "mangle",
     "meta",
-    "http-equiv"
+    "minify",
+    "plugin",
+    "rehype",
+    "rehype-plugin",
+    "unified"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-remove-meta-http-equiv",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
@@ -41,11 +41,11 @@
   "scripts": {
     "test": "node --conditions development test.js"
   },
-  "xo": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
-    "strict": true,
-    "ignoreCatch": true
-  }
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": false
 }

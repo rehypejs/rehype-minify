@@ -4,18 +4,18 @@
   "description": "rehype plugin to move JavaScript `<script>` to `<body>`",
   "license": "MIT",
   "keywords": [
-    "unified",
+    "head",
+    "html",
+    "javascript",
+    "js",
+    "mangle",
+    "minify",
+    "move",
+    "plugin",
     "rehype",
     "rehype-plugin",
-    "plugin",
-    "html",
-    "minify",
-    "mangle",
-    "js",
     "script",
-    "javascript",
-    "head",
-    "move"
+    "unified"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-javascript-to-bottom",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
@@ -45,11 +45,11 @@
     "test": "node --conditions development test.js"
   },
   "excludeFromPreset": true,
-  "xo": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
-    "strict": true,
-    "ignoreCatch": true
-  }
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": false
 }

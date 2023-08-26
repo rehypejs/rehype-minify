@@ -4,15 +4,15 @@
   "description": "rehype preset to minify and mangle HTML",
   "license": "MIT",
   "keywords": [
-    "unified",
-    "rehype",
-    "rehype-plugin",
-    "plugin",
     "html",
+    "mangle",
     "min",
     "minify",
-    "mangle",
-    "preset"
+    "plugin",
+    "preset",
+    "rehype",
+    "rehype-plugin",
+    "unified"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-preset-minify",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
@@ -58,11 +58,11 @@
     "rehype-sort-attributes": "^4.0.0"
   },
   "scripts": {},
-  "xo": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
-    "strict": true,
-    "ignoreCatch": true
-  }
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": false
 }

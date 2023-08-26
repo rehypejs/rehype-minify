@@ -4,17 +4,17 @@
   "description": "rehype plugin to minify whitespace in attributes",
   "license": "MIT",
   "keywords": [
-    "unified",
+    "attributes",
+    "html",
+    "mangle",
+    "minify",
+    "plugin",
     "rehype",
     "rehype-plugin",
-    "plugin",
-    "html",
-    "minify",
-    "mangle",
-    "attributes",
-    "whitespace",
+    "space",
+    "unified",
     "white",
-    "space"
+    "whitespace"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-minify-attribute-whitespace",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
@@ -47,11 +47,11 @@
   "scripts": {
     "test": "node --conditions development test.js"
   },
-  "xo": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
-    "strict": true,
-    "ignoreCatch": true
-  }
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": false
 }

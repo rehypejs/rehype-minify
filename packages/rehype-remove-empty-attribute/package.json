@@ -4,15 +4,15 @@
   "description": "rehype plugin to remove empty attributes",
   "license": "MIT",
   "keywords": [
-    "unified",
+    "attributes",
+    "html",
+    "mangle",
+    "minify",
+    "plugin",
     "rehype",
     "rehype-plugin",
-    "plugin",
-    "html",
-    "minify",
-    "mangle",
     "remove",
-    "attributes"
+    "unified"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-remove-empty-attribute",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
@@ -44,11 +44,11 @@
   "scripts": {
     "test": "node --conditions development test.js"
   },
-  "xo": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
-    "strict": true,
-    "ignoreCatch": true
-  }
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": false
 }

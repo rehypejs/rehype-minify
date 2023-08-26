@@ -4,16 +4,16 @@
   "description": "rehype plugin to minify enumerated attributes",
   "license": "MIT",
   "keywords": [
-    "unified",
-    "rehype",
-    "rehype-plugin",
-    "plugin",
-    "html",
-    "minify",
-    "mangle",
     "attribute",
     "enum",
-    "enumerated"
+    "enumerated",
+    "html",
+    "mangle",
+    "minify",
+    "plugin",
+    "rehype",
+    "rehype-plugin",
+    "unified"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-minify-enumerated-attribute",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
@@ -48,11 +48,11 @@
   "scripts": {
     "test": "node --conditions development test.js"
   },
-  "xo": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
-    "strict": true,
-    "ignoreCatch": true
-  }
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": false
 }

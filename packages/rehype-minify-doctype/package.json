@@ -4,15 +4,15 @@
   "description": "rehype plugin to minify the HTML doctype",
   "license": "MIT",
   "keywords": [
-    "unified",
+    "doctype",
+    "document",
+    "html",
+    "mangle",
+    "minify",
+    "plugin",
     "rehype",
     "rehype-plugin",
-    "plugin",
-    "html",
-    "minify",
-    "mangle",
-    "doctype",
-    "document"
+    "unified"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-minify-doctype",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
@@ -41,11 +41,11 @@
     "test": "node --conditions development test.js"
   },
   "excludeFromPreset": true,
-  "xo": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
-    "strict": true,
-    "ignoreCatch": true
-  }
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": false
 }

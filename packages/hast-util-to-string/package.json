@@ -4,17 +4,17 @@
   "description": "hast utility to get the plain-text value of a node",
   "license": "MIT",
   "keywords": [
-    "unist",
+    "content",
     "hast",
     "hast-util",
-    "util",
-    "utility",
     "html",
-    "string",
     "serialize",
-    "content",
+    "string",
     "stringify",
-    "text"
+    "text",
+    "unist",
+    "util",
+    "utility"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/hast-util-to-string",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
@@ -40,11 +40,11 @@
   "scripts": {
     "test": "node --conditions development test.js"
   },
-  "xo": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
-    "strict": true,
-    "ignoreCatch": true
-  }
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": false
 }

@@ -4,16 +4,16 @@
   "description": "rehype plugin to minify JavaScript URLs",
   "license": "MIT",
   "keywords": [
-    "unified",
+    "html",
+    "javascript",
+    "mangle",
+    "minify",
+    "plugin",
     "rehype",
     "rehype-plugin",
-    "plugin",
-    "html",
-    "minify",
-    "mangle",
-    "url",
-    "javascript",
-    "script"
+    "script",
+    "unified",
+    "url"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-minify-javascript-url",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
@@ -45,11 +45,11 @@
   "scripts": {
     "test": "node --conditions development test.js"
   },
-  "xo": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
-    "strict": true,
-    "ignoreCatch": true
-  }
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": false
 }

@@ -95,8 +95,6 @@ export const pipelinePackage = trough()
         String(fs.readFileSync(path.join(ctx.ancestor, 'package.json')))
       )
       const relative = path.relative(ctx.ancestor, ctx.root)
-      /** @type {boolean|undefined} */
-      // @ts-expect-error: Custom field in plugins.
       const exclude = previous.excludeFromPreset
 
       const curr = {
@@ -104,7 +102,7 @@ export const pipelinePackage = trough()
         version: previous.version,
         description: previous.description,
         license: pkg.license,
-        keywords: previous.keywords,
+        keywords: (previous.keywords || []).sort(),
         repository: pkg.repository + '/tree/main/' + relative,
         bugs: pkg.bugs,
         funding: pkg.funding,
@@ -121,13 +119,13 @@ export const pipelinePackage = trough()
           test: ctx.tests ? 'node --conditions development test.js' : undefined
         },
         excludeFromPreset: exclude,
-        xo: false,
         typeCoverage: {
           atLeast: 100,
           detail: true,
-          strict: true,
-          ignoreCatch: true
-        }
+          ignoreCatch: true,
+          strict: true
+        },
+        xo: false
       }
 
       ctx.package.value = JSON.stringify(curr, null, 2) + '\n'

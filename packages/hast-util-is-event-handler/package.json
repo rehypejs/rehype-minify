@@ -4,15 +4,15 @@
   "description": "hast utility to check if a property is an event handler",
   "license": "MIT",
   "keywords": [
-    "unist",
+    "event",
+    "handler",
     "hast",
     "hast-util",
-    "util",
-    "utility",
     "html",
     "property",
-    "event",
-    "handler"
+    "unist",
+    "util",
+    "utility"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/hast-util-is-event-handler",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
@@ -35,11 +35,11 @@
   "scripts": {
     "test": "node --conditions development test.js"
   },
-  "xo": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
-    "strict": true,
-    "ignoreCatch": true
-  }
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": false
 }

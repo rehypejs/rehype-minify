@@ -4,18 +4,18 @@
   "description": "rehype plugin to prevent a `favicon.ico` requests",
   "license": "MIT",
   "keywords": [
-    "unified",
+    "favicon",
+    "html",
+    "icon",
+    "mangle",
+    "minify",
+    "plugin",
+    "prevent",
     "rehype",
     "rehype-plugin",
-    "plugin",
-    "html",
-    "minify",
-    "mangle",
-    "favicon",
+    "request",
     "shortcut",
-    "icon",
-    "prevent",
-    "request"
+    "unified"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-prevent-favicon-request",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
@@ -44,11 +44,11 @@
     "test": "node --conditions development test.js"
   },
   "excludeFromPreset": true,
-  "xo": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
-    "strict": true,
-    "ignoreCatch": true
-  }
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": false
 }

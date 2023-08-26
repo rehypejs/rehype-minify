@@ -5,13 +5,13 @@
   "license": "MIT",
   "keywords": [
     "html",
-    "whitespace",
-    "white",
-    "space",
+    "name",
     "sensitive",
-    "tagname",
+    "space",
     "tag",
-    "name"
+    "tagname",
+    "white",
+    "whitespace"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/html-whitespace-sensitive-tag-names",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
@@ -32,11 +32,11 @@
     "index.js"
   ],
   "scripts": {},
-  "xo": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
-    "strict": true,
-    "ignoreCatch": true
-  }
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": false
 }

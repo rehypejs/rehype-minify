@@ -4,16 +4,16 @@
   "description": "rehype plugin to remove duplicates in attribute values with unique tokens",
   "license": "MIT",
   "keywords": [
-    "unified",
+    "attribute",
+    "duplicate",
+    "html",
+    "mangle",
+    "minify",
+    "plugin",
     "rehype",
     "rehype-plugin",
-    "plugin",
-    "html",
-    "minify",
-    "mangle",
     "remove",
-    "duplicate",
-    "attribute",
+    "unified",
     "value"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-remove-duplicate-attribute-values",
@@ -45,11 +45,11 @@
   "scripts": {
     "test": "node --conditions development test.js"
   },
-  "xo": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
-    "strict": true,
-    "ignoreCatch": true
-  }
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": false
 }

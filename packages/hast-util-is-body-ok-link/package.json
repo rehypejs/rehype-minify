@@ -4,15 +4,15 @@
   "description": "hast utility to check if a link element is “Body OK”",
   "license": "MIT",
   "keywords": [
-    "unist",
+    "body",
     "hast",
     "hast-util",
-    "util",
-    "utility",
     "html",
     "link",
-    "body",
-    "ok"
+    "ok",
+    "unist",
+    "util",
+    "utility"
   ],
   "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/hast-util-is-body-ok-link",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
@@ -40,11 +40,11 @@
   "scripts": {
     "test": "node --conditions development test.js"
   },
-  "xo": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
-    "strict": true,
-    "ignoreCatch": true
-  }
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": false
 }
