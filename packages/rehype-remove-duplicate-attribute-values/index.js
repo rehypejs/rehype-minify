@@ -40,20 +40,19 @@ const own = {}.hasOwnProperty
 export default function rehypeRemoveDuplicateAttributeValues() {
   return (tree) => {
     visit(tree, 'element', (node) => {
-      const props = node.properties || {}
       /** @type {string} */
       let prop
 
-      for (prop in props) {
-        if (own.call(props, prop)) {
-          const value = props[prop]
+      for (prop in node.properties) {
+        if (own.call(node.properties, prop)) {
+          const value = node.properties[prop]
 
           if (
             own.call(schema, prop) &&
             isElement(node, schema[prop]) &&
             Array.isArray(value)
           ) {
-            props[prop] = [...new Set(value)]
+            node.properties[prop] = [...new Set(value)]
           }
         }
       }

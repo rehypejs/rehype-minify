@@ -55,7 +55,7 @@ test('hast-util-is-css-link', (t) => {
   )
 
   t.equal(
-    isCssLink(u('element', {tagName: 'link'}, [])),
+    isCssLink(u('element', {tagName: 'link', properties: {}}, [])),
     false,
     'no - for `link`s without `rel`'
   )

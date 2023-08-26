@@ -24,20 +24,22 @@ test('hast-util-from-string', (t) => {
   )
 
   t.deepEqual(
-    fromString(u('element', {tagName: 'p'}, []), 'foo'),
-    u('element', {tagName: 'p'}, [u('text', 'foo')]),
+    fromString(u('element', {tagName: 'p', properties: {}}, []), 'foo'),
+    u('element', {tagName: 'p', properties: {}}, [u('text', 'foo')]),
     'should set parent nodes'
   )
 
   t.deepEqual(
-    fromString(u('element', {tagName: 'p'}, [])),
-    u('element', {tagName: 'p'}, []),
+    fromString(u('element', {tagName: 'p', properties: {}}, [])),
+    u('element', {tagName: 'p', properties: {}}, []),
     'should reset parent nodes (1)'
   )
 
   t.deepEqual(
-    fromString(u('element', {tagName: 'p'}, [u('text', 'foo')])),
-    u('element', {tagName: 'p'}, []),
+    fromString(
+      u('element', {tagName: 'p', properties: {}}, [u('text', 'foo')])
+    ),
+    u('element', {tagName: 'p', properties: {}}, []),
     'should reset parent nodes (2)'
   )
 

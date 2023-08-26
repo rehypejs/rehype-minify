@@ -19,8 +19,12 @@ test('rehype-remove-duplicate-attribute-values', (t) => {
   t.deepEqual(
     rehype()
       .use(min)
-      .runSync(u('root', [{type: 'element', tagName: 'i', children: []}])),
-    u('root', [{type: 'element', tagName: 'i', children: []}])
+      .runSync(
+        u('root', [
+          {type: 'element', tagName: 'i', properties: {}, children: []}
+        ])
+      ),
+    u('root', [{type: 'element', tagName: 'i', properties: {}, children: []}])
   )
 
   t.end()

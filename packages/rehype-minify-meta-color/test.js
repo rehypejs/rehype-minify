@@ -65,8 +65,14 @@ test('rehype-minify-meta-color', (t) => {
   t.deepEqual(
     rehype()
       .use(min)
-      .runSync(u('root', [{type: 'element', tagName: 'meta', children: []}])),
-    u('root', [{type: 'element', tagName: 'meta', children: []}])
+      .runSync(
+        u('root', [
+          {type: 'element', tagName: 'meta', properties: {}, children: []}
+        ])
+      ),
+    u('root', [
+      {type: 'element', tagName: 'meta', properties: {}, children: []}
+    ])
   )
 
   t.end()

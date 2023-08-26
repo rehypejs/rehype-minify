@@ -49,16 +49,15 @@ const own = {}.hasOwnProperty
 export default function rehypeMinifyEnumeratedAttribute() {
   return (tree) => {
     visit(tree, 'element', (node) => {
-      const props = node.properties || {}
       /** @type {string} */
       let prop
 
-      for (prop in props) {
-        if (own.call(props, prop) && hasProperty(node, prop)) {
+      for (prop in node.properties) {
+        if (own.call(node.properties, prop) && hasProperty(node, prop)) {
           const attribute = find(html, prop).attribute
 
           if (own.call(enumeratedAttributes, attribute)) {
-            let value = props[prop]
+            let value = node.properties[prop]
 
             // Note: we don’t really handle enumerated as lists, so instead
             // we cast them to a string (assuming they are space-separated).
@@ -82,7 +81,8 @@ export default function rehypeMinifyEnumeratedAttribute() {
                   !definition.selector ||
                   matches(definition.selector, node)
                 ) {
-                  props[prop] = minify(value, definition)
+                  // @ts-expect-error: bug in `has-property`.
+                  node.properties[prop] = minify(value, definition)
                 }
               }
             }

@@ -45,13 +45,12 @@ export default function rehypeSortAttributeValues() {
     const queues = []
 
     visit(tree, 'element', (node) => {
-      const props = node.properties || {}
       /** @type {string} */
       let prop
 
-      for (prop in props) {
-        if (own.call(props, prop)) {
-          const value = props[prop]
+      for (prop in node.properties) {
+        if (own.call(node.properties, prop)) {
+          const value = node.properties[prop]
 
           if (
             own.call(schema, prop) &&

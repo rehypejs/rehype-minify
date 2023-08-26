@@ -66,8 +66,7 @@ export function isBodyOkLink(node) {
     return true
   }
 
-  const props = node.properties || {}
-  const rel = props.rel || []
+  const rel = node.properties.rel || []
   let index = -1
 
   if (!Array.isArray(rel) || rel.length === 0) {

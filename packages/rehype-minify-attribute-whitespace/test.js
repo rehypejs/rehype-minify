@@ -45,11 +45,15 @@ test('rehype-minify-attribute-whitespace', (t) => {
       .use(min)
       .runSync({
         type: 'root',
-        children: [{type: 'element', tagName: 'source', children: []}]
+        children: [
+          {type: 'element', tagName: 'source', properties: {}, children: []}
+        ]
       }),
     {
       type: 'root',
-      children: [{type: 'element', tagName: 'source', children: []}]
+      children: [
+        {type: 'element', tagName: 'source', properties: {}, children: []}
+      ]
     }
   )
 

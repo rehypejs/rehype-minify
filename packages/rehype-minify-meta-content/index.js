@@ -54,9 +54,8 @@ const lists = new Set([
 export default function rehypeMinifyMetaContent() {
   return (tree) => {
     visit(tree, 'element', (node) => {
-      const props = node.properties || {}
-      const name = String(props.name || '')
-      let value = props.content
+      const name = String(node.properties.name || '')
+      let value = node.properties.content
 
       if (
         isElement(node, 'meta') &&
@@ -74,7 +73,7 @@ export default function rehypeMinifyMetaContent() {
           value = stringify(parse(value), {padLeft: false})
         }
 
-        props.content = value
+        node.properties.content = value
       }
     })
   }

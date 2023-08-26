@@ -29,12 +29,13 @@
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
+    "index.d.ts",
     "index.js"
   ],
   "dependencies": {
-    "@types/hast": "^2.0.0",
-    "unified": "^10.0.0",
-    "unist-util-visit": "^4.0.0"
+    "@types/hast": "^3.0.0",
+    "unified": "^11.0.0",
+    "unist-util-visit": "^5.0.0"
   },
   "scripts": {
     "build": "rimraf \"*.d.ts\" && tsc && type-coverage",

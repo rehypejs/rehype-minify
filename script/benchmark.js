@@ -22,18 +22,18 @@
  * @property {Array<CleanResult>} results
  *
  * @callback ProcessFn
- * @param {Buffer} buf
+ * @param {Uint8Array} buf
  * @param {{name: string}} ctx
- * @returns {Buffer}
+ * @returns {Uint8Array}
  *
  * @typedef Raw
  * @property {ProcessFn} processFn
  * @property {'original'|'html-minifier'|'rehype-minify'} type
- * @property {Buffer} [input]
+ * @property {Uint8Array} [input]
  * @property {number} [inputSize]
- * @property {Buffer} [output]
+ * @property {Uint8Array} [output]
  * @property {number} [outputSize]
- * @property {Buffer} [gzipped]
+ * @property {Uint8Array} [gzipped]
  * @property {number} [gzipSize]
  * @property {Raw} [original]
  * @property {string} [rawWin]
@@ -50,7 +50,7 @@ import {bail} from 'bail'
 import {unified} from 'unified'
 import rehypeParse from 'rehype-parse'
 import rehypeStringify from 'rehype-stringify'
-import {toVFile} from 'to-vfile'
+import {toVFile, read, write} from 'to-vfile'
 import {trough} from 'trough'
 import htmlMinifier from 'html-minifier'
 import rehypePresetMinify from '../packages/rehype-preset-minify/index.js'
@@ -147,7 +147,7 @@ const benchmark = trough()
      * @param {Next} next
      */
     (ctx, next) => {
-      toVFile.read(path.join(cache, ctx.name, 'index.html'), (error, file) => {
+      read(path.join(cache, ctx.name, 'index.html'), (error, file) => {
         if (file) {
           ctx.file = file
           next()
@@ -185,7 +185,7 @@ const benchmark = trough()
               next(new Error('Empty response from ' + url))
             } else {
               ctx.file = toVFile({path: fp, value: buf})
-              toVFile.write(ctx.file, (error) => {
+              write(ctx.file, (error) => {
                 next(error)
               })
             }
@@ -212,7 +212,7 @@ const processorPipeline = trough()
         next()
       } else {
         const fp = path.join(cache, ctx.name, ctx.type + '.html')
-        toVFile.write({path: fp, value: output}, (error) => {
+        write({path: fp, value: output}, (error) => {
           next(error)
         })
       }

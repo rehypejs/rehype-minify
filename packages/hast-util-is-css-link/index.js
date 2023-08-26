@@ -57,14 +57,13 @@ export function isCssLink(node) {
     return false
   }
 
-  const props = node.properties || {}
-  const rel = props.rel
+  const rel = node.properties.rel
 
   if (!rel || !Array.isArray(rel) || !rel.includes('stylesheet')) {
     return false
   }
 
-  const type = String(props.type || '')
+  const type = String(node.properties.type || '')
     .trim()
     .toLowerCase()
 

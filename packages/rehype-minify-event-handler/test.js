@@ -42,8 +42,14 @@ test('rehype-minify-event-handler', (t) => {
   t.deepEqual(
     rehype()
       .use(min)
-      .runSync(u('root', [{type: 'element', tagName: 'button', children: []}])),
-    u('root', [{type: 'element', tagName: 'button', children: []}])
+      .runSync(
+        u('root', [
+          {type: 'element', tagName: 'button', properties: {}, children: []}
+        ])
+      ),
+    u('root', [
+      {type: 'element', tagName: 'button', properties: {}, children: []}
+    ])
   )
 
   t.end()

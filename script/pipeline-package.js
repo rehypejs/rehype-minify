@@ -7,8 +7,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import {exec} from 'node:child_process'
-import {toVFile} from 'to-vfile'
-import {findDown} from 'vfile-find-down'
+import {read} from 'to-vfile'
+import {findDownAll} from 'vfile-find-down'
 import {trough} from 'trough'
 
 export const pipelinePackage = trough()
@@ -18,7 +18,7 @@ export const pipelinePackage = trough()
      * @param {Next} next
      */
     (ctx, next) => {
-      toVFile.read(path.join(ctx.root, 'package.json'), (error, file) => {
+      read(path.join(ctx.root, 'package.json'), (error, file) => {
         if (file) {
           ctx.package = file
         }
@@ -58,7 +58,7 @@ export const pipelinePackage = trough()
      * @param {Next} next
      */
     (ctx, next) => {
-      findDown(['.js', '.ts'], ctx.root, (error, files) => {
+      findDownAll(['.js', '.ts'], ctx.root, (error, files) => {
         ctx.tests = false
 
         if (files) {

@@ -56,7 +56,7 @@ export function isCssStyle(node) {
     return false
   }
 
-  const value = (node.properties || {}).type
+  const value = node.properties.type
 
   return (
     value === undefined ||

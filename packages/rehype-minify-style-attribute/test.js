@@ -66,7 +66,7 @@ test('rehype-minify-style-attribute', (t) => {
       {
         type: 'element',
         tagName: 'i',
-        properties: {style: null},
+        properties: {style: undefined},
         children: []
       }
     ])

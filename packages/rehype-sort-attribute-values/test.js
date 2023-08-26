@@ -62,8 +62,12 @@ test('rehype-sort-attribute-values', (t) => {
   t.deepEqual(
     rehype()
       .use(min)
-      .runSync(u('root', [{type: 'element', tagName: 'div', children: []}])),
-    u('root', [{type: 'element', tagName: 'div', children: []}])
+      .runSync(
+        u('root', [
+          {type: 'element', tagName: 'div', properties: {}, children: []}
+        ])
+      ),
+    u('root', [{type: 'element', tagName: 'div', properties: {}, children: []}])
   )
 
   t.end()

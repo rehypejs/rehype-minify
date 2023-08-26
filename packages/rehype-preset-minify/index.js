@@ -23,7 +23,7 @@ import rehypeSortAttributeValues from 'rehype-sort-attribute-values'
 import rehypeSortAttributes from 'rehype-sort-attributes'
 
 const settings = {
-  entities: {
+  characterReferences: {
     omitOptionalSemicolons: true,
     useShortestReferences: true
   },

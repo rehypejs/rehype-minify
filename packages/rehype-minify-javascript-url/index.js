@@ -47,21 +47,21 @@ const suffix = '}a();'
 export default function rehypeMinifyJavaScriptUrl() {
   return (tree) => {
     visit(tree, 'element', (node) => {
-      const props = node.properties || {}
       /** @type {string} */
       let prop
 
-      for (prop in props) {
+      for (prop in node.properties) {
         if (
           hasProperty(node, prop) &&
           own.call(urlAttributes, prop) &&
           isElement(node, urlAttributes[prop])
         ) {
-          const value = props[prop]
+          const value = node.properties[prop]
           let result = value
 
           if (
             typeof result === 'string' &&
+            // @ts-expect-error: bug in `has-property`.
             result.slice(0, protocol.length).toLowerCase() === protocol
           ) {
             result = result.slice(protocol.length)
@@ -71,10 +71,11 @@ export default function rehypeMinifyJavaScriptUrl() {
               result = output.code.slice(prefix.length, -suffix.length)
             } catch {}
 
+            // @ts-expect-error: bug in `has-property`.
             result = protocol + result.trim()
           }
 
-          props[prop] = result
+          node.properties[prop] = result
         }
       }
     })

@@ -83,8 +83,12 @@ test('rehype-minify-url', (t) => {
   t.deepEqual(
     rehype()
       .use(min, options)
-      .runSync(u('root', [{type: 'element', tagName: 'a', children: []}])),
-    u('root', [{type: 'element', tagName: 'a', children: []}])
+      .runSync(
+        u('root', [
+          {type: 'element', tagName: 'a', properties: {}, children: []}
+        ])
+      ),
+    u('root', [{type: 'element', tagName: 'a', properties: {}, children: []}])
   )
 
   t.deepEqual(

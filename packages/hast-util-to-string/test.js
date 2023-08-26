@@ -15,10 +15,10 @@ test('hast-util-to-string', (t) => {
 
   t.deepEqual(
     toString(
-      u('element', {tagName: 'p'}, [
+      u('element', {tagName: 'p', properties: {}}, [
         u('text', 'foo '),
         u('comment', 'bar'),
-        u('element', {tagName: 'strong'}, [u('text', ' baz')])
+        u('element', {tagName: 'strong', properties: {}}, [u('text', ' baz')])
       ])
     ),
     'foo  baz',
@@ -31,7 +31,7 @@ test('hast-util-to-string', (t) => {
         u('doctype', {name: 'html'}),
         u('text', 'foo '),
         u('comment', 'bar'),
-        u('element', {tagName: 'strong'}, [u('text', ' baz')])
+        u('element', {tagName: 'strong', properties: {}}, [u('text', ' baz')])
       ])
     ),
     'foo  baz',

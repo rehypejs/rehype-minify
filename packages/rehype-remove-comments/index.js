@@ -35,9 +35,8 @@
  */
 
 /**
+ * @typedef {import('hast').Nodes} Nodes
  * @typedef {import('hast').Root} Root
- * @typedef {import('unist').Node} Node
- * @typedef {Root|Root['children'][number]} HastNode
  *
  * @typedef Options
  *   Configuration.
@@ -60,27 +59,23 @@ import {isConditionalComment} from 'hast-util-is-conditional-comment'
 export default function rehypeRemoveComments(options = {}) {
   const force = options.removeConditional
 
-  return (tree) =>
-    // `undefined` is never returned because we don’t remove nodes (but TS
-    // doesn’t know it.)
-    /* c8 ignore next */
-    filter(tree, {cascade: false}, force ? hard : soft) || undefined
+  return (tree) => {
+    return filter(tree, {cascade: false}, force ? hard : soft)
+  }
 }
 
 /**
- * @param {Node} node
+ * @param {Nodes} node
  * @returns {boolean}
  */
 function soft(node) {
-  const x = /** @type {HastNode} */ (node)
-  return hard(x) || isConditionalComment(x)
+  return hard(node) || isConditionalComment(node)
 }
 
 /**
- * @param {Node} node
+ * @param {Nodes} node
  * @returns {boolean}
  */
 function hard(node) {
-  const x = /** @type {HastNode} */ (node)
-  return x.type !== 'comment'
+  return node.type !== 'comment'
 }

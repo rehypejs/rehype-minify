@@ -45,12 +45,11 @@ export default function rehypeSortAttributes() {
     visit(tree, 'element', (node) => {
       const name = node.tagName
       const cache = counts[name] || (counts[name] = {known: [], counts: {}})
-      const props = node.properties || {}
       /** @type {string} */
       let prop
 
-      for (prop in props) {
-        if (own.call(props, prop)) {
+      for (prop in node.properties) {
+        if (own.call(node.properties, prop)) {
           const value = safe(prop)
 
           if (value in cache.counts) {
@@ -67,17 +66,16 @@ export default function rehypeSortAttributes() {
 
     visit(tree, 'element', (node) => {
       const cache = caches[node.tagName]
-      const props = node.properties || {}
       /** @type {Array<string>} */
       const keys = []
-      /** @type {Required<Element['properties']>} */
+      /** @type {Element['properties']} */
       const result = {}
       let index = -1
       /** @type {string} */
       let prop
 
-      for (prop in props) {
-        if (own.call(props, prop)) {
+      for (prop in node.properties) {
+        if (own.call(node.properties, prop)) {
           keys.push(prop)
         }
       }
@@ -85,7 +83,7 @@ export default function rehypeSortAttributes() {
       keys.sort((a, b) => cache.indexOf(a) - cache.indexOf(b))
 
       while (++index < keys.length) {
-        result[keys[index]] = props[keys[index]]
+        result[keys[index]] = node.properties[keys[index]]
       }
 
       node.properties = result

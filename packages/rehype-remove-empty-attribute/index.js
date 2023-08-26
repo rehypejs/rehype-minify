@@ -41,20 +41,19 @@ const own = {}.hasOwnProperty
 export default function rehypeRemoveEmptyAttribute() {
   return (tree) => {
     visit(tree, 'element', (node) => {
-      const props = node.properties || {}
       /** @type {string} */
       let prop
 
-      for (prop in props) {
-        if (own.call(props, prop)) {
-          const value = props[prop]
+      for (prop in node.properties) {
+        if (own.call(node.properties, prop)) {
+          const value = node.properties[prop]
 
           if (
             (value === '' || (Array.isArray(value) && value.length === 0)) &&
             (isEventHandler(prop) ||
               (own.call(schema, prop) && isElement(node, schema[prop])))
           ) {
-            props[prop] = null
+            node.properties[prop] = null
           }
         }
       }

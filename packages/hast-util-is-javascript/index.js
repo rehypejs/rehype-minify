@@ -81,13 +81,13 @@ export function isJavaScript(node) {
     return false
   }
 
-  const props = node.properties || {}
-
   if (hasProperty(node, 'type')) {
-    return check(props.type)
+    return check(node.properties.type)
   }
 
-  return !hasProperty(node, 'language') || check(props.language, 'text/')
+  return (
+    !hasProperty(node, 'language') || check(node.properties.language, 'text/')
+  )
 }
 
 /**

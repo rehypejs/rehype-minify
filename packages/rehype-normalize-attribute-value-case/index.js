@@ -41,17 +41,17 @@ const own = {}.hasOwnProperty
 export default function rehypeNormalizeAttributeValueCase() {
   return (tree) => {
     visit(tree, 'element', (node) => {
-      const props = node.properties || {}
       /** @type {string} */
       let prop
 
-      for (prop in props) {
+      for (prop in node.properties) {
         if (
           hasProperty(node, prop) &&
           own.call(schema, prop) &&
           isElement(node, schema[prop])
         ) {
-          props[prop] = minify(props[prop])
+          // @ts-expect-error: bug in `has-property`.
+          node.properties[prop] = minify(node.properties[prop])
         }
       }
     })

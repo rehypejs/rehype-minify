@@ -34,8 +34,12 @@ test('rehype-minify-javascript-url', (t) => {
   t.deepEqual(
     rehype()
       .use(min)
-      .runSync(u('root', [{type: 'element', tagName: 'img', children: []}])),
-    u('root', [{type: 'element', tagName: 'img', children: []}])
+      .runSync(
+        u('root', [
+          {type: 'element', tagName: 'img', properties: {}, children: []}
+        ])
+      ),
+    u('root', [{type: 'element', tagName: 'img', properties: {}, children: []}])
   )
   /* eslint-enable no-script-url */
 

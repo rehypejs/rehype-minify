@@ -4,7 +4,6 @@
  * @typedef {import('type-fest').PackageJson} PackageJson
  * @typedef {import('./benchmark-results.json')} BenchmarkResult
  * @typedef {import('mdast').Root} Root
- * @typedef {import('mdast').List} List
  * @typedef {import('hast').Root} HastRoot
  * @typedef {import('hast').Element} Element
  * @typedef {Element['children'][number]} ElementChild
@@ -21,7 +20,7 @@ import rehypeFormat from 'rehype-format'
 import rehypeStringify from 'rehype-stringify'
 import {remark} from 'remark'
 import {zone} from 'mdast-zone'
-import {toVFile} from 'to-vfile'
+import {read, readSync} from 'to-vfile'
 import remarkPresetWooorm from 'remark-preset-wooorm'
 
 export const pipelineRoot = trough()
@@ -31,7 +30,7 @@ export const pipelineRoot = trough()
      * @param {Next} next
      */
     (ctx, next) => {
-      toVFile.read(path.join(ctx.root, 'readme.md'), (error, file) => {
+      read(path.join(ctx.root, 'readme.md'), (error, file) => {
         if (file) {
           ctx.readme = file
         }
@@ -74,7 +73,11 @@ export const pipelineRoot = trough()
         }
       }
 
-      remark()
+      /** @type {import('unified').Processor<Root, undefined, undefined, Root, string>} */
+      // @ts-expect-error: to do: remove when `remark` is released.
+      const processor = remark()
+
+      processor
         .data('settings', remarkPresetWooorm.settings)
         .use(plugin('plugins-core', core))
         .use(plugin('plugins-other', others))
@@ -90,8 +93,11 @@ export const pipelineRoot = trough()
       function plugin(name, list) {
         return attacher
 
-        /** @type {import('unified').Plugin<Array<void>, Root>} */
         function attacher() {
+          /**
+           * @param {Root} tree
+           * @returns {undefined}
+           */
           return (tree) => {
             zone(tree, name, (start, _, end) => [
               start,
@@ -121,7 +127,7 @@ export const pipelineRoot = trough()
         }
       }
 
-      /** @type {import('unified').Plugin<Array<void>, Root>} */
+      /** @type {import('unified').Plugin<[], Root>} */
       function benchmark() {
         /** @type {BenchmarkResult} */
         let data
@@ -129,7 +135,7 @@ export const pipelineRoot = trough()
         try {
           data = JSON.parse(
             String(
-              toVFile.readSync({
+              readSync({
                 dirname: 'script',
                 basename: 'benchmark-results.json'
               })
@@ -218,20 +224,20 @@ export const pipelineRoot = trough()
               )
             }
 
-            const tree = /** @type {HastRoot} */ (
-              unified()
-                .use(rehypeFormat)
-                .runSync(
-                  // @ts-expect-error: works fine.
-                  h('table', [
-                    h('thead', h('tr', h1), h('tr', h2)),
-                    h('tbody', body),
-                    h('tfoot', h('tr', foot))
-                  ])
-                )
+            /** @type {import('unified').Processor<undefined, HastRoot, HastRoot, HastRoot, string>} */
+            // @ts-expect-error: to do: remove when `rehype-format` is released.
+            const processor = unified().use(rehypeFormat).use(rehypeStringify)
+
+            const tree = processor.runSync(
+              // @ts-expect-error: fine.
+              h('table', [
+                h('thead', h('tr', h1), h('tr', h2)),
+                h('tbody', body),
+                h('tfoot', h('tr', foot))
+              ])
             )
 
-            const fragment = unified().use(rehypeStringify).stringify(tree)
+            const fragment = processor.stringify(tree)
 
             return [start, u('html', fragment), end]
           })

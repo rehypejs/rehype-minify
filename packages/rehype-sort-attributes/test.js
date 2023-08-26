@@ -1,3 +1,7 @@
+/**
+ * @typedef {import('rehype-parse')}
+ */
+
 import test from 'tape'
 import {rehype} from 'rehype'
 import {u} from 'unist-builder'
@@ -7,7 +11,7 @@ test('rehype-sort-attributes', (t) => {
   t.equal(
     rehype()
       .use(min)
-      .use({settings: {fragment: true}})
+      .data('settings', {fragment: true})
       .processSync(
         [
           '<a id="alpha" class="bravo" href="#charlie"></a>',
@@ -30,7 +34,11 @@ test('rehype-sort-attributes', (t) => {
   t.deepEqual(
     rehype()
       .use(min)
-      .runSync(u('root', [{type: 'element', tagName: 'div', children: []}])),
+      .runSync(
+        u('root', [
+          {type: 'element', tagName: 'div', properties: {}, children: []}
+        ])
+      ),
     u('root', [{type: 'element', tagName: 'div', properties: {}, children: []}])
   )
 

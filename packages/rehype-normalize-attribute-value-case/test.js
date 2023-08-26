@@ -29,8 +29,14 @@ test('rehype-normalize-attribute-value-case', (t) => {
   t.deepEqual(
     rehype()
       .use(min)
-      .runSync(u('root', [{type: 'element', tagName: 'form', children: []}])),
-    u('root', [{type: 'element', tagName: 'form', children: []}])
+      .runSync(
+        u('root', [
+          {type: 'element', tagName: 'form', properties: {}, children: []}
+        ])
+      ),
+    u('root', [
+      {type: 'element', tagName: 'form', properties: {}, children: []}
+    ])
   )
 
   t.end()

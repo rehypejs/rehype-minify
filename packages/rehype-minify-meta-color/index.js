@@ -45,15 +45,14 @@ const suffix = '}'
 export default function rehypeMinifyMetaColor() {
   return (tree) => {
     visit(tree, 'element', (node) => {
-      const props = node.properties || {}
-      const name = props.name
+      const name = node.properties.name
 
       if (
         isElement(node, 'meta') &&
         (name === 'msapplication-TileColor' || name === 'theme-color') &&
         hasProperty(node, 'content')
       ) {
-        let value = props.content
+        let value = node.properties.content
 
         if (typeof value === 'string') {
           try {
@@ -63,7 +62,7 @@ export default function rehypeMinifyMetaColor() {
             /* c8 ignore next */
           } catch {}
 
-          props.content = value
+          node.properties.content = value
         }
       }
     })

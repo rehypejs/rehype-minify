@@ -30,14 +30,16 @@
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
+    "index.d.ts",
     "index.js",
+    "schema.d.ts",
     "schema.js"
   ],
   "dependencies": {
-    "@types/hast": "^2.0.0",
-    "hast-util-is-element": "^2.0.0",
-    "unified": "^10.0.0",
-    "unist-util-visit": "^4.0.0"
+    "@types/hast": "^3.0.0",
+    "hast-util-is-element": "^3.0.0",
+    "unified": "^11.0.0",
+    "unist-util-visit": "^5.0.0"
   },
   "scripts": {
     "build": "rimraf \"*.d.ts\" && tsc && type-coverage",

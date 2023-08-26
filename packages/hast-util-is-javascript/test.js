@@ -57,7 +57,12 @@ test('hast-util-is-javascript', (t) => {
   )
 
   t.ok(
-    isJavaScript({type: 'element', tagName: 'script', children: []}),
+    isJavaScript({
+      type: 'element',
+      tagName: 'script',
+      properties: {},
+      children: []
+    }),
     'yes - for script w/o properties'
   )
 

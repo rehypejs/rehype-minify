@@ -41,13 +41,13 @@ const suffix = '}a();'
 export default function rehypeMinifyEventHandler() {
   return (tree) => {
     visit(tree, 'element', (node) => {
-      const props = node.properties || {}
       /** @type {string} */
       let name
 
-      for (name in props) {
+      for (name in node.properties) {
         if (hasProperty(node, name) && isEventHandler(name)) {
-          props[name] = minify(props[name])
+          // @ts-expect-error: bug in `has-property`.
+          node.properties[name] = minify(node.properties[name])
         }
       }
     })

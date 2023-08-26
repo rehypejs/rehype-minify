@@ -6,7 +6,7 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
-import {toVFile} from 'to-vfile'
+import {read} from 'to-vfile'
 import {trough} from 'trough'
 
 const filePipeline = trough()
@@ -16,7 +16,7 @@ const filePipeline = trough()
      * @param {Next} next
      */
     (ctx, next) => {
-      toVFile.read(path.join(ctx.root, 'index.js'), (error, file) => {
+      read(path.join(ctx.root, 'index.js'), (error, file) => {
         if (file) {
           ctx.file = file
         }

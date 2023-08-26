@@ -1,12 +1,18 @@
+/**
+ * @typedef {import('rehype-stringify').Options} Options
+ */
+
 import test from 'tape'
 import {rehype} from 'rehype'
 import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import min from './index.js'
 
-// A few stringify settings to produce small file.
+/**
+ * @type {Options}
+ */
 const settings = {
-  entities: {
+  characterReferences: {
     omitOptionalSemicolons: true,
     useShortestReferences: true
   },
@@ -262,6 +268,7 @@ test('rehype-minify-enumerated-attribute', (t) => {
   t.deepEqual(
     rehype()
       .use(min)
+      // @ts-expect-error: remove support for missing properties.
       .runSync(u('root', [{type: 'element', tagName: 'form', children: []}])),
     u('root', [{type: 'element', tagName: 'form', children: []}]),
     'should support an element w/o properties'

@@ -84,11 +84,10 @@ export default function rehypeMinifyUrl(options) {
     }
 
     visit(tree, 'element', (node) => {
-      const props = node.properties || {}
       /** @type {string} */
       let prop
 
-      for (prop in props) {
+      for (prop in node.properties) {
         if (
           hasProperty(node, prop) &&
           own.call(urlAttributes, prop) &&
@@ -96,11 +95,12 @@ export default function rehypeMinifyUrl(options) {
           !(
             node.tagName === 'link' &&
             prop === 'href' &&
-            Array.isArray(props.rel) &&
-            props.rel.includes('canonical')
+            Array.isArray(node.properties.rel) &&
+            node.properties.rel.includes('canonical')
           )
         ) {
-          props[prop] = minify(props[prop], relate)
+          // @ts-expect-error: bug in `has-property`.
+          node.properties[prop] = minify(node.properties[prop], relate)
         }
       }
     })

@@ -13,7 +13,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import {inspect} from 'node:util'
 import {parse} from 'comment-parser'
-import GitHubSlugger from 'github-slugger'
+import {slug as githubSlug} from 'github-slugger'
 import {findAndReplace} from 'mdast-util-find-and-replace'
 import {toString} from 'mdast-util-to-string'
 import {unified} from 'unified'
@@ -21,7 +21,7 @@ import remarkParse from 'remark-parse'
 import {remark} from 'remark'
 import {rehype} from 'rehype'
 import rehypeFormat from 'rehype-format'
-import {toVFile} from 'to-vfile'
+import {toVFile, read} from 'to-vfile'
 import {trough} from 'trough'
 import parseAuthor from 'parse-author'
 import strip from 'strip-indent'
@@ -47,7 +47,7 @@ export const pipelineReadme = trough()
      */
     // eslint-disable-next-line complexity
     async (ctx) => {
-      const script = await toVFile.read(path.join(ctx.root, 'index.js'))
+      const script = await read(path.join(ctx.root, 'index.js'))
       const fileInfo = parse(String(script), {spacing: 'preserve'})[0]
       const tags = fileInfo.tags
       const exampleTag = tags.find((d) => d.tag === 'example')
@@ -83,7 +83,10 @@ export const pipelineReadme = trough()
       const health = org + '/.github'
       const hMain = health + '/blob/main'
       const slug = remote.split('/').slice(-2).join('/')
-      const descriptionTree = unified().use(remarkParse).parse(description)
+      const descriptionTree = /** @type {Root} */ (
+        // @ts-expect-error: to do: remove (and cast) when released.
+        unified().use(remarkParse).parse(description)
+      )
       /** @type {Record<string, unknown> & {default?: Function}} */
       const mod = await import(script.path)
       const specifiers = Object.keys(mod).filter((d) => d !== 'default')
@@ -150,7 +153,7 @@ export const pipelineReadme = trough()
         const node = descriptionContent[contentIndex]
 
         if (node.type === 'heading' && node.depth === 2) {
-          category = GitHubSlugger.slug(toString(node))
+          category = githubSlug(toString(node))
         }
 
         if (!(category in categories)) {
@@ -902,6 +905,7 @@ export const pipelineReadme = trough()
       ctx.readme = toVFile(path.join(ctx.root, 'readme.md'))
       /** @type {Root} */
       const root = {type: 'root', children}
+      // @ts-expect-error: to do: remove when remark is released.
       ctx.readme.value = proc.stringify(root, ctx.readme)
     }
   )

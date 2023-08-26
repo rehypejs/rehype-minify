@@ -31,7 +31,7 @@ test('hast-util-is-css-style', (t) => {
     'yes - `style` with `[type= text/css ]`'
   )
   t.equal(
-    isCssStyle(u('element', {tagName: 'style'}, [])),
+    isCssStyle(u('element', {tagName: 'style', properties: {}}, [])),
     true,
     'yes - without properties'
   )
@@ -43,7 +43,7 @@ test('hast-util-is-css-style', (t) => {
   )
   t.equal(isCssStyle(h('div')), false, 'no - other elements')
   t.equal(
-    isCssStyle(u('element', {tagName: 'p'}, [])),
+    isCssStyle(u('element', {tagName: 'p', properties: {}}, [])),
     false,
     'no - other nodes'
   )

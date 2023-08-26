@@ -52,7 +52,8 @@ export default function rehypeMinifyStyleAttribute() {
             /* c8 ignore next */
           } catch {}
 
-          node.properties.style = value || null
+          // @ts-expect-error: to do: are hast styles messed up?
+          node.properties.style = value || undefined
         }
       }
     })
