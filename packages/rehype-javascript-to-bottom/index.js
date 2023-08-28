@@ -44,6 +44,7 @@ import {isJavaScript} from 'hast-util-is-javascript'
  *   You can pass `filter`, a function called with each checked element,
  *   returning `true` if the script should be moved, and `false` if not.
  */
+// To do: improve type above.
 
 /**
  * Move JS `<script>` elements to the end of `<body>`.

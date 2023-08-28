@@ -28,9 +28,7 @@
     "index.d.ts",
     "index.js"
   ],
-  "scripts": {
-    "test": "node --conditions development test.js"
-  },
+  "scripts": {},
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,

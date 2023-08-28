@@ -1,55 +1,70 @@
-import test from 'tape'
+import assert from 'node:assert/strict'
+import test from 'node:test'
 import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {isCssStyle} from './index.js'
 
-test('hast-util-is-css-style', (t) => {
-  t.equal(isCssStyle(h('style')), true, 'yes - a `style` node')
-  t.equal(
-    isCssStyle(h('style', {type: null})),
-    true,
-    'yes - `style` without `type`'
-  )
-  t.equal(
-    isCssStyle(h('style', {type: 'text/css'})),
-    true,
-    'yes - `style` with `[type=text/css]`'
-  )
-  t.equal(
-    isCssStyle(h('style', {type: 'TEXT/CSS'})),
-    true,
-    'yes - `style` with `[type=TEXT/CSS]`'
-  )
-  t.equal(
-    isCssStyle(h('style', {type: 'TeXt/CsS'})),
-    true,
-    'yes - `style` with `[type=TeXt/CsS]`'
-  )
-  t.equal(
-    isCssStyle(h('style', {type: ' text/css '})),
-    true,
-    'yes - `style` with `[type= text/css ]`'
-  )
-  t.equal(
-    isCssStyle(u('element', {tagName: 'style', properties: {}}, [])),
-    true,
-    'yes - without properties'
+test('hast-util-is-css-style', async function (t) {
+  await t.test('should be yes for a `style` node', async function () {
+    assert.equal(isCssStyle(h('style')), true)
+  })
+
+  await t.test('should be yes for `style` without `type`', async function () {
+    assert.equal(isCssStyle(h('style', {type: null})), true)
+  })
+
+  await t.test(
+    'should be yes for `style` with `[type=text/css]`',
+    async function () {
+      assert.equal(isCssStyle(h('style', {type: 'text/css'})), true)
+    }
   )
 
-  t.equal(
-    isCssStyle(h('style', {type: 'text/foo'})),
-    false,
-    'no - `style` with `[type=text/foo]`'
+  await t.test(
+    'should be yes for `style` with `[type=TEXT/CSS]`',
+    async function () {
+      assert.equal(isCssStyle(h('style', {type: 'TEXT/CSS'})), true)
+    }
   )
-  t.equal(isCssStyle(h('div')), false, 'no - other elements')
-  t.equal(
-    isCssStyle(u('element', {tagName: 'p', properties: {}}, [])),
-    false,
-    'no - other nodes'
-  )
-  t.equal(isCssStyle(u('text', 'foo')), false, 'no - other nodes')
-  // @ts-expect-error: not enough arguments.
-  t.equal(isCssStyle(), false, 'no - nothing')
 
-  t.end()
+  await t.test(
+    'should be yes for `style` with `[type=TeXt/CsS]`',
+    async function () {
+      assert.equal(isCssStyle(h('style', {type: 'TeXt/CsS'})), true)
+    }
+  )
+
+  await t.test(
+    'should be yes for `style` with `[type= text/css ]`',
+    async function () {
+      assert.equal(isCssStyle(h('style', {type: ' text/css '})), true)
+    }
+  )
+
+  await t.test(
+    'should be no for `style` with `[type=text/foo]`',
+    async function () {
+      assert.equal(isCssStyle(h('style', {type: 'text/foo'})), false)
+    }
+  )
+
+  await t.test('should be no for other elements', async function () {
+    assert.equal(isCssStyle(h('div')), false)
+  })
+
+  await t.test('should be no for other nodes', async function () {
+    assert.equal(
+      isCssStyle(u('element', {tagName: 'p', properties: {}}, [])),
+      false
+    )
+  })
+
+  await t.test('should be no for other nodes', async function () {
+    assert.equal(isCssStyle(u('text', 'foo')), false)
+  })
+
+  await t.test('should be no for nothing', async function () {
+    // @ts-expect-error: not enough arguments.
+    assert.equal(isCssStyle(), false)
+  })
 })

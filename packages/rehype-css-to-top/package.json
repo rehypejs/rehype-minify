@@ -39,9 +39,7 @@
     "unified": "^11.0.0",
     "unist-util-visit": "^5.0.0"
   },
-  "scripts": {
-    "test": "node --conditions development test.js"
-  },
+  "scripts": {},
   "excludeFromPreset": true,
   "typeCoverage": {
     "atLeast": 100,

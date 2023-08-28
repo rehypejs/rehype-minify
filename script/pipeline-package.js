@@ -166,9 +166,7 @@ async function generatePackageJson(context) {
     types: 'index.d.ts',
     files: codePaths.filter((name) => !/test/.test(name)).sort(),
     dependencies: previousPackage.dependencies,
-    scripts: codePaths.some((name) => /test/.test(name))
-      ? {test: 'node --conditions development test.js'}
-      : {},
+    scripts: {},
     excludeFromPreset: previousPackage.excludeFromPreset,
     typeCoverage: {
       atLeast: 100,

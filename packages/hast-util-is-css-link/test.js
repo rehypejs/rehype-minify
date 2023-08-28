@@ -1,67 +1,88 @@
-import test from 'tape'
+import assert from 'node:assert/strict'
+import test from 'node:test'
 import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {isCssLink} from './index.js'
 
-test('hast-util-is-css-link', (t) => {
-  t.equal(
-    isCssLink(h('link', {rel: ['stylesheet']})),
-    true,
-    'yes - for `link` with `[rel=stylesheet]` and no `[type]`'
+test('hast-util-is-css-link', async function (t) {
+  await t.test(
+    'should be yes for `link` with `[rel=stylesheet]` and no `[type]`',
+    async function () {
+      assert.equal(isCssLink(h('link', {rel: ['stylesheet']})), true)
+    }
   )
 
-  t.equal(
-    isCssLink(h('link', {rel: ['stylesheet', 'author']})),
-    true,
-    'yes - for `link` with multiple `rel`’s, including `stylesheet`, and no `[type]`'
+  await t.test(
+    'should be yes for `link` with multiple `rel`’s, including `stylesheet`, and no `[type]`',
+    async function () {
+      assert.equal(isCssLink(h('link', {rel: ['stylesheet', 'author']})), true)
+    }
   )
 
-  t.equal(
-    isCssLink(h('link', {rel: ['stylesheet'], type: 'text/css'})),
-    true,
-    'yes - for `link` with `[rel=stylesheet]` and `[type=text/css]`'
+  await t.test(
+    'should be yes for `link` with `[rel=stylesheet]` and `[type=text/css]`',
+    async function () {
+      assert.equal(
+        isCssLink(h('link', {rel: ['stylesheet'], type: 'text/css'})),
+        true
+      )
+    }
   )
 
-  t.equal(
-    isCssLink(h('link', {rel: ['stylesheet', 'author'], type: 'text/css'})),
-    true,
-    'yes - for `link` with multiple `rel`’s, including `stylesheet`, and `[type=text/css]`'
+  await t.test(
+    'should be yes for `link` with multiple `rel`’s, including `stylesheet`, and `[type=text/css]`',
+    async function () {
+      assert.equal(
+        isCssLink(h('link', {rel: ['stylesheet', 'author'], type: 'text/css'})),
+        true
+      )
+    }
   )
 
-  t.equal(
-    isCssLink(h('link', {rel: ['stylesheet'], type: 'text/foo'})),
-    false,
-    'no - for `link` with `[rel=stylesheet]`, but a type other than `text/css`'
+  await t.test(
+    'should be no for `link` with `[rel=stylesheet]`, but a type other than `text/css`',
+    async function () {
+      assert.equal(
+        isCssLink(h('link', {rel: ['stylesheet'], type: 'text/foo'})),
+        false
+      )
+    }
   )
 
-  t.equal(
-    isCssLink(h('link', {rel: ['author']})),
-    false,
-    'no - for `link`s with other rel’s'
+  await t.test('should be no for `link`s with other rel’s', async function () {
+    assert.equal(isCssLink(h('link', {rel: ['author']})), false)
+  })
+
+  await t.test(
+    'should be no for `link`s with other rel’s (2)',
+    async function () {
+      assert.equal(
+        isCssLink(h('link', {rel: ['author'], type: 'text/css'})),
+        false
+      )
+    }
   )
 
-  t.equal(
-    isCssLink(h('link', {rel: ['author'], type: 'text/css'})),
-    false,
-    'no - for `link`s with other rel’s (2)'
-  )
+  await t.test('should be no for `link`s without `rel`', async function () {
+    assert.equal(isCssLink(h('link')), false)
+  })
 
-  t.equal(isCssLink(h('link')), false, 'no - for `link`s without `rel`')
+  await t.test('should be no for `link`s without `rel`', async function () {
+    assert.equal(isCssLink(h('link', {rel: null})), false)
+  })
 
-  t.equal(
-    isCssLink(h('link', {rel: null})),
-    false,
-    'no - for `link`s without `rel`'
-  )
+  await t.test('should be no for `link`s without `rel`', async function () {
+    assert.equal(
+      isCssLink(u('element', {tagName: 'link', properties: {}}, [])),
+      false
+    )
+  })
 
-  t.equal(
-    isCssLink(u('element', {tagName: 'link', properties: {}}, [])),
-    false,
-    'no - for `link`s without `rel`'
-  )
+  await t.test('should be no for non-links', async function () {
+    assert.equal(isCssLink(h('p')), false)
+  })
 
-  t.equal(isCssLink(h('p')), false, 'no - for non-links')
-
-  t.equal(isCssLink(u('text', 'foo')), false, 'no - for non-elements')
-  t.end()
+  await t.test('should be no for non-elements', async function () {
+    assert.equal(isCssLink(u('text', 'foo')), false)
+  })
 })

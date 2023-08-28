@@ -1,47 +1,40 @@
-import test from 'tape'
+import assert from 'node:assert/strict'
+import test from 'node:test'
 import {u} from 'unist-builder'
 import {fromString} from './index.js'
 
-test('hast-util-from-string', (t) => {
-  t.deepEqual(
-    // @ts-expect-error: `value` missing.
-    fromString(u('text'), 'foo'),
-    u('text', 'foo'),
-    'should set text nodes'
-  )
+test('hast-util-from-string', async function (t) {
+  await t.test('should set text nodes', async function () {
+    assert.deepEqual(
+      // @ts-expect-error: `value` missing.
+      fromString(u('text'), 'foo'),
+      u('text', 'foo')
+    )
+  })
 
-  t.deepEqual(
-    // @ts-expect-error: `value` missing.
-    fromString(u('text')),
-    u('text', ''),
-    'should reset text nodes (1)'
-  )
+  await t.test('should reset text nodes (1)', async function () {
+    assert.deepEqual(
+      // @ts-expect-error: `value` missing.
+      fromString(u('text')),
+      u('text', '')
+    )
+  })
 
-  t.deepEqual(
-    fromString(u('text', 'foo')),
-    u('text', ''),
-    'should reset text nodes (2)'
-  )
+  await t.test('should reset text nodes (2)', async function () {
+    assert.deepEqual(fromString(u('text', 'foo')), u('text', ''))
+  })
 
-  t.deepEqual(
-    fromString(u('element', {tagName: 'p', properties: {}}, []), 'foo'),
-    u('element', {tagName: 'p', properties: {}}, [u('text', 'foo')]),
-    'should set parent nodes'
-  )
-
-  t.deepEqual(
-    fromString(u('element', {tagName: 'p', properties: {}}, [])),
-    u('element', {tagName: 'p', properties: {}}, []),
-    'should reset parent nodes (1)'
-  )
-
-  t.deepEqual(
-    fromString(
+  await t.test('should set parent nodes', async function () {
+    assert.deepEqual(
+      fromString(u('element', {tagName: 'p', properties: {}}, []), 'foo'),
       u('element', {tagName: 'p', properties: {}}, [u('text', 'foo')])
-    ),
-    u('element', {tagName: 'p', properties: {}}, []),
-    'should reset parent nodes (2)'
-  )
+    )
+  })
 
-  t.end()
+  await t.test('should reset parent nodes', async function () {
+    assert.deepEqual(
+      fromString(u('element', {tagName: 'p', properties: {}}, [])),
+      u('element', {tagName: 'p', properties: {}}, [])
+    )
+  })
 })

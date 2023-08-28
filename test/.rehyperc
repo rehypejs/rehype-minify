@@ -1,5 +1,0 @@
-{
-  "plugins": [
-    "../packages/rehype-preset-minify/index.js"
-  ]
-}

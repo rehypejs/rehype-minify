@@ -1,70 +1,82 @@
-import test from 'tape'
+import assert from 'node:assert/strict'
+import test from 'node:test'
 import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {isJavaScript} from './index.js'
 
-test('hast-util-is-javascript', (t) => {
-  t.ok(isJavaScript(h('script')), 'yes - for `script`')
-  t.ok(
-    isJavaScript(h('script', {src: 'index.js'})),
-    'yes - for `script` with src'
-  )
-  t.ok(
-    isJavaScript(h('script', {type: 'text/ecmascript'})),
-    'yes - for `text/ecmascript` type'
-  )
-  t.ok(
-    isJavaScript(h('script', {language: 'ecmascript'})),
-    'yes - for `ecmascript` language'
-  )
-  t.ok(
-    isJavaScript(h('script', {type: 'text/jscript'})),
-    'yes - for `text/jscript` type'
-  )
-  t.ok(
-    isJavaScript(h('script', {language: 'jscript'})),
-    'yes - for `jscript` language'
-  )
-  t.ok(
-    isJavaScript(h('script', {type: 'text/javascript1.5'})),
-    'yes - for `text/javascript1.5` type'
-  )
-  t.ok(
-    isJavaScript(h('script', {language: 'javascript1.5'})),
-    'yes - for `javascript1.5` language'
+test('hast-util-is-javascript', async function (t) {
+  await t.test('should be yes for `script`', async function () {
+    assert.ok(isJavaScript(h('script')))
+  })
+
+  await t.test('should be yes for `script` with src', async function () {
+    assert.ok(isJavaScript(h('script', {src: 'index.js'})))
+  })
+
+  await t.test('should be yes for `text/ecmascript` type', async function () {
+    assert.ok(isJavaScript(h('script', {type: 'text/ecmascript'})))
+  })
+
+  await t.test('should be yes for `ecmascript` language', async function () {
+    assert.ok(isJavaScript(h('script', {language: 'ecmascript'})))
+  })
+
+  await t.test('should be yes for `text/jscript` type', async function () {
+    assert.ok(isJavaScript(h('script', {type: 'text/jscript'})))
+  })
+
+  await t.test('should be yes for `jscript` language', async function () {
+    assert.ok(isJavaScript(h('script', {language: 'jscript'})))
+  })
+
+  await t.test(
+    'should be yes for `text/javascript1.5` type',
+    async function () {
+      assert.ok(isJavaScript(h('script', {type: 'text/javascript1.5'})))
+    }
   )
 
-  // @ts-expect-error: not enough arguments.
-  t.notOk(isJavaScript(), 'no - for nothing')
-  t.notOk(isJavaScript(u('root', [])), 'no - for other nodes')
-  t.notOk(isJavaScript(h('p')), 'no - for other elements')
-  t.notOk(isJavaScript(h('script', {type: true})), 'no - for non-string type')
-  t.notOk(
-    isJavaScript(h('script', {type: 'text/fooscript'})),
-    'no - for other type'
-  )
-  t.ok(
-    isJavaScript(h('script', {type: 'text/javascript', language: 'fooscript'})),
-    'yes - for JS type with other language'
-  )
-  t.notOk(
-    isJavaScript(h('script', {language: 'fooscript'})),
-    'no - for other language'
-  )
-  t.notOk(
-    isJavaScript(h('script', {language: true})),
-    'no - for non-string language'
+  await t.test('should be yes for `javascript1.5` language', async function () {
+    assert.ok(isJavaScript(h('script', {language: 'javascript1.5'})))
+  })
+
+  await t.test('should be no for nothing', async function () {
+    // @ts-expect-error: not enough arguments.
+    assert.equal(isJavaScript(), false)
+  })
+
+  await t.test('should be no for other nodes', async function () {
+    assert.equal(isJavaScript(u('root', [])), false)
+  })
+
+  await t.test('should be no for other elements', async function () {
+    assert.equal(isJavaScript(h('p')), false)
+  })
+
+  await t.test('should be no for non-string type', async function () {
+    assert.equal(isJavaScript(h('script', {type: true})), false)
+  })
+
+  await t.test('should be no for other type', async function () {
+    assert.equal(isJavaScript(h('script', {type: 'text/fooscript'})), false)
+  })
+
+  await t.test(
+    'should be yes for JS type with other language',
+    async function () {
+      assert.ok(
+        isJavaScript(
+          h('script', {type: 'text/javascript', language: 'fooscript'})
+        )
+      )
+    }
   )
 
-  t.ok(
-    isJavaScript({
-      type: 'element',
-      tagName: 'script',
-      properties: {},
-      children: []
-    }),
-    'yes - for script w/o properties'
-  )
+  await t.test('should be no for other language', async function () {
+    assert.equal(isJavaScript(h('script', {language: 'fooscript'})), false)
+  })
 
-  t.end()
+  await t.test('should be no for non-string language', async function () {
+    assert.equal(isJavaScript(h('script', {language: true})), false)
+  })
 })

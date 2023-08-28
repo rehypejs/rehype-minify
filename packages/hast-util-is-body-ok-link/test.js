@@ -1,59 +1,85 @@
-import test from 'tape'
+import assert from 'node:assert/strict'
+import test from 'node:test'
 import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {isBodyOkLink} from './index.js'
 
-test('isBodyOkLink', (t) => {
-  t.equal(
-    isBodyOkLink(h('link', {itemProp: 'foo'})),
-    true,
-    'yes - for `link`s with `itemProp`'
+test('isBodyOkLink', async function (t) {
+  await t.test('should be yes for `link`s with `itemProp`', async function () {
+    assert.equal(isBodyOkLink(h('link', {itemProp: 'foo'})), true)
+  })
+
+  await t.test(
+    'should be yes for `link`s with `rel[prefetch]`',
+    async function () {
+      assert.equal(
+        isBodyOkLink(h('link', {rel: ['prefetch'], href: '//example.com'})),
+        true
+      )
+    }
   )
 
-  t.equal(
-    isBodyOkLink(h('link', {rel: ['prefetch'], href: '//example.com'})),
-    true,
-    'yes - for `link`s with `rel[prefetch]`'
+  await t.test(
+    'should be yes for `link`s with `rel[stylesheet]`',
+    async function () {
+      assert.equal(
+        isBodyOkLink(h('link', {rel: ['stylesheet'], href: 'index.css'})),
+        true
+      )
+    }
   )
 
-  t.equal(
-    isBodyOkLink(h('link', {rel: ['stylesheet'], href: 'index.css'})),
-    true,
-    'yes - for `link`s with `rel[stylesheet]`'
+  await t.test(
+    'should be yes for `link`s with `rel[pingback]`',
+    async function () {
+      assert.equal(
+        isBodyOkLink(h('link', {rel: ['pingback'], href: '//example.com'})),
+        true
+      )
+    }
   )
 
-  t.equal(
-    isBodyOkLink(h('link', {rel: ['pingback'], href: '//example.com'})),
-    true,
-    'yes - for `link`s with `rel[pingback]`'
+  await t.test('should be no for `link`s with other rel’s', async function () {
+    assert.equal(
+      isBodyOkLink(h('link', {rel: ['author'], href: 'index.css'})),
+      false
+    )
+  })
+
+  await t.test(
+    'should be no for `link`s with combined rel’s',
+    async function () {
+      assert.equal(
+        isBodyOkLink(
+          h('link', {rel: ['stylesheet', 'author'], href: 'index.css'})
+        ),
+        false
+      )
+    }
   )
 
-  t.equal(
-    isBodyOkLink(h('link', {rel: ['author'], href: 'index.css'})),
-    false,
-    'no - for `link`s with other rel’s'
+  await t.test(
+    'should be no for `link`s without `rel` or `itemProp`',
+    async function () {
+      assert.equal(isBodyOkLink(h('link')), false)
+    }
   )
 
-  t.equal(
-    isBodyOkLink(h('link', {rel: ['stylesheet', 'author'], href: 'index.css'})),
-    false,
-    'no - for `link`s with combined rel’s'
+  await t.test(
+    'should be no for `link`s without `rel` or `itemProp` (2)',
+    async function () {
+      assert.equal(
+        isBodyOkLink(u('element', {tagName: 'link', properties: {}}, [])),
+        false
+      )
+    }
   )
 
-  t.equal(
-    isBodyOkLink(h('link')),
-    false,
-    'no - for `link`s without `rel` or `itemProp`'
-  )
+  await t.test('should be no for non-links', async function () {
+    assert.equal(isBodyOkLink(h('p')), false)
+  })
 
-  t.equal(
-    isBodyOkLink(u('element', {tagName: 'link', properties: {}}, [])),
-    false,
-    'no - for `link`s without `rel` or `itemProp` (2)'
-  )
-
-  t.equal(isBodyOkLink(h('p')), false, 'no - for non-links')
-
-  t.equal(isBodyOkLink(u('text', 'foo')), false, 'no - for non-elements')
-  t.end()
+  await t.test('should be no for non-elements', async function () {
+    assert.equal(isBodyOkLink(u('text', 'foo')), false)
+  })
 })
