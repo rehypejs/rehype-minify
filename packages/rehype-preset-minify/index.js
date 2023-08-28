@@ -1,3 +1,47 @@
+/**
+ * rehype preset to minify HTML.
+ *
+ * ## What is this?
+ *
+ * This package is a [unified](https://github.com/unifiedjs/unified)
+ * ([rehype](https://github.com/rehypejs/rehype)) preset to minify HTML.
+ *
+ * ## When should I use this?
+ *
+ * You can use this plugin when you want to improve the size of HTML documents.
+ *
+ * ## API
+ *
+ * ### `unified().use(rehypePresetMinify)`
+ *
+ * Use the preset.
+ *
+ * Presets don’t have options.
+ *
+ * You can reconfigure plugins in presets by using them afterwards with different
+ * options.
+ *
+ * @example
+ *   {"processor": {"fragment": false}}
+ *   <!doctype html>
+ *   <html lang="en-GB">
+ *     <head>
+ *       <meta charset="utf-8">
+ *       <meta http-equiv="content-language" content="en-US">
+ *       <script src="index.js" type="text/javascript" language="javascript">
+ *         alert(true);
+ *       </script>
+ *       <link rel="stylesheet" href="index.css" type="text/css">
+ *       <title>Foo  &amp;  bar</title>
+ *     </head>
+ *     <body>
+ *       <h1 class="foo foo">bar  bar</h1>
+ *       <p id="alfred" id="alfred">  <strong>foo</strong> <em>bar</em> </p>
+ *       <button type="BUTTON" onclick="javascript:return false">Alpha</button>
+ *     </body>
+ *   </html>
+ */
+
 import rehypeMinifyAttributeWhitespace from 'rehype-minify-attribute-whitespace'
 import rehypeMinifyCssStyle from 'rehype-minify-css-style'
 import rehypeRemoveMetaHttpEquiv from 'rehype-remove-meta-http-equiv'

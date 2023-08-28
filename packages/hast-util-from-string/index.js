@@ -49,40 +49,44 @@
  *
  * ###### Parameters
  *
- * *   `node` (`Node`) — hast node
- * *   `value` (`string`, optional) — new text
+ * *   `node` (`Node`) — node to change.
+ * *   `value` (`string`, default: `''`) — value to use
  *
  * ###### Returns
  *
- * The given node (`Node`).
+ * Given node (`Node`).
  */
 
 /**
- * @typedef {import('hast').Root} Root
- * @typedef {Root|Root['children'][number]} Node
+ * @typedef {import('hast').Nodes} Nodes
  */
 
+// To do: remove return result.
 /**
  * Set the plain-text value of a hast node.
  * This is like the DOMs `Node#textContent` setter.
  * The given node is returned.
  *
- * @template {Node} Thing
+ * @template {Nodes} Thing
+ *   Node kind.
  * @param {Thing} node
- * @param {string|null|undefined} [d]
+ *   Node to change.
+ * @param {string | null | undefined} [value='']
+ *   Value to use (default: `''`)
  * @returns {Thing}
+ *   Given node.
  */
-export function fromString(node, d) {
-  const value = d === undefined || d === null ? '' : String(d)
+export function fromString(node, value) {
+  const normalized = value === undefined || value === null ? '' : String(value)
 
   if ('children' in node) {
     node.children = []
 
     if (value) {
-      node.children.push({type: 'text', value})
+      node.children.push({type: 'text', value: normalized})
     }
   } else if (node.type !== 'doctype') {
-    node.value = value
+    node.value = normalized
   }
 
   return node

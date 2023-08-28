@@ -1,103 +1,68 @@
 /**
- * @typedef {import('trough').Callback} Next
- * @typedef {import('vfile').VFile} VFile
- *
- * @typedef Context
- * @property {string} root
- * @property {string} [ancestor]
- * @property {Array<string>} [plugins]
+ * @typedef {import('type-fest').PackageJson} PackageJson
  */
 
-import fs from 'node:fs'
-import path from 'node:path'
-import process from 'node:process'
-import chalk from 'chalk'
-import {bail} from 'bail'
-import {trough} from 'trough'
+import fs from 'node:fs/promises'
+import {relative} from 'node:path'
 import {isHidden} from 'is-hidden'
-import {pipelineRoot} from './pipeline-root.js'
+import {compareFile} from 'vfile-sort'
+import {reporter} from 'vfile-reporter'
+import {read, write} from 'to-vfile'
 import {pipelinePackage} from './pipeline-package.js'
-import {pipelineReadme} from './pipeline-readme.js'
-import {pipelinePresets} from './pipeline-presets.js'
+import {pipelineRoot} from './pipeline-root.js'
 
-const rootPath = process.cwd()
-const packages = path.join(rootPath, 'packages')
+const ancestor = new URL('../', import.meta.url)
+const packagesFolder = new URL('packages/', ancestor)
 
-fs.readdir(packages, (error, basenames) => {
-  bail(error)
+/** @type {PackageJson} */
+const ancestorPackage = JSON.parse(
+  String(await read(new URL('package.json', ancestor)))
+)
 
-  basenames = basenames.filter((d) => !isHidden(d))
+let packages = await fs.readdir(packagesFolder)
 
-  const plugins = basenames.filter(
-    (name) =>
-      name.indexOf('rehype-') === 0 && name.indexOf('rehype-preset-') !== 0
-  )
+packages = packages.filter((d) => !isHidden(d))
 
-  // Generate all packages.
-  let index = -1
+const plugins = packages.filter(
+  (name) =>
+    name.indexOf('rehype-') === 0 && name.indexOf('rehype-preset-') !== 0
+)
 
-  while (++index < basenames.length) {
-    const basename = basenames[index]
+const results = await Promise.all(
+  packages.map(function (name) {
+    return pipelinePackage({
+      ancestor,
+      ancestorPackage,
+      packagesFolder,
+      packageFolder: new URL(name + '/', packagesFolder),
+      name,
+      plugins
+    })
+  })
+)
 
-    trough()
-      .use(
-        /**
-         * @param {Context} ctx
-         * @param {Next} next
-         */
-        (ctx, next) => {
-          pipelinePackage.run(ctx, next)
-        }
-      )
-      .use(
-        /**
-         * @param {Context} ctx
-         * @param {Next} next
-         */
-        (ctx, next) => {
-          if (basename.indexOf('rehype-preset-') === 0) {
-            pipelinePresets.run(ctx, next)
-          } else {
-            pipelineReadme.run(ctx, next)
-          }
-        }
-      )
-      .run(
-        {ancestor: rootPath, root: path.join(packages, basename), plugins},
-        wrap(basename)
-      )
-  }
+const files = results.flat()
 
-  // Generate root `readme.md`.
-  pipelineRoot.run({root: rootPath, plugins}, wrap(path.basename(rootPath)))
+files.push(...(await pipelineRoot(ancestor, files)))
 
-  /**
-   * @param {string} basename
-   */
-  function wrap(basename) {
-    return done
+// Generate info in main readme.
 
-    /**
-     * @param {Error?} error
-     * @param {Record<string, VFile>} ctx
-     */
-    function done(error, ctx) {
-      /** @type {string} */
-      let key
+// Write files.
+const writable = files.filter((d) => d.data.changed)
 
-      if (error) {
-        console.error(chalk.red('✗ ') + basename)
-        error.message = 'Could not process `' + basename + '`: ' + error.message
-        throw error
-      }
+await Promise.all(
+  writable.map(function (file) {
+    file.stored = true
+    return write(file)
+  })
+)
 
-      console.log(chalk.green('✓ ') + basename)
+// Clean paths and report.
+for (const file of files) {
+  file.path = relative(file.cwd, file.path)
+  file.history = [file.path]
+}
 
-      for (key in ctx) {
-        if (ctx[key] && ctx[key].stored) {
-          console.log('  └─ ' + ctx[key].basename)
-        }
-      }
-    }
-  }
-})
+files.sort(compareFile)
+
+console.error(reporter(files))

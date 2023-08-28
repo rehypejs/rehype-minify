@@ -6,8 +6,8 @@
 [![Coverage][coverage-badge]][coverage]
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
-[![Sponsors][sponsors-badge]][collective]
-[![Backers][backers-badge]][collective]
+[![Sponsors][funding-sponsors-badge]][funding]
+[![Backers][funding-backers-badge]][funding]
 [![Chat][chat-badge]][chat]
 
 **[rehype][]** plugin to prevent a network request to the favicon when there
@@ -47,19 +47,19 @@ the server by inserting an empty favicon.
 ## Install
 
 This package is [ESM only][esm].
-In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
+In Node.js (version 16+), install with [npm][]:
 
 ```sh
 npm install rehype-prevent-favicon-request
 ```
 
-In Deno with [`esm.sh`][esmsh]:
+In Deno with [`esm.sh`][esm-sh]:
 
 ```js
 import rehypePreventFaviconRequest from 'https://esm.sh/rehype-prevent-favicon-request@3'
 ```
 
-In browsers with [`esm.sh`][esmsh]:
+In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
@@ -72,23 +72,19 @@ In browsers with [`esm.sh`][esmsh]:
 On the API:
 
 ```js
+import rehypeParse from 'rehype-parse'
+import rehypePreventFaviconRequest from 'rehype-prevent-favicon-request'
+import rehypeStringify from 'rehype-stringify'
 import {read} from 'to-vfile'
 import {unified} from 'unified'
-import rehypeParse from 'rehype-parse'
-import rehypeStringify from 'rehype-stringify'
-import rehypePreventFaviconRequest from 'rehype-prevent-favicon-request'
 
-main()
+const file = await unified()
+  .use(rehypeParse)
+  .use(rehypePreventFaviconRequest)
+  .use(rehypeStringify)
+  .process(await read('index.html'))
 
-async function main() {
-  const file = await unified()
-    .use(rehypeParse)
-    .use(rehypePreventFaviconRequest)
-    .use(rehypeStringify)
-    .process(await read('index.html'))
-
-  console.log(String(file))
-}
+console.log(String(file))
 ```
 
 On the CLI:
@@ -157,7 +153,7 @@ Our projects sometimes work with older versions, but this is not guaranteed.
 
 ## Security
 
-As **rehype** works on HTML, and improper use of HTML can open you up to a
+As **rehype** works on HTML and improper use of HTML can open you up to a
 [cross-site scripting (XSS)][xss] attack, use of rehype can also be unsafe.
 Use [`rehype-sanitize`][rehype-sanitize] to make the tree safe.
 
@@ -175,56 +171,56 @@ abide by its terms.
 
 [MIT][license] © [Titus Wormer][author]
 
-[build-badge]: https://github.com/rehypejs/rehype-minify/workflows/main/badge.svg
+[author]: https://wooorm.com
 
 [build]: https://github.com/rehypejs/rehype-minify/actions
 
-[coverage-badge]: https://img.shields.io/codecov/c/github/rehypejs/rehype-minify.svg
-
-[coverage]: https://codecov.io/github/rehypejs/rehype-minify
-
-[downloads-badge]: https://img.shields.io/npm/dm/rehype-prevent-favicon-request.svg
-
-[downloads]: https://www.npmjs.com/package/rehype-prevent-favicon-request
-
-[size-badge]: https://img.shields.io/bundlephobia/minzip/rehype-prevent-favicon-request.svg
-
-[size]: https://bundlephobia.com/result?p=rehype-prevent-favicon-request
-
-[sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
-
-[backers-badge]: https://opencollective.com/unified/backers/badge.svg
-
-[collective]: https://opencollective.com/unified
-
-[chat-badge]: https://img.shields.io/badge/chat-discussions-success.svg
+[build-badge]: https://github.com/rehypejs/rehype-minify/workflows/main/badge.svg
 
 [chat]: https://github.com/rehypejs/rehype/discussions
 
-[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
-
-[npm]: https://docs.npmjs.com/cli/install
-
-[esmsh]: https://esm.sh
-
-[typescript]: https://www.typescriptlang.org
-
-[rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
-
-[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
-
-[health]: https://github.com/rehypejs/.github
-
-[contributing]: https://github.com/rehypejs/.github/blob/main/contributing.md
-
-[support]: https://github.com/rehypejs/.github/blob/main/support.md
+[chat-badge]: https://img.shields.io/badge/chat-discussions-success.svg
 
 [coc]: https://github.com/rehypejs/.github/blob/main/code-of-conduct.md
 
-[license]: https://github.com/rehypejs/rehype-minify/blob/main/license
+[contributing]: https://github.com/rehypejs/.github/blob/main/contributing.md
 
-[author]: https://wooorm.com
+[coverage]: https://codecov.io/github/rehypejs/rehype-minify
+
+[coverage-badge]: https://img.shields.io/codecov/c/github/rehypejs/rehype-minify.svg
+
+[downloads]: https://www.npmjs.com/package/rehype-prevent-favicon-request
+
+[downloads-badge]: https://img.shields.io/npm/dm/rehype-prevent-favicon-request.svg
+
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+
+[esm-sh]: https://esm.sh
+
+[funding]: https://opencollective.com/unified
+
+[funding-backers-badge]: https://opencollective.com/unified/backers/badge.svg
+
+[funding-sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
 
 [hast]: https://github.com/syntax-tree/hast
 
+[health]: https://github.com/rehypejs/.github
+
+[license]: https://github.com/rehypejs/rehype-minify/blob/main/license
+
+[npm]: https://docs.npmjs.com/cli/install
+
 [rehype]: https://github.com/rehypejs/rehype
+
+[rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
+
+[size]: https://bundlephobia.com/result?p=rehype-prevent-favicon-request
+
+[size-badge]: https://img.shields.io/bundlephobia/minzip/rehype-prevent-favicon-request.svg
+
+[support]: https://github.com/rehypejs/.github/blob/main/support.md
+
+[typescript]: https://www.typescriptlang.org
+
+[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting

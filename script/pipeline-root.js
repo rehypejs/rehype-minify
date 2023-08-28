@@ -1,267 +1,223 @@
 /**
- * @typedef {import('trough').Callback} Next
- * @typedef {import('vfile').VFile} VFile
- * @typedef {import('type-fest').PackageJson} PackageJson
- * @typedef {import('mdast').Root} Root
- * @typedef {import('hast').Root} HastRoot
  * @typedef {import('hast').Element} Element
- * @typedef {Element['children'][number]} ElementChild
+ * @typedef {import('hast').ElementContent} ElementContent
+ * @typedef {import('mdast').List} List
+ * @typedef {import('mdast').Html} Html
+ * @typedef {import('type-fest').PackageJson} PackageJson
+ * @typedef {import('vfile').VFile} VFile
  * @typedef {import('./benchmark.js').CleanResult} CleanResult
  * @typedef {import('./benchmark.js').Datum} Datum
  */
 
-import fs from 'node:fs'
-import path from 'node:path'
+import assert from 'node:assert/strict'
+import {basename} from 'node:path'
 import bytes from 'bytes'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
-import {trough} from 'trough'
-import {unified} from 'unified'
-import rehypeFormat from 'rehype-format'
-import rehypeStringify from 'rehype-stringify'
-import {remark} from 'remark'
+import {toHtml} from 'hast-util-to-html'
+import {fromMarkdown} from 'mdast-util-from-markdown'
+import {gfmFromMarkdown, gfmToMarkdown} from 'mdast-util-gfm'
+import {toMarkdown} from 'mdast-util-to-markdown'
 import {zone} from 'mdast-zone'
-import {read, readSync} from 'to-vfile'
+import {gfm} from 'micromark-extension-gfm'
+import rehypeFormat from 'rehype-format'
 import remarkPresetWooorm from 'remark-preset-wooorm'
+import {read} from 'to-vfile'
 
-export const pipelineRoot = trough()
-  .use(
-    /**
-     * @param {{root: string, plugins: Array<string>, readme?: VFile}} ctx
-     * @param {Next} next
-     */
-    (ctx, next) => {
-      read(path.join(ctx.root, 'readme.md'), (error, file) => {
-        if (file) {
-          ctx.readme = file
-        }
+/**
+ * @param {URL} ancestor
+ * @param {Array<VFile>} files
+ * @returns {Promise<Array<VFile>>}
+ */
+export async function pipelineRoot(ancestor, files) {
+  // Gather which plugins are used or not in the preset.
+  // Also check if the preset matches the metadata in each plugin.
+  const presetModule = files.find(function (d) {
+    return (
+      d.basename === 'index.js' &&
+      basename(d.dirname || '').startsWith('rehype-preset-')
+    )
+  })
+  assert(presetModule)
+  const preset = String(presetModule)
+  /** @type {Set<string>} */
+  const included = new Set()
+  /** @type {Set<string>} */
+  const excluded = new Set()
 
-        next(error)
-      })
+  for (const file of files) {
+    const folder = basename(file.dirname || '')
+
+    if (
+      file.basename !== 'package.json' ||
+      folder.startsWith('rehype-preset-') ||
+      !folder.startsWith('rehype-')
+    ) {
+      continue
     }
+
+    /** @type {PackageJson} */
+    const {excludeFromPreset, name} = JSON.parse(String(file))
+    assert(name)
+    const include = preset.includes(name)
+
+    if (include && excludeFromPreset) {
+      presetModule.message('Unexpected use of `' + name + '`')
+    } else if (!excludeFromPreset && !include) {
+      presetModule.message('Missing use of `' + name + '`')
+    }
+
+    const list = include ? included : excluded
+    list.add(name)
+  }
+
+  /** @type {Array<Datum>} */
+  const data = JSON.parse(
+    String(await read(new URL('benchmark-results.json', import.meta.url)))
   )
-  .use(
-    /**
-     * @param {{root: string, plugins: Array<string>, readme: VFile}} ctx
-     * @param {Next} next
-     */
-    (ctx, next) => {
-      /** @type {Array<string>} */
-      const others = []
-      /** @type {Array<string>} */
-      const core = []
-      let index = -1
 
-      while (++index < ctx.plugins.length) {
-        const name = ctx.plugins[index]
-        /** @type {PackageJson} */
-        const pack = JSON.parse(
-          String(
-            fs.readFileSync(
-              path.join(ctx.root, 'packages', name, 'package.json')
-            )
-          )
-        )
+  const readme = await read(new URL('readme.md', ancestor))
+  const tree = fromMarkdown(String(readme), {
+    extensions: [gfm()],
+    mdastExtensions: [gfmFromMarkdown()]
+  })
 
-        /** @type {boolean|undefined} */
-        // @ts-expect-error: Custom field in plugins.
-        const exclude = pack.excludeFromPreset
+  zone(tree, 'plugins-core', function (start, _, end) {
+    return [start, createList(included), end]
+  })
+  zone(tree, 'plugins-other', function (start, _, end) {
+    return [start, createList(excluded), end]
+  })
+  zone(tree, 'benchmark', function (start, _, end) {
+    return [start, createTable(data), end]
+  })
 
-        if (exclude) {
-          others.push(name)
-        } else {
-          core.push(name)
-        }
-      }
+  readme.value = toMarkdown(tree, {
+    // To do: remove after major: plan is to match defaults.
+    ...remarkPresetWooorm.settings,
+    // To do: remove after major.
+    listItemIndent: 'tab',
+    extensions: [gfmToMarkdown()]
+  })
+  readme.data.changed = true
 
-      /** @type {import('unified').Processor<Root, undefined, undefined, Root, string>} */
-      // @ts-expect-error: to do: remove when `remark` is released.
-      const processor = remark()
+  return [readme]
+}
 
-      processor
-        .data('settings', remarkPresetWooorm.settings)
-        .use(plugin('plugins-core', core))
-        .use(plugin('plugins-other', others))
-        .use(benchmark)
-        .process(ctx.readme, (error) => {
-          next(error)
-        })
-
-      /**
-       * @param {string} name
-       * @param {Array<string>} list
-       */
-      function plugin(name, list) {
-        return attacher
-
-        function attacher() {
-          /**
-           * @param {Root} tree
-           * @returns {undefined}
-           */
-          return (tree) => {
-            zone(tree, name, (start, _, end) => [
-              start,
+/**
+ * @param {Set<string>} list
+ * @returns {List}
+ */
+function createList(list) {
+  return {
+    type: 'list',
+    spread: false,
+    ordered: false,
+    children: [...list].sort().map(function (name) {
+      return {
+        type: 'listItem',
+        children: [
+          {
+            type: 'paragraph',
+            children: [
               {
-                type: 'list',
-                spread: false,
-                ordered: false,
-                children: list.map((name) => ({
-                  type: 'listItem',
-                  children: [
-                    {
-                      type: 'paragraph',
-                      children: [
-                        {
-                          type: 'link',
-                          url: './packages/' + name,
-                          children: [{type: 'inlineCode', value: name}]
-                        }
-                      ]
-                    }
-                  ]
-                }))
-              },
-              end
-            ])
-          }
-        }
-      }
-
-      /** @type {import('unified').Plugin<[], Root>} */
-      function benchmark() {
-        /** @type {Array<Datum>} */
-        let data
-
-        try {
-          data = JSON.parse(
-            String(
-              readSync({
-                dirname: 'script',
-                basename: 'benchmark-results.json'
-              })
-            )
-          )
-        } catch {
-          return
-        }
-
-        return (tree) => {
-          zone(tree, 'benchmark', (start, _, end) => {
-            /** @type {['raw', 'gzip']} */
-            const types = ['raw', 'gzip']
-            /** @type {Array<ElementChild>} */
-            const h1 = [h('th', {rowSpan: 2}, 'name')]
-            /** @type {Array<ElementChild>} */
-            let h2 = []
-            /** @type {Array<ElementChild>} */
-            let foot = [h('th', {scope: 'row'}, 'total')]
-            /** @type {Record<string, number>} */
-            const sum = {}
-
-            const body = data.map((d) => {
-              const cells = [
-                h(
-                  'th',
-                  {scope: 'row', align: 'left'},
-                  h('a', {href: d.url}, d.name)
-                )
-              ]
-
-              let index = -1
-
-              while (++index < types.length) {
-                const type = types[index]
-                let offset = 0 // Skip first.
-                /** @type {CleanResult | undefined}} */
-                let best
-
-                while (++offset < d.results.length) {
-                  if (!best || d.results[offset][type] < best[type]) {
-                    best = d.results[offset]
-                  }
-                }
-
-                offset = -1
-
-                while (++offset < d.results.length) {
-                  const r = d.results[offset]
-                  const key = type + ':' + r.type
-                  /** @type {`${type}Win`} */
-                  // @ts-expect-error: hush.
-                  const win = type + 'Win'
-                  /** @type {string|Element} */
-                  let value = r.type === 'original' ? bytes(r[type]) : r[win]
-
-                  sum[key] = (sum[key] || 0) + r[type]
-
-                  if (value === '0.00%') {
-                    value = '💥'
-                  }
-
-                  if (r === best) {
-                    value = h('b', value)
-                  }
-
-                  cells.push(h('td', {align: 'right'}, value))
-                }
+                type: 'link',
+                url: './packages/' + name,
+                children: [{type: 'inlineCode', value: name}]
               }
+            ]
+          }
+        ]
+      }
+    })
+  }
+}
 
-              return h('tr', cells)
-            })
+/**
+ * @param {Array<Datum>} data
+ * @returns {Html}
+ */
+function createTable(data) {
+  /** @type {['raw', 'gzip']} */
+  const types = ['raw', 'gzip']
+  /** @type {Array<ElementContent>} */
+  const h1 = [h('th', {rowSpan: 2}, 'name')]
+  /** @type {Array<ElementContent>} */
+  let h2 = []
+  /** @type {Array<ElementContent>} */
+  let foot = [h('th', {scope: 'row'}, 'total')]
+  /** @type {Record<string, number>} */
+  const sum = {}
 
-            let index = -1
+  const body = data.map((d) => {
+    const cells = [
+      h('th', {scope: 'row', align: 'left'}, h('a', {href: d.url}, d.name))
+    ]
 
-            while (++index < types.length) {
-              const type = types[index]
-              const head = data[0]
-              const cells = head.results.map((d) => h('th', d.type))
-              h1.push(h('th', {colSpan: cells.length}, type))
-              h2 = h2.concat(cells)
-              foot = foot.concat(
-                head.results.map((d) =>
-                  h('td', {align: 'right'}, bytes(sum[type + ':' + d.type]))
-                )
-              )
-            }
+    let index = -1
 
-            /** @type {import('unified').Processor<undefined, HastRoot, HastRoot, HastRoot, string>} */
-            // @ts-expect-error: to do: remove when `rehype-format` is released.
-            const processor = unified().use(rehypeFormat).use(rehypeStringify)
+    while (++index < types.length) {
+      const type = types[index]
+      let offset = 0 // Skip first.
+      /** @type {CleanResult | undefined}} */
+      let best
 
-            const tree = processor.runSync(
-              // @ts-expect-error: fine.
-              h('table', [
-                h('thead', h('tr', h1), h('tr', h2)),
-                h('tbody', body),
-                h('tfoot', h('tr', foot))
-              ])
-            )
-
-            const fragment = processor.stringify(tree)
-
-            return [start, u('html', fragment), end]
-          })
+      while (++offset < d.results.length) {
+        if (!best || d.results[offset][type] < best[type]) {
+          best = d.results[offset]
         }
       }
+
+      offset = -1
+
+      while (++offset < d.results.length) {
+        const r = d.results[offset]
+        const key = type + ':' + r.type
+        /** @type {`${type}Win`} */
+        // @ts-expect-error: hush.
+        const win = type + 'Win'
+        /** @type {Element | string} */
+        let value = r.type === 'original' ? bytes(r[type]) : r[win]
+
+        sum[key] = (sum[key] || 0) + r[type]
+
+        if (value === '0.00%') {
+          value = '💥'
+        }
+
+        if (r === best) {
+          value = h('b', value)
+        }
+
+        cells.push(h('td', {align: 'right'}, value))
+      }
     }
-  )
-  .use(
-    /**
-     * @param {{root: string, plugins: Array<string>, readme: VFile}} ctx
-     * @param {Next} next
-     */
-    (ctx, next) => {
-      fs.writeFile(ctx.readme.path, ctx.readme.value, (error) => {
-        next(error)
-      })
-    }
-  )
-  .use(
-    /**
-     * @param {{root: string, plugins: Array<string>, readme: VFile}} ctx
-     */
-    (ctx) => {
-      ctx.readme.stored = true
-    }
-  )
+
+    return h('tr', cells)
+  })
+
+  let index = -1
+
+  while (++index < types.length) {
+    const type = types[index]
+    const head = data[0]
+    const cells = head.results.map((d) => h('th', d.type))
+    h1.push(h('th', {colSpan: cells.length}, type))
+    h2 = h2.concat(cells)
+    foot = foot.concat(
+      head.results.map((d) =>
+        h('td', {align: 'right'}, bytes(sum[type + ':' + d.type]))
+      )
+    )
+  }
+
+  const tree = h('table', [
+    h('thead', h('tr', h1), h('tr', h2)),
+    h('tbody', body),
+    h('tfoot', h('tr', foot))
+  ])
+
+  // @ts-expect-error: fine. Will be OK after `rehype-format` is released.
+  rehypeFormat()(tree)
+
+  return {type: 'html', value: toHtml(tree)}
+}

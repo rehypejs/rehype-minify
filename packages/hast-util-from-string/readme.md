@@ -6,8 +6,8 @@
 [![Coverage][coverage-badge]][coverage]
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
-[![Sponsors][sponsors-badge]][collective]
-[![Backers][backers-badge]][collective]
+[![Sponsors][funding-sponsors-badge]][funding]
+[![Backers][funding-backers-badge]][funding]
 [![Chat][chat-badge]][chat]
 
 [`hast`][hast] utility to set the plain-text value of a node.
@@ -47,19 +47,19 @@ characters.
 ## Install
 
 This package is [ESM only][esm].
-In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
+In Node.js (version 16+), install with [npm][]:
 
 ```sh
 npm install hast-util-from-string
 ```
 
-In Deno with [`esm.sh`][esmsh]:
+In Deno with [`esm.sh`][esm-sh]:
 
 ```js
 import {fromString} from 'https://esm.sh/hast-util-from-string@2'
 ```
 
-In browsers with [`esm.sh`][esmsh]:
+In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
@@ -103,12 +103,12 @@ Set the plain-text value of a node.
 
 ###### Parameters
 
-*   `node` (`Node`) — hast node
-*   `value` (`string`, optional) — new text
+*   `node` (`Node`) — node to change.
+*   `value` (`string`, default: `''`) — value to use
 
 ###### Returns
 
-The given node (`Node`).
+Given node (`Node`).
 
 ## Syntax
 
@@ -132,7 +132,7 @@ Our projects sometimes work with older versions, but this is not guaranteed.
 
 ## Security
 
-As **rehype** works on HTML, and improper use of HTML can open you up to a
+As **rehype** works on HTML and improper use of HTML can open you up to a
 [cross-site scripting (XSS)][xss] attack, use of rehype can also be unsafe.
 Use [`rehype-sanitize`][rehype-sanitize] to make the tree safe.
 
@@ -150,54 +150,54 @@ abide by its terms.
 
 [MIT][license] © [Titus Wormer][author]
 
-[build-badge]: https://github.com/rehypejs/rehype-minify/workflows/main/badge.svg
+[author]: https://wooorm.com
 
 [build]: https://github.com/rehypejs/rehype-minify/actions
 
-[coverage-badge]: https://img.shields.io/codecov/c/github/rehypejs/rehype-minify.svg
-
-[coverage]: https://codecov.io/github/rehypejs/rehype-minify
-
-[downloads-badge]: https://img.shields.io/npm/dm/hast-util-from-string.svg
-
-[downloads]: https://www.npmjs.com/package/hast-util-from-string
-
-[size-badge]: https://img.shields.io/bundlephobia/minzip/hast-util-from-string.svg
-
-[size]: https://bundlephobia.com/result?p=hast-util-from-string
-
-[sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
-
-[backers-badge]: https://opencollective.com/unified/backers/badge.svg
-
-[collective]: https://opencollective.com/unified
-
-[chat-badge]: https://img.shields.io/badge/chat-discussions-success.svg
+[build-badge]: https://github.com/rehypejs/rehype-minify/workflows/main/badge.svg
 
 [chat]: https://github.com/rehypejs/rehype/discussions
 
-[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
-
-[npm]: https://docs.npmjs.com/cli/install
-
-[esmsh]: https://esm.sh
-
-[typescript]: https://www.typescriptlang.org
-
-[rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
-
-[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
-
-[health]: https://github.com/rehypejs/.github
-
-[contributing]: https://github.com/rehypejs/.github/blob/main/contributing.md
-
-[support]: https://github.com/rehypejs/.github/blob/main/support.md
+[chat-badge]: https://img.shields.io/badge/chat-discussions-success.svg
 
 [coc]: https://github.com/rehypejs/.github/blob/main/code-of-conduct.md
 
-[license]: https://github.com/rehypejs/rehype-minify/blob/main/license
+[contributing]: https://github.com/rehypejs/.github/blob/main/contributing.md
 
-[author]: https://wooorm.com
+[coverage]: https://codecov.io/github/rehypejs/rehype-minify
+
+[coverage-badge]: https://img.shields.io/codecov/c/github/rehypejs/rehype-minify.svg
+
+[downloads]: https://www.npmjs.com/package/hast-util-from-string
+
+[downloads-badge]: https://img.shields.io/npm/dm/hast-util-from-string.svg
+
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+
+[esm-sh]: https://esm.sh
+
+[funding]: https://opencollective.com/unified
+
+[funding-backers-badge]: https://opencollective.com/unified/backers/badge.svg
+
+[funding-sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
 
 [hast]: https://github.com/syntax-tree/hast
+
+[health]: https://github.com/rehypejs/.github
+
+[license]: https://github.com/rehypejs/rehype-minify/blob/main/license
+
+[npm]: https://docs.npmjs.com/cli/install
+
+[rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
+
+[size]: https://bundlephobia.com/result?p=hast-util-from-string
+
+[size-badge]: https://img.shields.io/bundlephobia/minzip/hast-util-from-string.svg
+
+[support]: https://github.com/rehypejs/.github/blob/main/support.md
+
+[typescript]: https://www.typescriptlang.org
+
+[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
