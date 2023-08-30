@@ -5,7 +5,7 @@
  * @typedef {import('mdast').Html} Html
  * @typedef {import('type-fest').PackageJson} PackageJson
  * @typedef {import('vfile').VFile} VFile
- * @typedef {import('./benchmark.js').CleanResult} CleanResult
+ * @typedef {import('./benchmark.js').Result} Result
  * @typedef {import('./benchmark.js').Datum} Datum
  */
 
@@ -165,7 +165,7 @@ function createTable(data) {
     while (++index < types.length) {
       const type = types[index]
       let offset = 0 // Skip first.
-      /** @type {CleanResult | undefined}} */
+      /** @type {Result | undefined}} */
       let best
 
       while (++offset < d.results.length) {
