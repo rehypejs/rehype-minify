@@ -1,9 +1,16 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {rehype} from 'rehype'
-import min from './index.js'
+import min from 'rehype-sort-attributes'
 
 test('rehype-sort-attributes', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(
+      Object.keys(await import('rehype-sort-attributes')).sort(),
+      ['default']
+    )
+  })
+
   await t.test('should work', async function () {
     assert.equal(
       rehype()

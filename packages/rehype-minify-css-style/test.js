@@ -2,9 +2,16 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {h} from 'hastscript'
 import {rehype} from 'rehype'
-import min from './index.js'
+import min from 'rehype-minify-css-style'
 
 test('rehype-minify-css-style', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(
+      Object.keys(await import('rehype-minify-css-style')).sort(),
+      ['default']
+    )
+  })
+
   await t.test('should minify', async function () {
     assert.deepEqual(
       rehype()

@@ -175,8 +175,7 @@ async function generatePackageJson(context) {
       gitContributors.length > 0 ? gitContributors : [ancestorPackage.author],
     sideEffects: false,
     type: 'module',
-    main: 'index.js',
-    types: 'index.d.ts',
+    exports: './index.js',
     files: codePaths
       .filter(function (name) {
         return !/test/.test(name)

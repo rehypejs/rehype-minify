@@ -1,9 +1,16 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {h} from 'hastscript'
-import {isBodyOkLink} from './index.js'
+import {isBodyOkLink} from 'hast-util-is-body-ok-link'
 
 test('isBodyOkLink', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(
+      Object.keys(await import('hast-util-is-body-ok-link')).sort(),
+      ['isBodyOkLink']
+    )
+  })
+
   await t.test('should be yes for `link`s with `itemProp`', async function () {
     assert.equal(isBodyOkLink(h('link', {itemProp: 'foo'})), true)
   })

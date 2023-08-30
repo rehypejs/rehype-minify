@@ -3,10 +3,16 @@ import fs from 'node:fs/promises'
 import test from 'node:test'
 import {isHidden} from 'is-hidden'
 import {rehype} from 'rehype'
+import rehypePresetMinify from 'rehype-preset-minify'
 import {trimTrailingLines} from 'trim-trailing-lines'
-import rehypePresetMinify from '../index.js'
 
 test('rehype-preset-minify (api)', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(Object.keys(await import('rehype-preset-minify')).sort(), [
+      'default'
+    ])
+  })
+
   const root = new URL('fixtures/', import.meta.url)
   const fixtures = await fs.readdir(root)
 

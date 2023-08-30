@@ -1,8 +1,15 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {isEventHandler} from './index.js'
+import {isEventHandler} from 'hast-util-is-event-handler'
 
 test('hast-util-is-event-handler', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(
+      Object.keys(await import('hast-util-is-event-handler')).sort(),
+      ['isEventHandler']
+    )
+  })
+
   await t.test('should be yes for `oncut`', async function () {
     assert.ok(isEventHandler('oncut'))
   })

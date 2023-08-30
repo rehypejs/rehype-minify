@@ -2,9 +2,16 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {h} from 'hastscript'
 import {rehype} from 'rehype'
-import min from './index.js'
+import min from 'rehype-minify-media-attribute'
 
 test('rehype-minify-media-attribute', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(
+      Object.keys(await import('rehype-minify-media-attribute')).sort(),
+      ['default']
+    )
+  })
+
   await t.test('should work (`link`)', async function () {
     assert.deepEqual(
       rehype()

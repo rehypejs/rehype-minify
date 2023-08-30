@@ -1,9 +1,15 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {h} from 'hastscript'
-import {toString} from './index.js'
+import {toString} from 'hast-util-to-string'
 
 test('hast-util-to-string', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(Object.keys(await import('hast-util-to-string')).sort(), [
+      'toString'
+    ])
+  })
+
   await t.test('should stringify comments', async function () {
     assert.equal(toString({type: 'comment', value: 'foo'}), 'foo')
   })

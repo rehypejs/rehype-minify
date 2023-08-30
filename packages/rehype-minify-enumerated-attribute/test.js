@@ -3,9 +3,16 @@ import test from 'node:test'
 import {h} from 'hastscript'
 import {rehype} from 'rehype'
 import rehypePresetMinify from 'rehype-preset-minify'
-import min from './index.js'
+import min from 'rehype-minify-enumerated-attribute'
 
 test('rehype-minify-enumerated-attribute', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(
+      Object.keys(await import('rehype-minify-enumerated-attribute')).sort(),
+      ['default']
+    )
+  })
+
   await t.test('should work on `meta[charSet]` (1)', async function () {
     assert.deepEqual(
       rehype()

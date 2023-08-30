@@ -1,9 +1,16 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import {enumeratedAttributes} from 'html-enumerated-attributes'
 import {html, find} from 'property-information'
-import {enumeratedAttributes} from './index.js'
 
 test('html-enumerated-attributes', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(
+      Object.keys(await import('html-enumerated-attributes')).sort(),
+      ['enumeratedAttributes']
+    )
+  })
+
   await t.test('should be cased correctly', async function () {
     /** @type {string} */
     let key

@@ -2,9 +2,16 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {h} from 'hastscript'
 import {rehype} from 'rehype'
-import min from './index.js'
+import min from 'rehype-minify-javascript-url'
 
 test('rehype-minify-javascript-url', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(
+      Object.keys(await import('rehype-minify-javascript-url')).sort(),
+      ['default']
+    )
+  })
+
   await t.test('should work', async function () {
     /* eslint-disable no-script-url */
     assert.deepEqual(

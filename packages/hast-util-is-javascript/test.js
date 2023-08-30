@@ -1,9 +1,16 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {h} from 'hastscript'
-import {isJavaScript} from './index.js'
+import {isJavaScript} from 'hast-util-is-javascript'
 
 test('hast-util-is-javascript', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(
+      Object.keys(await import('hast-util-is-javascript')).sort(),
+      ['isJavaScript']
+    )
+  })
+
   await t.test('should be yes for `script`', async function () {
     assert.ok(isJavaScript(h('script')))
   })

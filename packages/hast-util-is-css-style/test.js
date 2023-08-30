@@ -1,9 +1,16 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {h} from 'hastscript'
-import {isCssStyle} from './index.js'
+import {isCssStyle} from 'hast-util-is-css-style'
 
 test('hast-util-is-css-style', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(
+      Object.keys(await import('hast-util-is-css-style')).sort(),
+      ['isCssStyle']
+    )
+  })
+
   await t.test('should be yes for a `style` node', async function () {
     assert.equal(isCssStyle(h('style')), true)
   })

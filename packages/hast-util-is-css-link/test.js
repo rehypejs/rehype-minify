@@ -1,9 +1,16 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {h} from 'hastscript'
-import {isCssLink} from './index.js'
+import {isCssLink} from 'hast-util-is-css-link'
 
 test('hast-util-is-css-link', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(
+      Object.keys(await import('hast-util-is-css-link')).sort(),
+      ['isCssLink']
+    )
+  })
+
   await t.test(
     'should be yes for `link` with `[rel=stylesheet]` and no `[type]`',
     async function () {

@@ -1,9 +1,16 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {h} from 'hastscript'
-import {isConditionalComment} from './index.js'
+import {isConditionalComment} from 'hast-util-is-conditional-comment'
 
 test('hast-util-is-conditional-comment', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(
+      Object.keys(await import('hast-util-is-conditional-comment')).sort(),
+      ['isConditionalComment']
+    )
+  })
+
   await t.test('should detect a bunch of comments', async function () {
     const fixtures = [
       '[if IE]>…<![endif]',
