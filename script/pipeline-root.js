@@ -225,7 +225,7 @@ function createTable(data) {
     h('tfoot', h('tr', foot))
   ])
 
-  // @ts-expect-error: fine. Will be OK after `rehype-format` is released.
+  // @ts-expect-error: elements are fine.
   rehypeFormat()(tree)
 
   return {type: 'html', value: toHtml(tree)}

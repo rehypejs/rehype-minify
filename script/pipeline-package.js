@@ -962,7 +962,7 @@ function generateReadmePluggableExampleSection(state, plugin, example, file) {
         .data('settings', options.processor || {fragment: true})
         // @ts-expect-error: `undefined` is fine.
         .use(plugin, options.plugin || undefined)
-        // @ts-expect-error: `undefined` is fine to pass.
+        // @ts-expect-error: `undefined` is fine.
         .use(options.format ? rehypeFormat : undefined)
         .processSync(exampleValue)
         .toString()
