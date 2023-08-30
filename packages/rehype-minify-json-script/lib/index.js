@@ -7,7 +7,7 @@ import {toString} from 'hast-util-to-string'
 import {visit} from 'unist-util-visit'
 
 /**
- * Minify `script` elements with a JSON body.
+ * Minify JSON `<script>`s.
  *
  * @returns
  *   Transform.

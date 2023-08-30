@@ -92,19 +92,13 @@ console.log(div)
 
 ## API
 
-This package exports the following identifiers:
+This package exports the identifier
 `fromString`.
 There is no default export.
 
 ### `fromString(node[, value])`
 
 Set the plain-text value of a node.
-
-*   if `node` is a text node (has a `value` property; as in, `comment`,
-    `text`), set that to the given `value` or an empty string
-*   Otherwise, if `node` is a parent node (has `children`; as in, `element`,
-    `root`), replace them with a text node whose data is set to the given
-    `value`, or if `value` is not given, remove all its children
 
 ###### Parameters
 
@@ -115,14 +109,20 @@ Set the plain-text value of a node.
 
 Nothing (`undefined`).
 
+###### Algorithm
+
+*   if `node` is a `comment` or `text` node, sets its `value`
+*   if `node` is an `element` or `root`, replaces its children with a text
+    node for `value`
+
 ## Syntax
 
-HTML is handled according to WHATWG HTML (the living standard), which is also
-followed by browsers such as Chrome and Firefox.
+HTML is parsed according to WHATWG HTML (the living standard), which is also
+followed by all browsers.
 
 ## Syntax tree
 
-The syntax tree format used is [`hast`][hast].
+The syntax tree used is [hast][].
 
 ## Types
 
@@ -130,10 +130,14 @@ This package is fully typed with [TypeScript][].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line,
+`hast-util-from-string@^2`,
+compatible with Node.js 12.
 
 ## Security
 
@@ -197,9 +201,9 @@ abide by its terms.
 
 [rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
 
-[size]: https://bundlephobia.com/result?p=hast-util-from-string
+[size]: https://bundlejs.com/?q=hast-util-from-string
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/hast-util-from-string.svg
+[size-badge]: https://img.shields.io/bundlejs/size/hast-util-from-string
 
 [support]: https://github.com/rehypejs/.github/blob/main/support.md
 

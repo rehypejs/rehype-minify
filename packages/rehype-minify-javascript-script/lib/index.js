@@ -9,7 +9,7 @@ import Uglify from 'uglify-js'
 import {visit} from 'unist-util-visit'
 
 /**
- * Minify `script` elements with a JavaScript body.
+ * Minify JavaScript `<script>`s.
  *
  * @returns
  *   Transform.

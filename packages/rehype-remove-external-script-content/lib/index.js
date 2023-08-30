@@ -6,7 +6,7 @@ import {isJavaScript} from 'hast-util-is-javascript'
 import {visit} from 'unist-util-visit'
 
 /**
- * Remove content of external JavaScript `script` elements.
+ * Remove the contents of external JavaScript `<script>`s.
  *
  * @returns
  *   Transform.

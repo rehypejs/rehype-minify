@@ -23,7 +23,7 @@
 ## What is this?
 
 This GitHub repository is a monorepo that contains a couple utilities, ±30
-plugins, and 1 preset to minify HTML:
+plugins, and a preset with good and safe default, to minify HTML:
 
 ###### In
 
@@ -50,7 +50,7 @@ plugins, and 1 preset to minify HTML:
 ###### Out
 
 ```html
-<!doctypehtml><html lang=en><meta charset=utf8><script src=index.js></script><link href=index.css rel=stylesheet><title>Foo &amp bar</title><h1 class=foo>bar bar</h1><p id=alfred><strong>foo</strong> <em>bar</em></p><button onclick=return!1 type=button>Alpha</button>
+<!doctypehtml><html lang=en><meta charset=utf8><script src=index.js></script><link href=index.css rel=stylesheet><title>Foo &#38 bar</title><h1 class=foo>bar bar</h1><p id=alfred><strong>foo</strong> <em>bar</em></p><button onclick=return!1 type=button>Alpha</button>
 ```
 
 ## When should I use this?
@@ -103,10 +103,10 @@ The following plugins maintained here are included in the above preset.
 
 <!--plugins-core end-->
 
-The following plugins are not included because they are potentially
+The following plugins are not included in the preset as they are potentially
 **dangerous**, can make sites slower in certain cases, or need extra
 configuration.
-Read their readmes carefully before using:
+Read their readmes before using:
 
 <!--
   👉 **Note**: the following list is automatically generated.
@@ -134,7 +134,7 @@ and `rehype-minify`.
 To summarize: differences are negligible, in fact, minifying HTML doesn’t matter
 much.
 What does matter is using good compressions, such as gzip.
-Note: `html-minifier` crashes on `stackoverflow`.
+Note: `html-minifier` sometimes crashes, such as on `rocketchat`.
 
 <!--benchmark start-->
 
@@ -366,8 +366,8 @@ Huge differences in results are suspicious and may point to bugs.
 
 ## Security
 
-Use of `rehype-preset-minify` is *safe* by default, if the tree is already safe.
-As **rehype** works on HTML, and improper use of HTML can open you up to a
+Use of `rehype-preset-minify` is *safe* by default if the tree is already safe.
+As **rehype** works on HTML and improper use of HTML can open you up to a
 [cross-site scripting (XSS)][xss] attack, use of rehype can also be unsafe.
 Use [`rehype-sanitize`][rehype-sanitize] to make the tree safe.
 

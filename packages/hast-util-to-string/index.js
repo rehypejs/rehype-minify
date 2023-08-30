@@ -36,7 +36,7 @@
  *
  * ###### Parameters
  *
- * *   `node` (`Node`) — hast node
+ * *   `node` (`Node`) — node to serialize
  *
  * ###### Returns
  *

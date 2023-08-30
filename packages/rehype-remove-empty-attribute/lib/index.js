@@ -8,7 +8,7 @@ import {visit} from 'unist-util-visit'
 import {schema} from './schema.js'
 
 /**
- * Remove empty attributes, if possible.
+ * Remove empty attributes.
  *
  * @returns
  *   Transform.

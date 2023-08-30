@@ -15,9 +15,13 @@
  * ### `unified().use(rehypeMinifyAttributeWhitespace)`
  *
  * Minify whitespace in attributes.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <a href="  http://example.com "></a>
  */
 

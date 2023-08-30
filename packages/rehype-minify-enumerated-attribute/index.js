@@ -15,9 +15,13 @@
  * ### `unified().use(rehypeMinifyEnumeratedAttribute)`
  *
  * Minify enumerated attributes.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <meta charset="utf-8">
  *   <video preload="auto">
  *     <track kind="subtitles" src="abc.xyz">

@@ -20,6 +20,7 @@
 *   [Use](#use)
 *   [API](#api)
     *   [`unified().use(rehypeMinifyUrl[, options])`](#unifieduserehypeminifyurl-options)
+    *   [`Options`](#options)
 *   [Example](#example)
 *   [Syntax](#syntax)
 *   [Syntax tree](#syntax-tree)
@@ -110,18 +111,28 @@ The default export is `rehypeMinifyUrl`.
 
 Minify URLs.
 
-##### `options`
+###### Parameters
 
-Configuration (required).
+*   `options` (`Options`, optional)
+    — configuration
 
-All options except for what’s listed here are passed through to
+###### Returns
+
+Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
+
+### `Options`
+
+Configuration (TypeScript type).
+
+All options except for `from` are passed through to
 [`relateurl`](https://github.com/stevenvachon/relateurl).
 
-##### `options.from`
+###### Fields
 
-Absolute URL to where the document will be hosted (`string`).
-Can also be set with an `origin` and `pathname` in `file.data.meta`
-(as supported by [`rehype-meta`](https://github.com/rehypejs/rehype-meta)).
+*   `from` (`string`, optional)
+    — absolute URL to where the document will be hosted; can also be set
+    with an `origin` and `pathname` in `file.data.meta` (as supported by
+    [`rehype-meta`](https://github.com/rehypejs/rehype-meta)).
 
 ## Example
 
@@ -141,12 +152,12 @@ Can also be set with an `origin` and `pathname` in `file.data.meta`
 
 ## Syntax
 
-HTML is handled according to WHATWG HTML (the living standard), which is also
-followed by browsers such as Chrome and Firefox.
+HTML is parsed according to WHATWG HTML (the living standard), which is also
+followed by all browsers.
 
 ## Syntax tree
 
-The syntax tree format used is [`hast`][hast].
+The syntax tree used is [hast][].
 
 ## Types
 
@@ -154,10 +165,14 @@ This package is fully typed with [TypeScript][].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line,
+`rehype-minify-url@^4`,
+compatible with Node.js 12.
 
 ## Security
 
@@ -223,9 +238,9 @@ abide by its terms.
 
 [rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
 
-[size]: https://bundlephobia.com/result?p=rehype-minify-url
+[size]: https://bundlejs.com/?q=rehype-minify-url
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/rehype-minify-url.svg
+[size-badge]: https://img.shields.io/bundlejs/size/rehype-minify-url
 
 [support]: https://github.com/rehypejs/.github/blob/main/support.md
 

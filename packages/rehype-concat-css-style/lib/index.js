@@ -10,11 +10,9 @@ import {toString} from 'hast-util-to-string'
 import {visit} from 'unist-util-visit'
 
 /**
- * Concatenate CSS `<style>` elements together.
+ * Concatenate `<style>` elements together.
  *
- * This plugin can be dangerous if CSS is invalid.
- * Additionally, this plugin does not handle `scoped` styles.
- * Those are [deprecated](https://github.com/whatwg/html/issues/552) anyway.
+ * There are no options.
  *
  * @returns
  *   Transform.

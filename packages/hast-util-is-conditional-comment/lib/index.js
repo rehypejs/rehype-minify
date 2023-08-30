@@ -1,8 +1,8 @@
-const re = /^\[if[ \t\f\n\r]+[^\]]+]|<!\[endif]$/
-
 /**
  * @typedef {import('hast').Nodes} Nodes
  */
+
+const re = /^\[if[ \t\f\n\r]+[^\]]+]|<!\[endif]$/
 
 /**
  * Check if a node is a conditional comment.

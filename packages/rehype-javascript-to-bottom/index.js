@@ -17,14 +17,36 @@
  *
  * Move JavaScript `<script>`s to the end of `<body>`.
  *
- * ##### `options`
+ * ###### Parameters
  *
- * Configuration (optional).
+ * *   `options` (`Options`, optional)
+ *     — configuration
  *
- * ###### `options.filter`
+ * ###### Returns
  *
- * Function called with each checked script that can return `true` to move the
- * script or `false` if not.
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
+ *
+ * ### `Filter`
+ *
+ * Filter scripts that would be moved (TypeScript type).
+ *
+ * ###### Parameters
+ *
+ * *   `node` (`Element`)
+ *     — script element
+ *
+ * ###### Returns
+ *
+ * Whether to move the script (`true`) or not (`boolean`, optional).
+ *
+ * ### `Options`
+ *
+ * Configuration (TypeScript type).
+ *
+ * ###### Fields
+ *
+ * *   `filter` (`Filter`, optional)
+ *     — filter scripts that would otherwise be moved
  *
  * @example
  *   {"processor": {"fragment": false}}

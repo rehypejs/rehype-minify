@@ -19,9 +19,13 @@
  * ### `unified().use(rehypeRemoveScriptTypeJavaScript)`
  *
  * Remove `type` and `language` attributes on JavaScript scripts.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <script type="text/javascript"></script>
  *   <script language="javascript1.5"></script>
  *   <script type="module"></script>

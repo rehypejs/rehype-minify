@@ -16,9 +16,13 @@
  * ### `unified().use(rehypeRemoveDuplicateAttributeValues)`
  *
  * Remove duplicates in attributes values.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <div class="foo foo"></div>
  */
 

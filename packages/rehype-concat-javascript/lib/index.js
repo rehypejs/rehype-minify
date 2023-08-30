@@ -12,8 +12,7 @@ import {visit} from 'unist-util-visit'
 /**
  * Concatenate JS `<script>` elements together.
  *
- * This plugin can be dangerous if a) JS is invalid, or b) values are expected
- * to be undefined in one script and defined in another.
+ * There are no options.
  *
  * @returns
  *   Transform.

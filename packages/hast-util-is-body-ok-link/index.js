@@ -28,13 +28,15 @@
  *
  * Check whether a node is a “body OK” link.
  *
- * *   returns `true` for `link` elements with an `itemProp`
- * *   returns `true` for `link` elements with a `rel` list where one or more
- *     entries are `pingback`, `prefetch`, or `stylesheet`
+ * The following nodes are “body OK” links:
+ *
+ * *   `link` elements with an `itemProp`
+ * *   `link` elements with a `rel` list where one or more entries are
+ *     `pingback`, `prefetch`, or `stylesheet`
  *
  * ###### Parameters
  *
- * *   `node` (`Node`) — hast node
+ * *   `node` (`Node`) — node to check.
  *
  * ###### Returns
  *

@@ -19,7 +19,7 @@
 *   [Install](#install)
 *   [Use](#use)
 *   [API](#api)
-    *   [`isEventHandler(prop)`](#iseventhandlerprop)
+    *   [`isEventHandler(name)`](#iseventhandlername)
 *   [Syntax](#syntax)
 *   [Syntax tree](#syntax-tree)
 *   [Types](#types)
@@ -76,19 +76,19 @@ isEventHandler('class') //=> false
 
 ## API
 
-This package exports the following identifiers:
+This package exports the identifier
 `isEventHandler`.
 There is no default export.
 
-### `isEventHandler(prop)`
+### `isEventHandler(name)`
 
-Check if an attribute name or DOM property is an event handler.
+Check if a property is an event handler.
 
 Returns `true` when starting with `'on'` and its `length` is `5` or more.
 
 ###### Parameters
 
-*   `prop` (`string`) — property name
+*   `name` (`string`) — property name to check
 
 ###### Returns
 
@@ -96,12 +96,12 @@ Whether `prop` is an event handler (`boolean`).
 
 ## Syntax
 
-HTML is handled according to WHATWG HTML (the living standard), which is also
-followed by browsers such as Chrome and Firefox.
+HTML is parsed according to WHATWG HTML (the living standard), which is also
+followed by all browsers.
 
 ## Syntax tree
 
-The syntax tree format used is [`hast`][hast].
+The syntax tree used is [hast][].
 
 ## Types
 
@@ -109,10 +109,14 @@ This package is fully typed with [TypeScript][].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line,
+`hast-util-is-event-handler@^2`,
+compatible with Node.js 12.
 
 ## Security
 
@@ -176,9 +180,9 @@ abide by its terms.
 
 [rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
 
-[size]: https://bundlephobia.com/result?p=hast-util-is-event-handler
+[size]: https://bundlejs.com/?q=hast-util-is-event-handler
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/hast-util-is-event-handler.svg
+[size-badge]: https://img.shields.io/bundlejs/size/hast-util-is-event-handler
 
 [support]: https://github.com/rehypejs/.github/blob/main/support.md
 

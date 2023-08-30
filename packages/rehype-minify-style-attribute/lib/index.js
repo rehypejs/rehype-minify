@@ -11,7 +11,7 @@ const prefix = '*{'
 const suffix = '}'
 
 /**
- * Minify style attributes.
+ * Minify `style` attributes.
  *
  * @returns
  *   Transform.

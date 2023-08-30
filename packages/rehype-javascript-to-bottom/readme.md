@@ -20,6 +20,8 @@
 *   [Use](#use)
 *   [API](#api)
     *   [`unified().use(rehypeJavaScriptToBottom[, options])`](#unifieduserehypejavascripttobottom-options)
+    *   [`Filter`](#filter)
+    *   [`Options`](#options)
 *   [Example](#example)
 *   [Syntax](#syntax)
 *   [Syntax tree](#syntax-tree)
@@ -111,14 +113,36 @@ The default export is `rehypeJavaScriptToBottom`.
 
 Move JavaScript `<script>`s to the end of `<body>`.
 
-##### `options`
+###### Parameters
 
-Configuration (optional).
+*   `options` (`Options`, optional)
+    — configuration
 
-###### `options.filter`
+###### Returns
 
-Function called with each checked script that can return `true` to move the
-script or `false` if not.
+Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
+
+### `Filter`
+
+Filter scripts that would be moved (TypeScript type).
+
+###### Parameters
+
+*   `node` (`Element`)
+    — script element
+
+###### Returns
+
+Whether to move the script (`true`) or not (`boolean`, optional).
+
+### `Options`
+
+Configuration (TypeScript type).
+
+###### Fields
+
+*   `filter` (`Filter`, optional)
+    — filter scripts that would otherwise be moved
 
 ## Example
 
@@ -136,12 +160,12 @@ script or `false` if not.
 
 ## Syntax
 
-HTML is handled according to WHATWG HTML (the living standard), which is also
-followed by browsers such as Chrome and Firefox.
+HTML is parsed according to WHATWG HTML (the living standard), which is also
+followed by all browsers.
 
 ## Syntax tree
 
-The syntax tree format used is [`hast`][hast].
+The syntax tree used is [hast][].
 
 ## Types
 
@@ -149,10 +173,14 @@ This package is fully typed with [TypeScript][].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line,
+`rehype-javascript-to-bottom@^3`,
+compatible with Node.js 12.
 
 ## Security
 
@@ -218,9 +246,9 @@ abide by its terms.
 
 [rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
 
-[size]: https://bundlephobia.com/result?p=rehype-javascript-to-bottom
+[size]: https://bundlejs.com/?q=rehype-javascript-to-bottom
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/rehype-javascript-to-bottom.svg
+[size-badge]: https://img.shields.io/bundlejs/size/rehype-javascript-to-bottom
 
 [support]: https://github.com/rehypejs/.github/blob/main/support.md
 

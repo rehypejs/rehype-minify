@@ -7,6 +7,9 @@ import {collapseWhiteSpace} from 'collapse-white-space'
 /**
  * Check whether a hast node is a `<style>` that contains CSS.
  *
+ * Returns `true` if `node` is a `<style>` element that has no `type`, an empty
+ * `type`, or `'text/css'` as its `type`.
+ *
  * @param {Nodes} node
  *   Node to check.
  * @returns {boolean}

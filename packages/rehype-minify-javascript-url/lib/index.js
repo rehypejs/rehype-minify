@@ -15,7 +15,7 @@ const prefix = 'function a(){'
 const suffix = '}a();'
 
 /**
- * Minify JavaScript URLs.
+ * Minify `javascript:` URLs.
  *
  * @returns
  *   Transform.

@@ -21,7 +21,10 @@
  * ### `unified().use(rehypePreventFaviconRequest)`
  *
  * Prevent a network request to the favicon when there is none.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
  *   {"processor": {"fragment": false}}

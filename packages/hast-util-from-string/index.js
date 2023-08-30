@@ -46,12 +46,6 @@
  *
  * Set the plain-text value of a node.
  *
- * *   if `node` is a text node (has a `value` property; as in, `comment`,
- *     `text`), set that to the given `value` or an empty string
- * *   Otherwise, if `node` is a parent node (has `children`; as in, `element`,
- *     `root`), replace them with a text node whose data is set to the given
- *     `value`, or if `value` is not given, remove all its children
- *
  * ###### Parameters
  *
  * *   `node` (`Node`) — node to change
@@ -60,6 +54,12 @@
  * ###### Returns
  *
  * Nothing (`undefined`).
+ *
+ * ###### Algorithm
+ *
+ * *   if `node` is a `comment` or `text` node, sets its `value`
+ * *   if `node` is an `element` or `root`, replaces its children with a text
+ *     node for `value`
  */
 
 export {fromString} from './lib/index.js'

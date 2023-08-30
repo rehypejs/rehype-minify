@@ -15,9 +15,13 @@
  * ### `unified().use(rehypeMinifyJsonScript)`
  *
  * Minify JSON `<script>`s.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <script type="application/ld+json">
  *   {
  *     "@context": {

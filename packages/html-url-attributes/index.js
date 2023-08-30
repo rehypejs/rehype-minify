@@ -24,9 +24,10 @@
  *
  * ### `urlAttributes`
  *
- * Map of URL properties in HTML (`Record<string, Array<string> | null>`).
+ * HTML URL properties (`Record<string, Array<string> | null>`).
  *
- * `null` means the property name applies to all elements.
+ * Each key is a property name and each value is a list of tag names it applies
+ * to or `null` if it applies to all elements.
  */
 
 export {urlAttributes} from './lib/index.js'

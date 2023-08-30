@@ -15,9 +15,13 @@
  * ### `unified().use(rehypeMinifyLanguage)`
  *
  * Minify language attributes.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <span lang="en-US">Color</span>
  *   <a href="https://nl.wikipedia.org/wiki/HyperText_Markup_Language" hreflang="nld-NL">HTML</a>
  *   <span xml:lang="pt-BR">ótimo</span>

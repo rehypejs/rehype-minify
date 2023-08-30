@@ -110,7 +110,10 @@ The default export is `rehypeSortAttributeValues`.
 ### `unified().use(rehypeSortAttributeValues)`
 
 Sort attribute values.
-There are no options.
+
+###### Returns
+
+Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
 
 ## Example
 
@@ -128,12 +131,12 @@ There are no options.
 
 ## Syntax
 
-HTML is handled according to WHATWG HTML (the living standard), which is also
-followed by browsers such as Chrome and Firefox.
+HTML is parsed according to WHATWG HTML (the living standard), which is also
+followed by all browsers.
 
 ## Syntax tree
 
-The syntax tree format used is [`hast`][hast].
+The syntax tree used is [hast][].
 
 ## Types
 
@@ -141,10 +144,14 @@ This package is fully typed with [TypeScript][].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line,
+`rehype-sort-attribute-values@^4`,
+compatible with Node.js 12.
 
 ## Security
 
@@ -210,9 +217,9 @@ abide by its terms.
 
 [rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
 
-[size]: https://bundlephobia.com/result?p=rehype-sort-attribute-values
+[size]: https://bundlejs.com/?q=rehype-sort-attribute-values
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/rehype-sort-attribute-values.svg
+[size-badge]: https://img.shields.io/bundlejs/size/rehype-sort-attribute-values
 
 [support]: https://github.com/rehypejs/.github/blob/main/support.md
 

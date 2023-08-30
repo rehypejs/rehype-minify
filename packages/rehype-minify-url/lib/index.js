@@ -10,12 +10,18 @@
  * @typedef ExtraFields
  *   Extra fields.
  * @property {string | null | undefined} [from]
- *   Base URL of page (optional).
+ *   Absolute URL to where the document will be hosted (optional); can also be
+ *   set with an `origin` and `pathname` in `file.data.meta` (as supported by
+ *   [`rehype-meta`](https://github.com/rehypejs/rehype-meta)).
  *
  * @typedef {Extract<PropertyValue, Array<any>>} Objects
  * @typedef {Exclude<PropertyValue, Array<any>>} Primitives
  *
  * @typedef {RelateOptions & ExtraFields} Options
+ *   Configuration.
+ *
+ *   All options except for `from` are passed through to
+ *   [`relateurl`](https://github.com/stevenvachon/relateurl).
  *
  * @typedef {Properties[keyof Properties]} PropertyValue
  */
@@ -30,15 +36,6 @@ const emptyOptions = {}
 
 /**
  * Minify URLs.
- *
- * Uses [`relateurl`](https://www.npmjs.com/package/relateurl).
- * `from` in options is required (which must be an absolute url to where the
- * file is hosted.
- * All other [options](https://www.npmjs.com/package/relateurl#options) are
- * passed through.
- *
- * You cal define `options.from` by setting it on `vfile.data.meta`, as
- * `origin` and `pathname`.
  *
  * @param {Options | null | undefined} [options]
  *   Configuration (optional).

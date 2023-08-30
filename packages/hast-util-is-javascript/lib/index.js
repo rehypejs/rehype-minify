@@ -29,12 +29,15 @@ const mime = new Set([
 ])
 
 /**
- * Check if an element is a JavaScript script.
+ * Check if a node is a `<script>` that contains or references JavaScript.
+ *
+ * Returns `true` if `node` is a `<script>` element that has a valid JavaScript
+ * `type`, has no `type` and a valid JavaScript `language`, or has neither.
  *
  * @param {Nodes} node
  *   Node to check.
  * @returns {boolean}
- *   Whether `node` is a JavaScript script.
+ *   Whether a node is a `<script>` that contains or references JavaScript.
  */
 export function isJavaScript(node) {
   if (node.type !== 'element' || node.tagName !== 'script') {

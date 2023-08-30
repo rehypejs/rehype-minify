@@ -7,7 +7,7 @@ import {visit} from 'unist-util-visit'
 import {schema} from './schema.js'
 
 /**
- * Remove duplicates in attribute values with unique tokens.
+ * Remove duplicates in attributes values.
  *
  * @returns
  *   Transform.

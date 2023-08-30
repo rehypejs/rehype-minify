@@ -20,7 +20,10 @@
  *
  * Remove `meta[http-equiv=content-language]` and
  * `meta[http-equiv=content-type]`.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
  *   {"processor": {"fragment": false}, "format": true}

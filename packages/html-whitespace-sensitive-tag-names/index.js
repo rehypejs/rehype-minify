@@ -22,7 +22,7 @@
  *
  * ### `whitespaceSensitiveTagNames`
  *
- * List of whitespace sensitive HTML tag names (`Array<string>`).
+ * List of HTML tag names that are whitespace sensitive (`Array<string>`).
  */
 
 export {whitespaceSensitiveTagNames} from './lib/index.js'

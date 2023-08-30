@@ -6,14 +6,14 @@
 
 /**
  * @callback Filter
- *   Filter scripts that would otherwise be moved.
+ *   Filter scripts that would be moved.
  * @param {Element} node
  *   Script element.
  * @returns {boolean | null | undefined}
- *   Whether to move it (`true`) or not.
+ *   Whether to move the script (`true`) or not.
  *
  * @typedef Options
- *   Configuration
+ *   Configuration.
  * @property {Filter | null | undefined} [filter]
  *   Filter scripts that would otherwise be moved (optional).
  */

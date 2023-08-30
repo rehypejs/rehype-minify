@@ -6,7 +6,7 @@ import {isJavaScript} from 'hast-util-is-javascript'
 import {visit} from 'unist-util-visit'
 
 /**
- * Remove `type` and `language` on JavaScript scripts.
+ * Remove `type` and `language` attributes on JavaScript scripts.
  *
  * @returns
  *   Transform.

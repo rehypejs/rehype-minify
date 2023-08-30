@@ -14,10 +14,7 @@ const lists = new Set([
 ])
 
 /**
- * Minify `content` on `meta` elements.
- *
- * Note: `meta[name=theme-color]` and `meta[name=msapplication-TileColor]`
- * are handled by `rehype-minify-meta-color`.
+ * Minify `content` attributes on `meta` elements.
  *
  * @returns
  *   Transform.

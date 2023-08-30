@@ -16,9 +16,13 @@
  * ### `unified().use(rehypeNormalizeAttributeValueCase)`
  *
  * Normalize casing of attributes.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <form method="GET"></form>
  */
 

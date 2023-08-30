@@ -4,6 +4,7 @@
 
 /**
  * Set the plain-text value of a hast node.
+ *
  * This is like the DOMs `Node#textContent` setter.
  * The given node is returned.
  *

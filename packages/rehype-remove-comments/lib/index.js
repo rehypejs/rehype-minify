@@ -4,9 +4,8 @@
  * @typedef Options
  *   Configuration.
  * @property {boolean | null | undefined} [removeConditional=false]
- *   Remove conditional comments (default: `false`).
- *
- *   The default is to leave them.
+ *   Remove conditional comments (default: `false`); the default is to leave
+ *   them.
  */
 
 import {isConditionalComment} from 'hast-util-is-conditional-comment'
@@ -17,9 +16,6 @@ const emptyOptions = {}
 
 /**
  * Remove comments (except conditional comments).
- *
- * Pass `removeConditional: true` to also remove them.
- * are also removed.
  *
  * @param {Options | null | undefined} [options]
  *   Configuration (optional).

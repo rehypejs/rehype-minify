@@ -108,7 +108,10 @@ The default export is `rehypeMinifyStyleAttribute`.
 ### `unified().use(rehypeMinifyStyleAttribute)`
 
 Minify `style` attributes.
-There are no options.
+
+###### Returns
+
+Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
 
 ## Example
 
@@ -126,12 +129,12 @@ There are no options.
 
 ## Syntax
 
-HTML is handled according to WHATWG HTML (the living standard), which is also
-followed by browsers such as Chrome and Firefox.
+HTML is parsed according to WHATWG HTML (the living standard), which is also
+followed by all browsers.
 
 ## Syntax tree
 
-The syntax tree format used is [`hast`][hast].
+The syntax tree used is [hast][].
 
 ## Types
 
@@ -139,10 +142,14 @@ This package is fully typed with [TypeScript][].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line,
+`rehype-minify-style-attribute@^3`,
+compatible with Node.js 12.
 
 ## Security
 
@@ -208,9 +215,9 @@ abide by its terms.
 
 [rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
 
-[size]: https://bundlephobia.com/result?p=rehype-minify-style-attribute
+[size]: https://bundlejs.com/?q=rehype-minify-style-attribute
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/rehype-minify-style-attribute.svg
+[size-badge]: https://img.shields.io/bundlejs/size/rehype-minify-style-attribute
 
 [support]: https://github.com/rehypejs/.github/blob/main/support.md
 

@@ -26,15 +26,15 @@
  *
  * ## API
  *
- * ### `isEventHandler(prop)`
+ * ### `isEventHandler(name)`
  *
- * Check if an attribute name or DOM property is an event handler.
+ * Check if a property is an event handler.
  *
  * Returns `true` when starting with `'on'` and its `length` is `5` or more.
  *
  * ###### Parameters
  *
- * *   `prop` (`string`) — property name
+ * *   `name` (`string`) — property name to check
  *
  * ###### Returns
  *

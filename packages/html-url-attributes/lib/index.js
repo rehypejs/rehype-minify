@@ -1,7 +1,8 @@
 /**
- * Map of URL properties in HTML.
+ * HTML URL properties.
  *
- * `null` means the property name applies to all elements.
+ * Each key is a property name and each value is a list of tag names it applies
+ * to or `null` if it applies to all elements.
  *
  * @type {Record<string, Array<string> | null>}
  */

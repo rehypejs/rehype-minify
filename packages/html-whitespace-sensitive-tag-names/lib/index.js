@@ -1,5 +1,5 @@
 /**
- * List of whitespace sensitive HTML tag names.
+ * List of HTML tag names that are whitespace sensitive.
  */
 export const whitespaceSensitiveTagNames = [
   'pre',

@@ -19,9 +19,13 @@
  * ### `unified().use(rehypeConcatCssStyle)`
  *
  * Concatenate `<style>` elements together.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <style>b{color:red}</style>
  *   <style>i{color:blue}</style>
  */

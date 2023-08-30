@@ -15,9 +15,13 @@
  * ### `unified().use(rehypeMinifyEventHandler)`
  *
  * Minify whitespace in attributes.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <h1 onclick="javascript:alert(false)">Hello</h1>
  */
 

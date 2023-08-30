@@ -15,17 +15,27 @@
  *
  * Minify whitespace.
  *
- * ##### `options`
+ * ###### Parameters
  *
- * Configuration (optional).
+ * *   `options` (`Options`, optional)
+ *     — configuration
  *
- * ##### `options.newlines`
+ * ###### Returns
  *
- * Whether to collapse runs of whitespace that include line endings to one
- * line ending (`boolean`, default: `false`).
- * The default is to collapse everything to one space.
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
+ *
+ * ### `Options`
+ *
+ * Configuration (TypeScript).
+ *
+ * ###### Fields
+ *
+ * *   `newlines` (`boolean`, default: `false`)
+ *     — collapse whitespace containing newlines to `'\n'` instead of `' '`;
+ *     the default is to collapse to a single space
  *
  * @example
+ *   {}
  *   <h1>Heading</h1>
  *   <p><strong>This</strong> and <em>that</em></p>
  */

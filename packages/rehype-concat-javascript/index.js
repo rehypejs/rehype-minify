@@ -17,10 +17,14 @@
  *
  * ### `unified().use(rehypeConcatJavaScript)`
  *
- * Concatenate `<script>` elements together.
- * There are no options.
+ * Concatenate JS `<script>` elements together.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <script>function foo() {}</script>
  *   <script>function bar() {}</script>
  */

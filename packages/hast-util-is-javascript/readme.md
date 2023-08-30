@@ -76,20 +76,20 @@ isJavaScript(h('script', {language: 'fooscript'})) //=> false
 
 ## API
 
-This package exports the following identifiers:
+This package exports the identifier
 `isJavaScript`.
 There is no default export.
 
 ### `isJavaScript(node)`
 
-Check if a hast node is a `<script>` that contains or references JavaScript.
+Check if a node is a `<script>` that contains or references JavaScript.
 
 Returns `true` if `node` is a `<script>` element that has a valid JavaScript
 `type`, has no `type` and a valid JavaScript `language`, or has neither.
 
 ###### Parameters
 
-*   `node` (`Node`) — hast node
+*   `node` (`Node`) — node to check
 
 ###### Returns
 
@@ -98,12 +98,12 @@ Whether a node is a `<script>` that contains or references JavaScript
 
 ## Syntax
 
-HTML is handled according to WHATWG HTML (the living standard), which is also
-followed by browsers such as Chrome and Firefox.
+HTML is parsed according to WHATWG HTML (the living standard), which is also
+followed by all browsers.
 
 ## Syntax tree
 
-The syntax tree format used is [`hast`][hast].
+The syntax tree used is [hast][].
 
 ## Types
 
@@ -111,10 +111,14 @@ This package is fully typed with [TypeScript][].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line,
+`hast-util-is-javascript@^2`,
+compatible with Node.js 12.
 
 ## Security
 
@@ -178,9 +182,9 @@ abide by its terms.
 
 [rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
 
-[size]: https://bundlephobia.com/result?p=hast-util-is-javascript
+[size]: https://bundlejs.com/?q=hast-util-is-javascript
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/hast-util-is-javascript.svg
+[size-badge]: https://img.shields.io/bundlejs/size/hast-util-is-javascript
 
 [support]: https://github.com/rehypejs/.github/blob/main/support.md
 

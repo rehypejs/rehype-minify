@@ -16,9 +16,13 @@
  * ### `unified().use(rehypeRemoveEmptyAttribute)`
  *
  * Remove empty attributes.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <label for id=""></label>
  */
 

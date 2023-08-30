@@ -28,14 +28,14 @@
  *
  * ### `isJavaScript(node)`
  *
- * Check if a hast node is a `<script>` that contains or references JavaScript.
+ * Check if a node is a `<script>` that contains or references JavaScript.
  *
  * Returns `true` if `node` is a `<script>` element that has a valid JavaScript
  * `type`, has no `type` and a valid JavaScript `language`, or has neither.
  *
  * ###### Parameters
  *
- * *   `node` (`Node`) — hast node
+ * *   `node` (`Node`) — node to check
  *
  * ###### Returns
  *

@@ -14,9 +14,13 @@
  * ### `unified().use(rehypeMinifyCssStyle)`
  *
  * Minify CSS `<style>` elements.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <style>
  *     * { color: #ff0000 }
  *   </style>

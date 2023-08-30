@@ -13,6 +13,21 @@
  * @returns {string}
  *   Collapsed value.
  *
+ * @typedef Options
+ *   Configuration.
+ * @property {boolean | null | undefined} [newlines=false]
+ *   Collapse whitespace containing newlines to `'\n'` instead of `' '`
+ *   (default: `false`); the default is to collapse to a single space.
+ *
+ * @typedef Result
+ *   Result.
+ * @property {boolean} remove
+ *   Whether to remove.
+ * @property {boolean} ignore
+ *   Whether to ignore.
+ * @property {boolean} stripAtStart
+ *   Whether to strip at the start.
+ *
  * @typedef State
  *   Info passed around.
  * @property {Collapse} collapse
@@ -23,23 +38,6 @@
  *   Whether there is a break before (default: `false`).
  * @property {boolean | undefined} [after]
  *   Whether there is a break after (default: `false`).
- *
- * @typedef Options
- *   Configuration.
- * @property {boolean | null | undefined} [newlines=false]
- *   Collapse whitespace containing newlines to `'\n'` instead of `' '`
- *   (default: `false`).
- *
- *   The default is to collapse to a single space.
- *
- * @typedef Result
- *   Result.
- * @property {boolean} remove
- *   Whether to remove.
- * @property {boolean} ignore
- *   Whether to ignore.
- * @property {boolean} stripAtStart
- *   Whether to strip at the start.
  *
  * @typedef {'normal' | 'nowrap' | 'pre' | 'pre-wrap'} Whitespace
  *   Whitespace setting.

@@ -20,6 +20,7 @@
 *   [Use](#use)
 *   [API](#api)
     *   [`unified().use(rehypeMinifyWhitespace[, options])`](#unifieduserehypeminifywhitespace-options)
+    *   [`Options`](#options)
 *   [Example](#example)
 *   [Syntax](#syntax)
 *   [Syntax tree](#syntax-tree)
@@ -109,15 +110,24 @@ The default export is `rehypeMinifyWhitespace`.
 
 Minify whitespace.
 
-##### `options`
+###### Parameters
 
-Configuration (optional).
+*   `options` (`Options`, optional)
+    — configuration
 
-##### `options.newlines`
+###### Returns
 
-Whether to collapse runs of whitespace that include line endings to one
-line ending (`boolean`, default: `false`).
-The default is to collapse everything to one space.
+Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
+
+### `Options`
+
+Configuration (TypeScript).
+
+###### Fields
+
+*   `newlines` (`boolean`, default: `false`)
+    — collapse whitespace containing newlines to `'\n'` instead of `' '`;
+    the default is to collapse to a single space
 
 ## Example
 
@@ -136,12 +146,12 @@ The default is to collapse everything to one space.
 
 ## Syntax
 
-HTML is handled according to WHATWG HTML (the living standard), which is also
-followed by browsers such as Chrome and Firefox.
+HTML is parsed according to WHATWG HTML (the living standard), which is also
+followed by all browsers.
 
 ## Syntax tree
 
-The syntax tree format used is [`hast`][hast].
+The syntax tree used is [hast][].
 
 ## Types
 
@@ -149,10 +159,14 @@ This package is fully typed with [TypeScript][].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line,
+`rehype-minify-whitespace@^5`,
+compatible with Node.js 12.
 
 ## Security
 
@@ -218,9 +232,9 @@ abide by its terms.
 
 [rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
 
-[size]: https://bundlephobia.com/result?p=rehype-minify-whitespace
+[size]: https://bundlejs.com/?q=rehype-minify-whitespace
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/rehype-minify-whitespace.svg
+[size-badge]: https://img.shields.io/bundlejs/size/rehype-minify-whitespace
 
 [support]: https://github.com/rehypejs/.github/blob/main/support.md
 

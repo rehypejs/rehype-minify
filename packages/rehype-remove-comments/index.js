@@ -17,19 +17,27 @@
  *
  * Remove comments.
  *
- * ##### `options`
+ * ###### Parameters
  *
- * Configuration (optional).
+ * *   `options` (`Options`, optional)
+ *     — configuration
  *
- * ###### `options.removeConditional`
+ * ###### Returns
  *
- * Whether to remove conditional comments too (`boolean`, default: `false`).
- * The default behavior is to keep conditional comments.
- * Conditional comments are a legacy feature that was specific to Internet
- * Explorer.
- * They were no longer used in IE 10.
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
+ *
+ * ### `Options`
+ *
+ * Configuration (TypeScript type).
+ *
+ * ##### Fields
+ *
+ * *   `removeConditional` (`boolean`, default: `false`)
+ *     — remove conditional comments (default: `false`); the default is to
+ *     leave them
  *
  * @example
+ *   {}
  *   <!--Hello-->
  *   <!--[if IE 6]>OK<![endif]-->
  */

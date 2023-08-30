@@ -16,7 +16,10 @@
  * ### `unified().use(rehypeCssToTop)`
  *
  * Move CSS `<link>`s to the head.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
  *   {"processor": {"fragment": false}}

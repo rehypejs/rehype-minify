@@ -16,18 +16,28 @@
  *
  * Minify URLs.
  *
- * ##### `options`
+ * ###### Parameters
  *
- * Configuration (required).
+ * *   `options` (`Options`, optional)
+ *     — configuration
  *
- * All options except for what’s listed here are passed through to
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
+ *
+ * ### `Options`
+ *
+ * Configuration (TypeScript type).
+ *
+ * All options except for `from` are passed through to
  * [`relateurl`](https://github.com/stevenvachon/relateurl).
  *
- * ##### `options.from`
+ * ###### Fields
  *
- * Absolute URL to where the document will be hosted (`string`).
- * Can also be set with an `origin` and `pathname` in `file.data.meta`
- * (as supported by [`rehype-meta`](https://github.com/rehypejs/rehype-meta)).
+ * *   `from` (`string`, optional)
+ *     — absolute URL to where the document will be hosted; can also be set
+ *     with an `origin` and `pathname` in `file.data.meta` (as supported by
+ *     [`rehype-meta`](https://github.com/rehypejs/rehype-meta)).
  *
  * @example
  *   {"plugin": {"from": "https://example.com"}}

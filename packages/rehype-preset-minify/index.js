@@ -8,15 +8,14 @@
  *
  * ## When should I use this?
  *
- * You can use this plugin when you want to improve the size of HTML documents.
+ * You can use this preset when you want to improve the size of HTML documents.
  *
  * ## API
  *
  * ### `unified().use(rehypePresetMinify)`
  *
- * Use the preset.
- *
- * Presets don’t have options.
+ * Preset to minify HTML
+ * ([`Preset`](https://github.com/unifiedjs/unified#preset)).
  *
  * You can reconfigure plugins in presets by using them afterwards with different
  * options.
@@ -112,7 +111,11 @@ const plugins = [
   rehypeSortAttributes
 ]
 
-/** @type {import('unified').Preset} */
+/**
+ * Preset to minify HTML.
+ *
+ * @type {import('unified').Preset}
+ */
 const rehypePresetMinify = {plugins, settings}
 
 export default rehypePresetMinify

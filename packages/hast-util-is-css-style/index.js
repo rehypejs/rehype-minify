@@ -33,11 +33,11 @@
  *
  * ###### Parameters
  *
- * *   `node` (`Node`) — hast node
+ * *   `node` (`Node`) — node to check
  *
  * ###### Returns
  *
- * Whether a node is a `<style>` that references CSS (`boolean`).
+ * Whether `node` is a CSS style element (`boolean`).
  */
 
 export {isCssStyle} from './lib/index.js'

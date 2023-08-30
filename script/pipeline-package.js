@@ -233,7 +233,6 @@ function generateNmrc(state) {
 // eslint-disable-next-line complexity
 async function generateReadme(state) {
   const moduleUrl = new URL('index.js', state.context.packageFolder)
-  // To do: move files to `lib/index.js`?
   /** @type {[VFile, Record<string, unknown>]} */
   const [indexFile, indexModule] = await Promise.all([
     read(moduleUrl),
@@ -342,7 +341,8 @@ async function generateReadme(state) {
         state,
         // @ts-expect-error: assume it is usable.
         indexModule.default,
-        exampleTag
+        exampleTag,
+        indexFile
       )
     } else {
       indexFile.message('Missing `@example` comment in description')
@@ -481,14 +481,11 @@ function generateReadmeMeta(state) {
     'downloads-badge',
     'https://img.shields.io/npm/dm/' + packageName + '.svg'
   )
-  // To do: update.
-  state.urls.set('size', 'https://bundlephobia.com/result?p=' + packageName)
+  state.urls.set('size', 'https://bundlejs.com/?q=' + packageName)
   state.urls.set(
     'size-badge',
-    // To do: update.
-    'https://img.shields.io/bundlephobia/minzip/' + packageName + '.svg'
+    'https://img.shields.io/bundlejs/size/' + packageName
   )
-  state.urls.set('size', 'https://bundlephobia.com/result?p=' + packageName)
   state.urls.set(
     'sponsors-badge',
     'https://opencollective.com/unified/sponsors/badge.svg'
@@ -771,7 +768,6 @@ function generateReadmePluggableUseSection(state) {
         '',
         'const file = await unified()',
         '  .use(rehypeParse)',
-        // To do: options?
         '  .use(' + state.id + ')',
         '  .use(rehypeStringify)',
         "  .process(await read('index.html'))",
@@ -785,7 +781,6 @@ function generateReadmePluggableUseSection(state) {
       lang: 'sh',
       value:
         'rehype input.html --use ' +
-        // To do: options?
         state.context.name +
         ' --output output.html'
     },
@@ -839,7 +834,10 @@ function generateReadmeApiByline(state, specifiers) {
   if (specifiers.named.length > 0) {
     byline.children.push({
       type: 'text',
-      value: 'This package exports the following identifiers:\n'
+      value:
+        'This package exports the identifier' +
+        (specifiers.named.length === 1 ? '' : 's') +
+        '\n'
     })
 
     let index = -1
@@ -850,7 +848,10 @@ function generateReadmeApiByline(state, specifiers) {
       }
 
       // To do: link.
-      byline.children.push({type: 'inlineCode', value: specifiers.named[index]})
+      byline.children.push({
+        type: 'inlineCode',
+        value: specifiers.named[index]
+      })
     }
 
     byline.children.push({type: 'text', value: '.'})
@@ -882,10 +883,12 @@ function generateReadmeApiByline(state, specifiers) {
  *   Plugin.
  * @param {Spec} example
  *   Example.
+ * @param {VFile} file
+ *   File.
  * @returns {Array<TopLevelContent>}
  *   Content.
  */
-function generateReadmePluggableExampleSection(state, plugin, example) {
+function generateReadmePluggableExampleSection(state, plugin, example, file) {
   /** @type {Record<string, unknown>} */
   let options = {}
   const lines = example.description.replace(/^\r?\n|\r?\n$/g, '').split('\n')
@@ -894,7 +897,7 @@ function generateReadmePluggableExampleSection(state, plugin, example) {
   try {
     options = JSON.parse(headLine)
   } catch {
-    // To do: warn.
+    file.message('Expected first line in example to contain an options object')
     restLines.unshift(headLine)
   }
 
@@ -904,7 +907,16 @@ function generateReadmePluggableExampleSection(state, plugin, example) {
 
   state.urls.set('rehype-format', 'https://github.com/rehypejs/rehype-format')
 
-  // To do: validate schema?
+  for (const key of Object.keys(options)) {
+    assert(key === 'format' || key === 'plugin' || key === 'processor')
+  }
+
+  assert(typeof options.format === 'boolean' || options.format === undefined)
+  assert(
+    typeof options.processor === 'object' || options.processor === undefined
+  )
+  assert(typeof options.plugin === 'object' || options.plugin === undefined)
+
   if (options.plugin || options.format) {
     byline.children.push({type: 'text', value: '(with '})
 
@@ -997,8 +1009,7 @@ function generateReadmeTail(state) {
         {
           type: 'text',
           value:
-            // To do: `HTML is parsed according to WHATWG HTML (the living standard), which is also followed by all browsers.`
-            'HTML is handled according to WHATWG HTML (the living standard), which is also\nfollowed by browsers such as Chrome and Firefox.'
+            'HTML is parsed according to WHATWG HTML (the living standard), which is also\nfollowed by all browsers.'
         }
       ]
     },
@@ -1010,14 +1021,12 @@ function generateReadmeTail(state) {
     {
       type: 'paragraph',
       children: [
-        // To do: remove `format`.
-        {type: 'text', value: 'The syntax tree format used is '},
+        {type: 'text', value: 'The syntax tree used is '},
         {
           type: 'linkReference',
           identifier: 'hast',
-          referenceType: 'full',
-          // To do: just text.
-          children: [{type: 'inlineCode', value: 'hast'}]
+          referenceType: 'collapsed',
+          children: [{type: 'text', value: 'hast'}]
         },
         {type: 'text', value: '.'}
       ]
@@ -1051,9 +1060,16 @@ function generateReadmeTail(state) {
       children: [
         {
           type: 'text',
-          // To do: update: <https://github.com/rehypejs/rehype/tree/main/packages/rehype-parse#compatibility>.
           value:
-            'Projects maintained by the unified collective are compatible with all maintained\nversions of Node.js.\nAs of now, that is Node.js 12.20+, 14.14+, and 16.0+.\nOur projects sometimes work with older versions, but this is not guaranteed.'
+            'Projects maintained by the unified collective are compatible with maintained\nversions of Node.js.\n\nWhen we cut a new major release, we drop support for unmaintained versions of\nNode.\nThis means we try to keep the current release line,\n'
+        },
+        {
+          type: 'inlineCode',
+          value: state.context.name + '@^' + state.versionMajor
+        },
+        {
+          type: 'text',
+          value: ',\ncompatible with Node.js 12.'
         }
       ]
     },

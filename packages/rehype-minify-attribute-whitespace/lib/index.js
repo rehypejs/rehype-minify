@@ -4,9 +4,9 @@
  */
 
 /**
- * @typedef {Properties[keyof Properties]} PropertyValue
  * @typedef {Extract<PropertyValue, Array<any>>} Objects
  * @typedef {Exclude<PropertyValue, Array<any>>} Primitives
+ * @typedef {Properties[keyof Properties]} PropertyValue
  */
 
 import {collapseWhiteSpace} from 'collapse-white-space'

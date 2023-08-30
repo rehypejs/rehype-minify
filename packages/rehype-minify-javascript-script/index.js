@@ -15,9 +15,13 @@
  * ### `unified().use(rehypeMinifyJavaScriptScript)`
  *
  * Minify JavaScript `<script>`s.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <script>
  *     var name = "World";
  *     console.log("Hello, " + name + "!");

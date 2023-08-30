@@ -15,9 +15,13 @@
  * ### `unified().use(rehypeMinifyMediaAttribute)`
  *
  * Minify media attributes.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <link rel="stylesheet" media="only screen and (min-width: 320px)" href="index.css">
  *   <link rel="stylesheet" media="all" href="index.css">
  */

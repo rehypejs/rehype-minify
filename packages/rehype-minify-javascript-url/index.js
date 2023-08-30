@@ -14,9 +14,13 @@
  * ### `unified().use(rehypeMinifyJavaScriptUrl)`
  *
  * Minify `javascript:` URLs.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <img src="javascript:alert(true)">
  */
 

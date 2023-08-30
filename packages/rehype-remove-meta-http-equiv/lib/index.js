@@ -9,7 +9,7 @@ import {stringify} from 'space-separated-tokens'
 
 /**
  * Remove `meta[http-equiv=content-language]` and
- * `meta[http-equiv=content-type]` elements for shorter output.
+ * `meta[http-equiv=content-type]`.
  *
  * @returns
  *   Transform.

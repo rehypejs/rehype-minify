@@ -17,7 +17,10 @@
  * ### `unified().use(rehypeMinifyDoctype)`
  *
  * Minify the doctype.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
  *   {"processor": {"fragment": false}}

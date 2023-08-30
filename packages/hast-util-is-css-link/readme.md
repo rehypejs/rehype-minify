@@ -74,7 +74,7 @@ isCssLink(h('link', {rel: ['stylesheet'], type: 'text/foo'})) //=> false
 
 ## API
 
-This package exports the following identifiers:
+This package exports the identifier
 `isCssLink`.
 There is no default export.
 
@@ -88,7 +88,7 @@ as its `type`.
 
 ###### Parameters
 
-*   `node` (`Node`) — hast node
+*   `node` (`Node`) — node to check
 
 ###### Returns
 
@@ -96,12 +96,12 @@ Whether a node is a `<link>` that references CSS (`boolean`).
 
 ## Syntax
 
-HTML is handled according to WHATWG HTML (the living standard), which is also
-followed by browsers such as Chrome and Firefox.
+HTML is parsed according to WHATWG HTML (the living standard), which is also
+followed by all browsers.
 
 ## Syntax tree
 
-The syntax tree format used is [`hast`][hast].
+The syntax tree used is [hast][].
 
 ## Types
 
@@ -109,10 +109,14 @@ This package is fully typed with [TypeScript][].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line,
+`hast-util-is-css-link@^2`,
+compatible with Node.js 12.
 
 ## Security
 
@@ -176,9 +180,9 @@ abide by its terms.
 
 [rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
 
-[size]: https://bundlephobia.com/result?p=hast-util-is-css-link
+[size]: https://bundlejs.com/?q=hast-util-is-css-link
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/hast-util-is-css-link.svg
+[size-badge]: https://img.shields.io/bundlejs/size/hast-util-is-css-link
 
 [support]: https://github.com/rehypejs/.github/blob/main/support.md
 

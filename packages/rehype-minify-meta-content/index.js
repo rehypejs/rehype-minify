@@ -19,9 +19,13 @@
  * ### `unified().use(rehypeMinifyMetaContent)`
  *
  * Minify `content` attributes on `meta` elements.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
  *   <meta name="keywords" content="foo, bar baz, qux">
  */

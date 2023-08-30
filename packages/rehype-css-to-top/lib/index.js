@@ -8,10 +8,9 @@ import {isCssLink} from 'hast-util-is-css-link'
 import {visit} from 'unist-util-visit'
 
 /**
- * Move CSS `<link>` elements to the `<head>`.
+ * Move CSS `<link>`s to the head.
  *
- * This can *decrease* the time to
- * [first render](https://developer.yahoo.com/performance/rules.html#css_top)
+ * There are no options.
  *
  * @returns
  *   Transform.

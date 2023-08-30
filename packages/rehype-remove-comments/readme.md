@@ -20,6 +20,7 @@
 *   [Use](#use)
 *   [API](#api)
     *   [`unified().use(rehypeRemoveComments[, options])`](#unifieduserehyperemovecomments-options)
+    *   [`Options`](#options)
 *   [Example](#example)
 *   [Syntax](#syntax)
 *   [Syntax tree](#syntax-tree)
@@ -111,17 +112,24 @@ The default export is `rehypeRemoveComments`.
 
 Remove comments.
 
-##### `options`
+###### Parameters
 
-Configuration (optional).
+*   `options` (`Options`, optional)
+    — configuration
 
-###### `options.removeConditional`
+###### Returns
 
-Whether to remove conditional comments too (`boolean`, default: `false`).
-The default behavior is to keep conditional comments.
-Conditional comments are a legacy feature that was specific to Internet
-Explorer.
-They were no longer used in IE 10.
+Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
+
+### `Options`
+
+Configuration (TypeScript type).
+
+##### Fields
+
+*   `removeConditional` (`boolean`, default: `false`)
+    — remove conditional comments (default: `false`); the default is to
+    leave them
 
 ## Example
 
@@ -140,12 +148,12 @@ They were no longer used in IE 10.
 
 ## Syntax
 
-HTML is handled according to WHATWG HTML (the living standard), which is also
-followed by browsers such as Chrome and Firefox.
+HTML is parsed according to WHATWG HTML (the living standard), which is also
+followed by all browsers.
 
 ## Syntax tree
 
-The syntax tree format used is [`hast`][hast].
+The syntax tree used is [hast][].
 
 ## Types
 
@@ -153,10 +161,14 @@ This package is fully typed with [TypeScript][].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line,
+`rehype-remove-comments@^5`,
+compatible with Node.js 12.
 
 ## Security
 
@@ -222,9 +234,9 @@ abide by its terms.
 
 [rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
 
-[size]: https://bundlephobia.com/result?p=rehype-remove-comments
+[size]: https://bundlejs.com/?q=rehype-remove-comments
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/rehype-remove-comments.svg
+[size-badge]: https://img.shields.io/bundlejs/size/rehype-remove-comments
 
 [support]: https://github.com/rehypejs/.github/blob/main/support.md
 

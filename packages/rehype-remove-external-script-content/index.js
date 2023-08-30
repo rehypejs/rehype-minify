@@ -18,9 +18,13 @@
  * ### `unified().use(rehypeRemoveExternalScriptContent)`
  *
  * Remove the contents of external JavaScript `<script>`s.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <script src="index.js">console.log(1);</script>
  */
 

@@ -16,9 +16,13 @@
  * ### `unified().use(rehypeMinifyMetaColor)`
  *
  * Minify color attributes.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <meta name="theme-color" content="#0000ff">
  *   <meta name="msapplication-TileColor" content="#ff0000">
  */

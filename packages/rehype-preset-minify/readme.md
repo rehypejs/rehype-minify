@@ -36,7 +36,7 @@ This package is a [unified](https://github.com/unifiedjs/unified)
 
 ## When should I use this?
 
-You can use this plugin when you want to improve the size of HTML documents.
+You can use this preset when you want to improve the size of HTML documents.
 
 ## Install
 
@@ -108,9 +108,8 @@ The default export is `rehypePresetMinify`.
 
 ### `unified().use(rehypePresetMinify)`
 
-Use the preset.
-
-Presets don’t have options.
+Preset to minify HTML
+([`Preset`](https://github.com/unifiedjs/unified#preset)).
 
 You can reconfigure plugins in presets by using them afterwards with different
 options.
@@ -147,12 +146,12 @@ options.
 
 ## Syntax
 
-HTML is handled according to WHATWG HTML (the living standard), which is also
-followed by browsers such as Chrome and Firefox.
+HTML is parsed according to WHATWG HTML (the living standard), which is also
+followed by all browsers.
 
 ## Syntax tree
 
-The syntax tree format used is [`hast`][hast].
+The syntax tree used is [hast][].
 
 ## Types
 
@@ -160,10 +159,14 @@ This package is fully typed with [TypeScript][].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line,
+`rehype-preset-minify@^6`,
+compatible with Node.js 12.
 
 ## Security
 
@@ -229,9 +232,9 @@ abide by its terms.
 
 [rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
 
-[size]: https://bundlephobia.com/result?p=rehype-preset-minify
+[size]: https://bundlejs.com/?q=rehype-preset-minify
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/rehype-preset-minify.svg
+[size-badge]: https://img.shields.io/bundlejs/size/rehype-preset-minify
 
 [support]: https://github.com/rehypejs/.github/blob/main/support.md
 

@@ -23,9 +23,13 @@
  *
  * ### `enumeratedAttributes`
  *
- * Map of enumerated attributes in HTML (`Record<string, Array<Definition> | Definition>`).
+ * Enumerated HTML attributes (`Record<string, Array<Definition> | Definition>`).
  *
- * Each `Definition` is an object with the following fields:
+ * ### `Definition`
+ *
+ * Info (TypeScript type).
+ *
+ * ###### Fields
  *
  * *   `allowUnknown` (`boolean`, default: `false`)
  *     — whether arbitrary values are allowed

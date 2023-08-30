@@ -34,7 +34,7 @@
  *
  * ###### Parameters
  *
- * *   `node` (`Node`) — hast node
+ * *   `node` (`Node`) — node to check
  *
  * ###### Returns
  *

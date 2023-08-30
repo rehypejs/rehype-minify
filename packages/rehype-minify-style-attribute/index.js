@@ -14,9 +14,13 @@
  * ### `unified().use(rehypeMinifyStyleAttribute)`
  *
  * Minify `style` attributes.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <img style="display: block;">
  */
 

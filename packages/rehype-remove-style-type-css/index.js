@@ -18,9 +18,13 @@
  * ### `unified().use(rehypeRemoveStyleTypeCss)`
  *
  * Remove `type` attributes on CSS `<style>`s and `<link>`s.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <link rel="stylesheet alternate" type="text/css" href="index.css">
  *   <style type="text/css"></style>
  */

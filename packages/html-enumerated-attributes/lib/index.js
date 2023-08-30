@@ -1,6 +1,6 @@
 /**
  * @typedef Definition
- *   Info on an enumerated attribute.
+ *   Info.
  * @property {true} [allowUnknown=false]
  *   Whether arbitrary values are allowed (default: `false`).
  * @property {true} [caseSensitive=false]
@@ -18,7 +18,7 @@
  */
 
 /**
- * Map of enumerated attributes to one or more definitions.
+ * Enumerated HTML attributes.
  *
  * @type {Record<string, Array<Definition> | Definition>}
  */

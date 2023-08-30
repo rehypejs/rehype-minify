@@ -16,9 +16,13 @@
  * ### `unified().use(rehypeSortAttributeValues)`
  *
  * Sort attributes.
- * There are no options.
+ *
+ * ###### Returns
+ *
+ * Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
  *
  * @example
+ *   {}
  *   <div id="foo">bar</div>
  *   <div class="baz" id="qux">quux</div>
  */
