@@ -73,12 +73,17 @@ In browsers with [`esm.sh`][esm-sh]:
 import {h} from 'hastscript'
 import {fromString} from 'hast-util-from-string'
 
-console.log(fromString(h('p'), 'Alpha'))
+const p = h('p')
+fromString(p, 'Alpha')
+console.log(p)
 // { type: 'element',
 //   tagName: 'p',
 //   properties: {},
 //   children: [ { type: 'text', value: 'Alpha' } ] }
-console.log(fromString(h('div', [h('b', 'Bold'), ' and ', h('i', 'italic'), '.']), 'Charlie'))
+
+const div = h('div', [h('b', 'Bold'), ' and ', h('i', 'italic'), '.'])
+fromString(div, 'Charlie')
+console.log(div)
 // { type: 'element',
 //   tagName: 'div',
 //   properties: {},
@@ -103,12 +108,12 @@ Set the plain-text value of a node.
 
 ###### Parameters
 
-*   `node` (`Node`) — node to change.
+*   `node` (`Node`) — node to change
 *   `value` (`string`, default: `''`) — value to use
 
 ###### Returns
 
-Given node (`Node`).
+Nothing (`undefined`).
 
 ## Syntax
 
