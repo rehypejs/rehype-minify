@@ -31,7 +31,6 @@
     "packages/rehype-javascript-to-bottom/",
     "packages/rehype-minify-attribute-whitespace/",
     "packages/rehype-minify-css-style/",
-    "packages/rehype-minify-doctype/",
     "packages/rehype-minify-enumerated-attribute/",
     "packages/rehype-minify-event-handler/",
     "packages/rehype-minify-javascript-script/",

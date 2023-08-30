@@ -55,7 +55,6 @@ import {VFile} from 'vfile'
 import {trough} from 'trough'
 import {fetch} from 'undici'
 import {unified} from 'unified'
-import rehypeMinifyDoctype from '../packages/rehype-minify-doctype/index.js'
 import rehypePresetMinify from '../packages/rehype-preset-minify/index.js'
 
 const cache = 'benchmark-cache'
@@ -321,7 +320,6 @@ function test(ctx, next) {
         const processor = unified()
           .use(rehypeParse)
           .use(rehypePresetMinify)
-          .use(rehypeMinifyDoctype)
           .use(rehypeStringify)
 
         return String(processor.processSync(buf))

@@ -118,7 +118,6 @@ Read their readmes before using:
 *   [`rehype-concat-javascript`](./packages/rehype-concat-javascript)
 *   [`rehype-css-to-top`](./packages/rehype-css-to-top)
 *   [`rehype-javascript-to-bottom`](./packages/rehype-javascript-to-bottom)
-*   [`rehype-minify-doctype`](./packages/rehype-minify-doctype)
 *   [`rehype-minify-url`](./packages/rehype-minify-url)
 *   [`rehype-prevent-favicon-request`](./packages/rehype-prevent-favicon-request)
 
