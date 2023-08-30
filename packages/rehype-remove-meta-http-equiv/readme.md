@@ -54,14 +54,14 @@ npm install rehype-remove-meta-http-equiv
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeRemoveMetaHttpEquiv from 'https://esm.sh/rehype-remove-meta-http-equiv@3'
+import rehypeRemoveMetaHttpEquiv from 'https://esm.sh/rehype-remove-meta-http-equiv@4'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeRemoveMetaHttpEquiv from 'https://esm.sh/rehype-remove-meta-http-equiv@3?bundle'
+  import rehypeRemoveMetaHttpEquiv from 'https://esm.sh/rehype-remove-meta-http-equiv@4?bundle'
 </script>
 ```
 
@@ -170,7 +170,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-remove-meta-http-equiv@^3`,
+`rehype-remove-meta-http-equiv@^4`,
 compatible with Node.js 16.
 
 ## Security

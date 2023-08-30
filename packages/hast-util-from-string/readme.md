@@ -56,14 +56,14 @@ npm install hast-util-from-string
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import {fromString} from 'https://esm.sh/hast-util-from-string@2'
+import {fromString} from 'https://esm.sh/hast-util-from-string@3'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import {fromString} from 'https://esm.sh/hast-util-from-string@2?bundle'
+  import {fromString} from 'https://esm.sh/hast-util-from-string@3?bundle'
 </script>
 ```
 
@@ -136,7 +136,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`hast-util-from-string@^2`,
+`hast-util-from-string@^3`,
 compatible with Node.js 16.
 
 ## Security

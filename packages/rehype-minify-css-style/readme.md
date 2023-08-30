@@ -49,14 +49,14 @@ npm install rehype-minify-css-style
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeMinifyCssStyle from 'https://esm.sh/rehype-minify-css-style@3'
+import rehypeMinifyCssStyle from 'https://esm.sh/rehype-minify-css-style@4'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeMinifyCssStyle from 'https://esm.sh/rehype-minify-css-style@3?bundle'
+  import rehypeMinifyCssStyle from 'https://esm.sh/rehype-minify-css-style@4?bundle'
 </script>
 ```
 
@@ -150,7 +150,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-minify-css-style@^3`,
+`rehype-minify-css-style@^4`,
 compatible with Node.js 16.
 
 ## Security

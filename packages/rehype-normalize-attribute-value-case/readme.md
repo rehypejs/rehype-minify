@@ -51,14 +51,14 @@ npm install rehype-normalize-attribute-value-case
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeNormalizeAttributeValueCase from 'https://esm.sh/rehype-normalize-attribute-value-case@3'
+import rehypeNormalizeAttributeValueCase from 'https://esm.sh/rehype-normalize-attribute-value-case@4'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeNormalizeAttributeValueCase from 'https://esm.sh/rehype-normalize-attribute-value-case@3?bundle'
+  import rehypeNormalizeAttributeValueCase from 'https://esm.sh/rehype-normalize-attribute-value-case@4?bundle'
 </script>
 ```
 
@@ -150,7 +150,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-normalize-attribute-value-case@^3`,
+`rehype-normalize-attribute-value-case@^4`,
 compatible with Node.js 16.
 
 ## Security

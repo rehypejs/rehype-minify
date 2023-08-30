@@ -1,6 +1,6 @@
 {
   "name": "hast-util-is-css-link",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "hast utility to check if an element is a css link",
   "license": "MIT",
   "keywords": [

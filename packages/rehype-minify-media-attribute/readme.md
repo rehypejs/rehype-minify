@@ -50,14 +50,14 @@ npm install rehype-minify-media-attribute
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeMinifyMediaAttribute from 'https://esm.sh/rehype-minify-media-attribute@3'
+import rehypeMinifyMediaAttribute from 'https://esm.sh/rehype-minify-media-attribute@4'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeMinifyMediaAttribute from 'https://esm.sh/rehype-minify-media-attribute@3?bundle'
+  import rehypeMinifyMediaAttribute from 'https://esm.sh/rehype-minify-media-attribute@4?bundle'
 </script>
 ```
 
@@ -151,7 +151,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-minify-media-attribute@^3`,
+`rehype-minify-media-attribute@^4`,
 compatible with Node.js 16.
 
 ## Security

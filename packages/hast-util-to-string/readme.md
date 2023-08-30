@@ -55,14 +55,14 @@ npm install hast-util-to-string
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import {toString} from 'https://esm.sh/hast-util-to-string@2'
+import {toString} from 'https://esm.sh/hast-util-to-string@3'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import {toString} from 'https://esm.sh/hast-util-to-string@2?bundle'
+  import {toString} from 'https://esm.sh/hast-util-to-string@3?bundle'
 </script>
 ```
 
@@ -117,7 +117,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`hast-util-to-string@^2`,
+`hast-util-to-string@^3`,
 compatible with Node.js 16.
 
 ## Security

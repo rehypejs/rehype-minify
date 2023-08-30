@@ -50,14 +50,14 @@ npm install hast-util-is-css-style
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import {isCssStyle} from 'https://esm.sh/hast-util-is-css-style@2'
+import {isCssStyle} from 'https://esm.sh/hast-util-is-css-style@3'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import {isCssStyle} from 'https://esm.sh/hast-util-is-css-style@2?bundle'
+  import {isCssStyle} from 'https://esm.sh/hast-util-is-css-style@3?bundle'
 </script>
 ```
 
@@ -114,7 +114,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`hast-util-is-css-style@^2`,
+`hast-util-is-css-style@^3`,
 compatible with Node.js 16.
 
 ## Security

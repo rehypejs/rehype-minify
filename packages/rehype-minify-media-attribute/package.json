@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-media-attribute",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "rehype plugin to minify media attributes",
   "license": "MIT",
   "keywords": [

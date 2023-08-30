@@ -54,14 +54,14 @@ npm install rehype-concat-css-style
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeConcatCssStyle from 'https://esm.sh/rehype-concat-css-style@3'
+import rehypeConcatCssStyle from 'https://esm.sh/rehype-concat-css-style@4'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeConcatCssStyle from 'https://esm.sh/rehype-concat-css-style@3?bundle'
+  import rehypeConcatCssStyle from 'https://esm.sh/rehype-concat-css-style@4?bundle'
 </script>
 ```
 
@@ -154,7 +154,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-concat-css-style@^3`,
+`rehype-concat-css-style@^4`,
 compatible with Node.js 16.
 
 ## Security

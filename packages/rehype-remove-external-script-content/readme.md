@@ -53,14 +53,14 @@ npm install rehype-remove-external-script-content
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeRemoveExternalScriptContent from 'https://esm.sh/rehype-remove-external-script-content@3'
+import rehypeRemoveExternalScriptContent from 'https://esm.sh/rehype-remove-external-script-content@4'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeRemoveExternalScriptContent from 'https://esm.sh/rehype-remove-external-script-content@3?bundle'
+  import rehypeRemoveExternalScriptContent from 'https://esm.sh/rehype-remove-external-script-content@4?bundle'
 </script>
 ```
 
@@ -152,7 +152,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-remove-external-script-content@^3`,
+`rehype-remove-external-script-content@^4`,
 compatible with Node.js 16.
 
 ## Security

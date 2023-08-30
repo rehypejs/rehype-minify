@@ -52,14 +52,14 @@ npm install rehype-remove-comments
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeRemoveComments from 'https://esm.sh/rehype-remove-comments@5'
+import rehypeRemoveComments from 'https://esm.sh/rehype-remove-comments@6'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeRemoveComments from 'https://esm.sh/rehype-remove-comments@5?bundle'
+  import rehypeRemoveComments from 'https://esm.sh/rehype-remove-comments@6?bundle'
 </script>
 ```
 
@@ -167,7 +167,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-remove-comments@^5`,
+`rehype-remove-comments@^6`,
 compatible with Node.js 16.
 
 ## Security

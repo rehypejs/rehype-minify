@@ -52,14 +52,14 @@ npm install hast-util-is-event-handler
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import {isEventHandler} from 'https://esm.sh/hast-util-is-event-handler@2'
+import {isEventHandler} from 'https://esm.sh/hast-util-is-event-handler@3'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import {isEventHandler} from 'https://esm.sh/hast-util-is-event-handler@2?bundle'
+  import {isEventHandler} from 'https://esm.sh/hast-util-is-event-handler@3?bundle'
 </script>
 ```
 
@@ -115,7 +115,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`hast-util-is-event-handler@^2`,
+`hast-util-is-event-handler@^3`,
 compatible with Node.js 16.
 
 ## Security

@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-enumerated-attribute",
-  "version": "4.1.0",
+  "version": "5.0.0",
   "description": "rehype plugin to minify enumerated attributes",
   "license": "MIT",
   "keywords": [
@@ -35,7 +35,7 @@
   ],
   "dependencies": {
     "@types/hast": "^3.0.0",
-    "html-enumerated-attributes": "^0.1.0",
+    "html-enumerated-attributes": "^1.0.0",
     "hast-util-select": "^6.0.0",
     "property-information": "^6.0.0",
     "space-separated-tokens": "^2.0.0",

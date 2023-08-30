@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-javascript-script",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "rehype plugin to minify `script` elements with a JS body",
   "license": "MIT",
   "keywords": [
@@ -34,9 +34,9 @@
   ],
   "dependencies": {
     "@types/hast": "^3.0.0",
-    "hast-util-from-string": "^2.0.0",
-    "hast-util-is-javascript": "^2.0.0",
-    "hast-util-to-string": "^2.0.0",
+    "hast-util-from-string": "^3.0.0",
+    "hast-util-is-javascript": "^3.0.0",
+    "hast-util-to-string": "^3.0.0",
     "uglify-js": "^3.0.0",
     "unist-util-visit": "^5.0.0"
   },

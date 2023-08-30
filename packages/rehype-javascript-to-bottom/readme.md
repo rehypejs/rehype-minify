@@ -53,14 +53,14 @@ npm install rehype-javascript-to-bottom
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeJavaScriptToBottom from 'https://esm.sh/rehype-javascript-to-bottom@3'
+import rehypeJavaScriptToBottom from 'https://esm.sh/rehype-javascript-to-bottom@4'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeJavaScriptToBottom from 'https://esm.sh/rehype-javascript-to-bottom@3?bundle'
+  import rehypeJavaScriptToBottom from 'https://esm.sh/rehype-javascript-to-bottom@4?bundle'
 </script>
 ```
 
@@ -179,7 +179,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-javascript-to-bottom@^3`,
+`rehype-javascript-to-bottom@^4`,
 compatible with Node.js 16.
 
 ## Security

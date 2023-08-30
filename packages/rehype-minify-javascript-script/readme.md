@@ -50,14 +50,14 @@ npm install rehype-minify-javascript-script
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeMinifyJavaScriptScript from 'https://esm.sh/rehype-minify-javascript-script@4'
+import rehypeMinifyJavaScriptScript from 'https://esm.sh/rehype-minify-javascript-script@5'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeMinifyJavaScriptScript from 'https://esm.sh/rehype-minify-javascript-script@4?bundle'
+  import rehypeMinifyJavaScriptScript from 'https://esm.sh/rehype-minify-javascript-script@5?bundle'
 </script>
 ```
 
@@ -152,7 +152,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-minify-javascript-script@^4`,
+`rehype-minify-javascript-script@^5`,
 compatible with Node.js 16.
 
 ## Security

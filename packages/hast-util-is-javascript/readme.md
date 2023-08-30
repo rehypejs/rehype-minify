@@ -50,14 +50,14 @@ npm install hast-util-is-javascript
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import {isJavaScript} from 'https://esm.sh/hast-util-is-javascript@2'
+import {isJavaScript} from 'https://esm.sh/hast-util-is-javascript@3'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import {isJavaScript} from 'https://esm.sh/hast-util-is-javascript@2?bundle'
+  import {isJavaScript} from 'https://esm.sh/hast-util-is-javascript@3?bundle'
 </script>
 ```
 
@@ -117,7 +117,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`hast-util-is-javascript@^2`,
+`hast-util-is-javascript@^3`,
 compatible with Node.js 16.
 
 ## Security

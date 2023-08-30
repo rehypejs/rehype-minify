@@ -53,14 +53,14 @@ npm install rehype-concat-javascript
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeConcatJavaScript from 'https://esm.sh/rehype-concat-javascript@3'
+import rehypeConcatJavaScript from 'https://esm.sh/rehype-concat-javascript@4'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeConcatJavaScript from 'https://esm.sh/rehype-concat-javascript@3?bundle'
+  import rehypeConcatJavaScript from 'https://esm.sh/rehype-concat-javascript@4?bundle'
 </script>
 ```
 
@@ -153,7 +153,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-concat-javascript@^3`,
+`rehype-concat-javascript@^4`,
 compatible with Node.js 16.
 
 ## Security

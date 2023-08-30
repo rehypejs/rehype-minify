@@ -50,14 +50,14 @@ npm install rehype-minify-language
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeMinifyLanguage from 'https://esm.sh/rehype-minify-language@2'
+import rehypeMinifyLanguage from 'https://esm.sh/rehype-minify-language@3'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeMinifyLanguage from 'https://esm.sh/rehype-minify-language@2?bundle'
+  import rehypeMinifyLanguage from 'https://esm.sh/rehype-minify-language@3?bundle'
 </script>
 ```
 
@@ -155,7 +155,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-minify-language@^2`,
+`rehype-minify-language@^3`,
 compatible with Node.js 16.
 
 ## Security

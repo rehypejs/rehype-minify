@@ -1,6 +1,6 @@
 {
   "name": "rehype-remove-comments",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "description": "rehype plugin to remove comments (except conditional comments)",
   "license": "MIT",
   "keywords": [
@@ -33,7 +33,7 @@
   ],
   "dependencies": {
     "@types/hast": "^3.0.0",
-    "hast-util-is-conditional-comment": "^2.0.0",
+    "hast-util-is-conditional-comment": "^3.0.0",
     "unist-util-visit": "^5.0.0"
   },
   "scripts": {},

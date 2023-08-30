@@ -50,14 +50,14 @@ npm install rehype-minify-json-script
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeMinifyJsonScript from 'https://esm.sh/rehype-minify-json-script@3'
+import rehypeMinifyJsonScript from 'https://esm.sh/rehype-minify-json-script@4'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeMinifyJsonScript from 'https://esm.sh/rehype-minify-json-script@3?bundle'
+  import rehypeMinifyJsonScript from 'https://esm.sh/rehype-minify-json-script@4?bundle'
 </script>
 ```
 
@@ -159,7 +159,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-minify-json-script@^3`,
+`rehype-minify-json-script@^4`,
 compatible with Node.js 16.
 
 ## Security

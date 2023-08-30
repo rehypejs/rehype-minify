@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-attribute-whitespace",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "rehype plugin to minify whitespace in attributes",
   "license": "MIT",
   "keywords": [
@@ -38,7 +38,7 @@
     "@types/hast": "^3.0.0",
     "collapse-white-space": "^2.0.0",
     "hast-util-is-element": "^3.0.0",
-    "hast-util-is-event-handler": "^2.0.0",
+    "hast-util-is-event-handler": "^3.0.0",
     "unist-util-visit": "^5.0.0"
   },
   "scripts": {},

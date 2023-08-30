@@ -50,14 +50,14 @@ npm install rehype-minify-whitespace
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeMinifyWhitespace from 'https://esm.sh/rehype-minify-whitespace@5'
+import rehypeMinifyWhitespace from 'https://esm.sh/rehype-minify-whitespace@6'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeMinifyWhitespace from 'https://esm.sh/rehype-minify-whitespace@5?bundle'
+  import rehypeMinifyWhitespace from 'https://esm.sh/rehype-minify-whitespace@6?bundle'
 </script>
 ```
 
@@ -165,7 +165,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-minify-whitespace@^5`,
+`rehype-minify-whitespace@^6`,
 compatible with Node.js 16.
 
 ## Security

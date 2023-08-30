@@ -54,14 +54,14 @@ npm install rehype-remove-script-type-javascript
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeRemoveScriptTypeJavaScript from 'https://esm.sh/rehype-remove-script-type-javascript@3'
+import rehypeRemoveScriptTypeJavaScript from 'https://esm.sh/rehype-remove-script-type-javascript@4'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeRemoveScriptTypeJavaScript from 'https://esm.sh/rehype-remove-script-type-javascript@3?bundle'
+  import rehypeRemoveScriptTypeJavaScript from 'https://esm.sh/rehype-remove-script-type-javascript@4?bundle'
 </script>
 ```
 
@@ -157,7 +157,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-remove-script-type-javascript@^3`,
+`rehype-remove-script-type-javascript@^4`,
 compatible with Node.js 16.
 
 ## Security

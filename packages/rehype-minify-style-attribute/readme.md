@@ -49,14 +49,14 @@ npm install rehype-minify-style-attribute
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeMinifyStyleAttribute from 'https://esm.sh/rehype-minify-style-attribute@3'
+import rehypeMinifyStyleAttribute from 'https://esm.sh/rehype-minify-style-attribute@4'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeMinifyStyleAttribute from 'https://esm.sh/rehype-minify-style-attribute@3?bundle'
+  import rehypeMinifyStyleAttribute from 'https://esm.sh/rehype-minify-style-attribute@4?bundle'
 </script>
 ```
 
@@ -148,7 +148,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-minify-style-attribute@^3`,
+`rehype-minify-style-attribute@^4`,
 compatible with Node.js 16.
 
 ## Security

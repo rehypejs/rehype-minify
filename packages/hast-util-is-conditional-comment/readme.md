@@ -54,14 +54,14 @@ npm install hast-util-is-conditional-comment
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import {isConditionalComment} from 'https://esm.sh/hast-util-is-conditional-comment@2'
+import {isConditionalComment} from 'https://esm.sh/hast-util-is-conditional-comment@3'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import {isConditionalComment} from 'https://esm.sh/hast-util-is-conditional-comment@2?bundle'
+  import {isConditionalComment} from 'https://esm.sh/hast-util-is-conditional-comment@3?bundle'
 </script>
 ```
 
@@ -114,7 +114,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`hast-util-is-conditional-comment@^2`,
+`hast-util-is-conditional-comment@^3`,
 compatible with Node.js 16.
 
 ## Security

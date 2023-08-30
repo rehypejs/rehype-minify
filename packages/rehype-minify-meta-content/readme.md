@@ -54,14 +54,14 @@ npm install rehype-minify-meta-content
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeMinifyMetaContent from 'https://esm.sh/rehype-minify-meta-content@3'
+import rehypeMinifyMetaContent from 'https://esm.sh/rehype-minify-meta-content@4'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeMinifyMetaContent from 'https://esm.sh/rehype-minify-meta-content@3?bundle'
+  import rehypeMinifyMetaContent from 'https://esm.sh/rehype-minify-meta-content@4?bundle'
 </script>
 ```
 
@@ -155,7 +155,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-minify-meta-content@^3`,
+`rehype-minify-meta-content@^4`,
 compatible with Node.js 16.
 
 ## Security

@@ -50,14 +50,14 @@ npm install rehype-preset-minify
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypePresetMinify from 'https://esm.sh/rehype-preset-minify@6'
+import rehypePresetMinify from 'https://esm.sh/rehype-preset-minify@7'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypePresetMinify from 'https://esm.sh/rehype-preset-minify@6?bundle'
+  import rehypePresetMinify from 'https://esm.sh/rehype-preset-minify@7?bundle'
 </script>
 ```
 
@@ -165,7 +165,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-preset-minify@^6`,
+`rehype-preset-minify@^7`,
 compatible with Node.js 16.
 
 ## Security

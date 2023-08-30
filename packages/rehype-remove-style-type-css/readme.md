@@ -53,14 +53,14 @@ npm install rehype-remove-style-type-css
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeRemoveStyleTypeCss from 'https://esm.sh/rehype-remove-style-type-css@3'
+import rehypeRemoveStyleTypeCss from 'https://esm.sh/rehype-remove-style-type-css@4'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeRemoveStyleTypeCss from 'https://esm.sh/rehype-remove-style-type-css@3?bundle'
+  import rehypeRemoveStyleTypeCss from 'https://esm.sh/rehype-remove-style-type-css@4?bundle'
 </script>
 ```
 
@@ -154,7 +154,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-remove-style-type-css@^3`,
+`rehype-remove-style-type-css@^4`,
 compatible with Node.js 16.
 
 ## Security

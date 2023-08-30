@@ -50,14 +50,14 @@ npm install rehype-minify-event-handler
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeMinifyEventHandler from 'https://esm.sh/rehype-minify-event-handler@3'
+import rehypeMinifyEventHandler from 'https://esm.sh/rehype-minify-event-handler@4'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeMinifyEventHandler from 'https://esm.sh/rehype-minify-event-handler@3?bundle'
+  import rehypeMinifyEventHandler from 'https://esm.sh/rehype-minify-event-handler@4?bundle'
 </script>
 ```
 
@@ -149,7 +149,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-minify-event-handler@^3`,
+`rehype-minify-event-handler@^4`,
 compatible with Node.js 16.
 
 ## Security

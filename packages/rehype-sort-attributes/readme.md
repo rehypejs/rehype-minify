@@ -51,14 +51,14 @@ npm install rehype-sort-attributes
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import rehypeSortAttributes from 'https://esm.sh/rehype-sort-attributes@4'
+import rehypeSortAttributes from 'https://esm.sh/rehype-sort-attributes@5'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import rehypeSortAttributes from 'https://esm.sh/rehype-sort-attributes@4?bundle'
+  import rehypeSortAttributes from 'https://esm.sh/rehype-sort-attributes@5?bundle'
 </script>
 ```
 
@@ -152,7 +152,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`rehype-sort-attributes@^4`,
+`rehype-sort-attributes@^5`,
 compatible with Node.js 16.
 
 ## Security
