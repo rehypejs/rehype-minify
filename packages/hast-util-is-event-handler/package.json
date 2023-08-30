@@ -30,7 +30,8 @@
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
-    "index.js"
+    "index.js",
+    "lib/"
   ],
   "scripts": {},
   "typeCoverage": {

@@ -41,31 +41,4 @@
  * Whether a node is a `<link>` that references CSS (`boolean`).
  */
 
-/**
- * @typedef {import('hast').Root} Root
- * @typedef {Root|Root['children'][number]} Node
- */
-
-/**
- * Check whether a hast node is a `<link>` that references CSS.
- *
- * @param {Node} node
- * @returns {boolean}
- */
-export function isCssLink(node) {
-  if (!node || !('tagName' in node) || node.tagName !== 'link') {
-    return false
-  }
-
-  const rel = node.properties.rel
-
-  if (!rel || !Array.isArray(rel) || !rel.includes('stylesheet')) {
-    return false
-  }
-
-  const type = String(node.properties.type || '')
-    .trim()
-    .toLowerCase()
-
-  return !type || type === 'text/css'
-}
+export {isCssLink} from './lib/index.js'

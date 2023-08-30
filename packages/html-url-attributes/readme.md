@@ -78,7 +78,9 @@ There is no default export.
 
 ### `urlAttributes`
 
-Map of URL attributes in HTML (`Record<string, Array<string>>`).
+Map of URL properties in HTML (`Record<string, Array<string> | null>`).
+
+`null` means the property name applies to all elements.
 
 ## Syntax
 

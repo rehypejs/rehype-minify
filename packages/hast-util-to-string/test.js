@@ -1,33 +1,27 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {u} from 'unist-builder'
+import {h} from 'hastscript'
 import {toString} from './index.js'
 
 test('hast-util-to-string', async function (t) {
   await t.test('should stringify comments', async function () {
-    assert.deepEqual(toString(u('comment', 'foo')), 'foo')
+    assert.equal(toString({type: 'comment', value: 'foo'}), 'foo')
   })
 
   await t.test('should stringify texts', async function () {
-    assert.deepEqual(toString(u('text', 'foo')), 'foo')
+    assert.equal(toString({type: 'text', value: 'foo'}), 'foo')
   })
 
   await t.test('should return empty for doctypes', async function () {
-    assert.deepEqual(toString(u('doctype', {name: 'html'})), '')
+    assert.equal(toString({type: 'doctype'}), '')
   })
 
   await t.test(
     'should stringify elements (including only descendant texts)',
     async function () {
-      assert.deepEqual(
+      assert.equal(
         toString(
-          u('element', {tagName: 'p', properties: {}}, [
-            u('text', 'foo '),
-            u('comment', 'bar'),
-            u('element', {tagName: 'strong', properties: {}}, [
-              u('text', ' baz')
-            ])
-          ])
+          h('p', ['foo ', {type: 'comment', value: 'bar'}, h('strong', ' baz')])
         ),
         'foo  baz'
       )
@@ -37,17 +31,16 @@ test('hast-util-to-string', async function (t) {
   await t.test(
     'should stringify roots (including only descendant texts)',
     async function () {
-      assert.deepEqual(
-        toString(
-          u('root', [
-            u('doctype', {name: 'html'}),
-            u('text', 'foo '),
-            u('comment', 'bar'),
-            u('element', {tagName: 'strong', properties: {}}, [
-              u('text', ' baz')
-            ])
-          ])
-        ),
+      assert.equal(
+        toString({
+          type: 'root',
+          children: [
+            {type: 'doctype'},
+            {type: 'text', value: 'foo '},
+            {type: 'comment', value: 'bar'},
+            h('strong', ' baz')
+          ]
+        }),
         'foo  baz'
       )
     }

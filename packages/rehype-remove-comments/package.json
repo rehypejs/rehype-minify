@@ -29,13 +29,13 @@
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
-    "index.js"
+    "index.js",
+    "lib/"
   ],
   "dependencies": {
     "@types/hast": "^3.0.0",
     "hast-util-is-conditional-comment": "^2.0.0",
-    "unified": "^11.0.0",
-    "unist-util-filter": "^5.0.0"
+    "unist-util-visit": "^5.0.0"
   },
   "scripts": {},
   "typeCoverage": {

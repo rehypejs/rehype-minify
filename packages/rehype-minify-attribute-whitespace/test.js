@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-minify-attribute-whitespace', async function (t) {

@@ -77,19 +77,24 @@ There is no default export.
 
 ### `enumeratedAttributes`
 
-Map of enumerated attributes in HTML (`Record<string, Definition|Array<Definition>>`).
+Map of enumerated attributes in HTML (`Record<string, Array<Definition> | Definition>`).
 
 Each `Definition` is an object with the following fields:
 
-*   `selector` (`string`, optional, example: `'meta, script'`) — a simple CSS
-    selector
-*   `missing` (`string`, `null`, optional) — missing value default
-*   `invalid` (`string`, `null`, optional) — invalid value default
-*   `states` (`Array<string|null|Array<string>>`) — possible states
-*   `allowUnknown` (`boolean`, optional) — whether arbitrary values are
-    allowed
-*   `caseSensitive` (`boolean`, optional) — enumerated values are often
-    treated case-insensitive, except when this field is on
+*   `allowUnknown` (`boolean`, default: `false`)
+    — whether arbitrary values are allowed
+*   `caseSensitive` (`boolean`, default: `false`)
+    — enumerated values are often treated case-insensitive, except when
+    this field is on
+*   `invalid` (`string`, `null`, optional)
+    — invalid value default; `null` means a particular unnamed state
+*   `missing` (`string`, `null`, optional)
+    — missing value default; `null` means a particular unnamed state
+*   `selector` (`string`, optional, example: `'meta, script'`)
+    — simple CSS selector; can contain commas; missing means it applies to
+    all elements
+*   `states` (`Array<Array<string> | string | null>`)
+    — possible states
 
 ## Syntax
 

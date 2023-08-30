@@ -25,9 +25,4 @@
  * List of whitespace sensitive HTML tag names (`Array<string>`).
  */
 
-export const whitespaceSensitiveTagNames = [
-  'pre',
-  'script',
-  'style',
-  'textarea'
-]
+export {whitespaceSensitiveTagNames} from './lib/index.js'

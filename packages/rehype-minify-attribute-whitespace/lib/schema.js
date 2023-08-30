@@ -2,7 +2,10 @@
 // by `rehype-stringify`.
 
 /**
- * @type {Record<string, Array<string>|null>}
+ * Map of property names to tag names.
+ * `null` means all tag names.
+ *
+ * @type {Record<string, Array<string> | null>}
  */
 export const schema = {
   accept: ['input'],

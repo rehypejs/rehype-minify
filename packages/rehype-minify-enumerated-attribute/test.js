@@ -1,43 +1,17 @@
-/**
- * @typedef {import('rehype-stringify').Options} Options
- */
-
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
+import rehypePresetMinify from 'rehype-preset-minify'
 import min from './index.js'
-
-// To do: get them from preset?
-/**
- * @type {Options}
- */
-const settings = {
-  characterReferences: {
-    omitOptionalSemicolons: true,
-    useShortestReferences: true
-  },
-  quoteSmart: true,
-  preferUnquoted: true,
-  omitOptionalTags: true,
-  bogusComments: true,
-  collapseEmptyAttributes: true,
-  closeEmptyElements: true,
-  tightSelfClosing: true,
-  tightCommaSeparatedLists: true,
-  tightAttributes: true,
-  tightDoctype: true,
-  allowParseErrors: true
-}
 
 test('rehype-minify-enumerated-attribute', async function (t) {
   await t.test('should work on `meta[charSet]` (1)', async function () {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('meta', {charSet: 'utf-8'})])),
-      u('root', [h('meta', {charSet: 'utf8'})])
+        .runSync(h(undefined, [h('meta', {charSet: 'utf-8'})])),
+      h(undefined, [h('meta', {charSet: 'utf8'})])
     )
   })
 
@@ -45,8 +19,8 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('meta', {charSet: 'x-mac-roman'})])),
-      u('root', [h('meta', {charSet: 'mac'})])
+        .runSync(h(undefined, [h('meta', {charSet: 'x-mac-roman'})])),
+      h(undefined, [h('meta', {charSet: 'mac'})])
     )
   })
 
@@ -57,9 +31,9 @@ test('rehype-minify-enumerated-attribute', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [h('track', {kind: 'metadata', src: 'example.vtt'})])
+            h(undefined, [h('track', {kind: 'metadata', src: 'example.vtt'})])
           ),
-        u('root', [h('track', {kind: 'a', src: 'example.vtt'})])
+        h(undefined, [h('track', {kind: 'a', src: 'example.vtt'})])
       )
     }
   )
@@ -70,8 +44,8 @@ test('rehype-minify-enumerated-attribute', async function (t) {
       assert.deepEqual(
         rehype()
           .use(min)
-          .runSync(u('root', [h('track', {kind: 'invalid'})])),
-        u('root', [h('track', {kind: 'a'})])
+          .runSync(h(undefined, [h('track', {kind: 'invalid'})])),
+        h(undefined, [h('track', {kind: 'a'})])
       )
     }
   )
@@ -82,12 +56,12 @@ test('rehype-minify-enumerated-attribute', async function (t) {
       assert.deepEqual(
         rehype()
           .use(min)
-          .runSync(u('root', [h('track', {kind: 'subtitles'})])),
-        u('root', [
+          .runSync(h(undefined, [h('track', {kind: 'subtitles'})])),
+        h(undefined, [
           {
             type: 'element',
             tagName: 'track',
-            properties: {kind: null},
+            properties: {kind: undefined},
             children: []
           }
         ])
@@ -101,12 +75,12 @@ test('rehype-minify-enumerated-attribute', async function (t) {
       assert.deepEqual(
         rehype()
           .use(min)
-          .runSync(u('root', [h('button', {type: 'submit'})])),
-        u('root', [
+          .runSync(h(undefined, [h('button', {type: 'submit'})])),
+        h(undefined, [
           {
             type: 'element',
             tagName: 'button',
-            properties: {type: null},
+            properties: {type: undefined},
             children: []
           }
         ])
@@ -120,12 +94,12 @@ test('rehype-minify-enumerated-attribute', async function (t) {
       assert.deepEqual(
         rehype()
           .use(min)
-          .runSync(u('root', [h('area', {shape: 'rect'})])),
-        u('root', [
+          .runSync(h(undefined, [h('area', {shape: 'rect'})])),
+        h(undefined, [
           {
             type: 'element',
             tagName: 'area',
-            properties: {shape: null},
+            properties: {shape: undefined},
             children: []
           }
         ])
@@ -139,12 +113,12 @@ test('rehype-minify-enumerated-attribute', async function (t) {
       assert.deepEqual(
         rehype()
           .use(min)
-          .runSync(u('root', [h('area', {shape: 'rectangle'})])),
-        u('root', [
+          .runSync(h(undefined, [h('area', {shape: 'rectangle'})])),
+        h(undefined, [
           {
             type: 'element',
             tagName: 'area',
-            properties: {shape: null},
+            properties: {shape: undefined},
             children: []
           }
         ])
@@ -158,12 +132,12 @@ test('rehype-minify-enumerated-attribute', async function (t) {
       assert.deepEqual(
         rehype()
           .use(min)
-          .runSync(u('root', [h('area', {shape: 'invalid'})])),
-        u('root', [
+          .runSync(h(undefined, [h('area', {shape: 'invalid'})])),
+        h(undefined, [
           {
             type: 'element',
             tagName: 'area',
-            properties: {shape: null},
+            properties: {shape: undefined},
             children: []
           }
         ])
@@ -177,8 +151,8 @@ test('rehype-minify-enumerated-attribute', async function (t) {
       assert.deepEqual(
         rehype()
           .use(min)
-          .runSync(u('root', [h('div', {translate: 'invalid'})])),
-        u('root', [h('div', {translate: 'invalid'})])
+          .runSync(h(undefined, [h('div', {translate: 'invalid'})])),
+        h(undefined, [h('div', {translate: 'invalid'})])
       )
     }
   )
@@ -187,8 +161,8 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('div', {spellCheck: 'true'})])),
-      u('root', [h('div', {spellCheck: ''})])
+        .runSync(h(undefined, [h('div', {spellCheck: 'true'})])),
+      h(undefined, [h('div', {spellCheck: ''})])
     )
   })
 
@@ -196,8 +170,8 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('div', {spellCheck: 'false'})])),
-      u('root', [h('div', {spellCheck: 'false'})])
+        .runSync(h(undefined, [h('div', {spellCheck: 'false'})])),
+      h(undefined, [h('div', {spellCheck: 'false'})])
     )
   })
 
@@ -205,8 +179,8 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('div', {spellCheck: 'invalid'})])),
-      u('root', [h('div', {spellCheck: 'invalid'})])
+        .runSync(h(undefined, [h('div', {spellCheck: 'invalid'})])),
+      h(undefined, [h('div', {spellCheck: 'invalid'})])
     )
   })
 
@@ -216,8 +190,8 @@ test('rehype-minify-enumerated-attribute', async function (t) {
       assert.deepEqual(
         rehype()
           .use(min)
-          .runSync(u('root', [h('link', {crossOrigin: 'anonymous'})])),
-        u('root', [h('link', {crossOrigin: ''})])
+          .runSync(h(undefined, [h('link', {crossOrigin: 'anonymous'})])),
+        h(undefined, [h('link', {crossOrigin: ''})])
       )
     }
   )
@@ -226,12 +200,12 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('img', {loading: 'eager'})])),
-      u('root', [
+        .runSync(h(undefined, [h('img', {loading: 'eager'})])),
+      h(undefined, [
         {
           type: 'element',
           tagName: 'img',
-          properties: {loading: null},
+          properties: {loading: undefined},
           children: []
         }
       ])
@@ -242,8 +216,8 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('img', {loading: 'lazy'})])),
-      u('root', [h('img', {loading: 'lazy'})])
+        .runSync(h(undefined, [h('img', {loading: 'lazy'})])),
+      h(undefined, [h('img', {loading: 'lazy'})])
     )
   })
 
@@ -251,12 +225,12 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('img', {loading: 'xxx'})])),
-      u('root', [
+        .runSync(h(undefined, [h('img', {loading: 'xxx'})])),
+      h(undefined, [
         {
           type: 'element',
           tagName: 'img',
-          properties: {loading: null},
+          properties: {loading: undefined},
           children: []
         }
       ])
@@ -267,8 +241,8 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('img')])),
-      u('root', [h('img')])
+        .runSync(h(undefined, [h('img')])),
+      h(undefined, [h('img')])
     )
   })
 
@@ -276,12 +250,12 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('li', {type: 'xxx'})])),
-      u('root', [
+        .runSync(h(undefined, [h('li', {type: 'xxx'})])),
+      h(undefined, [
         {
           type: 'element',
           tagName: 'li',
-          properties: {type: null},
+          properties: {type: undefined},
           children: []
         }
       ])
@@ -292,8 +266,8 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('a', {target: 'b'})])),
-      u('root', [h('a', {target: 'b'})])
+        .runSync(h(undefined, [h('a', {target: 'b'})])),
+      h(undefined, [h('a', {target: 'b'})])
     )
   })
 
@@ -301,8 +275,8 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('area', {target: '_blank'})])),
-      u('root', [h('area', {target: '_blank'})])
+        .runSync(h(undefined, [h('area', {target: '_blank'})])),
+      h(undefined, [h('area', {target: '_blank'})])
     )
   })
 
@@ -310,12 +284,12 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('a', {target: '_self'})])),
-      u('root', [
+        .runSync(h(undefined, [h('a', {target: '_self'})])),
+      h(undefined, [
         {
           type: 'element',
           tagName: 'a',
-          properties: {target: null},
+          properties: {target: undefined},
           children: []
         }
       ])
@@ -326,12 +300,12 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('form', {target: ''})])),
-      u('root', [
+        .runSync(h(undefined, [h('form', {target: ''})])),
+      h(undefined, [
         {
           type: 'element',
           tagName: 'form',
-          properties: {target: null},
+          properties: {target: undefined},
           children: []
         }
       ])
@@ -341,7 +315,7 @@ test('rehype-minify-enumerated-attribute', async function (t) {
   await t.test('should support `ol[type]`', async function () {
     assert.deepEqual(
       rehype()
-        .use({settings})
+        .data('settings', rehypePresetMinify.settings)
         .use(min)
         .processSync(
           `<!doctypehtml><title>ol[type]</title>
@@ -368,7 +342,7 @@ test('rehype-minify-enumerated-attribute', async function (t) {
   await t.test('should support `ul[type]`', async function () {
     assert.deepEqual(
       rehype()
-        .use({settings})
+        .data('settings', rehypePresetMinify.settings)
         .use(min)
         .processSync(
           `<!doctypehtml><title>ul[type]</title>
@@ -391,7 +365,7 @@ test('rehype-minify-enumerated-attribute', async function (t) {
   await t.test('should support `li[type]`', async function () {
     assert.deepEqual(
       rehype()
-        .use({settings})
+        .data('settings', rehypePresetMinify.settings)
         .use(min)
         .processSync(
           `<!doctypehtml><title>li[type]</title>
@@ -452,7 +426,7 @@ test('rehype-minify-enumerated-attribute', async function (t) {
   await t.test('should support `form[target]`', async function () {
     assert.deepEqual(
       rehype()
-        .use({settings})
+        .data('settings', rehypePresetMinify.settings)
         .use(min)
         .processSync(
           `<!doctypehtml><title>form[target]</title>
@@ -479,7 +453,7 @@ test('rehype-minify-enumerated-attribute', async function (t) {
   await t.test('should support `form[autocomplete]`', async function () {
     assert.deepEqual(
       rehype()
-        .use({settings})
+        .data('settings', rehypePresetMinify.settings)
         .use(min)
         .processSync(
           `<!doctypehtml><title>form[autocomplete]</title>
@@ -500,7 +474,7 @@ test('rehype-minify-enumerated-attribute', async function (t) {
   await t.test('should support `form[method]`', async function () {
     assert.deepEqual(
       rehype()
-        .use({settings})
+        .data('settings', rehypePresetMinify.settings)
         .use(min)
         .processSync(
           `<!doctypehtml><title>form[method]</title>
@@ -523,7 +497,7 @@ test('rehype-minify-enumerated-attribute', async function (t) {
   await t.test('should support `form[enctype]`', async function () {
     assert.deepEqual(
       rehype()
-        .use({settings})
+        .data('settings', rehypePresetMinify.settings)
         .use(min)
         .processSync(
           `<!doctypehtml><title>form[enctype]</title>
@@ -546,7 +520,7 @@ test('rehype-minify-enumerated-attribute', async function (t) {
   await t.test('should support `img[decoding]`', async function () {
     assert.deepEqual(
       rehype()
-        .use({settings})
+        .data('settings', rehypePresetMinify.settings)
         .use(min)
         .processSync(
           `<!doctypehtml><title>img[decoding]</title>
@@ -571,43 +545,7 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     async function () {
       assert.deepEqual(
         rehype()
-          .use({settings})
-          .use(min)
-          .processSync(
-            `<!doctypehtml><title>input[formmethod],button[formmethod]</title>
-<input>
-<input formmethod=some-text>
-<input formmethod=get>
-<input formmethod=post>
-<input formmethod=dialog>
-<button></button>
-<button formmethod=some-text></button>
-<button formmethod=get></button>
-<button formmethod=post></button>
-<button formmethod=dialog></button>`
-          )
-          .toString(),
-        `<!doctypehtml><title>input[formmethod],button[formmethod]</title>
-<input>
-<input formmethod=a>
-<input formmethod=a>
-<input formmethod=post>
-<input formmethod=dialog>
-<button></button>
-<button formmethod=a></button>
-<button formmethod=a></button>
-<button formmethod=post></button>
-<button formmethod=dialog></button>`
-      )
-    }
-  )
-
-  await t.test(
-    'should support `input[formmethod]`, `button[formmethod]`',
-    async function () {
-      assert.deepEqual(
-        rehype()
-          .use({settings})
+          .data('settings', rehypePresetMinify.settings)
           .use(min)
           .processSync(
             `<!doctypehtml><title>input[formmethod],button[formmethod]</title>
@@ -643,7 +581,7 @@ test('rehype-minify-enumerated-attribute', async function (t) {
     async function () {
       assert.deepEqual(
         rehype()
-          .use({settings})
+          .data('settings', rehypePresetMinify.settings)
           .use(min)
           .processSync(
             `<!doctypehtml><title>input[formtarget],button[formtarget]</title>

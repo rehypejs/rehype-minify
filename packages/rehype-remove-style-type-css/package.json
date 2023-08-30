@@ -32,13 +32,13 @@
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
-    "index.js"
+    "index.js",
+    "lib/"
   ],
   "dependencies": {
     "@types/hast": "^3.0.0",
     "hast-util-is-css-link": "^2.0.0",
     "hast-util-is-css-style": "^2.0.0",
-    "unified": "^11.0.0",
     "unist-util-visit": "^5.0.0"
   },
   "scripts": {},

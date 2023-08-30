@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-minify-event-handler', async function (t) {
@@ -12,9 +11,9 @@ test('rehype-minify-event-handler', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [h('h1', {onClick: 'javascript:alert(false)'}, 'Hello')])
+          h(undefined, [h('h1', {onClick: 'javascript:alert(false)'}, 'Hello')])
         ),
-      u('root', [h('h1', {onClick: 'alert(!1)'}, 'Hello')])
+      h(undefined, [h('h1', {onClick: 'alert(!1)'}, 'Hello')])
     )
     /* eslint-enable no-script-url */
   })
@@ -24,9 +23,9 @@ test('rehype-minify-event-handler', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [h('button', {onClick: 'return false'}, 'Click me')])
+          h(undefined, [h('button', {onClick: 'return false'}, 'Click me')])
         ),
-      u('root', [h('button', {onClick: 'return!1'}, 'Click me')])
+      h(undefined, [h('button', {onClick: 'return!1'}, 'Click me')])
     )
   })
 
@@ -35,9 +34,11 @@ test('rehype-minify-event-handler', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [h('button', {id: 'foo', onClick: 'alert('}, 'Click me')])
+          h(undefined, [
+            h('button', {id: 'foo', onClick: 'alert('}, 'Click me')
+          ])
         ),
-      u('root', [h('button', {id: 'foo', onClick: 'alert('}, 'Click me')])
+      h(undefined, [h('button', {id: 'foo', onClick: 'alert('}, 'Click me')])
     )
   })
 
@@ -45,8 +46,8 @@ test('rehype-minify-event-handler', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('button', {onCut: true}, 'Click me')])),
-      u('root', [h('button', {onCut: true}, 'Click me')])
+        .runSync(h(undefined, [h('button', {onCut: true}, 'Click me')])),
+      h(undefined, [h('button', {onCut: true}, 'Click me')])
     )
   })
 })

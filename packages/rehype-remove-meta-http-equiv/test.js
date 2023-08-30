@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-remove-meta-http-equiv', async function (t) {
@@ -11,7 +10,7 @@ test('rehype-remove-meta-http-equiv', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('head', [
               h('meta', {charSet: 'utf8'}),
               h('meta', {
@@ -21,7 +20,7 @@ test('rehype-remove-meta-http-equiv', async function (t) {
             ])
           ])
         ),
-      u('root', [h('head', [h('meta', {charSet: 'chinese'})])])
+      h(undefined, [h('head', [h('meta', {charSet: 'chinese'})])])
     )
   })
 
@@ -30,7 +29,7 @@ test('rehype-remove-meta-http-equiv', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('head', [
               h('meta', {
                 httpEquiv: ['content-type'],
@@ -39,7 +38,7 @@ test('rehype-remove-meta-http-equiv', async function (t) {
             ])
           ])
         ),
-      u('root', [h('head', [h('meta', {charSet: 'chinese'})])])
+      h(undefined, [h('head', [h('meta', {charSet: 'chinese'})])])
     )
   })
 
@@ -48,7 +47,7 @@ test('rehype-remove-meta-http-equiv', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('html', [
               h('meta', {
                 httpEquiv: ['content-type'],
@@ -57,7 +56,7 @@ test('rehype-remove-meta-http-equiv', async function (t) {
             ])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('html', [
           h('meta', {
             httpEquiv: ['content-type'],
@@ -75,13 +74,13 @@ test('rehype-remove-meta-http-equiv', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('head', [
                 h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
               ])
             ])
           ),
-        u('root', [
+        h(undefined, [
           h('head', [
             h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
           ])
@@ -97,7 +96,7 @@ test('rehype-remove-meta-http-equiv', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('html', [
                 h('head', [
                   h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
@@ -105,7 +104,7 @@ test('rehype-remove-meta-http-equiv', async function (t) {
               ])
             ])
           ),
-        u('root', [h('html', {lang: 'en-US'}, [h('head', [])])])
+        h(undefined, [h('html', {lang: 'en-US'}, [h('head', [])])])
       )
     }
   )
@@ -115,7 +114,7 @@ test('rehype-remove-meta-http-equiv', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('html', {lang: 'en-GB'}, [
               h('head', [
                 h('meta', {httpEquiv: ['content-language'], content: 'en-US'})
@@ -123,7 +122,7 @@ test('rehype-remove-meta-http-equiv', async function (t) {
             ])
           ])
         ),
-      u('root', [h('html', {lang: 'en-US'}, [h('head', [])])])
+      h(undefined, [h('html', {lang: 'en-US'}, [h('head', [])])])
     )
   })
 
@@ -132,8 +131,8 @@ test('rehype-remove-meta-http-equiv', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
-            u('doctype', {name: 'html'}),
+          h(undefined, [
+            {type: 'doctype'},
             h('html', {lang: 'en-GB'}, [
               h('head', [
                 h('meta', {charSet: 'utf8'}),
@@ -159,8 +158,8 @@ test('rehype-remove-meta-http-equiv', async function (t) {
             ])
           ])
         ),
-      u('root', [
-        u('doctype', {name: 'html'}),
+      h(undefined, [
+        {type: 'doctype'},
         h('html', {lang: 'en-US'}, [
           h('head', [
             h('meta', {charSet: 'chinese'}),

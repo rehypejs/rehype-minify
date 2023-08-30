@@ -1,7 +1,3 @@
-/**
- * @typedef {import('rehype-parse')}
- */
-
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {rehype} from 'rehype'

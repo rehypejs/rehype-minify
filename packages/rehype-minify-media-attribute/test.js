@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-minify-media-attribute', async function (t) {
@@ -11,11 +10,11 @@ test('rehype-minify-media-attribute', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('link', {media: '(min-width: 320px)', href: 'index.css'})
           ])
         ),
-      u('root', [h('link', {media: '(min-width:320px)', href: 'index.css'})])
+      h(undefined, [h('link', {media: '(min-width:320px)', href: 'index.css'})])
     )
   })
 
@@ -24,11 +23,11 @@ test('rehype-minify-media-attribute', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('source', {media: '(min-width: 721px)', src: 'pear.jpg'})
           ])
         ),
-      u('root', [h('source', {media: '(min-width:721px)', src: 'pear.jpg'})])
+      h(undefined, [h('source', {media: '(min-width:721px)', src: 'pear.jpg'})])
     )
   })
 
@@ -36,13 +35,12 @@ test('rehype-minify-media-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('style', {media: 'all'}, '* {color: red}')])),
-      u('root', [
+        .runSync(h(undefined, [h('style', {media: 'all'}, '* {color: red}')])),
+      h(undefined, [
         {
           type: 'element',
           tagName: 'style',
-          // To do: `undefined`?
-          properties: {media: null},
+          properties: {media: undefined},
           children: [{type: 'text', value: '* {color: red}'}]
         }
       ])
@@ -54,9 +52,9 @@ test('rehype-minify-media-attribute', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [h('source', {media: '!important', src: 'pear.jpg'})])
+          h(undefined, [h('source', {media: '!important', src: 'pear.jpg'})])
         ),
-      u('root', [h('source', {media: '!important', src: 'pear.jpg'})])
+      h(undefined, [h('source', {media: '!important', src: 'pear.jpg'})])
     )
   })
 
@@ -64,8 +62,8 @@ test('rehype-minify-media-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('div')])),
-      u('root', [h('div')])
+        .runSync(h(undefined, [h('div')])),
+      h(undefined, [h('div')])
     )
   })
 
@@ -73,8 +71,8 @@ test('rehype-minify-media-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('source', {media: true})])),
-      u('root', [h('source', {media: true})])
+        .runSync(h(undefined, [h('source', {media: true})])),
+      h(undefined, [h('source', {media: true})])
     )
   })
 })

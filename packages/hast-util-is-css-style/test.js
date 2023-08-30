@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {isCssStyle} from './index.js'
 
@@ -10,7 +9,7 @@ test('hast-util-is-css-style', async function (t) {
   })
 
   await t.test('should be yes for `style` without `type`', async function () {
-    assert.equal(isCssStyle(h('style', {type: null})), true)
+    assert.equal(isCssStyle(h('style', {type: undefined})), true)
   })
 
   await t.test(
@@ -53,18 +52,6 @@ test('hast-util-is-css-style', async function (t) {
   })
 
   await t.test('should be no for other nodes', async function () {
-    assert.equal(
-      isCssStyle(u('element', {tagName: 'p', properties: {}}, [])),
-      false
-    )
-  })
-
-  await t.test('should be no for other nodes', async function () {
-    assert.equal(isCssStyle(u('text', 'foo')), false)
-  })
-
-  await t.test('should be no for nothing', async function () {
-    // @ts-expect-error: not enough arguments.
-    assert.equal(isCssStyle(), false)
+    assert.equal(isCssStyle({type: 'text', value: 'foo'}), false)
   })
 })

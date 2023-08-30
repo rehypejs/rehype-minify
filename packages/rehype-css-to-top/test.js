@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-css-to-top', async function (t) {
@@ -11,12 +10,12 @@ test('rehype-css-to-top', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('head'),
             h('body', h('link', {rel: ['stylesheet'], href: 'index.css'}))
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('head', h('link', {rel: ['stylesheet'], href: 'index.css'})),
         h('body')
       ])
@@ -28,7 +27,7 @@ test('rehype-css-to-top', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('head'),
             h(
               'body',
@@ -40,7 +39,7 @@ test('rehype-css-to-top', async function (t) {
             )
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('head'),
         h(
           'body',
@@ -59,11 +58,13 @@ test('rehype-css-to-top', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          h(null, [
+          h(undefined, [
             h('body', h('link', {rel: ['stylesheet'], href: 'index.css'}))
           ])
         ),
-      h(null, [h('body', h('link', {rel: ['stylesheet'], href: 'index.css'}))])
+      h(undefined, [
+        h('body', h('link', {rel: ['stylesheet'], href: 'index.css'}))
+      ])
     )
   })
 })

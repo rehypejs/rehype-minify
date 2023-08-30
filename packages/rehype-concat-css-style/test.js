@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-concat-css-style', async function (t) {
@@ -11,12 +10,12 @@ test('rehype-concat-css-style', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('style', 'b {color: red}'),
             h('style', 'i {color: blue}')
           ])
         ),
-      u('root', [h('style', 'b {color: red}i {color: blue}')])
+      h(undefined, [h('style', 'b {color: red}i {color: blue}')])
     )
   })
 
@@ -25,12 +24,12 @@ test('rehype-concat-css-style', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('style', 'b {color: red}'),
             h('style', {type: 'text/foostyle'}, 'i {color: blue}')
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('style', 'b {color: red}'),
         h('style', {type: 'text/foostyle'}, 'i {color: blue}')
       ])
@@ -41,8 +40,8 @@ test('rehype-concat-css-style', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('style', 'b {color: red}')])),
-      u('root', [h('style', 'b {color: red}')])
+        .runSync(h(undefined, [h('style', 'b {color: red}')])),
+      h(undefined, [h('style', 'b {color: red}')])
     )
   })
 })

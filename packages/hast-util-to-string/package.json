@@ -32,7 +32,8 @@
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
-    "index.js"
+    "index.js",
+    "lib/"
   ],
   "dependencies": {
     "@types/hast": "^3.0.0"

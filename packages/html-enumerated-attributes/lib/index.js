@@ -1,32 +1,40 @@
 /**
- * @typedef Info
- * @property {string} [selector]
- * @property {string|null} [missing]
- * @property {string|null} [invalid]
- * @property {Array<null|string|Array<string>>} states
- * @property {true} [allowUnknown]
- * @property {true} [caseSensitive]
+ * @typedef Definition
+ *   Info on an enumerated attribute.
+ * @property {true} [allowUnknown=false]
+ *   Whether arbitrary values are allowed (default: `false`).
+ * @property {true} [caseSensitive=false]
+ *   Enumerated values are often treated case-insensitive, except when this
+ *   field is on (default: `false`).
+ * @property {string | null} [invalid]
+ *   Invalid value default; `null` means a particular unnamed state.
+ * @property {string | null} [missing]
+ *   Missing value default; `null` means a particular unnamed state.
+ * @property {string | undefined} [selector]
+ *   Simple CSS selector; can contain commas; missing means it applies to all
+ *   elements.
+ * @property {Array<Array<string> | string | null>} states
+ *   Possible states.
  */
 
 /**
- * This schema exposes a map of property names to (one or more) definitions.
- * Each definition defines how that attribute is enumerated.
+ * Map of enumerated attributes to one or more definitions.
  *
- * @type {Record<string, Info|Array<Info>>}
+ * @type {Record<string, Array<Definition> | Definition>}
  */
-export const schema = {
-  autoComplete: {
-    selector: 'form',
-    missing: '',
+export const enumeratedAttributes = {
+  autocomplete: {
     invalid: '',
+    missing: '',
+    selector: 'form',
     states: [['', 'on'], 'off']
   },
   behavior: {
-    selector: 'marquee',
     missing: 'scroll',
+    selector: 'marquee',
     states: ['alternate', 'scroll', 'slide']
   },
-  charSet: {
+  charset: {
     selector: 'meta, script',
     // In HTML5, utf8 is implied.
     // But we let it be here for older versions.
@@ -241,83 +249,83 @@ export const schema = {
       ['x-user-defined']
     ]
   },
-  contentEditable: {
-    missing: null,
+  contenteditable: {
     invalid: null,
+    missing: null,
     states: [null, ['', 'true'], 'false']
   },
-  crossOrigin: {
-    selector: 'link, img, audio, video, script',
-    missing: null,
+  crossorigin: {
     invalid: '',
+    missing: null,
+    selector: 'link, img, audio, video, script',
     states: [['', 'anonymous'], 'use-credentials']
   },
   decoding: {
-    selector: 'img',
-    missing: '',
     invalid: '',
+    missing: '',
+    selector: 'img',
     states: ['sync', 'async', ['', 'auto']]
   },
   dir: {
-    missing: '',
     invalid: '',
+    missing: '',
     states: ['', 'ltr', 'rtl', 'auto']
   },
   direction: {
-    selector: 'marquee',
     missing: 'left',
+    selector: 'marquee',
     states: ['left', 'right', 'up', 'down']
   },
   draggable: {
     missing: null,
     states: [null, 'true', 'false']
   },
-  // When changing `encType`, please also change `formEncType`.
-  encType: {
-    selector: 'form',
+  // When changing `encType`, please also change `formenctype`.
+  enctype: {
     invalid: 'application/x-www-form-urlencoded',
     missing: 'application/x-www-form-urlencoded',
+    selector: 'form',
     states: [
       'application/x-www-form-urlencoded',
       'multipart/form-data',
       'text/plain'
     ]
   },
-  // When changing `formEncType`, please also change `encType`.
-  formEncType: {
-    selector: 'button, input',
+  // When changing `formenctype`, please also change `encType`.
+  formenctype: {
     invalid: 'application/x-www-form-urlencoded',
     // Note that `missing: null` here is intentionally different from `encType`.
     missing: null,
+    selector: 'button, input',
     states: [
       'application/x-www-form-urlencoded',
       'multipart/form-data',
       'text/plain'
     ]
   },
-  // When changing `formMethod`, please also change `method`.
-  formMethod: {
-    selector: 'button, input',
+  // When changing `formmethod`, please also change `method`.
+  formmethod: {
     invalid: 'get',
-    // Note that `missing: null` here is intentionally different from `formMethod`.
+    // Note that `missing: null` here is intentionally different from `formmethod`.
     missing: null,
+    selector: 'button, input',
     states: ['dialog', 'get', 'post']
   },
-  // When changing `formTarget`, please also change `target`.
-  formTarget: {
-    selector: 'button, input',
+  // When changing `formtarget`, please also change `target`.
+  formtarget: {
+    allowUnknown: true,
     // Note that `missing: null` here is intentionally different from `target`.
     missing: null,
-    allowUnknown: true,
-    // Note that `formTarget` uses `_self` and `target` uses `['', '_self']`,
+    selector: 'button, input',
+    // Note that `formtarget` uses `_self` and `target` uses `['', '_self']`,
     // which is intentional.
     states: ['_blank', '_parent', '_self', '_top']
   },
-  inputMode: {
-    // In fact only applies to `text`, `search`, and `password`.
-    selector: 'input',
+  inputmode: {
     invalid: '',
     missing: '',
+    // In fact only applies to `text`, `search`, and `password`.
+    selector: 'input',
     states: [
       '',
       'email',
@@ -335,27 +343,27 @@ export const schema = {
     ]
   },
   keytype: {
-    selector: 'keygen',
     missing: 'rsa',
+    selector: 'keygen',
     states: ['', 'rsa']
   },
   kind: {
-    selector: 'track',
-    missing: 'subtitles',
     invalid: 'metadata',
+    missing: 'subtitles',
+    selector: 'track',
     states: ['captions', 'chapters', 'descriptions', 'metadata', 'subtitles']
   },
   loading: {
-    selector: 'iframe, img',
     invalid: 'eager',
     missing: 'eager',
+    selector: 'iframe, img',
     states: ['eager', 'lazy']
   },
-  // When changing `method`, please also change `formMethod`.
+  // When changing `method`, please also change `formmethod`.
   method: {
-    selector: 'form',
     invalid: 'get',
     missing: 'get',
+    selector: 'form',
     states: ['dialog', 'get', 'post']
   },
   preload: {
@@ -364,10 +372,10 @@ export const schema = {
     states: [['', 'auto'], 'metadata', 'none']
   },
   // Should also apply to `content` on `meta[name=referrer]`.
-  referrerPolicy: {
-    selector: 'a, area, iframe, img, link',
-    missing: '',
+  referrerpolicy: {
     invalid: '',
+    missing: '',
+    selector: 'a, area, iframe, img, link',
     states: [
       '',
       'no-referrer',
@@ -378,13 +386,13 @@ export const schema = {
     ]
   },
   scope: {
-    selector: 'th',
     missing: '',
+    selector: 'th',
     states: ['', 'col', 'colgroup', 'row', 'rowgroup']
   },
   shape: {
-    selector: 'area',
     missing: 'rect',
+    selector: 'area',
     states: [
       // The latter are non-conforming.
       ['rect', 'rectangle'],
@@ -393,32 +401,32 @@ export const schema = {
       'default'
     ]
   },
-  spellCheck: {
-    missing: null,
+  spellcheck: {
     invalid: null,
+    missing: null,
     states: [null, ['', 'true'], 'false']
   },
-  // When changing `target`, please also change `formTarget`.
+  // When changing `target`, please also change `formtarget`.
   target: {
-    selector: 'a, area, base, form',
-    missing: '',
     allowUnknown: true,
+    missing: '',
+    selector: 'a, area, base, form',
     states: ['_blank', '_parent', ['', '_self'], '_top']
   },
   translate: {
-    missing: null,
     invalid: null,
+    missing: null,
     states: [['', 'yes'], 'no']
   },
   type: [
     {
-      selector: 'button',
       missing: 'submit',
+      selector: 'button',
       states: ['button', 'menu', 'reset', 'submit']
     },
     {
-      selector: 'input',
       missing: 'text',
+      selector: 'input',
       states: [
         'button',
         'checkbox',
@@ -446,38 +454,38 @@ export const schema = {
     },
     {
       caseSensitive: true,
-      selector: 'li',
-      missing: '',
       invalid: '',
+      missing: '',
+      selector: 'li',
       states: ['1', 'a', 'A', 'i', 'I', 'circle', 'disc', 'square']
     },
     {
-      selector: 'menu',
       missing: '',
+      selector: 'menu',
       states: ['', 'context', 'toolbar']
     },
     {
-      selector: 'menuitem',
       missing: 'command',
+      selector: 'menuitem',
       states: ['checkbox', 'command', 'radio']
     },
     {
       caseSensitive: true,
-      selector: 'ol',
-      missing: '1',
       invalid: '1',
+      missing: '1',
+      selector: 'ol',
       states: ['1', 'a', 'A', 'i', 'I']
     },
     {
-      selector: 'ul',
-      missing: '',
       invalid: '',
+      missing: '',
+      selector: 'ul',
       states: ['circle', 'disc', 'square']
     }
   ],
   wrap: {
-    selector: 'textarea',
     missing: 'soft',
+    selector: 'textarea',
     states: ['hard', 'soft']
   }
 }

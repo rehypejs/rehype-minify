@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-minify-whitespace', async function (t) {
@@ -11,7 +10,7 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('main', [
               '  ',
               h('p', [
@@ -33,7 +32,7 @@ test('rehype-minify-whitespace', async function (t) {
             ])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('main', [
           h('p', [
             h('strong', 'foo'),
@@ -52,7 +51,7 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('head', [
               '  ',
               h('meta', {itemProp: true}),
@@ -65,7 +64,7 @@ test('rehype-minify-whitespace', async function (t) {
             ])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('head', [
           h('meta', {itemProp: true}),
           h('noscript', [h('link', {rel: ['stylesheet'], href: 'index.css'})])
@@ -79,7 +78,7 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min, {newlines: true})
         .runSync(
-          u('root', [
+          h(undefined, [
             h('main', [
               '  ',
               h('p', [
@@ -101,7 +100,7 @@ test('rehype-minify-whitespace', async function (t) {
             ])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('main', [
           h('p', [
             h('strong', 'foo'),
@@ -121,8 +120,8 @@ test('rehype-minify-whitespace', async function (t) {
       assert.deepEqual(
         rehype()
           .use(min, {newlines: true})
-          .runSync(u('root', [h('main', ['  a  ', h('br'), ' c '])])),
-        u('root', [h('main', ['a', h('br'), 'c'])])
+          .runSync(h(undefined, [h('main', ['  a  ', h('br'), ' c '])])),
+        h(undefined, [h('main', ['a', h('br'), 'c'])])
       )
     }
   )
@@ -132,7 +131,7 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('form', [
               '  ',
               h('input', {list: 'a'}),
@@ -148,7 +147,7 @@ test('rehype-minify-whitespace', async function (t) {
             ])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('form', [
           h('input', {list: 'a'}),
           h('datalist', {id: 'a'}, [h('option', 'b'), h('option', 'c')])
@@ -164,7 +163,7 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('section', [
                 '  a  ',
                 h('object', ['  b  ', h('p', '  c  '), '  d  ']),
@@ -172,7 +171,7 @@ test('rehype-minify-whitespace', async function (t) {
               ])
             ])
           ),
-        u('root', [
+        h(undefined, [
           h('section', ['a ', h('object', ['b', h('p', 'c'), 'd ']), ' e'])
         ])
       )
@@ -184,7 +183,7 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('main', [
               h('p', [
                 h('strong', 'foo '),
@@ -195,7 +194,7 @@ test('rehype-minify-whitespace', async function (t) {
             ])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('main', [
           h('p', [
             h('strong', 'foo '),
@@ -213,13 +212,13 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('main', [
               h('p', [' ', h('span', [' ', h('strong', ' '), ' ']), ' '])
             ])
           ])
         ),
-      u('root', [h('main', [h('p', [h('span', [h('strong')])])])])
+      h(undefined, [h('main', [h('p', [h('span', [h('strong')])])])])
     )
   })
 
@@ -228,11 +227,11 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('main', [h('strong', 'a'), h('span', [h('span', ' '), 'b'])])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('main', [h('strong', 'a'), h('span', [h('span', ' '), 'b'])])
       ])
     )
@@ -244,8 +243,8 @@ test('rehype-minify-whitespace', async function (t) {
       assert.deepEqual(
         rehype()
           .use(min)
-          .runSync(u('root', [h('main', '  ')])),
-        u('root', [h('main')])
+          .runSync(h(undefined, [h('main', '  ')])),
+        h(undefined, [h('main')])
       )
     }
   )
@@ -256,8 +255,8 @@ test('rehype-minify-whitespace', async function (t) {
       assert.deepEqual(
         rehype()
           .use(min)
-          .runSync(u('root', [h('main', '\n ')])),
-        u('root', [h('main')])
+          .runSync(h(undefined, [h('main', '\n ')])),
+        h(undefined, [h('main')])
       )
     }
   )
@@ -266,8 +265,8 @@ test('rehype-minify-whitespace', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('main', ['  ', h('p'), '  ', h('p'), '  '])])),
-      u('root', [h('main', [h('p'), h('p')])])
+        .runSync(h(undefined, [h('main', ['  ', h('p'), '  ', h('p'), '  '])])),
+      h(undefined, [h('main', [h('p'), h('p')])])
     )
   })
 
@@ -276,11 +275,11 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('main', ['  ', h('div', ['  ', ' foo ', ' \n', ' bar '])])
           ])
         ),
-      u('root', [h('main', [h('div', ['foo ', 'bar'])])])
+      h(undefined, [h('main', [h('div', ['foo ', 'bar'])])])
     )
   })
 
@@ -291,7 +290,7 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('main', [
                 h('i', [
                   h('span', 'foo '),
@@ -300,7 +299,7 @@ test('rehype-minify-whitespace', async function (t) {
               ])
             ])
           ),
-        u('root', [
+        h(undefined, [
           h('main', [
             h('i', [
               h('span', 'foo '),
@@ -319,7 +318,7 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('main', [
                 h('span', [
                   'foo ',
@@ -329,7 +328,7 @@ test('rehype-minify-whitespace', async function (t) {
               ])
             ])
           ),
-        u('root', [
+        h(undefined, [
           h('main', [
             h('span', ['foo ', h('a', {href: 'example.com'}, 'bar'), ' baz'])
           ])
@@ -345,7 +344,7 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('main', [
                 h('p'),
                 h('i', [h('span', 'foo ')]),
@@ -353,7 +352,7 @@ test('rehype-minify-whitespace', async function (t) {
               ])
             ])
           ),
-        u('root', [
+        h(undefined, [
           h('main', [
             h('p'),
             h('i', [h('span', 'foo ')]),
@@ -369,9 +368,9 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
-            u('doctype', {name: 'html'}),
-            u('text', '\n'),
+          h(undefined, [
+            {type: 'doctype'},
+            {type: 'text', value: '\n'},
             h('html', [
               '\n  ',
               h('head', [
@@ -400,8 +399,8 @@ test('rehype-minify-whitespace', async function (t) {
             ])
           ])
         ),
-      u('root', [
-        u('doctype', {name: 'html'}),
+      h(undefined, [
+        {type: 'doctype'},
         h('html', [
           h('head', [
             h('meta', {charSet: 'utf8'}),
@@ -423,8 +422,10 @@ test('rehype-minify-whitespace', async function (t) {
       assert.deepEqual(
         rehype()
           .use(min)
-          .runSync(u('root', [h('p', [h('label', ' a '), ' ', h('input')])])),
-        u('root', [h('p', [h('label', 'a '), h('input')])])
+          .runSync(
+            h(undefined, [h('p', [h('label', ' a '), ' ', h('input')])])
+          ),
+        h(undefined, [h('p', [h('label', 'a '), h('input')])])
       )
     }
   )
@@ -433,8 +434,8 @@ test('rehype-minify-whitespace', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('p', [h('label', 'a'), ' ', h('input')])])),
-      u('root', [h('p', [h('label', 'a'), ' ', h('input')])])
+        .runSync(h(undefined, [h('p', [h('label', 'a'), ' ', h('input')])])),
+      h(undefined, [h('p', [h('label', 'a'), ' ', h('input')])])
     )
   })
 
@@ -444,8 +445,8 @@ test('rehype-minify-whitespace', async function (t) {
       assert.deepEqual(
         rehype()
           .use(min)
-          .runSync(u('root', [h('p', [h('label', 'a'), ' ', h('button')])])),
-        u('root', [h('p', [h('label', 'a'), ' ', h('button')])])
+          .runSync(h(undefined, [h('p', [h('label', 'a'), ' ', h('button')])])),
+        h(undefined, [h('p', [h('label', 'a'), ' ', h('button')])])
       )
     }
   )
@@ -454,8 +455,10 @@ test('rehype-minify-whitespace', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('main', [h('p', ' a '), ' b ', h('p', ' c ')])])),
-      u('root', [h('main', [h('p', 'a'), 'b', h('p', 'c')])])
+        .runSync(
+          h(undefined, [h('main', [h('p', ' a '), ' b ', h('p', ' c ')])])
+        ),
+      h(undefined, [h('main', [h('p', 'a'), 'b', h('p', 'c')])])
     )
   })
 
@@ -464,7 +467,7 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('head', [
               '  ',
               h('meta', {charSet: 'utf8'}),
@@ -484,7 +487,7 @@ test('rehype-minify-whitespace', async function (t) {
             ])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('head', [
           h('meta', {charSet: 'utf8'}),
           h('title', 'a'),
@@ -503,7 +506,7 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('p', [
               '  a  ',
               h('select', [
@@ -521,7 +524,7 @@ test('rehype-minify-whitespace', async function (t) {
             ])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('p', [
           'a ',
           h('select', [
@@ -538,7 +541,7 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('p', [
               '  a  ',
               h('img'),
@@ -550,7 +553,7 @@ test('rehype-minify-whitespace', async function (t) {
             ])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('p', ['a ', h('img'), ' b ', h('video'), ' c ', h('audio'), ' d'])
       ])
     )
@@ -561,7 +564,7 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('p', [
               '  a  ',
               h('video', [h('track'), '  b  ', h('a', '  c  '), '  d  ']),
@@ -569,7 +572,7 @@ test('rehype-minify-whitespace', async function (t) {
             ])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('p', ['a ', h('video', [h('track'), 'b ', h('a', 'c '), 'd ']), ' e'])
       ])
     )
@@ -582,9 +585,11 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [h('p', ['  a  ', u('comment', '  b  '), '  c  '])])
+            h(undefined, [
+              h('p', ['  a  ', {type: 'comment', value: '  b  '}, '  c  '])
+            ])
           ),
-        u('root', [h('p', ['a ', u('comment', '  b  '), 'c'])])
+        h(undefined, [h('p', ['a ', {type: 'comment', value: '  b  '}, 'c'])])
       )
     }
   )
@@ -596,16 +601,20 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('main', [
                 h('p', '  a  '),
-                u('comment', '  b  '),
+                {type: 'comment', value: '  b  '},
                 h('p', '  c  ')
               ])
             ])
           ),
-        u('root', [
-          h('main', [h('p', 'a'), u('comment', '  b  '), h('p', 'c')])
+        h(undefined, [
+          h('main', [
+            h('p', 'a'),
+            {type: 'comment', value: '  b  '},
+            h('p', 'c')
+          ])
         ])
       )
     }
@@ -618,7 +627,7 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('main', [
                 h('p', '  a  '),
                 '  ',
@@ -630,7 +639,7 @@ test('rehype-minify-whitespace', async function (t) {
               ])
             ])
           ),
-        u('root', [
+        h(undefined, [
           h('main', [
             h('p', 'a'),
             h('x', {hidden: true}, 'b'),
@@ -649,28 +658,28 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('main', [
                 h('p', '  a  '),
                 '  ',
                 // @ts-expect-error: custom node.
-                u('x'),
+                {type: 'x'},
                 '  ',
                 h('p', '  c  '),
                 '  ',
                 // @ts-expect-error: custom node.
-                h('p', ['  d  ', u('x'), '  f  '])
+                h('p', ['  d  ', {type: 'x'}, '  f  '])
               ])
             ])
           ),
-        u('root', [
+        h(undefined, [
           h('main', [
             h('p', 'a'),
             // @ts-expect-error: custom node.
-            u('x'),
+            {type: 'x'},
             h('p', 'c'),
             // @ts-expect-error: custom node.
-            h('p', ['d ', u('x'), ' f'])
+            h('p', ['d ', {type: 'x'}, ' f'])
           ])
         ])
       )
@@ -684,28 +693,28 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('main', [
                 h('p', '  a  '),
                 '  ',
                 // @ts-expect-error: custom node.
-                u('x'),
+                {type: 'x'},
                 '  ',
                 h('p', '  c  '),
                 '  ',
                 // @ts-expect-error: custom node.
-                h('p', ['  d  ', u('x'), '  f  '])
+                h('p', ['  d  ', {type: 'x'}, '  f  '])
               ])
             ])
           ),
-        u('root', [
+        h(undefined, [
           h('main', [
             h('p', 'a'),
             // @ts-expect-error: custom node.
-            u('x'),
+            {type: 'x'},
             h('p', 'c'),
             // @ts-expect-error: custom node.
-            h('p', ['d ', u('x'), ' f'])
+            h('p', ['d ', {type: 'x'}, ' f'])
           ])
         ])
       )
@@ -717,7 +726,7 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('main', [
               h('p', '  a  '),
               '  ',
@@ -727,7 +736,9 @@ test('rehype-minify-whitespace', async function (t) {
             ])
           ])
         ),
-      u('root', [h('main', [h('p', 'a'), h('xmp', '  1 < 3  '), h('p', 'b')])])
+      h(undefined, [
+        h('main', [h('p', 'a'), h('xmp', '  1 < 3  '), h('p', 'b')])
+      ])
     )
   })
 
@@ -736,7 +747,7 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('main', [
               h('p', '  a  '),
               '  ',
@@ -746,7 +757,7 @@ test('rehype-minify-whitespace', async function (t) {
             ])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('main', [h('p', 'a'), h('listing', '  1 < 3  '), h('p', 'b')])
       ])
     )
@@ -756,10 +767,8 @@ test('rehype-minify-whitespace', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(
-          u('root', [h('p', '  a  '), u('text', '  '), h('p', '  b  ')])
-        ),
-      u('root', [h('p', 'a'), h('p', 'b')])
+        .runSync(h(undefined, [h('p', '  a  '), '  ', h('p', '  b  ')])),
+      h(undefined, [h('p', 'a'), h('p', 'b')])
     )
   })
 
@@ -768,13 +777,9 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
-            h('p', '  a  '),
-            u('text', '  '),
-            h('plaintext', '  1 < 3  ')
-          ])
+          h(undefined, [h('p', '  a  '), '  ', h('plaintext', '  1 < 3  ')])
         ),
-      u('root', [h('p', 'a'), h('plaintext', '  1 < 3  ')])
+      h(undefined, [h('p', 'a'), h('plaintext', '  1 < 3  ')])
     )
   })
 
@@ -783,7 +788,7 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('main', [
               h('p', '  a  '),
               '  ',
@@ -793,7 +798,7 @@ test('rehype-minify-whitespace', async function (t) {
             ])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('main', [h('p', 'a'), h('listing', '  1 < 3  '), h('p', 'b')])
       ])
     )
@@ -804,7 +809,7 @@ test('rehype-minify-whitespace', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('main', [
               h('p', '  a  '),
               '  ',
@@ -814,7 +819,7 @@ test('rehype-minify-whitespace', async function (t) {
             ])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('main', [h('p', 'a'), h('listing', '  1 < 3  '), h('p', 'b')])
       ])
     )
@@ -827,7 +832,7 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('p', [
                 '  ',
                 h('nobr', '  Long   line   with   no   breaks  '),
@@ -835,7 +840,7 @@ test('rehype-minify-whitespace', async function (t) {
               ])
             ])
           ),
-        u('root', [h('p', [h('nobr', ' Long line with no breaks ')])])
+        h(undefined, [h('p', [h('nobr', ' Long line with no breaks ')])])
       )
     }
   )
@@ -847,9 +852,9 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [h('p', ['  a  ', h('textarea', '  b  '), '  c  '])])
+            h(undefined, [h('p', ['  a  ', h('textarea', '  b  '), '  c  '])])
           ),
-        u('root', [h('p', ['a ', h('textarea', '  b  '), ' c'])])
+        h(undefined, [h('p', ['a ', h('textarea', '  b  '), ' c'])])
       )
     }
   )
@@ -861,7 +866,7 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('main', [
                 h('p', '  a  '),
                 '  ',
@@ -871,7 +876,7 @@ test('rehype-minify-whitespace', async function (t) {
               ])
             ])
           ),
-        u('root', [
+        h(undefined, [
           h('main', [
             h('p', 'a'),
             h('pre', h('code', '  1 < 3  ')),
@@ -889,7 +894,7 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('main', [
                 h('p', '  a  '),
                 '  ',
@@ -899,7 +904,7 @@ test('rehype-minify-whitespace', async function (t) {
               ])
             ])
           ),
-        u('root', [
+        h(undefined, [
           h('main', [
             h('p', 'a'),
             h('pre', {wrap: true}, h('code', '  1 < 3  ')),
@@ -917,7 +922,7 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('main', [
                 '  ',
                 h('p', '  a  '),
@@ -942,7 +947,7 @@ test('rehype-minify-whitespace', async function (t) {
               ])
             ])
           ),
-        u('root', [
+        h(undefined, [
           h('main', [
             h('p', 'a'),
             h('table', [
@@ -963,11 +968,11 @@ test('rehype-minify-whitespace', async function (t) {
         rehype()
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('main', [' \u00A0 ', h('p', '  a \u00A0 '), ' \u00A0 '])
             ])
           ),
-        u('root', [h('main', ['\u00A0', h('p', 'a \u00A0'), '\u00A0'])])
+        h(undefined, [h('main', ['\u00A0', h('p', 'a \u00A0'), '\u00A0'])])
       )
     }
   )
@@ -976,8 +981,8 @@ test('rehype-minify-whitespace', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('script', ' // a \n b ')])),
-      u('root', [h('script', ' // a \n b ')])
+        .runSync(h(undefined, [h('script', ' // a \n b ')])),
+      h(undefined, [h('script', ' // a \n b ')])
     )
   })
 })

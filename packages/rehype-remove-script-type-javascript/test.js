@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-remove-script-type-javascript', async function (t) {
@@ -10,13 +9,12 @@ test('rehype-remove-script-type-javascript', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('script', {type: 'text/javascript'})])),
-      u('root', [
+        .runSync(h(undefined, [h('script', {type: 'text/javascript'})])),
+      h(undefined, [
         {
           type: 'element',
           tagName: 'script',
-          // To do: `undefined`
-          properties: {type: null},
+          properties: {type: undefined},
           children: []
         }
       ])
@@ -27,13 +25,12 @@ test('rehype-remove-script-type-javascript', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('script', {language: 'javascript'})])),
-      u('root', [
+        .runSync(h(undefined, [h('script', {language: 'javascript'})])),
+      h(undefined, [
         {
           type: 'element',
           tagName: 'script',
-          // To do: `undefined`
-          properties: {language: null},
+          properties: {language: undefined},
           children: []
         }
       ])
@@ -44,8 +41,8 @@ test('rehype-remove-script-type-javascript', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('script', {type: 'fooscript'})])),
-      u('root', [h('script', {type: 'fooscript'})])
+        .runSync(h(undefined, [h('script', {type: 'fooscript'})])),
+      h(undefined, [h('script', {type: 'fooscript'})])
     )
   })
 
@@ -53,8 +50,8 @@ test('rehype-remove-script-type-javascript', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('script', {language: 'fooscript'})])),
-      u('root', [h('script', {language: 'fooscript'})])
+        .runSync(h(undefined, [h('script', {language: 'fooscript'})])),
+      h(undefined, [h('script', {language: 'fooscript'})])
     )
   })
 
@@ -62,8 +59,8 @@ test('rehype-remove-script-type-javascript', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('script', {type: 'module'})])),
-      u('root', [h('script', {type: 'module'})])
+        .runSync(h(undefined, [h('script', {type: 'module'})])),
+      h(undefined, [h('script', {type: 'module'})])
     )
   })
 })

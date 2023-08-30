@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-prevent-favicon-request', async function (t) {
@@ -11,20 +10,17 @@ test('rehype-prevent-favicon-request', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
-            u('doctype', {name: 'html'}),
-            h('html', [h('head'), h('body')])
-          ])
+          h(undefined, [{type: 'doctype'}, h('html', [h('head'), h('body')])])
         ),
-      u('root', [
-        u('doctype', {name: 'html'}),
+      h(undefined, [
+        {type: 'doctype'},
         h('html', [
           h(
             'head',
             h('link', {
+              href: 'data:image/x-icon;,',
               rel: ['shortcut', 'icon'],
-              type: 'image/x-icon',
-              href: 'data:image/x-icon;,'
+              type: 'image/x-icon'
             })
           ),
           h('body')
@@ -38,25 +34,25 @@ test('rehype-prevent-favicon-request', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
-            u('doctype', {name: 'html'}),
+          h(undefined, [
+            {type: 'doctype'},
             h('html', [
               h('head', [
                 h('link', {
-                  rel: ['shortcut', 'icon'],
-                  href: '/example.ico'
+                  href: '/example.ico',
+                  rel: ['shortcut', 'icon']
                 })
               ])
             ])
           ])
         ),
-      u('root', [
-        u('doctype', {name: 'html'}),
+      h(undefined, [
+        {type: 'doctype'},
         h('html', [
           h('head', [
             h('link', {
-              rel: ['shortcut', 'icon'],
-              href: '/example.ico'
+              href: '/example.ico',
+              rel: ['shortcut', 'icon']
             })
           ])
         ])
@@ -69,30 +65,30 @@ test('rehype-prevent-favicon-request', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
-            u('doctype', {name: 'html'}),
+          h(undefined, [
+            {type: 'doctype'},
             h('html', [
               h('head', [
                 h('link', {
-                  rel: ['icon'],
-                  href: '/example.ico'
+                  href: '/example.ico',
+                  rel: ['icon']
                 })
               ])
             ])
           ])
         ),
-      u('root', [
-        u('doctype', {name: 'html'}),
+      h(undefined, [
+        {type: 'doctype'},
         h('html', [
           h('head', [
             h('link', {
-              rel: ['icon'],
-              href: '/example.ico'
+              href: '/example.ico',
+              rel: ['icon']
             }),
             h('link', {
+              href: 'data:image/x-icon;,',
               rel: ['shortcut', 'icon'],
-              type: 'image/x-icon',
-              href: 'data:image/x-icon;,'
+              type: 'image/x-icon'
             })
           ])
         ])
@@ -101,6 +97,9 @@ test('rehype-prevent-favicon-request', async function (t) {
   })
 
   await t.test('should do nothing without head', async function () {
-    assert.deepEqual(rehype().use(min).runSync(u('root', [])), u('root', []))
+    assert.deepEqual(
+      rehype().use(min).runSync(h(undefined, [])),
+      h(undefined, [])
+    )
   })
 })

@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-minify-style-attribute', async function (t) {
@@ -10,8 +9,8 @@ test('rehype-minify-style-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('i', {style: 'color: #ff0000;'})])),
-      u('root', [h('i', {style: 'color:red'})])
+        .runSync(h(undefined, [h('i', {style: 'color: #ff0000;'})])),
+      h(undefined, [h('i', {style: 'color:red'})])
     )
   })
 
@@ -20,7 +19,7 @@ test('rehype-minify-style-attribute', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             {
               type: 'element',
               tagName: 'i',
@@ -29,7 +28,7 @@ test('rehype-minify-style-attribute', async function (t) {
             }
           ])
         ),
-      u('root', [
+      h(undefined, [
         {
           type: 'element',
           tagName: 'i',
@@ -45,7 +44,7 @@ test('rehype-minify-style-attribute', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             {
               type: 'element',
               tagName: 'i',
@@ -54,7 +53,7 @@ test('rehype-minify-style-attribute', async function (t) {
             }
           ])
         ),
-      u('root', [
+      h(undefined, [
         {
           type: 'element',
           tagName: 'i',
@@ -69,8 +68,8 @@ test('rehype-minify-style-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('i', {style: ''})])),
-      u('root', [
+        .runSync(h(undefined, [h('i', {style: ''})])),
+      h(undefined, [
         {
           type: 'element',
           tagName: 'i',
@@ -85,8 +84,8 @@ test('rehype-minify-style-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('i', {style: '!important'})])),
-      u('root', [h('i', {style: '!important'})])
+        .runSync(h(undefined, [h('i', {style: '!important'})])),
+      h(undefined, [h('i', {style: '!important'})])
     )
   })
 
@@ -94,8 +93,8 @@ test('rehype-minify-style-attribute', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('i')])),
-      u('root', [h('i')])
+        .runSync(h(undefined, [h('i')])),
+      h(undefined, [h('i')])
     )
   })
 })

@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {isBodyOkLink} from './index.js'
 
@@ -65,21 +64,11 @@ test('isBodyOkLink', async function (t) {
     }
   )
 
-  await t.test(
-    'should be no for `link`s without `rel` or `itemProp` (2)',
-    async function () {
-      assert.equal(
-        isBodyOkLink(u('element', {tagName: 'link', properties: {}}, [])),
-        false
-      )
-    }
-  )
-
   await t.test('should be no for non-links', async function () {
     assert.equal(isBodyOkLink(h('p')), false)
   })
 
   await t.test('should be no for non-elements', async function () {
-    assert.equal(isBodyOkLink(u('text', 'foo')), false)
+    assert.equal(isBodyOkLink({type: 'text', value: 'foo'}), false)
   })
 })

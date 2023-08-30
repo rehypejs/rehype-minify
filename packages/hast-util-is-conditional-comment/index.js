@@ -18,12 +18,11 @@
  * ## Use
  *
  * ```js
- * import {u} from 'unist-builder'
  * import {isConditionalComment} from 'hast-util-is-conditional-comment'
  *
- * isConditionalComment(u('comment', '[if IE]>...<![endif]')) //=> true
- * isConditionalComment(u('comment', '<![endif]')) //=> true
- * isConditionalComment(u('comment', 'foo')) //=> false
+ * isConditionalComment(u({type: 'comment', value: '[if IE]>...<![endif]'})) //=> true
+ * isConditionalComment(u({type: 'comment', value: '<![endif]'})) //=> true
+ * isConditionalComment(u({type: 'comment', value: 'foo'})) //=> false
  * ```
  *
  * ## API
@@ -41,19 +40,4 @@
  * Whether a node is a conditional comment (`boolean`).
  */
 
-const re = /^\[if[ \t\f\n\r]+[^\]]+]|<!\[endif]$/
-
-/**
- * @typedef {import('hast').Root} Root
- * @typedef {Root|Root['children'][number]} Node
- */
-
-/**
- * Check if a node is a conditional comment.
- *
- * @param {Node} node
- * @returns {boolean}
- */
-export function isConditionalComment(node) {
-  return node && node.type === 'comment' && re.test(node.value)
-}
+export {isConditionalComment} from './lib/index.js'

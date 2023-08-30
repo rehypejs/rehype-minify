@@ -22,41 +22,4 @@
  *   <label for id=""></label>
  */
 
-/**
- * @typedef {import('hast').Root} Root
- */
-
-import {visit} from 'unist-util-visit'
-import {isElement} from 'hast-util-is-element'
-import {isEventHandler} from 'hast-util-is-event-handler'
-import {schema} from './schema.js'
-
-const own = {}.hasOwnProperty
-
-/**
- * Remove empty attributes, if possible.
- *
- * @type {import('unified').Plugin<Array<void>, Root>}
- */
-export default function rehypeRemoveEmptyAttribute() {
-  return (tree) => {
-    visit(tree, 'element', (node) => {
-      /** @type {string} */
-      let prop
-
-      for (prop in node.properties) {
-        if (own.call(node.properties, prop)) {
-          const value = node.properties[prop]
-
-          if (
-            (value === '' || (Array.isArray(value) && value.length === 0)) &&
-            (isEventHandler(prop) ||
-              (own.call(schema, prop) && isElement(node, schema[prop])))
-          ) {
-            node.properties[prop] = null
-          }
-        }
-      }
-    })
-  }
-}
+export {default} from './lib/index.js'

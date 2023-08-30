@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-minify-json-script', async function (t) {
@@ -11,7 +10,7 @@ test('rehype-minify-json-script', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h(
               'script',
               {type: 'application/ld+json'},
@@ -19,7 +18,9 @@ test('rehype-minify-json-script', async function (t) {
             )
           ])
         ),
-      u('root', [h('script', {type: 'application/ld+json'}, '{"@context":{}}')])
+      h(undefined, [
+        h('script', {type: 'application/ld+json'}, '{"@context":{}}')
+      ])
     )
   })
 
@@ -28,11 +29,11 @@ test('rehype-minify-json-script', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('script', {type: 'application/ld+json'}, '{\n\t"@context": {')
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('script', {type: 'application/ld+json'}, '{\n\t"@context": {')
       ])
     )
@@ -43,9 +44,9 @@ test('rehype-minify-json-script', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [h('script', {type: 'foo'}, '{\n\t"@context": {}\n\t}')])
+          h(undefined, [h('script', {type: 'foo'}, '{\n\t"@context": {}\n\t}')])
         ),
-      u('root', [h('script', {type: 'foo'}, '{\n\t"@context": {}\n\t}')])
+      h(undefined, [h('script', {type: 'foo'}, '{\n\t"@context": {}\n\t}')])
     )
   })
 })

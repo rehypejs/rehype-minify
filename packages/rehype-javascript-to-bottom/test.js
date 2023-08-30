@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-javascript-to-bottom', async function (t) {
@@ -11,7 +10,7 @@ test('rehype-javascript-to-bottom', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('head', [
               h('script', {src: 'index.js'}),
               h('script', 'alert(1);'),
@@ -20,7 +19,7 @@ test('rehype-javascript-to-bottom', async function (t) {
             h('body', [])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('head', [h('script', {type: 'fooscript', src: 'index.js'})]),
         h('body', [h('script', {src: 'index.js'}), h('script', 'alert(1);')])
       ])
@@ -36,7 +35,7 @@ test('rehype-javascript-to-bottom', async function (t) {
           }
         })
         .runSync(
-          u('root', [
+          h(undefined, [
             h('head', [
               h('script', {src: 'index.js'}),
               h('script', {src: 'foo.js'})
@@ -44,7 +43,7 @@ test('rehype-javascript-to-bottom', async function (t) {
             h('body', [])
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('head', [h('script', {src: 'foo.js'})]),
         h('body', [h('script', {src: 'index.js'})])
       ])

@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-remove-style-type-css', async function (t) {
@@ -11,13 +10,13 @@ test('rehype-remove-style-type-css', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [h('link', {rel: ['stylesheet'], type: 'text/css'})])
+          h(undefined, [h('link', {rel: ['stylesheet'], type: 'text/css'})])
         ),
-      u('root', [
+      h(undefined, [
         {
           type: 'element',
           tagName: 'link',
-          properties: {rel: ['stylesheet'], type: null},
+          properties: {rel: ['stylesheet'], type: undefined},
           children: []
         }
       ])
@@ -28,12 +27,12 @@ test('rehype-remove-style-type-css', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('style', {type: 'text/css'})])),
-      u('root', [
+        .runSync(h(undefined, [h('style', {type: 'text/css'})])),
+      h(undefined, [
         {
           type: 'element',
           tagName: 'style',
-          properties: {type: null},
+          properties: {type: undefined},
           children: []
         }
       ])
@@ -44,8 +43,8 @@ test('rehype-remove-style-type-css', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('link', {type: 'foostyle'})])),
-      u('root', [h('link', {type: 'foostyle'})])
+        .runSync(h(undefined, [h('link', {type: 'foostyle'})])),
+      h(undefined, [h('link', {type: 'foostyle'})])
     )
   })
 
@@ -53,8 +52,8 @@ test('rehype-remove-style-type-css', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('style', {type: 'foostyle'})])),
-      u('root', [h('style', {type: 'foostyle'})])
+        .runSync(h(undefined, [h('style', {type: 'foostyle'})])),
+      h(undefined, [h('style', {type: 'foostyle'})])
     )
   })
 })

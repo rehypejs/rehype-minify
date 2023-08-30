@@ -27,30 +27,4 @@
  *   <script type="module"></script>
  */
 
-/**
- * @typedef {import('hast').Root} Root
- */
-
-import {visit} from 'unist-util-visit'
-import {isJavaScript} from 'hast-util-is-javascript'
-
-/**
- * Remove `type` and `language` on JavaScript scripts.
- *
- * @type {import('unified').Plugin<Array<void>, Root>}
- */
-export default function rehypeRemoveScriptTypeJavaScript() {
-  return (tree) => {
-    visit(tree, 'element', (node) => {
-      if (isJavaScript(node) && node.properties) {
-        if ('type' in node.properties) {
-          node.properties.type = null
-        }
-
-        if ('language' in node.properties) {
-          node.properties.language = null
-        }
-      }
-    })
-  }
-}
+export {default} from './lib/index.js'

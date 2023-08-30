@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {isJavaScript} from './index.js'
 
@@ -40,13 +39,8 @@ test('hast-util-is-javascript', async function (t) {
     assert.ok(isJavaScript(h('script', {language: 'javascript1.5'})))
   })
 
-  await t.test('should be no for nothing', async function () {
-    // @ts-expect-error: not enough arguments.
-    assert.equal(isJavaScript(), false)
-  })
-
   await t.test('should be no for other nodes', async function () {
-    assert.equal(isJavaScript(u('root', [])), false)
+    assert.equal(isJavaScript({type: 'root', children: []}), false)
   })
 
   await t.test('should be no for other elements', async function () {

@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-minify-meta-color', async function (t) {
@@ -11,9 +10,9 @@ test('rehype-minify-meta-color', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [h('meta', {name: 'theme-color', content: '#ff0000'})])
+          h(undefined, [h('meta', {name: 'theme-color', content: '#ff0000'})])
         ),
-      u('root', [h('meta', {name: 'theme-color', content: 'red'})])
+      h(undefined, [h('meta', {name: 'theme-color', content: 'red'})])
     )
   })
 
@@ -22,11 +21,13 @@ test('rehype-minify-meta-color', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('meta', {name: 'msapplication-TileColor', content: '#00ff00'})
           ])
         ),
-      u('root', [h('meta', {name: 'msapplication-TileColor', content: '#0f0'})])
+      h(undefined, [
+        h('meta', {name: 'msapplication-TileColor', content: '#0f0'})
+      ])
     )
   })
 
@@ -34,8 +35,10 @@ test('rehype-minify-meta-color', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('meta', {name: 'theme-color', content: true})])),
-      u('root', [h('meta', {name: 'theme-color', content: true})])
+        .runSync(
+          h(undefined, [h('meta', {name: 'theme-color', content: true})])
+        ),
+      h(undefined, [h('meta', {name: 'theme-color', content: true})])
     )
   })
 
@@ -43,8 +46,8 @@ test('rehype-minify-meta-color', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('meta', {name: 'theme-color'})])),
-      u('root', [h('meta', {name: 'theme-color'})])
+        .runSync(h(undefined, [h('meta', {name: 'theme-color'})])),
+      h(undefined, [h('meta', {name: 'theme-color'})])
     )
   })
 
@@ -52,8 +55,8 @@ test('rehype-minify-meta-color', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('meta', {name: 'theme-color', content: ''})])),
-      u('root', [h('meta', {name: 'theme-color', content: ''})])
+        .runSync(h(undefined, [h('meta', {name: 'theme-color', content: ''})])),
+      h(undefined, [h('meta', {name: 'theme-color', content: ''})])
     )
   })
 
@@ -61,8 +64,10 @@ test('rehype-minify-meta-color', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('meta', {name: 'theme-color', content: '#f'})])),
-      u('root', [h('meta', {name: 'theme-color', content: '#f'})])
+        .runSync(
+          h(undefined, [h('meta', {name: 'theme-color', content: '#f'})])
+        ),
+      h(undefined, [h('meta', {name: 'theme-color', content: '#f'})])
     )
   })
 
@@ -71,9 +76,9 @@ test('rehype-minify-meta-color', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [h('meta', {name: 'theme-color', content: 'unknown'})])
+          h(undefined, [h('meta', {name: 'theme-color', content: 'unknown'})])
         ),
-      u('root', [h('meta', {name: 'theme-color', content: 'unknown'})])
+      h(undefined, [h('meta', {name: 'theme-color', content: 'unknown'})])
     )
   })
 })

@@ -31,32 +31,4 @@
  *   </script>
  */
 
-import {visit} from 'unist-util-visit'
-import {fromString} from 'hast-util-from-string'
-import {toString} from 'hast-util-to-string'
-import {isElement} from 'hast-util-is-element'
-
-/**
- * @typedef {import('hast').Root} Root
- */
-
-/**
- * Minify `script` elements with a JSON body.
- *
- * @type {import('unified').Plugin<Array<void>, Root>}
- */
-export default function rehypeMinifyJsonScript() {
-  return (tree) => {
-    visit(tree, 'element', (node) => {
-      if (
-        isElement(node, 'script') &&
-        node.properties &&
-        node.properties.type === 'application/ld+json'
-      ) {
-        try {
-          fromString(node, JSON.stringify(JSON.parse(toString(node))))
-        } catch {}
-      }
-    })
-  }
-}
+export {default} from './lib/index.js'

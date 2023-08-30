@@ -1,13 +1,8 @@
 /**
  * @typedef {import('trough').Callback} Next
- * @typedef {import('vfile').VFile} VFile
- *
- * @typedef Result
- * @property {string} type
- * @property {number} outputSize
- * @property {number} gzipSize
- * @property {string} rawWin
- * @property {string} gzipWin
+ */
+
+/**
  *
  * @typedef CleanResult
  * @property {string} type
@@ -28,7 +23,7 @@
  *
  * @typedef Raw
  * @property {ProcessFn} processFn
- * @property {'original'|'html-minifier'|'rehype-minify'} type
+ * @property {'html-minifier' | 'original' | 'rehype-minify'} type
  * @property {string} [input]
  * @property {number} [inputSize]
  * @property {string} [output]
@@ -39,21 +34,29 @@
  * @property {string} [rawWin]
  * @property {string} [gzipWin]
  * @property {string} name
+ *
+ * @typedef Result
+ * @property {string} type
+ * @property {number} outputSize
+ * @property {number} gzipSize
+ * @property {string} rawWin
+ * @property {string} gzipWin
  */
 
 import fs from 'node:fs'
 import path from 'node:path'
 import zlib from 'node:zlib'
-import {fetch} from 'undici'
 import {bail} from 'bail'
-import {unified} from 'unified'
+import htmlMinifier from 'html-minifier'
 import rehypeParse from 'rehype-parse'
 import rehypeStringify from 'rehype-stringify'
-import {toVFile, read, write} from 'to-vfile'
+import {read, write} from 'to-vfile'
+import {VFile} from 'vfile'
 import {trough} from 'trough'
-import htmlMinifier from 'html-minifier'
-import rehypePresetMinify from '../packages/rehype-preset-minify/index.js'
+import {fetch} from 'undici'
+import {unified} from 'unified'
 import rehypeMinifyDoctype from '../packages/rehype-minify-doctype/index.js'
+import rehypePresetMinify from '../packages/rehype-preset-minify/index.js'
 
 const cache = 'benchmark-cache'
 
@@ -67,7 +70,7 @@ const benchmarks = trough()
      * @param {Record<string, string>} ctx
      * @param {Next} next
      */
-    (ctx, next) => {
+    function (ctx, next) {
       /** @type {Array<Datum>} */
       const data = []
       const keys = Object.keys(ctx)
@@ -83,7 +86,7 @@ const benchmarks = trough()
            * @param {Error?} error
            * @param {{name: string, url: string, file: VFile, original: Result, results: Array<Result>}} results
            */
-          (error, results) => {
+          function (error, results) {
             count++
 
             if (error) {
@@ -92,19 +95,21 @@ const benchmarks = trough()
               data.push({
                 name: results.name,
                 url: results.url,
-                results: [results.original]
-                  .concat(results.results)
-                  .map((d) => ({
-                    type: d.type,
-                    raw: d.outputSize,
-                    gzip: d.gzipSize,
-                    rawWin: d.rawWin,
-                    gzipWin: d.gzipWin
-                  }))
+                results: [results.original, ...results.results].map(
+                  function (d) {
+                    return {
+                      type: d.type,
+                      raw: d.outputSize,
+                      gzip: d.gzipSize,
+                      rawWin: d.rawWin,
+                      gzipWin: d.gzipWin
+                    }
+                  }
+                )
               })
 
               if (count === keys.length) {
-                next(null, data)
+                next(undefined, data)
               }
             }
           }
@@ -117,12 +122,14 @@ const benchmarks = trough()
      * @param {Array<Datum>} data
      * @param {Next} next
      */
-    (data, next) => {
-      data.sort((a, b) => a.name.localeCompare(b.name))
+    function (data, next) {
+      data.sort(function (a, b) {
+        return a.name.localeCompare(b.name)
+      })
 
       fs.writeFile(
         path.join('script', 'benchmark-results.json'),
-        JSON.stringify(data, null, 2) + '\n',
+        JSON.stringify(data, undefined, 2) + '\n',
         next
       )
     }
@@ -134,9 +141,9 @@ const benchmark = trough()
      * @param {{name: string, url: string}} ctx
      * @param {Next} next
      */
-    (ctx, next) => {
-      fs.mkdir(path.join(cache, ctx.name), (error) => {
-        next(error && error.code === 'EEXIST' ? null : error)
+    function (ctx, next) {
+      fs.mkdir(path.join(cache, ctx.name), function (error) {
+        return next(error && error.code === 'EEXIST' ? undefined : error)
       })
     }
   )
@@ -145,13 +152,13 @@ const benchmark = trough()
      * @param {{name: string, url: string, file?: VFile}} ctx
      * @param {Next} next
      */
-    (ctx, next) => {
-      read(path.join(cache, ctx.name, 'index.html'), (error, file) => {
+    function (ctx, next) {
+      read(path.join(cache, ctx.name, 'index.html'), function (error, file) {
         if (file) {
           ctx.file = file
           next()
         } else {
-          next(error && error.code === 'ENOENT' ? null : error)
+          next(error && error.code === 'ENOENT' ? undefined : error)
         }
       })
     }
@@ -161,14 +168,14 @@ const benchmark = trough()
      * @param {{name: string, url: string, file: VFile}} ctx
      * @param {Next} next
      */
-    (ctx, next) => {
+    function (ctx, next) {
       const url = ctx.url
 
       if (ctx.file) {
         next()
       } else {
         fetch(url)
-          .then((response) => {
+          .then(function (response) {
             if (response.status !== 200) {
               throw new Error(
                 'Could not get `' + url + '` (' + response.status + ')'
@@ -177,14 +184,14 @@ const benchmark = trough()
 
             return response.text()
           })
-          .then((value) => {
+          .then(function (value) {
             const fp = path.join(cache, ctx.name, 'index.html')
 
             if (value.length < 1024) {
               next(new Error('Empty response from ' + url))
             } else {
-              ctx.file = toVFile({path: fp, value})
-              write(ctx.file, (error) => {
+              ctx.file = new VFile({path: fp, value})
+              write(ctx.file, function (error) {
                 next(error)
               })
             }
@@ -200,7 +207,7 @@ const processorPipeline = trough()
      * @param {Raw} ctx
      * @param {Next} next
      */
-    (ctx, next) => {
+    function (ctx, next) {
       if (!ctx.input) throw new Error('Expected `input`')
 
       const output = ctx.processFn(ctx.input, ctx)
@@ -211,7 +218,7 @@ const processorPipeline = trough()
         next()
       } else {
         const fp = path.join(cache, ctx.name, ctx.type + '.html')
-        write({path: fp, value: output}, (error) => {
+        write({path: fp, value: output}, function (error) {
           next(error)
         })
       }
@@ -222,9 +229,9 @@ const processorPipeline = trough()
      * @param {Raw} ctx
      * @param {Next} next
      */
-    (ctx, next) => {
+    function (ctx, next) {
       if (!ctx.output) throw new Error('Expected output')
-      zlib.gzip(ctx.output, (error, buf) => {
+      zlib.gzip(ctx.output, function (error, buf) {
         ctx.gzipped = buf
         next(error)
       })
@@ -234,7 +241,7 @@ const processorPipeline = trough()
     /**
      * @param {Raw} ctx
      */
-    (ctx) => {
+    function (ctx) {
       if (!ctx.input) throw new Error('Expected `input`')
       if (!ctx.gzipped) throw new Error('Expected `gzipped`')
       if (!ctx.output) throw new Error('Expected `output`')
@@ -311,8 +318,6 @@ function test(ctx, next) {
     {
       name: ctx.name,
       processFn(buf) {
-        // To do, fix
-        // type-coverage:ignore-next-line
         const processor = unified()
           .use(rehypeParse)
           .use(rehypePresetMinify)
@@ -392,7 +397,7 @@ function test(ctx, next) {
     /**
      * @param {Error?} error
      */
-    (error) => {
+    function (error) {
       if (error) {
         next(error)
         return
@@ -416,7 +421,7 @@ function test(ctx, next) {
           /**
            * @param {Error?} error
            */
-          (error) => {
+          function (error) {
             count++
 
             if (error || count === results.length) {

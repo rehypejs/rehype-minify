@@ -101,7 +101,6 @@
     "typescript": "^5.0.0",
     "undici": "^5.0.0",
     "unified": "^11.0.0",
-    "unist-builder": "^4.0.0",
     "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.0",
     "vfile-find-down": "^7.0.0",
@@ -114,7 +113,7 @@
     "build": "tsc --build --clean && tsc --build && type-coverage",
     "format": "remark . --frail --output --quiet && prettier . --log-level warn --write && xo --fix",
     "prepack": "npm run build && npm run format",
-    "test": "npm run generate && npm run build && npm run format && npm run test-coverage",
+    "test": "npm run build && npm run generate && npm run format && npm run test-coverage",
     "test-api": "node --conditions development test/index.js",
     "test-coverage": "c8 --100 --check-coverage --reporter lcov npm run test-api"
   },

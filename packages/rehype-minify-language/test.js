@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-minify-language', async function (t) {
@@ -10,8 +9,8 @@ test('rehype-minify-language', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('span', {lang: 'en-US'})])),
-      u('root', [h('span', {lang: 'en'})])
+        .runSync(h(undefined, [h('span', {lang: 'en-US'})])),
+      h(undefined, [h('span', {lang: 'en'})])
     )
   })
 
@@ -19,8 +18,8 @@ test('rehype-minify-language', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('span', {xmlLang: '!'})])),
-      u('root', [h('span', {xmlLang: '!'})])
+        .runSync(h(undefined, [h('span', {xmlLang: '!'})])),
+      h(undefined, [h('span', {xmlLang: '!'})])
     )
   })
 })

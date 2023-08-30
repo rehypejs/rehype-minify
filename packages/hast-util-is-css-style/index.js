@@ -40,27 +40,4 @@
  * Whether a node is a `<style>` that references CSS (`boolean`).
  */
 
-/**
- * @typedef {import('hast').Root} Root
- * @typedef {Root|Root['children'][number]} Node
- */
-
-/**
- * Check whether a hast node is a `<style>` that contains CSS.
- *
- * @param {Node} node
- * @returns {boolean}
- */
-export function isCssStyle(node) {
-  if (!node || !('tagName' in node) || node.tagName !== 'style') {
-    return false
-  }
-
-  const value = node.properties.type
-
-  return (
-    value === undefined ||
-    value === null ||
-    String(value).trim().toLowerCase() === 'text/css'
-  )
-}
+export {isCssStyle} from './lib/index.js'

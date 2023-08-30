@@ -35,50 +35,7 @@
  */
 
 /**
- * @typedef {import('hast').Nodes} Nodes
- * @typedef {import('hast').Root} Root
- * @typedef {import('unist').Node} Node
- *
- * @typedef Options
- *   Configuration.
- * @property {boolean} [removeConditional=false]
- *   Conditional comments are also removed when configured with `force: true`
- *   The default is to leave them.
+ * @typedef {import('./lib/index.js').Options} Options
  */
 
-import {filter} from 'unist-util-filter'
-import {isConditionalComment} from 'hast-util-is-conditional-comment'
-
-/**
- * Remove comments (except conditional comments).
- *
- * When configured with `force: true` (default: `false`), conditional comments
- * are also removed.
- *
- * @type {import('unified').Plugin<[Options?]|Array<void>, Root>}
- */
-export default function rehypeRemoveComments(options = {}) {
-  const force = options.removeConditional
-
-  return (tree) => {
-    return filter(tree, {cascade: false}, force ? hard : soft)
-  }
-}
-
-/**
- * @param {Node} value
- * @returns {boolean}
- */
-function soft(value) {
-  const node = /** @type {Nodes} */ (value)
-  return hard(node) || isConditionalComment(node)
-}
-
-/**
- * @param {Node} value
- * @returns {boolean}
- */
-function hard(value) {
-  const node = /** @type {Nodes} */ (value)
-  return node.type !== 'comment'
-}
+export {default} from './lib/index.js'

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import {h} from 'hastscript'
 import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import min from './index.js'
 
 test('rehype-minify-doctype', async function (t) {
@@ -10,16 +10,19 @@ test('rehype-minify-doctype', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
-            u('doctype', {
+          // @ts-expect-error: fields are no longer valid.
+          h(undefined, [
+            {
+              type: 'doctype',
               name: 'HTML',
               public: '-//W3C//DTD HTML 4.01//EN',
               system: 'http://www.w3.org/TR/html4/strict.dtd'
-            })
+            }
           ])
         ),
-      u('root', [
-        u('doctype', {name: 'HTML', public: undefined, system: undefined})
+      // @ts-expect-error: fields are no longer valid.
+      h(undefined, [
+        {type: 'doctype', name: 'HTML', public: undefined, system: undefined}
       ])
     )
   })
@@ -28,8 +31,10 @@ test('rehype-minify-doctype', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [u('doctype', {name: 'html'})])),
-      u('root', [u('doctype', {name: 'html'})])
+        // @ts-expect-error: fields are no longer valid.
+        .runSync(h(undefined, [{type: 'doctype', name: 'html'}])),
+      // @ts-expect-error: fields are no longer valid.
+      h(undefined, [{type: 'doctype', name: 'html'}])
     )
   })
 })

@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-minify-meta-content', async function (t) {
@@ -11,11 +10,11 @@ test('rehype-minify-meta-content', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('meta', {name: 'keywords', content: 'foo, bar baz, qux'})
           ])
         ),
-      u('root', [h('meta', {name: 'keywords', content: 'foo,bar baz,qux'})])
+      h(undefined, [h('meta', {name: 'keywords', content: 'foo,bar baz,qux'})])
     )
   })
 
@@ -24,7 +23,7 @@ test('rehype-minify-meta-content', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('meta', {
               name: 'viewport',
               content:
@@ -32,7 +31,7 @@ test('rehype-minify-meta-content', async function (t) {
             })
           ])
         ),
-      u('root', [
+      h(undefined, [
         h('meta', {
           name: 'viewport',
           content: 'width=device-width,initial-scale=1'
@@ -45,8 +44,8 @@ test('rehype-minify-meta-content', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('meta', {name: 'viewport', content: true})])),
-      u('root', [h('meta', {name: 'viewport', content: true})])
+        .runSync(h(undefined, [h('meta', {name: 'viewport', content: true})])),
+      h(undefined, [h('meta', {name: 'viewport', content: true})])
     )
   })
 
@@ -54,8 +53,8 @@ test('rehype-minify-meta-content', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('meta')])),
-      u('root', [h('meta')])
+        .runSync(h(undefined, [h('meta')])),
+      h(undefined, [h('meta')])
     )
   })
 })

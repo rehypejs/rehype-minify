@@ -1,6 +1,7 @@
-/** @type {Record<string, string|Array<string>|null>} */
+/** @type {Record<string, Array<string> | string | null>} */
 export const schema = {
-  accept: 'input',
+  acceptCharset: 'form',
+  accessKey: null,
   className: null,
   dropzone: null,
   htmlFor: 'output',
@@ -8,8 +9,6 @@ export const schema = {
   itemProp: null,
   itemRef: null,
   itemType: null,
-  ping: ['a', 'area'],
-  rel: ['a', 'area', 'link'],
   sandbox: 'iframe',
   sizes: 'link'
 }

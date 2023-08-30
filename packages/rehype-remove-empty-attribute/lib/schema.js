@@ -1,4 +1,4 @@
-/** @type {Record<string, string|Array<string>|null>} */
+/** @type {Record<string, Array<string> | string | null>} */
 export const schema = {
   abbr: 'th',
   accept: 'input',

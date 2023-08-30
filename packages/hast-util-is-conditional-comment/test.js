@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {isConditionalComment} from './index.js'
 
@@ -22,16 +21,15 @@ test('hast-util-is-conditional-comment', async function (t) {
     let index = -1
 
     while (++index < fixtures.length) {
-      assert.equal(isConditionalComment(u('comment', fixtures[index])), true)
+      assert.equal(
+        isConditionalComment({type: 'comment', value: fixtures[index]}),
+        true
+      )
     }
   })
 
   await t.test('should be no for other comments', async function () {
-    assert.equal(
-      // @ts-expect-error: incorrect node.
-      isConditionalComment(u('comments', 'foo')),
-      false
-    )
+    assert.equal(isConditionalComment({type: 'comment', value: 'foo'}), false)
   })
 
   await t.test('should be no for elements', async function () {
@@ -39,6 +37,6 @@ test('hast-util-is-conditional-comment', async function (t) {
   })
 
   await t.test('should be no for texts', async function () {
-    assert.equal(isConditionalComment(u('text', 'foo')), false)
+    assert.equal(isConditionalComment({type: 'text', value: 'foo'}), false)
   })
 })

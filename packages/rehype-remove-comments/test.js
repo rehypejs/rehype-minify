@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-remove-comments', async function (t) {
@@ -10,8 +9,8 @@ test('rehype-remove-comments', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('div', [{type: 'comment', value: 'foo'}])])),
-      u('root', [h('div')])
+        .runSync(h(undefined, [h('div', [{type: 'comment', value: 'foo'}])])),
+      h(undefined, [h('div')])
     )
   })
 
@@ -20,11 +19,11 @@ test('rehype-remove-comments', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('div', [{type: 'comment', value: '[if IE]>…<![endif]'}])
           ])
         ),
-      u('root', [h('div', [{type: 'comment', value: '[if IE]>…<![endif]'}])])
+      h(undefined, [h('div', [{type: 'comment', value: '[if IE]>…<![endif]'}])])
     )
   })
 
@@ -35,11 +34,11 @@ test('rehype-remove-comments', async function (t) {
         rehype()
           .use(min, {removeConditional: true})
           .runSync(
-            u('root', [
+            h(undefined, [
               h('div', [{type: 'comment', value: '[if IE]>…<![endif]'}])
             ])
           ),
-        u('root', [h('div')])
+        h(undefined, [h('div')])
       )
     }
   )

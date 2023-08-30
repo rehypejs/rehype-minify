@@ -8,7 +8,7 @@ import {trimTrailingLines} from 'trim-trailing-lines'
 
 const exec = promisify(execCallback)
 
-test('cli', async function (t) {
+test('rehype-preset-minify (cli)', async function (t) {
   await t.test('should minify from the CLI', async function () {
     const inputUrl = new URL('fixtures/small/input.html', import.meta.url)
     const outputUrl = new URL('fixtures/small/output.html', import.meta.url)

@@ -68,12 +68,11 @@ In browsers with [`esm.sh`][esm-sh]:
 ## Use
 
 ```js
-import {u} from 'unist-builder'
 import {isConditionalComment} from 'hast-util-is-conditional-comment'
 
-isConditionalComment(u('comment', '[if IE]>...<![endif]')) //=> true
-isConditionalComment(u('comment', '<![endif]')) //=> true
-isConditionalComment(u('comment', 'foo')) //=> false
+isConditionalComment(u({type: 'comment', value: '[if IE]>...<![endif]'})) //=> true
+isConditionalComment(u({type: 'comment', value: '<![endif]'})) //=> true
+isConditionalComment(u({type: 'comment', value: 'foo'})) //=> false
 ```
 
 ## API

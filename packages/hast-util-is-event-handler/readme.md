@@ -88,7 +88,7 @@ Returns `true` when starting with `'on'` and its `length` is `5` or more.
 
 ###### Parameters
 
-*   `prop` (`string`) — attribute name
+*   `prop` (`string`) — property name
 
 ###### Returns
 

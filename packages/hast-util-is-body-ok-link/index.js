@@ -41,43 +41,4 @@
  * Whether a node is a “body OK” link (`boolean`).
  */
 
-/**
- * @typedef {import('hast').Root} Root
- * @typedef {Root|Root['children'][number]} Node
- */
-
-import {isElement} from 'hast-util-is-element'
-import {hasProperty} from 'hast-util-has-property'
-
-const list = new Set(['pingback', 'prefetch', 'stylesheet'])
-
-/**
- * Checks whether a node is a “body OK” link.
- *
- * @param {Node} node
- * @returns {boolean}
- */
-export function isBodyOkLink(node) {
-  if (!isElement(node, 'link')) {
-    return false
-  }
-
-  if (hasProperty(node, 'itemProp')) {
-    return true
-  }
-
-  const rel = node.properties.rel || []
-  let index = -1
-
-  if (!Array.isArray(rel) || rel.length === 0) {
-    return false
-  }
-
-  while (++index < rel.length) {
-    if (!list.has(String(rel[index]))) {
-      return false
-    }
-  }
-
-  return true
-}
+export {isBodyOkLink} from './lib/index.js'

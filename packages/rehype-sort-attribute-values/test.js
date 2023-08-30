@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-sort-attribute-values', async function (t) {
@@ -10,8 +9,10 @@ test('rehype-sort-attribute-values', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('#foo.qux.quux.bar.foo.baz', {itemProp: true})])),
-      u('root', [h('#foo.bar.baz.foo.quux.qux', {itemProp: true})])
+        .runSync(
+          h(undefined, [h('#foo.qux.quux.bar.foo.baz', {itemProp: true})])
+        ),
+      h(undefined, [h('#foo.bar.baz.foo.quux.qux', {itemProp: true})])
     )
   })
 
@@ -21,11 +22,13 @@ test('rehype-sort-attribute-values', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('.foo', [h('.bar.foo'), h('.quux'), h('.qux.baz.bar.foo')])
           ])
         ),
-      u('root', [h('.foo', [h('.foo.bar'), h('.quux'), h('.foo.bar.baz.qux')])])
+      h(undefined, [
+        h('.foo', [h('.foo.bar'), h('.quux'), h('.foo.bar.baz.qux')])
+      ])
     )
   })
 
@@ -33,8 +36,8 @@ test('rehype-sort-attribute-values', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('.foobar', [h('.foo.foobar')])])),
-      u('root', [h('.foobar', [h('.foobar.foo')])])
+        .runSync(h(undefined, [h('.foobar', [h('.foo.foobar')])])),
+      h(undefined, [h('.foobar', [h('.foobar.foo')])])
     )
   })
 
@@ -42,8 +45,8 @@ test('rehype-sort-attribute-values', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('.foo.foo')])),
-      u('root', [h('.foo.foo')])
+        .runSync(h(undefined, [h('.foo.foo')])),
+      h(undefined, [h('.foo.foo')])
     )
   })
 
@@ -51,8 +54,8 @@ test('rehype-sort-attribute-values', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('.foo.foob')])),
-      u('root', [h('.foo.foob')])
+        .runSync(h(undefined, [h('.foo.foob')])),
+      h(undefined, [h('.foo.foob')])
     )
   })
 
@@ -60,8 +63,8 @@ test('rehype-sort-attribute-values', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('.foob.foo')])),
-      u('root', [h('.foo.foob')])
+        .runSync(h(undefined, [h('.foob.foo')])),
+      h(undefined, [h('.foo.foob')])
     )
   })
 
@@ -69,8 +72,8 @@ test('rehype-sort-attribute-values', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('.foob.fooa')])),
-      u('root', [h('.fooa.foob')])
+        .runSync(h(undefined, [h('.foob.fooa')])),
+      h(undefined, [h('.fooa.foob')])
     )
   })
 })

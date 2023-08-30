@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-normalize-attribute-value-case', async function (t) {
@@ -10,8 +9,8 @@ test('rehype-normalize-attribute-value-case', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('form', {id: 'FOO', method: 'GET'})])),
-      u('root', [h('form', {id: 'FOO', method: 'get'})])
+        .runSync(h(undefined, [h('form', {id: 'FOO', method: 'GET'})])),
+      h(undefined, [h('form', {id: 'FOO', method: 'get'})])
     )
   })
 
@@ -19,8 +18,8 @@ test('rehype-normalize-attribute-value-case', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('form', {method: true})])),
-      u('root', [h('form', {method: true})])
+        .runSync(h(undefined, [h('form', {method: true})])),
+      h(undefined, [h('form', {method: true})])
     )
   })
 
@@ -28,8 +27,8 @@ test('rehype-normalize-attribute-value-case', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('form', {acceptCharset: ['UTF8', 'UTF-8']})])),
-      u('root', [h('form', {acceptCharset: ['utf8', 'utf-8']})])
+        .runSync(h(undefined, [h('form', {acceptCharset: ['UTF8', 'UTF-8']})])),
+      h(undefined, [h('form', {acceptCharset: ['utf8', 'utf-8']})])
     )
   })
 })

@@ -5,8 +5,8 @@
 import fs from 'node:fs/promises'
 import {relative} from 'node:path'
 import {isHidden} from 'is-hidden'
-import {compareFile} from 'vfile-sort'
 import {reporter} from 'vfile-reporter'
+import {compareFile} from 'vfile-sort'
 import {read, write} from 'to-vfile'
 import {pipelinePackage} from './pipeline-package.js'
 import {pipelineRoot} from './pipeline-root.js'
@@ -21,21 +21,22 @@ const ancestorPackage = JSON.parse(
 
 let packages = await fs.readdir(packagesFolder)
 
-packages = packages.filter((d) => !isHidden(d))
+packages = packages.filter(function (d) {
+  return !isHidden(d)
+})
 
-const plugins = packages.filter(
-  (name) =>
-    name.indexOf('rehype-') === 0 && name.indexOf('rehype-preset-') !== 0
-)
+const plugins = packages.filter(function (name) {
+  return name.indexOf('rehype-') === 0 && name.indexOf('rehype-preset-') !== 0
+})
 
 const results = await Promise.all(
   packages.map(function (name) {
     return pipelinePackage({
       ancestor,
       ancestorPackage,
-      packagesFolder,
-      packageFolder: new URL(name + '/', packagesFolder),
       name,
+      packageFolder: new URL(name + '/', packagesFolder),
+      packagesFolder,
       plugins
     })
   })
@@ -48,7 +49,9 @@ files.push(...(await pipelineRoot(ancestor, files)))
 // Generate info in main readme.
 
 // Write files.
-const writable = files.filter((d) => d.data.changed)
+const writable = files.filter(function (d) {
+  return d.data.changed
+})
 
 await Promise.all(
   writable.map(function (file) {

@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
 import {isCssLink} from './index.js'
 
@@ -67,22 +66,11 @@ test('hast-util-is-css-link', async function (t) {
     assert.equal(isCssLink(h('link')), false)
   })
 
-  await t.test('should be no for `link`s without `rel`', async function () {
-    assert.equal(isCssLink(h('link', {rel: null})), false)
-  })
-
-  await t.test('should be no for `link`s without `rel`', async function () {
-    assert.equal(
-      isCssLink(u('element', {tagName: 'link', properties: {}}, [])),
-      false
-    )
-  })
-
   await t.test('should be no for non-links', async function () {
     assert.equal(isCssLink(h('p')), false)
   })
 
   await t.test('should be no for non-elements', async function () {
-    assert.equal(isCssLink(u('text', 'foo')), false)
+    assert.equal(isCssLink({type: 'text', value: 'foo'}), false)
   })
 })

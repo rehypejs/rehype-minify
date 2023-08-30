@@ -25,8 +25,11 @@ import {read} from 'to-vfile'
 
 /**
  * @param {URL} ancestor
+ *   URL to the root of the repository.
  * @param {Array<VFile>} files
+ *   All files.
  * @returns {Promise<Array<VFile>>}
+ *   More files.
  */
 export async function pipelineRoot(ancestor, files) {
   // Gather which plugins are used or not in the preset.
@@ -105,7 +108,9 @@ export async function pipelineRoot(ancestor, files) {
 
 /**
  * @param {Set<string>} list
+ *   List.
  * @returns {List}
+ *   List node.
  */
 function createList(list) {
   return {
@@ -134,7 +139,9 @@ function createList(list) {
 
 /**
  * @param {Array<Datum>} data
+ *   Data.
  * @returns {Html}
+ *   HTML node.
  */
 function createTable(data) {
   /** @type {['raw', 'gzip']} */
@@ -142,13 +149,13 @@ function createTable(data) {
   /** @type {Array<ElementContent>} */
   const h1 = [h('th', {rowSpan: 2}, 'name')]
   /** @type {Array<ElementContent>} */
-  let h2 = []
+  const h2 = []
   /** @type {Array<ElementContent>} */
-  let foot = [h('th', {scope: 'row'}, 'total')]
+  const foot = [h('th', {scope: 'row'}, 'total')]
   /** @type {Record<string, number>} */
   const sum = {}
 
-  const body = data.map((d) => {
+  const body = data.map(function (d) {
     const cells = [
       h('th', {scope: 'row', align: 'left'}, h('a', {href: d.url}, d.name))
     ]
@@ -200,13 +207,15 @@ function createTable(data) {
   while (++index < types.length) {
     const type = types[index]
     const head = data[0]
-    const cells = head.results.map((d) => h('th', d.type))
+    const cells = head.results.map(function (d) {
+      return h('th', d.type)
+    })
     h1.push(h('th', {colSpan: cells.length}, type))
-    h2 = h2.concat(cells)
-    foot = foot.concat(
-      head.results.map((d) =>
-        h('td', {align: 'right'}, bytes(sum[type + ':' + d.type]))
-      )
+    h2.push(...cells)
+    foot.push(
+      ...head.results.map(function (d) {
+        return h('td', {align: 'right'}, bytes(sum[type + ':' + d.type]))
+      })
     )
   }
 

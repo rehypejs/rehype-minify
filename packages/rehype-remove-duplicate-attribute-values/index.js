@@ -22,40 +22,4 @@
  *   <div class="foo foo"></div>
  */
 
-/**
- * @typedef {import('hast').Root} Root
- */
-
-import {visit} from 'unist-util-visit'
-import {isElement} from 'hast-util-is-element'
-import {schema} from './schema.js'
-
-const own = {}.hasOwnProperty
-
-/**
- * Remove duplicates in attribute values with unique tokens.
- *
- * @type {import('unified').Plugin<Array<void>, Root>}
- */
-export default function rehypeRemoveDuplicateAttributeValues() {
-  return (tree) => {
-    visit(tree, 'element', (node) => {
-      /** @type {string} */
-      let prop
-
-      for (prop in node.properties) {
-        if (own.call(node.properties, prop)) {
-          const value = node.properties[prop]
-
-          if (
-            own.call(schema, prop) &&
-            isElement(node, schema[prop]) &&
-            Array.isArray(value)
-          ) {
-            node.properties[prop] = [...new Set(value)]
-          }
-        }
-      }
-    })
-  }
-}
+export {default} from './lib/index.js'

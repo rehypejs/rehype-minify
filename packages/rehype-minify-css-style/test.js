@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-minify-css-style', async function (t) {
@@ -10,8 +9,8 @@ test('rehype-minify-css-style', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('style', '* { color: #ff0000; }')])),
-      u('root', [h('style', '*{color:red}')])
+        .runSync(h(undefined, [h('style', '* { color: #ff0000; }')])),
+      h(undefined, [h('style', '*{color:red}')])
     )
   })
 
@@ -20,9 +19,11 @@ test('rehype-minify-css-style', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [h('style', {type: 'foostyle'}, '* { color: #ff0000; }')])
+          h(undefined, [
+            h('style', {type: 'foostyle'}, '* { color: #ff0000; }')
+          ])
         ),
-      u('root', [h('style', {type: 'foostyle'}, '* { color: #ff0000; }')])
+      h(undefined, [h('style', {type: 'foostyle'}, '* { color: #ff0000; }')])
     )
   })
 
@@ -30,8 +31,8 @@ test('rehype-minify-css-style', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('style', '* { color }')])),
-      u('root', [h('style', '* { color }')])
+        .runSync(h(undefined, [h('style', '* { color }')])),
+      h(undefined, [h('style', '* { color }')])
     )
   })
 
@@ -40,9 +41,9 @@ test('rehype-minify-css-style', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [h('style', '* { -webkit-: 0 0 2px rgba(#000, 0.4); }')])
+          h(undefined, [h('style', '* { -webkit-: 0 0 2px rgba(#000, 0.4); }')])
         ),
-      u('root', [h('style', '* { -webkit-: 0 0 2px rgba(#000, 0.4); }')])
+      h(undefined, [h('style', '* { -webkit-: 0 0 2px rgba(#000, 0.4); }')])
     )
   })
 })

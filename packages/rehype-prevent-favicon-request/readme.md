@@ -128,7 +128,7 @@ There are no options.
 ###### Out
 
 ```html
-<!doctype html><html><head><link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;,"></head><body></body></html>
+<!doctype html><html><head><link href="data:image/x-icon;," rel="shortcut icon" type="image/x-icon"></head><body></body></html>
 ```
 
 ## Syntax

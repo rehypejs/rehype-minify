@@ -11,16 +11,26 @@
 
 /**
  * @typedef Context
+ *   Info passed around for each package.
  * @property {URL} ancestor
+ *   URL to monorepo.
  * @property {PackageJson} ancestorPackage
+ *   Package of monorepo.
  * @property {string} name
- * @property {URL} packagesFolder
+ *   Name of package.
  * @property {URL} packageFolder
+ *   Folder of package.
+ * @property {URL} packagesFolder
+ *   Folder of packages.
  * @property {Array<string>} plugins
+ *   Plugins in monorepo.
  *
  * @typedef Specifiers
+ *   Parsed specifiers of a module.
  * @property {string | undefined} default
+ *   Name of default export.
  * @property {Array<string>} named
+ *   Names of named exports.
  *
  * @typedef State
  *   Info passed around.
@@ -42,12 +52,13 @@
 
 import assert from 'node:assert/strict'
 import {exec as execCallback} from 'node:child_process'
-import {relative} from 'node:path'
+import {relative, sep} from 'node:path'
 import {fileURLToPath} from 'node:url'
 import {inspect, promisify} from 'node:util'
 import {parse} from 'comment-parser'
 import {name as isIdentifierName} from 'estree-util-is-identifier-name'
 import {slug} from 'github-slugger'
+import {findAndReplace} from 'mdast-util-find-and-replace'
 import {fromMarkdown} from 'mdast-util-from-markdown'
 import {gfmFromMarkdown, gfmToMarkdown} from 'mdast-util-gfm'
 import {toMarkdown} from 'mdast-util-to-markdown'
@@ -63,7 +74,6 @@ import {read} from 'to-vfile'
 import {visit} from 'unist-util-visit'
 import {VFile} from 'vfile'
 import {findDownAll} from 'vfile-find-down'
-import {findAndReplace} from 'mdast-util-find-and-replace'
 
 const exec = promisify(execCallback)
 
@@ -102,7 +112,9 @@ export async function pipelinePackage(context) {
     author,
     context,
     id: context.name
-      .replace(/-([a-z])/g, (_, /** @type {string} */ $1) => $1.toUpperCase())
+      .replace(/-([a-z])/g, function (_, /** @type {string} */ $1) {
+        return $1.toUpperCase()
+      })
       .replace(/Javascript/g, 'JavaScript'),
     license: packageJson.license || 'MIT',
     remote,
@@ -110,15 +122,14 @@ export async function pipelinePackage(context) {
     versionMajor: (packageJson.version || '0').split('.')[0]
   }
 
-  // To do: `tsconfig`?
-  // To do: copy `.npmrc` from root?
-
   return [packageFile, generateNmrc(state), ...(await generateReadme(state))]
 }
 
 /**
  * @param {Context} context
+ *   Info passed around.
  * @returns {Promise<VFile>}
+ *   Files.
  */
 async function generatePackageJson(context) {
   const folderPath = relative(
@@ -132,9 +143,9 @@ async function generatePackageJson(context) {
     exec('git log --all --format="%cN <%cE>" "' + folderPath + '"')
   ])
 
-  const codePaths = files.map((file) =>
-    relative(fileURLToPath(context.packageFolder), file.path)
-  )
+  const codePaths = files.map(function (file) {
+    return relative(fileURLToPath(context.packageFolder), file.path)
+  })
 
   /** @type {PackageJson} */
   const previousPackage = JSON.parse(String(file))
@@ -144,7 +155,9 @@ async function generatePackageJson(context) {
   const gitContributors = [...new Set(commitResult.stdout.split('\n'))]
     .sort()
     .filter(Boolean)
-    .filter((d) => !d.includes('<noreply'))
+    .filter(function (d) {
+      return !d.includes('<noreply')
+    })
 
   // @ts-expect-error: `type-fest` has bugs.
   /** @satisfies {Partial<PackageJson>} */
@@ -164,7 +177,18 @@ async function generatePackageJson(context) {
     type: 'module',
     main: 'index.js',
     types: 'index.d.ts',
-    files: codePaths.filter((name) => !/test/.test(name)).sort(),
+    files: codePaths
+      .filter(function (name) {
+        return !/test/.test(name)
+      })
+      .map((d) => {
+        const index = d.indexOf(sep)
+        return index === -1 ? d : d.slice(0, index + 1)
+      })
+      .filter(function (d, index, all) {
+        return all.indexOf(d) === index
+      })
+      .sort(),
     dependencies: previousPackage.dependencies,
     scripts: {},
     excludeFromPreset: previousPackage.excludeFromPreset,
@@ -185,7 +209,9 @@ async function generatePackageJson(context) {
 
 /**
  * @param {State} state
+ *   Info passed around.
  * @returns {VFile}
+ *   File.
  */
 function generateNmrc(state) {
   const file = new VFile({
@@ -200,14 +226,15 @@ function generateNmrc(state) {
 
 /**
  * @param {State} state
+ *   Info passed around.
  * @returns {Promise<Array<VFile>>}
+ *   Files.
  */
 // eslint-disable-next-line complexity
 async function generateReadme(state) {
   const moduleUrl = new URL('index.js', state.context.packageFolder)
-  // To do: drop the default from types, properly check it?
   // To do: move files to `lib/index.js`?
-  /** @type {[VFile, Record<string, unknown> & {default?: Function}]} */
+  /** @type {[VFile, Record<string, unknown>]} */
   const [indexFile, indexModule] = await Promise.all([
     read(moduleUrl),
     import(moduleUrl.href)
@@ -223,7 +250,11 @@ async function generateReadme(state) {
 
   // Check plugin names.
   if (state.context.plugins.includes(state.context.name)) {
-    if (!('default' in indexModule) || !indexModule.default) {
+    if (
+      !('default' in indexModule) ||
+      !indexModule.default ||
+      typeof indexModule.default !== 'function'
+    ) {
       const message = indexFile.message('Expected `export default` in plugin')
       message.fatal = true
     } else if (indexModule.default.name !== state.id) {
@@ -242,19 +273,18 @@ async function generateReadme(state) {
   const specifiers = {
     default:
       'default' in indexModule && indexModule.default ? state.id : undefined,
-    named: Object.keys(indexModule).filter((d) => d !== 'default')
+    named: Object.keys(indexModule).filter(function (d) {
+      return d !== 'default'
+    })
   }
 
   const block = parse(String(indexFile), {spacing: 'preserve'})
   const fileInfo = block[0] || {}
 
-  if (fileInfo.problems && fileInfo.problems.length > 0) {
-    // To do: improve messages here?
-    console.log('problems!', fileInfo.problems)
-  }
-
   const tags = fileInfo.tags || []
-  const exampleTag = tags.find((d) => d.tag === 'example')
+  const exampleTag = tags.find(function (d) {
+    return d.tag === 'example'
+  })
   const description = stripIndent(fileInfo.description || '').trim()
 
   const explicitDocs = fromMarkdown(description, {
@@ -328,7 +358,7 @@ async function generateReadme(state) {
     const fragment = {type: 'root', children: categories.intro}
     findAndReplace(
       fragment,
-      ['hast', 'rehype'].map((d) => {
+      ['hast', 'rehype'].map(function (d) {
         return [
           d,
           function () {
@@ -361,7 +391,6 @@ async function generateReadme(state) {
     ...generateReadmeHead(state),
     ...generateReadmeMeta(state),
     ...(categories.intro || []),
-    // To do: use `remark-toc` here?
     {type: 'heading', depth: 2, children: [{type: 'text', value: 'Contents'}]},
     ...(categories['what-is-this'] || []),
     ...(categories['when-should-i-use-this'] || []),
@@ -414,7 +443,9 @@ async function generateReadme(state) {
 
 /**
  * @param {State} state
+ *   Info passed around.
  * @returns {Array<TopLevelContent>}
+ *   Content.
  */
 function generateReadmeHead(state) {
   return [
@@ -429,7 +460,9 @@ function generateReadmeHead(state) {
 
 /**
  * @param {State} state
+ *   Info passed around.
  * @returns {Array<TopLevelContent>}
+ *   Content.
  */
 function generateReadmeMeta(state) {
   const packageName = state.context.name
@@ -583,8 +616,11 @@ function generateReadmeMeta(state) {
 
 /**
  * @param {State} state
+ *   Info passed around.
  * @param {Specifiers} specifiers
+ *   Specifiers.
  * @returns {Array<TopLevelContent>}
+ *   Content.
  */
 function generateReadmeInstall(state, specifiers) {
   let defaultImportSummary = specifiers.default
@@ -700,7 +736,9 @@ function generateReadmeInstall(state, specifiers) {
 
 /**
  * @param {State} state
+ *   Info passed around.
  * @returns {Array<TopLevelContent>}
+ *   Content.
  */
 function generateReadmePluggableUseSection(state) {
   /** @type {Array<[string, string]>} */
@@ -712,7 +750,9 @@ function generateReadmePluggableUseSection(state) {
     ['{unified}', 'unified']
   ]
 
-  imports.sort((a, b) => a[1].localeCompare(b[1]))
+  imports.sort(function (a, b) {
+    return a[1].localeCompare(b[1])
+  })
 
   return [
     {type: 'heading', depth: 2, children: [{type: 'text', value: 'Use'}]},
@@ -725,7 +765,9 @@ function generateReadmePluggableUseSection(state) {
       lang: 'js',
       // To do: use estree, prettier?
       value: [
-        ...imports.map((d) => 'import ' + d[0] + " from '" + d[1] + "'"),
+        ...imports.map(function (d) {
+          return 'import ' + d[0] + " from '" + d[1] + "'"
+        }),
         '',
         'const file = await unified()',
         '  .use(rehypeParse)',
@@ -784,8 +826,11 @@ function generateReadmePluggableUseSection(state) {
 
 /**
  * @param {State} state
+ *   Info passed around.
  * @param {Specifiers} specifiers
+ *   Specifiers.
  * @returns {Array<TopLevelContent>}
+ *   Content.
  */
 function generateReadmeApiByline(state, specifiers) {
   /** @type {Paragraph} */
@@ -832,9 +877,13 @@ function generateReadmeApiByline(state, specifiers) {
 
 /**
  * @param {State} state
+ *   Info passed around.
  * @param {Plugin} plugin
+ *   Plugin.
  * @param {Spec} example
+ *   Example.
  * @returns {Array<TopLevelContent>}
+ *   Content.
  */
 function generateReadmePluggableExampleSection(state, plugin, example) {
   /** @type {Record<string, unknown>} */
@@ -913,7 +962,9 @@ function generateReadmePluggableExampleSection(state, plugin, example) {
 
 /**
  * @param {State} state
+ *   Info passed around.
  * @returns {Array<TopLevelContent>}
+ *   Content.
  */
 function generateReadmeTail(state) {
   const org = state.remote.split('/').slice(0, -1).join('/')

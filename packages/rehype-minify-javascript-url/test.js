@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-minify-javascript-url', async function (t) {
@@ -12,11 +11,11 @@ test('rehype-minify-javascript-url', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [
+          h(undefined, [
             h('a', {id: 'foo', href: 'javascript:alert(false)'}, 'Hello')
           ])
         ),
-      u('root', [h('a', {id: 'foo', href: 'javascript:alert(!1)'}, 'Hello')])
+      h(undefined, [h('a', {id: 'foo', href: 'javascript:alert(!1)'}, 'Hello')])
     )
   })
 
@@ -25,9 +24,9 @@ test('rehype-minify-javascript-url', async function (t) {
       rehype()
         .use(min)
         .runSync(
-          u('root', [h('a', {href: 'javascript:alert(false'}, 'Hello')])
+          h(undefined, [h('a', {href: 'javascript:alert(false'}, 'Hello')])
         ),
-      u('root', [h('a', {href: 'javascript:alert(false'}, 'Hello')])
+      h(undefined, [h('a', {href: 'javascript:alert(false'}, 'Hello')])
     )
   })
 
@@ -35,8 +34,8 @@ test('rehype-minify-javascript-url', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min)
-        .runSync(u('root', [h('img', {src: 'http://example.com/fav.ico'})])),
-      u('root', [h('img', {src: 'http://example.com/fav.ico'})])
+        .runSync(h(undefined, [h('img', {src: 'http://example.com/fav.ico'})])),
+      h(undefined, [h('img', {src: 'http://example.com/fav.ico'})])
     )
   })
 

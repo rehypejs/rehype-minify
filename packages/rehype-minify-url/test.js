@@ -1,20 +1,19 @@
 import assert from 'node:assert/strict'
 import {URL} from 'node:url'
 import test from 'node:test'
-import {rehype} from 'rehype'
-import {u} from 'unist-builder'
 import {h} from 'hastscript'
+import {rehype} from 'rehype'
 import min from './index.js'
 
 test('rehype-minify-url', async function (t) {
   await t.test('should throw w/o options', async function () {
-    assert.throws(() => {
+    assert.throws(function () {
       rehype().use(min).processSync('')
     }, /^Error: Missing absolute `from` in options$/)
   })
 
   await t.test('should throw with relative `from`', async function () {
-    assert.throws(() => {
+    assert.throws(function () {
       rehype().use(min, {from: '/'}).processSync('')
     }, /^Error: Missing absolute `from` in options$/)
   })
@@ -28,11 +27,11 @@ test('rehype-minify-url', async function (t) {
         rehype()
           .use(min, options)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('a', {href: 'http://example.com/one/bravo/index.html'})
             ])
           ),
-        u('root', [h('a', {href: '../bravo/'})])
+        h(undefined, [h('a', {href: '../bravo/'})])
       )
     }
   )
@@ -44,11 +43,11 @@ test('rehype-minify-url', async function (t) {
         rehype()
           .use(min, options)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('a', {href: 'http://example.com/two/charlie/index.html'})
             ])
           ),
-        u('root', [h('a', {href: '/two/charlie/'})])
+        h(undefined, [h('a', {href: '/two/charlie/'})])
       )
     }
   )
@@ -59,8 +58,8 @@ test('rehype-minify-url', async function (t) {
       assert.deepEqual(
         rehype()
           .use(min, options)
-          .runSync(u('root', [h('a', {href: options.from})])),
-        u('root', [h('a', {href: ''})])
+          .runSync(h(undefined, [h('a', {href: options.from})])),
+        h(undefined, [h('a', {href: ''})])
       )
     }
   )
@@ -70,9 +69,9 @@ test('rehype-minify-url', async function (t) {
       rehype()
         .use(min, options)
         .runSync(
-          u('root', [h('a', {href: options.from.replace(/http/, 'https')})])
+          h(undefined, [h('a', {href: options.from.replace(/http/, 'https')})])
         ),
-      u('root', [h('a', {href: options.from.replace(/http/, 'https')})])
+      h(undefined, [h('a', {href: options.from.replace(/http/, 'https')})])
     )
   })
 
@@ -80,8 +79,8 @@ test('rehype-minify-url', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min, options)
-        .runSync(u('root', [h('a', {href: 'http://google.com:80/alpha'})])),
-      u('root', [h('a', {href: '//google.com/alpha'})])
+        .runSync(h(undefined, [h('a', {href: 'http://google.com:80/alpha'})])),
+      h(undefined, [h('a', {href: '//google.com/alpha'})])
     )
   })
 
@@ -90,9 +89,9 @@ test('rehype-minify-url', async function (t) {
       rehype()
         .use(min, options)
         .runSync(
-          u('root', [h('a', {href: '../../../../../../../../#anchor'})])
+          h(undefined, [h('a', {href: '../../../../../../../../#anchor'})])
         ),
-      u('root', [h('a', {href: '/#anchor'})])
+      h(undefined, [h('a', {href: '/#anchor'})])
     )
   })
 
@@ -101,9 +100,11 @@ test('rehype-minify-url', async function (t) {
       rehype()
         .use(min, options)
         .runSync(
-          u('root', [h('a', {href: false, ping: ['../../foo', '../../bar']})])
+          h(undefined, [
+            h('a', {href: false, ping: ['../../foo', '../../bar']})
+          ])
         ),
-      u('root', [h('a', {href: false, ping: ['/foo', '/bar']})])
+      h(undefined, [h('a', {href: false, ping: ['/foo', '/bar']})])
     )
   })
 
@@ -111,22 +112,8 @@ test('rehype-minify-url', async function (t) {
     assert.deepEqual(
       rehype()
         .use(min, options)
-        .runSync(u('root', [h('a', {href: true})])),
-      u('root', [h('a', {href: true})])
-    )
-  })
-
-  // To do: remove?
-  await t.test('should ignore w/o properties', async function () {
-    assert.deepEqual(
-      rehype()
-        .use(min, options)
-        .runSync(
-          u('root', [
-            {type: 'element', tagName: 'a', properties: {}, children: []}
-          ])
-        ),
-      u('root', [{type: 'element', tagName: 'a', properties: {}, children: []}])
+        .runSync(h(undefined, [h('a', {href: true})])),
+      h(undefined, [h('a', {href: true})])
     )
   })
 
@@ -137,7 +124,7 @@ test('rehype-minify-url', async function (t) {
         rehype()
           .use(min, options)
           .runSync(
-            u('root', [
+            h(undefined, [
               {
                 type: 'element',
                 tagName: 'link',
@@ -146,7 +133,7 @@ test('rehype-minify-url', async function (t) {
               }
             ])
           ),
-        u('root', [
+        h(undefined, [
           {
             type: 'element',
             tagName: 'link',
@@ -163,18 +150,20 @@ test('rehype-minify-url', async function (t) {
     async function () {
       assert.deepEqual(
         rehype()
-          .use(() => (_, file) => {
-            const url = new URL(options.from)
-            // To do: include types to check this?
-            file.data.meta = {origin: url.origin, pathname: url.pathname}
+          .use(function () {
+            return function (_, file) {
+              const url = new URL(options.from)
+              // From: <https://github.com/rehypejs/rehype-meta#configorigin>
+              file.data.meta = {origin: url.origin, pathname: url.pathname}
+            }
           })
           .use(min)
           .runSync(
-            u('root', [
+            h(undefined, [
               h('a', {href: 'http://example.com/one/bravo/index.html'})
             ])
           ),
-        u('root', [h('a', {href: '../bravo/'})])
+        h(undefined, [h('a', {href: '../bravo/'})])
       )
     }
   )
