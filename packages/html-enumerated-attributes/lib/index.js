@@ -390,6 +390,12 @@ export const enumeratedAttributes = {
     selector: 'th',
     states: ['', 'col', 'colgroup', 'row', 'rowgroup']
   },
+  shadowrootmode: {
+    missing: null,
+    invalid: null,
+    selector: 'template',
+    states: [null, 'closed', 'open']
+  },
   shape: {
     missing: 'rect',
     selector: 'area',
