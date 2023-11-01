@@ -38,5 +38,10 @@
     "ignoreCatch": true,
     "strict": true
   },
-  "xo": false
+  "xo": {
+    "prettier": true,
+    "rules": {
+      "capitalized-comments": "off"
+    }
+  }
 }

@@ -197,7 +197,10 @@ async function generatePackageJson(context) {
       ignoreCatch: true,
       strict: true
     },
-    xo: false
+    xo: previousPackage.xo || {
+      prettier: true,
+      rules: {'capitalized-comments': 'off'}
+    }
   }
 
   file.value = JSON.stringify(packageJson, undefined, 2) + '\n'
