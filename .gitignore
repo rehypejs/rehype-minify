@@ -1,6 +1,7 @@
 benchmark-cache/
 coverage/
 node_modules/
+*.d.ts.map
 *.d.ts
 *.log
 *.tsbuildinfo

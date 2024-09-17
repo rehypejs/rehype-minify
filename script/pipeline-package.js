@@ -137,7 +137,7 @@ async function generatePackageJson(context) {
   )
 
   const [files, file, commitResult] = await Promise.all([
-    findDownAll(['.js', '.ts'], fileURLToPath(context.packageFolder)),
+    findDownAll(['.js', '.map', '.ts'], fileURLToPath(context.packageFolder)),
     read(new URL('package.json', context.packageFolder)),
     exec('git log --all --format="%cN <%cE>" "' + folderPath + '"')
   ])
