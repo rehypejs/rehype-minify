@@ -1,5 +1,5 @@
 /**
- * @typedef {import('hast').Nodes} Nodes
+ * @import {Nodes} from 'hast'
  */
 
 const list = new Set(['pingback', 'prefetch', 'stylesheet'])

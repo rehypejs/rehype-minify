@@ -1,7 +1,5 @@
 /**
- * @typedef {import('hast').Element} Element
- * @typedef {import('hast').Parents} Parents
- * @typedef {import('hast').Root} Root
+ * @import {Element, Parents, Root} from 'hast'
  */
 
 import {fromString} from 'hast-util-from-string'

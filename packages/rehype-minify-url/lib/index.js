@@ -1,9 +1,7 @@
 /**
- * @typedef {import('hast').Root} Root
- * @typedef {import('hast').Properties} Properties
- * @typedef {import('relateurl')} RelateUrl
- * @typedef {import('relateurl').Options} RelateOptions
- * @typedef {import('vfile').VFile} VFile
+ * @import {Properties, Root} from 'hast'
+ * @import {default as RelateUrl, Options as RelateOptions} from 'relateurl'
+ * @import {VFile} from 'vfile'
  */
 
 /**

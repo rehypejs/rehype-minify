@@ -1,6 +1,5 @@
 /**
- * @typedef {import('hast').Nodes} Nodes
- * @typedef {import('hast').Properties} Properties
+ * @import {Nodes, Properties} from 'hast'
  */
 
 /**

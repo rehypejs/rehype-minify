@@ -1,5 +1,5 @@
 /**
- * @typedef {import('hast').Root} Root
+ * @import {Root} from 'hast'
  */
 
 import {isCssLink} from 'hast-util-is-css-link'

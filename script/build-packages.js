@@ -1,5 +1,5 @@
 /**
- * @typedef {import('type-fest').PackageJson} PackageJson
+ * @import {PackageJson} from 'type-fest'
  */
 
 import fs from 'node:fs/promises'

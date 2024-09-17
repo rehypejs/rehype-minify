@@ -1,7 +1,5 @@
 /**
- * @typedef {import('hast').Element} Element
- * @typedef {import('hast').Parents} Parents
- * @typedef {import('hast').Root} Root
+ * @import {Element, Parents, Root} from 'hast'
  */
 
 import {isCssLink} from 'hast-util-is-css-link'

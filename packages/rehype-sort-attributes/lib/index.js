@@ -1,6 +1,5 @@
 /**
- * @typedef {import('hast').Properties} Properties
- * @typedef {import('hast').Root} Root
+ * @import {Properties, Root} from 'hast'
  */
 
 import {visit} from 'unist-util-visit'

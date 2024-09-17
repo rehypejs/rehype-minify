@@ -1,5 +1,5 @@
 /**
- * @typedef {import('hast').Root} Root
+ * @import {Root} from 'hast'
  */
 
 import {fromString} from 'hast-util-from-string'

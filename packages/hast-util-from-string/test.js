@@ -1,5 +1,5 @@
 /**
- * @typedef {import('hast').Nodes} Nodes
+ * @import {Nodes} from 'hast'
  */
 
 import assert from 'node:assert/strict'

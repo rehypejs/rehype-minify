@@ -1,7 +1,5 @@
 /**
- * @typedef {import('hast').Root} Root
- * @typedef {import('hast').Element} Element
- * @typedef {import('hast').Parents} Parents
+ * @import {Element, Parents, Root} from 'hast'
  */
 
 import {visit} from 'unist-util-visit'

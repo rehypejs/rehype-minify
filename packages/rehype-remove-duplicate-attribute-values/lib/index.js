@@ -1,5 +1,5 @@
 /**
- * @typedef {import('hast').Root} Root
+ * @import {Root} from 'hast'
  */
 
 import {isElement} from 'hast-util-is-element'

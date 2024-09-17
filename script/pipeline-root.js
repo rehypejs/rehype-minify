@@ -1,12 +1,9 @@
 /**
- * @typedef {import('hast').Element} Element
- * @typedef {import('hast').ElementContent} ElementContent
- * @typedef {import('mdast').List} List
- * @typedef {import('mdast').Html} Html
- * @typedef {import('type-fest').PackageJson} PackageJson
- * @typedef {import('vfile').VFile} VFile
- * @typedef {import('./benchmark.js').Result} Result
- * @typedef {import('./benchmark.js').Datum} Datum
+ * @import {ElementContent, Element} from 'hast'
+ * @import {List, Html} from 'mdast'
+ * @import {PackageJson} from 'type-fest'
+ * @import {VFile} from 'vfile'
+ * @import {Datum, Result} from './benchmark.js'
  */
 
 import assert from 'node:assert/strict'

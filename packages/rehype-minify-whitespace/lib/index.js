@@ -1,8 +1,5 @@
 /**
- * @typedef {import('hast').Nodes} Nodes
- * @typedef {import('hast').Parents} Parents
- * @typedef {import('hast').Root} Root
- * @typedef {import('hast').Text} Text
+ * @import {Nodes, Parents, Root, Text} from 'hast'
  */
 
 /**

@@ -1,6 +1,8 @@
 /**
- * @typedef {import('hast').Root} Root
- *
+ * @import {Root} from 'hast'
+ */
+
+/**
  * @typedef Options
  *   Configuration.
  * @property {boolean | null | undefined} [removeConditional=false]

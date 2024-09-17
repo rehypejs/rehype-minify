@@ -1,5 +1,5 @@
 /**
- * @typedef {import('hast').Nodes} Nodes
+ * @import {Nodes} from 'hast'
  */
 
 const re = /^\[if[ \t\f\n\r]+[^\]]+]|<!\[endif]$/

@@ -1,6 +1,5 @@
 /**
- * @typedef {import('hast').Element} Element
- * @typedef {import('hast').Root} Root
+ * @import {Element, Root} from 'hast'
  */
 
 import {visit} from 'unist-util-visit'

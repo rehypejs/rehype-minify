@@ -1,5 +1,5 @@
 /**
- * @typedef {import('hast').Nodes} Nodes
+ * @import {Nodes} from 'hast'
  */
 
 import {collapseWhiteSpace} from 'collapse-white-space'

@@ -41,6 +41,10 @@
  *   </html>
  */
 
+/**
+ * @import {Preset} from 'unified'
+ */
+
 import rehypeMinifyAttributeWhitespace from 'rehype-minify-attribute-whitespace'
 import rehypeMinifyCssStyle from 'rehype-minify-css-style'
 import rehypeMinifyEnumeratedAttribute from 'rehype-minify-enumerated-attribute'
@@ -114,7 +118,7 @@ const plugins = [
 /**
  * Preset to minify HTML.
  *
- * @type {import('unified').Preset}
+ * @type {Preset}
  */
 const rehypePresetMinify = {plugins, settings}
 

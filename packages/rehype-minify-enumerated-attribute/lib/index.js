@@ -1,6 +1,6 @@
 /**
- * @typedef {import('hast').Root} Root
- * @typedef {import('html-enumerated-attributes').Definition} Definition
+ * @import {Root} from 'hast'
+ * @import {Definition} from 'html-enumerated-attributes'
  */
 
 import {matches} from 'hast-util-select'
