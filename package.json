@@ -24,6 +24,7 @@
     "packages/hast-util-is-css-style/",
     "packages/hast-util-is-event-handler/",
     "packages/hast-util-is-javascript/",
+    "packages/hast-util-minify-whitespace/",
     "packages/hast-util-to-string/",
     "packages/rehype-concat-css-style/",
     "packages/rehype-concat-javascript/",

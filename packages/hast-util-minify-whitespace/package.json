@@ -1,22 +1,19 @@
 {
-  "name": "rehype-minify-whitespace",
-  "version": "6.0.0",
-  "description": "rehype plugin to collapse whitespace",
+  "name": "hast-util-minify-whitespace",
+  "version": "0.0.0",
+  "description": "hast utility to get the plain-text value of a node",
   "license": "MIT",
   "keywords": [
-    "collapse",
+    "hast",
+    "hast-util",
     "html",
-    "mangle",
     "minify",
-    "plugin",
-    "rehype",
-    "rehype-plugin",
-    "space",
-    "unified",
-    "white",
+    "unist",
+    "util",
+    "utility",
     "whitespace"
   ],
-  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-minify-whitespace",
+  "repository": "https://github.com/rehypejs/rehype-minify/tree/main/packages/hast-util-minify-whitespace",
   "bugs": "https://github.com/rehypejs/rehype-minify/issues",
   "funding": {
     "type": "opencollective",
@@ -24,7 +21,7 @@
   },
   "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
   "contributors": [
-    "Titus Wormer <tituswormer@gmail.com>"
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
   ],
   "sideEffects": false,
   "type": "module",
@@ -37,7 +34,10 @@
   ],
   "dependencies": {
     "@types/hast": "^3.0.0",
-    "hast-util-minify-whitespace": "^0.0.0"
+    "hast-util-embedded": "^3.0.0",
+    "hast-util-is-element": "^3.0.0",
+    "hast-util-whitespace": "^3.0.0",
+    "unist-util-is": "^6.0.0"
   },
   "scripts": {},
   "typeCoverage": {
