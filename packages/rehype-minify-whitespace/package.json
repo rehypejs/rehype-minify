@@ -37,7 +37,7 @@
   ],
   "dependencies": {
     "@types/hast": "^3.0.0",
-    "hast-util-minify-whitespace": "^0.0.0"
+    "hast-util-minify-whitespace": "^1.0.0"
   },
   "scripts": {},
   "typeCoverage": {

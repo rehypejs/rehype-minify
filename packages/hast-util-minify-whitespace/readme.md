@@ -49,14 +49,14 @@ npm install hast-util-minify-whitespace
 In Deno with [`esm.sh`][esm-sh]:
 
 ```js
-import {minifyWhitespace} from 'https://esm.sh/hast-util-minify-whitespace@0'
+import {minifyWhitespace} from 'https://esm.sh/hast-util-minify-whitespace@1'
 ```
 
 In browsers with [`esm.sh`][esm-sh]:
 
 ```html
 <script type="module">
-  import {minifyWhitespace} from 'https://esm.sh/hast-util-minify-whitespace@0?bundle'
+  import {minifyWhitespace} from 'https://esm.sh/hast-util-minify-whitespace@1?bundle'
 </script>
 ```
 
@@ -137,7 +137,7 @@ versions of Node.js.
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
 This means we try to keep the current release line,
-`hast-util-minify-whitespace@^0`,
+`hast-util-minify-whitespace@^1`,
 compatible with Node.js 16.
 
 ## Security

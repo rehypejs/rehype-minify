@@ -1,6 +1,6 @@
 {
   "name": "hast-util-minify-whitespace",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "hast utility to get the plain-text value of a node",
   "license": "MIT",
   "keywords": [
@@ -21,7 +21,7 @@
   },
   "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
   "contributors": [
-    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
+    "Titus Wormer <tituswormer@gmail.com>"
   ],
   "sideEffects": false,
   "type": "module",
