@@ -23,18 +23,19 @@ export default function rehypeRemoveEmptyAttribute() {
   return function (tree) {
     visit(tree, 'element', function (node) {
       /** @type {string} */
-      let prop
+      let property
 
-      for (prop in node.properties) {
-        if (Object.hasOwn(node.properties, prop)) {
-          const value = node.properties[prop]
+      for (property in node.properties) {
+        if (Object.hasOwn(node.properties, property)) {
+          const value = node.properties[property]
 
           if (
             (value === '' || (Array.isArray(value) && value.length === 0)) &&
-            (isEventHandler(prop) ||
-              (Object.hasOwn(schema, prop) && isElement(node, schema[prop])))
+            (isEventHandler(property) ||
+              (Object.hasOwn(schema, property) &&
+                isElement(node, schema[property])))
           ) {
-            node.properties[prop] = undefined
+            node.properties[property] = undefined
           }
         }
       }

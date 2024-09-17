@@ -30,15 +30,15 @@ export default function rehypeMinifyJavaScriptUrl() {
   return function (tree) {
     visit(tree, 'element', function (node) {
       /** @type {string} */
-      let prop
+      let property
 
-      for (prop in node.properties) {
+      for (property in node.properties) {
         if (
-          node.properties[prop] &&
-          Object.hasOwn(urlAttributes, prop) &&
-          isElement(node, urlAttributes[prop])
+          node.properties[property] &&
+          Object.hasOwn(urlAttributes, property) &&
+          isElement(node, urlAttributes[property])
         ) {
-          const value = node.properties[prop]
+          const value = node.properties[property]
           let result = value
 
           if (
@@ -55,7 +55,7 @@ export default function rehypeMinifyJavaScriptUrl() {
             result = protocol + result.trim()
           }
 
-          node.properties[prop] = result
+          node.properties[property] = result
         }
       }
     })

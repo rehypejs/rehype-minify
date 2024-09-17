@@ -14,21 +14,21 @@
 
 ## Contents
 
-*   [What is this?](#what-is-this)
-*   [When should I use this?](#when-should-i-use-this)
-*   [Install](#install)
-*   [Use](#use)
-*   [API](#api)
-    *   [`unified().use(rehypeMinifyWhitespace[, options])`](#unifieduserehypeminifywhitespace-options)
-    *   [`Options`](#options)
-*   [Example](#example)
-*   [Syntax](#syntax)
-*   [Syntax tree](#syntax-tree)
-*   [Types](#types)
-*   [Compatibility](#compatibility)
-*   [Security](#security)
-*   [Contribute](#contribute)
-*   [License](#license)
+* [What is this?](#what-is-this)
+* [When should I use this?](#when-should-i-use-this)
+* [Install](#install)
+* [Use](#use)
+* [API](#api)
+  * [`unified().use(rehypeMinifyWhitespace[, options])`](#unifieduserehypeminifywhitespace-options)
+  * [`Options`](#options)
+* [Example](#example)
+* [Syntax](#syntax)
+* [Syntax tree](#syntax-tree)
+* [Types](#types)
+* [Compatibility](#compatibility)
+* [Security](#security)
+* [Contribute](#contribute)
+* [License](#license)
 
 ## What is this?
 
@@ -112,8 +112,8 @@ Minify whitespace.
 
 ###### Parameters
 
-*   `options` (`Options`, optional)
-    — configuration
+* `options` (`Options`, optional)
+  — configuration
 
 ###### Returns
 
@@ -125,9 +125,9 @@ Configuration (TypeScript).
 
 ###### Fields
 
-*   `newlines` (`boolean`, default: `false`)
-    — collapse whitespace containing newlines to `'\n'` instead of `' '`;
-    the default is to collapse to a single space
+* `newlines` (`boolean`, default: `false`)
+  — collapse whitespace containing newlines to `'\n'` instead of `' '`;
+  the default is to collapse to a single space
 
 ## Example
 

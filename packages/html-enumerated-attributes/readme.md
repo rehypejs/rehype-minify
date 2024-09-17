@@ -14,20 +14,20 @@ Utility with info on enumerated attributes.
 
 ## Contents
 
-*   [What is this?](#what-is-this)
-*   [When should I use this?](#when-should-i-use-this)
-*   [Install](#install)
-*   [Use](#use)
-*   [API](#api)
-    *   [`enumeratedAttributes`](#enumeratedattributes)
-    *   [`Definition`](#definition)
-*   [Syntax](#syntax)
-*   [Syntax tree](#syntax-tree)
-*   [Types](#types)
-*   [Compatibility](#compatibility)
-*   [Security](#security)
-*   [Contribute](#contribute)
-*   [License](#license)
+* [What is this?](#what-is-this)
+* [When should I use this?](#when-should-i-use-this)
+* [Install](#install)
+* [Use](#use)
+* [API](#api)
+  * [`enumeratedAttributes`](#enumeratedattributes)
+  * [`Definition`](#definition)
+* [Syntax](#syntax)
+* [Syntax tree](#syntax-tree)
+* [Types](#types)
+* [Compatibility](#compatibility)
+* [Security](#security)
+* [Contribute](#contribute)
+* [License](#license)
 
 ## What is this?
 
@@ -86,20 +86,20 @@ Info (TypeScript type).
 
 ###### Fields
 
-*   `allowUnknown` (`boolean`, default: `false`)
-    — whether arbitrary values are allowed
-*   `caseSensitive` (`boolean`, default: `false`)
-    — enumerated values are often treated case-insensitive, except when
-    this field is on
-*   `invalid` (`string`, `null`, optional)
-    — invalid value default; `null` means a particular unnamed state
-*   `missing` (`string`, `null`, optional)
-    — missing value default; `null` means a particular unnamed state
-*   `selector` (`string`, optional, example: `'meta, script'`)
-    — simple CSS selector; can contain commas; missing means it applies to
-    all elements
-*   `states` (`Array<Array<string> | string | null>`)
-    — possible states
+* `allowUnknown` (`boolean`, default: `false`)
+  — whether arbitrary values are allowed
+* `caseSensitive` (`boolean`, default: `false`)
+  — enumerated values are often treated case-insensitive, except when
+  this field is on
+* `invalid` (`string`, `null`, optional)
+  — invalid value default; `null` means a particular unnamed state
+* `missing` (`string`, `null`, optional)
+  — missing value default; `null` means a particular unnamed state
+* `selector` (`string`, optional, example: `'meta, script'`)
+  — simple CSS selector; can contain commas; missing means it applies to
+  all elements
+* `states` (`Array<Array<string> | string | null>`)
+  — possible states
 
 ## Syntax
 

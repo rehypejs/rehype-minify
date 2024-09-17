@@ -14,19 +14,19 @@
 
 ## Contents
 
-*   [What is this?](#what-is-this)
-*   [When should I use this?](#when-should-i-use-this)
-*   [Install](#install)
-*   [Use](#use)
-*   [API](#api)
-    *   [`isBodyOkLink(node)`](#isbodyoklinknode)
-*   [Syntax](#syntax)
-*   [Syntax tree](#syntax-tree)
-*   [Types](#types)
-*   [Compatibility](#compatibility)
-*   [Security](#security)
-*   [Contribute](#contribute)
-*   [License](#license)
+* [What is this?](#what-is-this)
+* [When should I use this?](#when-should-i-use-this)
+* [Install](#install)
+* [Use](#use)
+* [API](#api)
+  * [`isBodyOkLink(node)`](#isbodyoklinknode)
+* [Syntax](#syntax)
+* [Syntax tree](#syntax-tree)
+* [Types](#types)
+* [Compatibility](#compatibility)
+* [Security](#security)
+* [Contribute](#contribute)
+* [License](#license)
 
 ## What is this?
 
@@ -84,13 +84,13 @@ Check whether a node is a “body OK” link.
 
 The following nodes are “body OK” links:
 
-*   `link` elements with an `itemProp`
-*   `link` elements with a `rel` list where one or more entries are
-    `pingback`, `prefetch`, or `stylesheet`
+* `link` elements with an `itemProp`
+* `link` elements with a `rel` list where one or more entries are
+  `pingback`, `prefetch`, or `stylesheet`
 
 ###### Parameters
 
-*   `node` (`Node`) — node to check.
+* `node` (`Node`) — node to check.
 
 ###### Returns
 

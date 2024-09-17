@@ -14,21 +14,21 @@
 
 ## Contents
 
-*   [What is this?](#what-is-this)
-*   [When should I use this?](#when-should-i-use-this)
-*   [Install](#install)
-*   [Use](#use)
-*   [API](#api)
-    *   [`unified().use(rehypeMinifyUrl[, options])`](#unifieduserehypeminifyurl-options)
-    *   [`Options`](#options)
-*   [Example](#example)
-*   [Syntax](#syntax)
-*   [Syntax tree](#syntax-tree)
-*   [Types](#types)
-*   [Compatibility](#compatibility)
-*   [Security](#security)
-*   [Contribute](#contribute)
-*   [License](#license)
+* [What is this?](#what-is-this)
+* [When should I use this?](#when-should-i-use-this)
+* [Install](#install)
+* [Use](#use)
+* [API](#api)
+  * [`unified().use(rehypeMinifyUrl[, options])`](#unifieduserehypeminifyurl-options)
+  * [`Options`](#options)
+* [Example](#example)
+* [Syntax](#syntax)
+* [Syntax tree](#syntax-tree)
+* [Types](#types)
+* [Compatibility](#compatibility)
+* [Security](#security)
+* [Contribute](#contribute)
+* [License](#license)
 
 ## What is this?
 
@@ -113,8 +113,8 @@ Minify URLs.
 
 ###### Parameters
 
-*   `options` (`Options`, optional)
-    — configuration
+* `options` (`Options`, optional)
+  — configuration
 
 ###### Returns
 
@@ -129,10 +129,10 @@ All options except for `from` are passed through to
 
 ###### Fields
 
-*   `from` (`string`, optional)
-    — absolute URL to where the document will be hosted; can also be set
-    with an `origin` and `pathname` in `file.data.meta` (as supported by
-    [`rehype-meta`](https://github.com/rehypejs/rehype-meta)).
+* `from` (`string`, optional)
+  — absolute URL to where the document will be hosted; can also be set
+  with an `origin` and `pathname` in `file.data.meta` (as supported by
+  [`rehype-meta`](https://github.com/rehypejs/rehype-meta)).
 
 ## Example
 

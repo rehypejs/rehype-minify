@@ -22,18 +22,18 @@ export default function rehypeRemoveDuplicateAttributeValues() {
   return function (tree) {
     visit(tree, 'element', function (node) {
       /** @type {string} */
-      let prop
+      let property
 
-      for (prop in node.properties) {
-        if (Object.hasOwn(node.properties, prop)) {
-          const value = node.properties[prop]
+      for (property in node.properties) {
+        if (Object.hasOwn(node.properties, property)) {
+          const value = node.properties[property]
 
           if (
-            Object.hasOwn(schema, prop) &&
-            isElement(node, schema[prop]) &&
+            Object.hasOwn(schema, property) &&
+            isElement(node, schema[property]) &&
             Array.isArray(value)
           ) {
-            node.properties[prop] = [...new Set(value)]
+            node.properties[property] = [...new Set(value)]
           }
         }
       }

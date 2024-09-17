@@ -14,22 +14,22 @@
 
 ## Contents
 
-*   [What is this?](#what-is-this)
-*   [When should I use this?](#when-should-i-use-this)
-*   [Install](#install)
-*   [Use](#use)
-*   [API](#api)
-    *   [`unified().use(rehypeJavaScriptToBottom[, options])`](#unifieduserehypejavascripttobottom-options)
-    *   [`Filter`](#filter)
-    *   [`Options`](#options)
-*   [Example](#example)
-*   [Syntax](#syntax)
-*   [Syntax tree](#syntax-tree)
-*   [Types](#types)
-*   [Compatibility](#compatibility)
-*   [Security](#security)
-*   [Contribute](#contribute)
-*   [License](#license)
+* [What is this?](#what-is-this)
+* [When should I use this?](#when-should-i-use-this)
+* [Install](#install)
+* [Use](#use)
+* [API](#api)
+  * [`unified().use(rehypeJavaScriptToBottom[, options])`](#unifieduserehypejavascripttobottom-options)
+  * [`Filter`](#filter)
+  * [`Options`](#options)
+* [Example](#example)
+* [Syntax](#syntax)
+* [Syntax tree](#syntax-tree)
+* [Types](#types)
+* [Compatibility](#compatibility)
+* [Security](#security)
+* [Contribute](#contribute)
+* [License](#license)
 
 ## What is this?
 
@@ -115,8 +115,8 @@ Move JavaScript `<script>`s to the end of `<body>`.
 
 ###### Parameters
 
-*   `options` (`Options`, optional)
-    — configuration
+* `options` (`Options`, optional)
+  — configuration
 
 ###### Returns
 
@@ -128,8 +128,8 @@ Filter scripts that would be moved (TypeScript type).
 
 ###### Parameters
 
-*   `node` (`Element`)
-    — script element
+* `node` (`Element`)
+  — script element
 
 ###### Returns
 
@@ -141,8 +141,8 @@ Configuration (TypeScript type).
 
 ###### Fields
 
-*   `filter` (`Filter`, optional)
-    — filter scripts that would otherwise be moved
+* `filter` (`Filter`, optional)
+  — filter scripts that would otherwise be moved
 
 ## Example
 

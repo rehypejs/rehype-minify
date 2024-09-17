@@ -21,16 +21,16 @@ export function isCssLink(node) {
     return false
   }
 
-  const rel = node.properties.rel
+  const value = node.properties.rel
 
-  if (!rel || !Array.isArray(rel) || !rel.includes('stylesheet')) {
+  if (!value || !Array.isArray(value) || !value.includes('stylesheet')) {
     return false
   }
 
-  const value = collapseWhiteSpace(String(node.properties.type || ''), {
+  const result = collapseWhiteSpace(String(node.properties.type || ''), {
     style: 'html',
     trim: true
   }).toLowerCase()
 
-  return value === '' || value === 'text/css'
+  return result === '' || result === 'text/css'
 }

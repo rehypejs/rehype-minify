@@ -25,15 +25,13 @@ export default function rehypeMinifyMediaAttribute() {
    */
   return function (tree) {
     visit(tree, 'element', function (node) {
-      const props = node.properties
-
       if (
-        props &&
+        node.properties &&
         (node.tagName === 'link' ||
           node.tagName === 'source' ||
           node.tagName === 'style')
       ) {
-        let value = props.media
+        let value = node.properties.media
 
         if (typeof value === 'string') {
           try {
@@ -42,7 +40,7 @@ export default function rehypeMinifyMediaAttribute() {
             /* c8 ignore next -- in a try/catch for potential future third party errors */
           } catch {}
 
-          props.media = value === 'all' || !value ? undefined : value
+          node.properties.media = value === 'all' || !value ? undefined : value
         }
       }
     })

@@ -32,11 +32,11 @@ export default function rehypeSortAttributes() {
       }
 
       /** @type {string} */
-      let prop
+      let property
 
-      for (prop in node.properties) {
-        if (Object.hasOwn(node.properties, prop)) {
-          cache.set(prop, (cache.get(prop) || 0) + 1)
+      for (property in node.properties) {
+        if (Object.hasOwn(node.properties, property)) {
+          cache.set(property, (cache.get(property) || 0) + 1)
         }
       }
     })
@@ -53,11 +53,11 @@ export default function rehypeSortAttributes() {
         const result = {}
         let index = -1
         /** @type {string} */
-        let prop
+        let property
 
-        for (prop in node.properties) {
-          if (Object.hasOwn(node.properties, prop)) {
-            keys.push(prop)
+        for (property in node.properties) {
+          if (Object.hasOwn(node.properties, property)) {
+            keys.push(property)
           }
         }
 

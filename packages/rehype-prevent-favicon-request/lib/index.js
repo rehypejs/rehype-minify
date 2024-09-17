@@ -30,12 +30,12 @@ export default function rehypePreventFaviconRequest() {
       }
 
       if (node.tagName === 'link' && node.properties) {
-        const rel = node.properties.rel
+        const value = node.properties.rel
 
         if (
-          Array.isArray(rel) &&
-          rel.includes('shortcut') &&
-          rel.includes('icon')
+          Array.isArray(value) &&
+          value.includes('shortcut') &&
+          value.includes('icon')
         ) {
           ico = node
           return false

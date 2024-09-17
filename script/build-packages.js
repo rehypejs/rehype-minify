@@ -3,7 +3,7 @@
  */
 
 import fs from 'node:fs/promises'
-import {relative} from 'node:path'
+import path from 'node:path'
 import {isHidden} from 'is-hidden'
 import {reporter} from 'vfile-reporter'
 import {compareFile} from 'vfile-sort'
@@ -62,7 +62,7 @@ await Promise.all(
 
 // Clean paths and report.
 for (const file of files) {
-  file.path = relative(file.cwd, file.path)
+  file.path = path.relative(file.cwd, file.path)
   file.history = [file.path]
 }
 

@@ -29,15 +29,15 @@ export default function rehypeNormalizeAttributeValueCase() {
   return function (tree) {
     visit(tree, 'element', function (node) {
       /** @type {string} */
-      let prop
+      let property
 
-      for (prop in node.properties) {
+      for (property in node.properties) {
         if (
-          node.properties[prop] &&
-          Object.hasOwn(schema, prop) &&
-          isElement(node, schema[prop])
+          node.properties[property] &&
+          Object.hasOwn(schema, property) &&
+          isElement(node, schema[property])
         ) {
-          node.properties[prop] = minify(node.properties[prop])
+          node.properties[property] = minify(node.properties[property])
         }
       }
     })

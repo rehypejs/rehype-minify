@@ -25,14 +25,14 @@ export default function rehypeMinifyEnumeratedAttribute() {
   return function (tree) {
     visit(tree, 'element', function (node) {
       /** @type {string} */
-      let prop
+      let property
 
-      for (prop in node.properties) {
-        if (Object.hasOwn(node.properties, prop)) {
-          const attribute = find(html, prop).attribute
+      for (property in node.properties) {
+        if (Object.hasOwn(node.properties, property)) {
+          const attribute = find(html, property).attribute
 
           if (Object.hasOwn(enumeratedAttributes, attribute)) {
-            let value = node.properties[prop]
+            let value = node.properties[property]
 
             // Note: we don’t really handle enumerated as lists, so instead
             // we cast them to a string (assuming they are space-separated).
@@ -56,7 +56,7 @@ export default function rehypeMinifyEnumeratedAttribute() {
                   !definition.selector ||
                   matches(definition.selector, node)
                 ) {
-                  node.properties[prop] = minify(value, definition)
+                  node.properties[property] = minify(value, definition)
                 }
               }
             }

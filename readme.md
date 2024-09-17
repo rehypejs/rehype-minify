@@ -10,15 +10,15 @@
 
 ## Contents
 
-*   [What is this?](#what-is-this)
-*   [When should I use this?](#when-should-i-use-this)
-*   [Presets](#presets)
-*   [Plugins](#plugins)
-*   [Benchmark](#benchmark)
-*   [Security](#security)
-*   [Related](#related)
-*   [Contribute](#contribute)
-*   [License](#license)
+* [What is this?](#what-is-this)
+* [When should I use this?](#when-should-i-use-this)
+* [Presets](#presets)
+* [Plugins](#plugins)
+* [Benchmark](#benchmark)
+* [Security](#security)
+* [Related](#related)
+* [Contribute](#contribute)
+* [License](#license)
 
 ## What is this?
 
@@ -64,8 +64,8 @@ process HTML.
 Presets are combinations of plugins.
 One preset is maintained here:
 
-*   [`rehype-preset-minify`][rehype-preset-minify]
-    — preset to minify and mangle HTML
+* [`rehype-preset-minify`][rehype-preset-minify]
+  — preset to minify and mangle HTML
 
 ## Plugins
 
@@ -77,29 +77,29 @@ The following plugins maintained here are included in the above preset.
 
 <!--plugins-core start-->
 
-*   [`rehype-minify-attribute-whitespace`](./packages/rehype-minify-attribute-whitespace)
-*   [`rehype-minify-css-style`](./packages/rehype-minify-css-style)
-*   [`rehype-minify-enumerated-attribute`](./packages/rehype-minify-enumerated-attribute)
-*   [`rehype-minify-event-handler`](./packages/rehype-minify-event-handler)
-*   [`rehype-minify-javascript-script`](./packages/rehype-minify-javascript-script)
-*   [`rehype-minify-javascript-url`](./packages/rehype-minify-javascript-url)
-*   [`rehype-minify-json-script`](./packages/rehype-minify-json-script)
-*   [`rehype-minify-language`](./packages/rehype-minify-language)
-*   [`rehype-minify-media-attribute`](./packages/rehype-minify-media-attribute)
-*   [`rehype-minify-meta-color`](./packages/rehype-minify-meta-color)
-*   [`rehype-minify-meta-content`](./packages/rehype-minify-meta-content)
-*   [`rehype-minify-style-attribute`](./packages/rehype-minify-style-attribute)
-*   [`rehype-minify-whitespace`](./packages/rehype-minify-whitespace)
-*   [`rehype-normalize-attribute-value-case`](./packages/rehype-normalize-attribute-value-case)
-*   [`rehype-remove-comments`](./packages/rehype-remove-comments)
-*   [`rehype-remove-duplicate-attribute-values`](./packages/rehype-remove-duplicate-attribute-values)
-*   [`rehype-remove-empty-attribute`](./packages/rehype-remove-empty-attribute)
-*   [`rehype-remove-external-script-content`](./packages/rehype-remove-external-script-content)
-*   [`rehype-remove-meta-http-equiv`](./packages/rehype-remove-meta-http-equiv)
-*   [`rehype-remove-script-type-javascript`](./packages/rehype-remove-script-type-javascript)
-*   [`rehype-remove-style-type-css`](./packages/rehype-remove-style-type-css)
-*   [`rehype-sort-attribute-values`](./packages/rehype-sort-attribute-values)
-*   [`rehype-sort-attributes`](./packages/rehype-sort-attributes)
+* [`rehype-minify-attribute-whitespace`](./packages/rehype-minify-attribute-whitespace)
+* [`rehype-minify-css-style`](./packages/rehype-minify-css-style)
+* [`rehype-minify-enumerated-attribute`](./packages/rehype-minify-enumerated-attribute)
+* [`rehype-minify-event-handler`](./packages/rehype-minify-event-handler)
+* [`rehype-minify-javascript-script`](./packages/rehype-minify-javascript-script)
+* [`rehype-minify-javascript-url`](./packages/rehype-minify-javascript-url)
+* [`rehype-minify-json-script`](./packages/rehype-minify-json-script)
+* [`rehype-minify-language`](./packages/rehype-minify-language)
+* [`rehype-minify-media-attribute`](./packages/rehype-minify-media-attribute)
+* [`rehype-minify-meta-color`](./packages/rehype-minify-meta-color)
+* [`rehype-minify-meta-content`](./packages/rehype-minify-meta-content)
+* [`rehype-minify-style-attribute`](./packages/rehype-minify-style-attribute)
+* [`rehype-minify-whitespace`](./packages/rehype-minify-whitespace)
+* [`rehype-normalize-attribute-value-case`](./packages/rehype-normalize-attribute-value-case)
+* [`rehype-remove-comments`](./packages/rehype-remove-comments)
+* [`rehype-remove-duplicate-attribute-values`](./packages/rehype-remove-duplicate-attribute-values)
+* [`rehype-remove-empty-attribute`](./packages/rehype-remove-empty-attribute)
+* [`rehype-remove-external-script-content`](./packages/rehype-remove-external-script-content)
+* [`rehype-remove-meta-http-equiv`](./packages/rehype-remove-meta-http-equiv)
+* [`rehype-remove-script-type-javascript`](./packages/rehype-remove-script-type-javascript)
+* [`rehype-remove-style-type-css`](./packages/rehype-remove-style-type-css)
+* [`rehype-sort-attribute-values`](./packages/rehype-sort-attribute-values)
+* [`rehype-sort-attributes`](./packages/rehype-sort-attributes)
 
 <!--plugins-core end-->
 
@@ -114,12 +114,12 @@ Read their readmes before using:
 
 <!--plugins-other start-->
 
-*   [`rehype-concat-css-style`](./packages/rehype-concat-css-style)
-*   [`rehype-concat-javascript`](./packages/rehype-concat-javascript)
-*   [`rehype-css-to-top`](./packages/rehype-css-to-top)
-*   [`rehype-javascript-to-bottom`](./packages/rehype-javascript-to-bottom)
-*   [`rehype-minify-url`](./packages/rehype-minify-url)
-*   [`rehype-prevent-favicon-request`](./packages/rehype-prevent-favicon-request)
+* [`rehype-concat-css-style`](./packages/rehype-concat-css-style)
+* [`rehype-concat-javascript`](./packages/rehype-concat-javascript)
+* [`rehype-css-to-top`](./packages/rehype-css-to-top)
+* [`rehype-javascript-to-bottom`](./packages/rehype-javascript-to-bottom)
+* [`rehype-minify-url`](./packages/rehype-minify-url)
+* [`rehype-prevent-favicon-request`](./packages/rehype-prevent-favicon-request)
 
 <!--plugins-other end-->
 
@@ -358,8 +358,8 @@ listed above and pass [`allowDangerousCharacters` to
 
 ## Related
 
-*   [`rehype-format`](https://github.com/rehypejs/rehype-format)
-    — format HTML
+* [`rehype-format`](https://github.com/rehypejs/rehype-format)
+  — format HTML
 
 ## Contribute
 

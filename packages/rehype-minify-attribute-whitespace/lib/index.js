@@ -31,15 +31,16 @@ export default function rehypeMinifyAttributeWhitespace() {
   return function (tree) {
     visit(tree, 'element', function (node) {
       /** @type {string} */
-      let prop
+      let property
 
-      for (prop in node.properties) {
+      for (property in node.properties) {
         if (
-          Object.hasOwn(node.properties, prop) &&
-          (isEventHandler(prop) ||
-            (Object.hasOwn(schema, prop) && isElement(node, schema[prop])))
+          Object.hasOwn(node.properties, property) &&
+          (isEventHandler(property) ||
+            (Object.hasOwn(schema, property) &&
+              isElement(node, schema[property])))
         ) {
-          node.properties[prop] = minify(node.properties[prop])
+          node.properties[property] = minify(node.properties[property])
         }
       }
     })

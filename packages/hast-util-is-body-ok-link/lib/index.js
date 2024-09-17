@@ -21,15 +21,15 @@ export function isBodyOkLink(node) {
     return true
   }
 
-  const rel = node.properties.rel
+  const value = node.properties.rel
   let index = -1
 
-  if (!Array.isArray(rel) || rel.length === 0) {
+  if (!Array.isArray(value) || value.length === 0) {
     return false
   }
 
-  while (++index < rel.length) {
-    if (!list.has(String(rel[index]))) {
+  while (++index < value.length) {
+    if (!list.has(String(value[index]))) {
       return false
     }
   }

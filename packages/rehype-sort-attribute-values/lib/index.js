@@ -29,18 +29,18 @@ export default function rehypeSortAttributeValues() {
 
     visit(tree, 'element', function (node) {
       /** @type {string} */
-      let prop
+      let property
 
-      for (prop in node.properties) {
-        if (Object.hasOwn(node.properties, prop)) {
-          const value = node.properties[prop]
+      for (property in node.properties) {
+        if (Object.hasOwn(node.properties, property)) {
+          const value = node.properties[property]
 
           if (
-            Object.hasOwn(schema, prop) &&
-            isElement(node, schema[prop]) &&
+            Object.hasOwn(schema, property) &&
+            isElement(node, schema[property]) &&
             Array.isArray(value)
           ) {
-            add(prop, value)
+            add(property, value)
           }
         }
       }
@@ -49,20 +49,20 @@ export default function rehypeSortAttributeValues() {
     flush()
 
     /**
-     * @param {string} prop
+     * @param {string} property
      *   Property name.
      * @param {Array<number | string>} values
      *   Values.
      * @returns {undefined}
      *   Nothing.
      */
-    function add(prop, values) {
+    function add(property, values) {
       let index = -1
-      let cache = counts.get(prop)
+      let cache = counts.get(property)
 
       if (!cache) {
         cache = new Map()
-        counts.set(prop, cache)
+        counts.set(property, cache)
       }
 
       while (++index < values.length) {
@@ -70,7 +70,7 @@ export default function rehypeSortAttributeValues() {
         cache.set(value, (cache.get(value) || 0) + 1)
       }
 
-      queues.push([prop, values])
+      queues.push([property, values])
     }
 
     /**
@@ -81,9 +81,9 @@ export default function rehypeSortAttributeValues() {
       /** @type {Map<string, Array<number | string>>} */
       const caches = new Map()
 
-      for (const [prop, cache] of counts) {
+      for (const [property, cache] of counts) {
         caches.set(
-          prop,
+          property,
           [...cache.entries()]
             .sort(function (a, b) {
               return b[1] - a[1] || compare(String(a[0]), String(b[0]), 0)

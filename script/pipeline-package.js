@@ -52,7 +52,7 @@
 
 import assert from 'node:assert/strict'
 import {exec as execCallback} from 'node:child_process'
-import {relative, sep} from 'node:path'
+import path from 'node:path'
 import {fileURLToPath} from 'node:url'
 import {inspect, promisify} from 'node:util'
 import {parse} from 'comment-parser'
@@ -68,7 +68,6 @@ import {normalizeIdentifier} from 'micromark-util-normalize-identifier'
 import parseAuthor from 'parse-author'
 import {rehype} from 'rehype'
 import rehypeFormat from 'rehype-format'
-import remarkPresetWooorm from 'remark-preset-wooorm'
 import stripIndent from 'strip-indent'
 import {read} from 'to-vfile'
 import {visit} from 'unist-util-visit'
@@ -132,7 +131,7 @@ export async function pipelinePackage(context) {
  *   Files.
  */
 async function generatePackageJson(context) {
-  const folderPath = relative(
+  const folderPath = path.relative(
     fileURLToPath(context.ancestor),
     fileURLToPath(context.packageFolder)
   )
@@ -144,7 +143,7 @@ async function generatePackageJson(context) {
   ])
 
   const codePaths = files.map(function (file) {
-    return relative(fileURLToPath(context.packageFolder), file.path)
+    return path.relative(fileURLToPath(context.packageFolder), file.path)
   })
 
   /** @type {PackageJson} */
@@ -181,7 +180,7 @@ async function generatePackageJson(context) {
         return !/test/.test(name)
       })
       .map((d) => {
-        const index = d.indexOf(sep)
+        const index = d.indexOf(path.sep)
         return index === -1 ? d : d.slice(0, index + 1)
       })
       .filter(function (d, index, all) {
@@ -288,7 +287,7 @@ async function generateReadme(state) {
   })
   const description = stripIndent(fileInfo.description || '').trim()
 
-  const explicitDocs = fromMarkdown(description, {
+  const explicitDocumentation = fromMarkdown(description, {
     extensions: [gfm()],
     mdastExtensions: [gfmFromMarkdown()]
   })
@@ -298,9 +297,9 @@ async function generateReadme(state) {
   let category = 'intro'
   let contentIndex = -1
 
-  while (++contentIndex < explicitDocs.children.length) {
+  while (++contentIndex < explicitDocumentation.children.length) {
     const node = /** @type {TopLevelContent} */ (
-      explicitDocs.children[contentIndex]
+      explicitDocumentation.children[contentIndex]
     )
 
     if (node.type === 'heading' && node.depth === 2) {
@@ -431,13 +430,7 @@ async function generateReadme(state) {
     tree.children.push({type: 'definition', identifier, url})
   }
 
-  file.value = toMarkdown(tree, {
-    // To do: remove after major: plan is to match defaults.
-    ...remarkPresetWooorm.settings,
-    // To do: remove after major.
-    listItemIndent: 'tab',
-    extensions: [gfmToMarkdown()]
-  })
+  file.value = toMarkdown(tree, {extensions: [gfmToMarkdown()]})
   file.data.changed = true
 
   return [file, indexFile]

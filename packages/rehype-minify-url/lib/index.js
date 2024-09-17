@@ -77,21 +77,21 @@ export default function rehypeMinifyUrl(options) {
 
     visit(tree, 'element', function (node) {
       /** @type {string} */
-      let prop
+      let property
 
-      for (prop in node.properties) {
+      for (property in node.properties) {
         if (
-          node.properties[prop] &&
-          Object.hasOwn(urlAttributes, prop) &&
-          isElement(node, urlAttributes[prop]) &&
+          node.properties[property] &&
+          Object.hasOwn(urlAttributes, property) &&
+          isElement(node, urlAttributes[property]) &&
           !(
             node.tagName === 'link' &&
-            prop === 'href' &&
+            property === 'href' &&
             Array.isArray(node.properties.rel) &&
             node.properties.rel.includes('canonical')
           )
         ) {
-          node.properties[prop] = minify(node.properties[prop], relate)
+          node.properties[property] = minify(node.properties[property], relate)
         }
       }
     })

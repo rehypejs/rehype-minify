@@ -14,19 +14,19 @@
 
 ## Contents
 
-*   [What is this?](#what-is-this)
-*   [When should I use this?](#when-should-i-use-this)
-*   [Install](#install)
-*   [Use](#use)
-*   [API](#api)
-    *   [`fromString(node[, value])`](#fromstringnode-value)
-*   [Syntax](#syntax)
-*   [Syntax tree](#syntax-tree)
-*   [Types](#types)
-*   [Compatibility](#compatibility)
-*   [Security](#security)
-*   [Contribute](#contribute)
-*   [License](#license)
+* [What is this?](#what-is-this)
+* [When should I use this?](#when-should-i-use-this)
+* [Install](#install)
+* [Use](#use)
+* [API](#api)
+  * [`fromString(node[, value])`](#fromstringnode-value)
+* [Syntax](#syntax)
+* [Syntax tree](#syntax-tree)
+* [Types](#types)
+* [Compatibility](#compatibility)
+* [Security](#security)
+* [Contribute](#contribute)
+* [License](#license)
 
 ## What is this?
 
@@ -102,8 +102,8 @@ Set the plain-text value of a node.
 
 ###### Parameters
 
-*   `node` (`Node`) — node to change
-*   `value` (`string`, default: `''`) — value to use
+* `node` (`Node`) — node to change
+* `value` (`string`, default: `''`) — value to use
 
 ###### Returns
 
@@ -111,9 +111,9 @@ Nothing (`undefined`).
 
 ###### Algorithm
 
-*   if `node` is a `comment` or `text` node, sets its `value`
-*   if `node` is an `element` or `root`, replaces its children with a text
-    node for `value`
+* if `node` is a `comment` or `text` node, sets its `value`
+* if `node` is an `element` or `root`, replaces its children with a text
+  node for `value`
 
 ## Syntax
 

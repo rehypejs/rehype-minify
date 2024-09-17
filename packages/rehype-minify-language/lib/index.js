@@ -25,13 +25,15 @@ export default function rehypeMinifyLanguage() {
       let index = -1
 
       while (++index < fields.length) {
-        const prop = fields[index]
-        const value = node.properties[prop]
+        const property = fields[index]
+        const value = node.properties[property]
 
         if (typeof value === 'string') {
           // BCP 47 tags are case-insensitive, but in this project we prefer
           // lowercase which *should* help GZIP.
-          node.properties[prop] = (bcp47Normalize(value) || value).toLowerCase()
+          node.properties[property] = (
+            bcp47Normalize(value) || value
+          ).toLowerCase()
         }
       }
     })

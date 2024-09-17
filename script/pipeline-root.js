@@ -10,7 +10,7 @@
  */
 
 import assert from 'node:assert/strict'
-import {basename} from 'node:path'
+import path from 'node:path'
 import bytes from 'bytes'
 import {h} from 'hastscript'
 import {toHtml} from 'hast-util-to-html'
@@ -20,7 +20,6 @@ import {toMarkdown} from 'mdast-util-to-markdown'
 import {zone} from 'mdast-zone'
 import {gfm} from 'micromark-extension-gfm'
 import rehypeFormat from 'rehype-format'
-import remarkPresetWooorm from 'remark-preset-wooorm'
 import {read} from 'to-vfile'
 
 /**
@@ -37,7 +36,7 @@ export async function pipelineRoot(ancestor, files) {
   const presetModule = files.find(function (d) {
     return (
       d.basename === 'index.js' &&
-      basename(d.dirname || '').startsWith('rehype-preset-')
+      path.basename(d.dirname || '').startsWith('rehype-preset-')
     )
   })
   assert(presetModule)
@@ -48,7 +47,7 @@ export async function pipelineRoot(ancestor, files) {
   const excluded = new Set()
 
   for (const file of files) {
-    const folder = basename(file.dirname || '')
+    const folder = path.basename(file.dirname || '')
 
     if (
       file.basename !== 'package.json' ||
@@ -94,13 +93,7 @@ export async function pipelineRoot(ancestor, files) {
     return [start, createTable(data), end]
   })
 
-  readme.value = toMarkdown(tree, {
-    // To do: remove after major: plan is to match defaults.
-    ...remarkPresetWooorm.settings,
-    // To do: remove after major.
-    listItemIndent: 'tab',
-    extensions: [gfmToMarkdown()]
-  })
+  readme.value = toMarkdown(tree, {extensions: [gfmToMarkdown()]})
   readme.data.changed = true
 
   return [readme]
