@@ -6,8 +6,17 @@
  * @typedef Options
  *   Configuration.
  * @property {boolean | null | undefined} [removeConditional=false]
- *   Remove conditional comments (default: `false`); the default is to leave
- *   them.
+ *   Remove conditional comments (default: `false`);
+ *   the default is to leave them.
+ * @property {Test | null | undefined} [test]
+ *   Choose which comments to keep.
+ *
+ * @callback Test
+ *   Test a comment.
+ * @param {string} value
+ *   Comment value.
+ * @returns {boolean | null | undefined}
+ *   Whether to keep the comment.
  */
 
 import {isConditionalComment} from 'hast-util-is-conditional-comment'
@@ -38,7 +47,8 @@ export default function rehypeRemoveComments(options) {
       if (
         typeof index === 'number' &&
         parent &&
-        (settings.removeConditional || !isConditionalComment(node))
+        (settings.removeConditional || !isConditionalComment(node)) &&
+        (!settings.test || !settings.test(node.value))
       ) {
         parent.children.splice(index, 1)
         return index

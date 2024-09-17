@@ -21,6 +21,7 @@
 * [API](#api)
   * [`unified().use(rehypeRemoveComments[, options])`](#unifieduserehyperemovecomments-options)
   * [`Options`](#options)
+  * [`Test`](#test)
 * [Example](#example)
 * [Syntax](#syntax)
 * [Syntax tree](#syntax-tree)
@@ -125,11 +126,26 @@ Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
 
 Configuration (TypeScript type).
 
-##### Fields
+###### Fields
 
 * `removeConditional` (`boolean`, default: `false`)
   — remove conditional comments (default: `false`); the default is to
   leave them
+* `test` (`Test`, optional)
+  — choose which comments to keep (optional)
+
+### `Test`
+
+Test a comment (TypeScript type).
+
+###### Parameters
+
+* `value` (`string`)
+  — comment value
+
+###### Returns
+
+Whether to keep the comment (`boolean`, optional).
 
 ## Example
 

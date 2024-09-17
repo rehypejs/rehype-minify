@@ -49,4 +49,28 @@ test('rehype-remove-comments', async function (t) {
       )
     }
   )
+
+  await t.test(
+    'should remove conditional comments w/ `removeConditional`',
+    async function () {
+      assert.deepEqual(
+        rehype()
+          .use(min, {
+            test(value) {
+              return /b/.test(value)
+            }
+          })
+          .runSync(
+            h(undefined, [
+              h('div', [
+                {type: 'comment', value: 'a'},
+                {type: 'comment', value: 'b'},
+                {type: 'comment', value: 'c'}
+              ])
+            ])
+          ),
+        h(undefined, [h('div', [{type: 'comment', value: 'b'}])])
+      )
+    }
+  )
 })

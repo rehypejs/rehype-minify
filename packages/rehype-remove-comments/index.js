@@ -30,11 +30,26 @@
  *
  * Configuration (TypeScript type).
  *
- * ##### Fields
+ * ###### Fields
  *
- * *   `removeConditional` (`boolean`, default: `false`)
- *     — remove conditional comments (default: `false`); the default is to
- *     leave them
+ * * `removeConditional` (`boolean`, default: `false`)
+ *   — remove conditional comments (default: `false`); the default is to
+ *   leave them
+ * * `test` (`Test`, optional)
+ *   — choose which comments to keep (optional)
+ *
+ * ### `Test`
+ *
+ * Test a comment (TypeScript type).
+ *
+ * ###### Parameters
+ *
+ * * `value` (`string`)
+ *   — comment value
+ *
+ * ###### Returns
+ *
+ * Whether to keep the comment (`boolean`, optional).
  *
  * @example
  *   {}
@@ -44,6 +59,7 @@
 
 /**
  * @typedef {import('./lib/index.js').Options} Options
+ * @typedef {import('./lib/index.js').Test} Test
  */
 
 export {default} from './lib/index.js'

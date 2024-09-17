@@ -16,7 +16,7 @@
  *   Nothing.
  */
 export function fromString(node, value) {
-  const normalized = value === undefined || value === null ? '' : String(value)
+  const normalized = value === null || value === undefined ? '' : String(value)
 
   if ('children' in node) {
     node.children = []
