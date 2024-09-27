@@ -49,6 +49,7 @@
 
 import assert from 'node:assert/strict'
 import {exec as execCallback} from 'node:child_process'
+import {readFile} from 'node:fs/promises'
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
 import {inspect, promisify} from 'node:util'
@@ -71,6 +72,10 @@ import {visit} from 'unist-util-visit'
 import {VFile} from 'vfile'
 import {findDownAll} from 'vfile-find-down'
 
+const licenseValue = await readFile(
+  new URL('../license', import.meta.url),
+  'utf8'
+)
 const exec = promisify(execCallback)
 
 /**
@@ -118,7 +123,12 @@ export async function pipelinePackage(context) {
     versionMajor: (packageJson.version || '0').split('.')[0]
   }
 
-  return [packageFile, generateNmrc(state), ...(await generateReadme(state))]
+  return [
+    packageFile,
+    generateNmrc(state),
+    generateLicense(state),
+    ...(await generateReadme(state))
+  ]
 }
 
 /**
@@ -215,6 +225,23 @@ function generateNmrc(state) {
   const file = new VFile({
     path: new URL('.npmrc', state.context.packageFolder),
     value: ['ignore-scripts=true', 'package-lock=false', ''].join('\n')
+  })
+
+  file.data.changed = true
+
+  return file
+}
+
+/**
+ * @param {State} state
+ *   Info passed around.
+ * @returns {VFile}
+ *   File.
+ */
+function generateLicense(state) {
+  const file = new VFile({
+    path: new URL('license', state.context.packageFolder),
+    value: licenseValue
   })
 
   file.data.changed = true
