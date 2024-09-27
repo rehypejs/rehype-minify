@@ -1,6 +1,6 @@
 {
   "name": "hast-util-is-event-handler",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "hast utility to check if a property is an event handler",
   "license": "MIT",
   "keywords": [

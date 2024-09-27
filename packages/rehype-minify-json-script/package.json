@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-json-script",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "rehype plugin to minify `script` elements with a JSON body",
   "license": "MIT",
   "keywords": [

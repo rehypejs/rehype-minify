@@ -1,6 +1,6 @@
 {
   "name": "hast-util-is-javascript",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "hast utility to check if an element is a JavaScript script",
   "license": "MIT",
   "keywords": [

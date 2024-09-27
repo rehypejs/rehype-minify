@@ -1,6 +1,6 @@
 {
   "name": "rehype-concat-javascript",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "rehype plugin to concatenate JS `<script>` elements together",
   "license": "MIT",
   "keywords": [

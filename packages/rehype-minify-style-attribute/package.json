@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-style-attribute",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "rehype plugin to minify style attributes",
   "license": "MIT",
   "keywords": [

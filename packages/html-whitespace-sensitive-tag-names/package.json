@@ -1,6 +1,6 @@
 {
   "name": "html-whitespace-sensitive-tag-names",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "List of whitespace sensitive HTML tag names",
   "license": "MIT",
   "keywords": [

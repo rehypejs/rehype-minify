@@ -1,6 +1,6 @@
 {
   "name": "rehype-minify-javascript-script",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "rehype plugin to minify `script` elements with a JS body",
   "license": "MIT",
   "keywords": [

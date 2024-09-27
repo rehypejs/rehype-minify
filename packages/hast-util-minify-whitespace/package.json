@@ -1,6 +1,6 @@
 {
   "name": "hast-util-minify-whitespace",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "hast utility to get the plain-text value of a node",
   "license": "MIT",
   "keywords": [
