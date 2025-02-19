@@ -1,12 +1,9 @@
-# ![rehype-minify][logo]
+# ![rehype-minify][file-logo]
 
-[![Build][build-badge]][build]
-[![Coverage][coverage-badge]][coverage]
-[![Sponsors][sponsors-badge]][collective]
-[![Backers][backers-badge]][collective]
-[![Chat][chat-badge]][chat]
+[![Build][badge-build-image]][badge-build-url]
+[![Coverage][badge-coverage-image]][badge-coverage-url]
 
-**[rehype][]** plugins to minify HTML.
+**[rehype][github-rehype]** plugins to minify HTML.
 
 ## Contents
 
@@ -64,7 +61,7 @@ process HTML.
 Presets are combinations of plugins.
 One preset is maintained here:
 
-* [`rehype-preset-minify`][rehype-preset-minify]
+* [`rehype-preset-minify`][github-rehype-preset-minify]
   — preset to minify and mangle HTML
 
 ## Plugins
@@ -123,12 +120,14 @@ Read their readmes before using:
 
 <!--plugins-other end-->
 
-Also: pass [`allowDangerousCharacters` to `rehype-stringify`][rehype-stringify]
+Also: pass
+[`allowDangerousCharacters` to `rehype-stringify`][github-rehype-stringify]
 if you trust your content.
 
 ## Benchmark
 
-Here’s a benchmark comparing the results from [`html-minifier`][html-minifier]
+Here’s a benchmark comparing the results from
+[`html-minifier`][github-html-minifier]
 and `rehype-minify`.
 To summarize: differences are negligible, in fact, minifying HTML doesn’t matter
 much.
@@ -349,12 +348,13 @@ Huge differences in results are suspicious and may point to bugs.
 
 Use of `rehype-preset-minify` is *safe* by default if the tree is already safe.
 As **rehype** works on HTML and improper use of HTML can open you up to a
-[cross-site scripting (XSS)][xss] attack, use of rehype can also be unsafe.
-Use [`rehype-sanitize`][rehype-sanitize] to make the tree safe.
+[cross-site scripting (XSS)][wikipedia-xss] attack,
+use of rehype can also be unsafe.
+Use [`rehype-sanitize`][github-rehype-sanitize] to make the tree safe.
 
 To further optimize the result disregarding security, use the extra plugins
-listed above and pass [`allowDangerousCharacters` to
-`rehype-stringify`][rehype-stringify].
+listed above and pass
+[`allowDangerousCharacters` to `rehype-stringify`][github-rehype-stringify].
 
 ## Related
 
@@ -363,60 +363,52 @@ listed above and pass [`allowDangerousCharacters` to
 
 ## Contribute
 
-See [`contributing.md`][contributing] in [`rehypejs/.github`][health] for ways
-to get started.
-See [`support.md`][support] for ways to get help.
+See [`contributing.md`][health-contributing]
+in
+[`rehypejs/.github`][health]
+for ways to get started.
+See [`support.md`][health-support] for ways to get help.
 
-This project has a [code of conduct][coc].
+This project has a [code of conduct][health-coc].
 By interacting with this repository, organization, or community you agree to
 abide by its terms.
 
 ## License
 
-[MIT][license] © [Titus Wormer][author]
+[MIT][file-license] © [Titus Wormer][wooorm]
 
 <!-- Definitions -->
 
-[build-badge]: https://github.com/rehypejs/rehype-minify/workflows/main/badge.svg
+[badge-build-image]: https://github.com/rehypejs/rehype-minify/workflows/main/badge.svg
 
-[build]: https://github.com/rehypejs/rehype-minify/actions
+[badge-build-url]: https://github.com/rehypejs/rehype-minify/actions
 
-[coverage-badge]: https://img.shields.io/codecov/c/github/rehypejs/rehype-minify.svg
+[badge-coverage-image]: https://img.shields.io/codecov/c/github/rehypejs/rehype-minify.svg
 
-[coverage]: https://codecov.io/github/rehypejs/rehype-minify
+[badge-coverage-url]: https://codecov.io/github/rehypejs/rehype-minify
 
-[sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
+[file-license]: license
 
-[backers-badge]: https://opencollective.com/unified/backers/badge.svg
+[file-logo]: https://raw.githubusercontent.com/rehypejs/rehype-minify/6f0f096/logo.svg?sanitize=true
 
-[collective]: https://opencollective.com/unified
+[github-html-minifier]: https://github.com/kangax/html-minifier
 
-[chat-badge]: https://img.shields.io/badge/chat-discussions-success.svg
+[github-rehype]: https://github.com/rehypejs/rehype
 
-[chat]: https://github.com/rehypejs/rehype/discussions
+[github-rehype-preset-minify]: https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-preset-minify
+
+[github-rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
+
+[github-rehype-stringify]: https://github.com/rehypejs/rehype/tree/main/packages/rehype-stringify#api
 
 [health]: https://github.com/rehypejs/.github
 
-[contributing]: https://github.com/rehypejs/.github/blob/main/contributing.md
+[health-coc]: https://github.com/rehypejs/.github/blob/main/code-of-conduct.md
 
-[support]: https://github.com/rehypejs/.github/blob/main/support.md
+[health-contributing]: https://github.com/rehypejs/.github/blob/main/contributing.md
 
-[coc]: https://github.com/rehypejs/.github/blob/main/code-of-conduct.md
+[health-support]: https://github.com/rehypejs/.github/blob/main/support.md
 
-[license]: license
+[wikipedia-xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
 
-[author]: https://wooorm.com
-
-[logo]: https://raw.githubusercontent.com/rehypejs/rehype-minify/6f0f096/logo.svg?sanitize=true
-
-[rehype]: https://github.com/rehypejs/rehype
-
-[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
-
-[rehype-sanitize]: https://github.com/rehypejs/rehype-sanitize
-
-[rehype-preset-minify]: https://github.com/rehypejs/rehype-minify/tree/main/packages/rehype-preset-minify
-
-[rehype-stringify]: https://github.com/rehypejs/rehype/tree/main/packages/rehype-stringify#api
-
-[html-minifier]: https://github.com/kangax/html-minifier
+[wooorm]: https://wooorm.com

@@ -173,7 +173,7 @@ function createTable(data) {
         // @ts-expect-error: hush.
         const win = type + 'Win'
         /** @type {Element | string} */
-        let value = r.type === 'original' ? bytes(r[type]) : r[win]
+        let value = r.type === 'original' ? bytes(r[type]) || '' : r[win]
 
         sum[key] = (sum[key] || 0) + r[type]
 

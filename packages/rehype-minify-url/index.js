@@ -30,7 +30,7 @@
  * Configuration (TypeScript type).
  *
  * All options except for `from` are passed through to
- * [`relateurl`](https://github.com/stevenvachon/relateurl).
+ * `relateurl`.
  *
  * ###### Fields
  *

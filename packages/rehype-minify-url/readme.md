@@ -125,7 +125,7 @@ Transform ([`Transformer`](https://github.com/unifiedjs/unified#transformer)).
 Configuration (TypeScript type).
 
 All options except for `from` are passed through to
-[`relateurl`](https://github.com/stevenvachon/relateurl).
+`relateurl`.
 
 ###### Fields
 

@@ -4,7 +4,7 @@
  * ## What is this?
  *
  * This package is a [unified](https://github.com/unifiedjs/unified)
- * ([rehype](https://github.com/rehypejs/rehype)) preset to minify HTML.
+ * (rehype) preset to minify HTML.
  *
  * ## When should I use this?
  *
