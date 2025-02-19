@@ -38,7 +38,7 @@
     "@types/hast": "^3.0.0",
     "html-enumerated-attributes": "^1.0.0",
     "hast-util-select": "^6.0.0",
-    "property-information": "^6.0.0",
+    "property-information": "^7.0.0",
     "space-separated-tokens": "^2.0.0",
     "unist-util-visit": "^5.0.0"
   },
